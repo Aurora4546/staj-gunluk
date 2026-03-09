@@ -1,0 +1,6 @@
+liste = [3,4,5,"asd",6,3,"asd"]
+silinenler = []
+for x in liste:
+    if liste.count(x) > 1:
+        silinenler.append(liste.pop())  
+print(f"Yeni liste --> {liste}\nTekrar eden elemanlar --> {silinenler}")

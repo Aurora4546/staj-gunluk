@@ -1,0 +1,32 @@
+import pandas as pd 
+import datetime
+from plyer import notification
+
+def desktop_notification(title,msg):
+  notification.notify(title=title, message = msg app_icon = None, timeout = 10)
+  
+data_frame_birthdays = pd.read_excel("birthdays.xlsx")
+
+data_frame_birthdays["birthday"] = pd.to_datetime(data_frame_birthdays["birthday"], dayfirst=True)
+
+today = datetime.datetime.now().date()
+
+current_year = today.year
+
+for index, row in data_frame_birthdays.iterrows():
+  bd = row["birthday"]
+  
+  if pd.notnull(bd):
+    this_year_birthday = bd.replace(year=current_year).date()
+    
+    if this_year_birthday < today:
+      this_year_birthday= bd.replace(year=current_year + 1).date()
+    
+    reminder_date = this_year_birthday - datetime.timedelta(days=7)
+    
+    if reminder_date == today:
+      name = row["name"]
+      notification1("Upcoming birthday ", f"{name}'s birthday is in 7 days!")
+
+
+

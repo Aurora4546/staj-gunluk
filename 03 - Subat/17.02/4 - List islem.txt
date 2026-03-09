@@ -1,0 +1,83 @@
+# ## 5 tane sayi ve kelime al. Listeye at Listeyi kullanicinin istedigi islem dogrultusunda
+# ## Hesapla = carp topla bol Kullanici return mesajlarina dikkat
+# i = 0
+# sayilar = []
+# while(i < 5):
+#     try:
+#         sayilar.append(int(input(f"{i + 1}.sayiyi giriniz : ")))
+#         i += 1
+#     except:
+#         print("Lutfen sayi giriniz.")
+#         i = 0
+
+
+# sayilar.sort(reverse = True)
+# islem = str(input("Lutfen islem seciniz : ")).strip()
+# res = 1
+# if islem == "*":
+#     for x in range(len(sayilar)):
+#         res *= sayilar[x] 
+# elif islem == "/":
+#     for x in range(len(sayilar)):
+#         if sayilar[x] == 0:
+#             continue
+#         else :
+#             res /= sayilar[x] 
+# elif islem == "+":
+#     res = 0
+#     for x in range(len(sayilar)):
+        
+#         res += sayilar[x]
+# elif islem == "-":
+    
+#     for x in range(len(sayilar)):
+#         if x == 0:
+#             res = sayilar[x]
+#         else:
+#             res -= sayilar[x]
+# else:
+#     print("Lutfen gecerli islem seciniz.")
+    
+# print("Sonuc --> ",res)
+
+
+## Kýsa yol ---------------------------------------------------------------
+# Önce sayýlarý al en son sayýyý da aldýktan sonra hala döngü içinde ol
+i = 0
+sayilar = []
+islem = ""
+while(True):
+    try:
+        if i == 5:
+            # son sayi alindi simdi islemi alman lazim
+            islem = str(input("Lutfen islem seciniz : ")).strip()
+            if islem not in "*/+-":
+                print("Gecersiz islem secimi")
+                continue
+            else:
+                break
+        sayilar.append(int(input(f"{i + 1}.sayiyi giriniz : ")))
+        i += 1
+    except:
+        print("Lutfen sayi giriniz.")
+    
+sayilar.sort(reverse = True)
+
+def hesapla(islem, liste):
+    sum = 1 if islem == "*" or islem == "/" else 0
+    for sayi in liste:
+        if sayi == 0:
+            continue
+        sum = eval(f"sum {islem} sayi")
+    print(f"Eval Metot ---> {sum}")
+
+hesapla(islem , sayilar)
+
+
+
+
+
+
+    
+        
+    

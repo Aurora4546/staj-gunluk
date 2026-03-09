@@ -1,0 +1,13 @@
+while(True):
+    input_kelime = str(input("Lutfen kelime giriniz."))
+    if " " not in input_kelime:
+        str_len = len(input_kelime)
+        if str_len <= 10:
+            print(f"{input_kelime} Kisa kelime")
+        elif str_len <= 25:
+            print(f"{input_kelime} Orta kelime")
+        else:
+            print(f"{input_kelime} Uzun kelime")
+        break
+    else:
+        print("cumle girmeyin")

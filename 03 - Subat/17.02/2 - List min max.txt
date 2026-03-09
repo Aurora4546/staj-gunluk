@@ -1,0 +1,23 @@
+liste = [10,3,13,4,15,10]
+
+min = 9999
+max = 0
+
+for x in range(len(liste)):
+    if liste[x] < min:
+        min = liste[x]
+    if liste[x] > max:
+        max = liste[x] 
+        
+innput = str(input(f"Min : {min} , Max : {max} Lutfen islem seciniz : ")).strip()
+
+if innput == "*":
+    print(min * max)
+elif innput == "+":
+    print(min + max)
+elif innput == "-":
+    print(min - max)
+elif innput == "/":
+    print(max / min)
+    
+   

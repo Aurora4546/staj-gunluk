@@ -1,0 +1,16 @@
+# Kullanicindan sayi al pozitif mi negarif mi 0 mi yazdir.
+
+while(True):
+  try:
+    x = int(input("Sayi gir : "))
+    if x > 0 :
+      print("Pozitif")
+    elif x < 0 :
+      print("Negatif")
+    else :
+      print("0 girdiniz.")
+    break;
+  except:
+    print("Lutfen sayi giriniz")
+    
+
