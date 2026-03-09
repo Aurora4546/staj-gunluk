@@ -1,0 +1,244 @@
+## Python lists
+## Python listeleri mutable'dýr. Ýçerdikleri deðerler deðiþebilir.
+## Yeni deðerler eklenebilir veya silinebilir.
+## Ýçerdikleri bütün deðerler sýralýdýr.
+## Bütün veri tiplerini içerisinde bulundurabilirler.
+
+a = list((1, 2, 3, 'apple', 4.5))
+## Burada kullanýlan constructor'ýn içerisinde aslýnda tuple var. Biz list constructor'ýný kullanarak
+## bunu listeye çeviriyoruz. list() constructor'ý sadece tek bir argüman alýr. Birden fazla parametresi yoktur.
+## Bu yüzden içerisine listeye dönüþtürülebilecek herhangi veri yapýsý eklememiz lazým.
+print(a)
+
+b = list("GFG") ## Stringler liste olarak kullanlabilir. Bu yüzden constructor çalýþýr.
+print(b)
+
+a = [2] * 5
+b = [0] * 7
+
+print(a)
+print(b)
+
+
+## List slicing
+## list slicing'de son index dahil edilmez.
+## Liste elemanlarýna eriþmenin kýsa yolu
+## Slicing kullanýlýrken maximum index numarasý dahil edilmez.
+## Negatif indexler kullanýldýðý zaman listenin saðýndan baþlayacaktýr.
+## Üçüncü olarak eklenebilen ise kaçarlý sýralayacaðýdýr.
+liste = [1,2,3,4,5,6,6,6,6,6,6,6,6,"string" , "string", "string2" , "string3"]
+print(f"{liste[:]}\n{liste[::]}\n{liste[:3]}\n{liste[-6:-1:2]}\n{liste[::-1]}")
+
+## Listeler mutable nesneler olduðu için içerikleri deðiþtirilebilir ve yeni içerikler eklenebilir.
+## Bu yüzden yeni liste dönmezler var olan nesne üzerinde deðiþiklikler yaparlar.
+## Python'da array olarak ayrý bir veri yapýsý yoktur.
+## Stack veri yapýsýný kullanabilmek için listelerin append() ve pop() metotlarý yeterli olacaktýr.
+## Önemli bazý list methodlarý ; append, extend, insert, remove, pop, clear, index, count, sort, reverse, copy
+
+liste.append("yeni deðer".upper())
+
+liste.extend({"SET"})
+liste.extend(("TUPLE")) # karakterlerin hepsini ayrý olarak ekledi.
+liste.extend(["LIST"])
+liste.extend({"key1":432, "key2" : 19,  "key3" : "value"}) # Ýterasyon yaparken sadece dictionary içerisindeki anahtarlarý bulur.
+
+liste.insert(-5,"tuple onunde") # -5.inci index'e ulaþýp ondan sonra yeni deðeri ekle.
+liste.insert(-5, "eklendiler")
+
+liste.remove("eklendiler")
+liste.remove(6)
+liste.remove(6)
+liste.remove(6)
+
+## Pop kullanmak yerine del keywork kullanýlabilir. 
+## del  ifadesi nesneleri veya sýnýflarý silmek için kullanýlýr.
+## Slice kullanarak belirli aralýklardaki elemanlarý da silebiliriz.
+## listelerde pop kullanýlmasý daha doðru olabilir çünkü sildiði deðeri dönecektir.
+liste.pop() # key2 silindi.
+x = liste.pop(); # key3 silindi VE SÝLÝNEN DEÐER x deðiþkenine atandý
+
+print("Silinen eleman \t:" , x)
+del liste[3]
+
+liste_index = liste.index(6, 0, -10)
+liste_index_2 =  liste.index("string" , 10)
+liste_count = liste.count("string")
+
+## Sort iþlemlerinde liste içerisindeki elemanlarýn karþýlaþtýrýlabilir olduðundan emin olmak lazým.
+## String ve integer karþýlaþtýrýlamayacaðý için sort metodu mixed listelerde kullanýlamaz.
+## Sort ve reverse ayný iþlemler deðildir. Sort bir karþýlaþtýrma gerektirir. Reverse sadece index'leri yer deðiþtirir.
+
+liste = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]
+liste.sort(reverse=True)
+print(liste)
+
+liste_copy = liste.copy()
+print(f"Kopyalanmis olan yeni liste : {liste_copy}")
+liste_copy.reverse()
+print(f"Kopyalanmis listenin reverse hali : {liste_copy}")
+
+print(f"liste içeridine bulunan ÝLK 6'NIN ÝNDEX NUMARASI ---> {liste_index}\n\"string\"'in ilk görüldüðü index ---> {liste_index_2}")
+print(f"\"string\"'lerin sayisi ---> {liste_count}")
+print(liste)
+
+#---------------------------------------------------------------------------------
+## TUPLES
+## Tuple'lar listelere çok benzerdir ama en önemli farklarý listeler MUTABLE iken TUPLE'LAR ÝMMUTABLE'DIR.
+## immutable olduklarý için tuple'lar daha performanslý çalýþýrlar.
+## Tuple veri tiplerinin içerikleri deðiþtirilemez ve yeni elemanlar eklenemez.
+## ANCAK TUPLE VERÝLERÝN ÝÇERÝSÝNDE MUTABLE NESNELER OLABÝLÝR.
+## YANÝ TUPLE ÝÇERÝSÝNDEKÝ ELEMANLARDAN HERHANGÝ BÝRÝ LÝSTE OLABÝLÝR.
+
+tupple_mutable_element = 1,2,3,4,5,6,7,["string","string2","string3","string4"]
+tupple = (1,2,3,4,5,6,7,8,8,8,8,8,8,8,9,10,11,12,13,14,15,16,17)
+tupple_single_element = "SINGLE ELEMENT" , 
+tupple_eight_count = tupple.count(8)
+tupple_index_of_15 = tupple.index(15,15)
+print(f"index of 15 ----> {tupple_index_of_15}\nCount of eights ----> {tupple_eight_count}")
+
+#---------------------------------------------------------------------------------
+## SETS
+## Ýndexleri yoktur. Sýralarý yoktur.
+## Ekleme ve silme iþlemleri yapýlabilir. Bunun için indexleri deðil SÝLÝNECEK OLAN ELEMAN GEREKLÝDÝR.
+## Setlerde YENÝ ELEMANLAR EKLENEBÝLÝR. AMA BENZERSÝZ OLMALARI ZORUNLUDUR.
+## Boþ bir set oluþturmak içn {} kullanlamaz Bu boþ dicitonary oluþturacaktýr.
+## Eðer boþ set oluþturmak istiyorsak o zaman set() constructor kullanýlabilir.
+## Stringleri set ile kullanabiliriz. Stringler ile kullanýldýðý zaman BENZERSÝZ OLAN karakterleri ekleyecektir.
+## Bunu yapabilmek için set() metodunu kullanmamýz þarttýr.
+## setlerde remove metodu ve discard metodunun temel farký remove bulamaz ise error verir, discard vermez.
+
+string_set = set("çekoslavakyalýlaþtýramadýklarýmýzdanmýsýnýnýz")
+basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana', 'banan','app' , 'different'}
+basket2 = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana','oran'} 
+
+basket.add("banan")
+basket.remove("banan") # "banan" içeren herhangi eleman bulamaz ise o zaman RaiseError
+basket.discard("pear") # Bulamaz ise hata yok
+
+
+# pop() metodu setler ile kullanýldýðý zaman RASTGELE bir elemaný silecektir ve bu elemaný geriye deðer olarak döndürecektir.
+# del statement ile temel fark bu.
+fruit = basket.pop()
+
+# set.difference() method. Setlerin farkýný alýr. Sadece soldaki setin deðerlerini alacaktýr.
+# Immutable bir metottur bu yüzden yeni SET döner.
+# difference alýnýrken birden fazla set kullanýlabilir. Diðer setlere göre benzersiz olan elemanlarý bulur.
+# Her zaman soldaki set esas alýnýr.
+set_difference = basket.difference(basket2, string_set)
+print(set_difference)
+
+# set.difference_update() Mutable özellik taþýr. Hangi set iþlemi çaðýrmýþ ise onun elemanlarý artýk yeni 
+# fark olacaktýr.
+basket.difference_update(basket2)
+
+print(f"basket difference ---> {basket}")
+print(string_set)
+print(fruit)
+print(basket)
+
+
+
+## Frozenset
+## Mutable olan SET nesnelerini immutable yapmak için kullanýlýr.
+## Yani artýk yeni deðerler eklenemeyecek. zaten deðerleri deðiþtirilemiyordu. sadece yenileri de eklenemez oldu.
+
+fruits = {"apple", "banana", "orange", "strawberry",  "mangoo"}
+fruits_frozen = frozenset(["apple", "banana", "orange", "strawberryY" , "mangoO"])
+fruits2_frozen = frozenset(("apple", "banana", "orange"))
+print(fruits_frozen) 
+
+
+## Intersection
+## Belirlenen bütün setlerin kesiþimlerini alýr. Yeni set döner.
+## ayný difference'da da oludðu gibi burada da update versiyonu vardýr.
+## Tamamen ayný mantýkta çalýþýr. FROZENSET IMMUTABLE OLDUGU ICIN UPDATE OLAMAZ.
+
+new_tuple = fruits_frozen.intersection(fruits2_frozen)
+fruits.intersection_update(fruits2_frozen)
+
+print(f"Fruits intersection update ---->>> {fruits}")
+print(new_tuple)
+print(fruits_frozen)
+
+## kesiþimleri olmayan setleri belirlemek için isdisjoint() metodu kullanýlabilir.
+## True vey False deðerler dönecektir. aldýðý parametreler arasýnda diðer set vardýr.
+is_disjoint = fruits.isdisjoint(fruits_frozen)
+print(is_disjoint)
+
+## issubset() karþýlaþtýrýlan setin diðer set içerisinde olup olmadýðýný kontrol etmek için kullanýlýr.
+## tamamen ayný ise de True döner.
+is_subset = fruits.issubset(fruits_frozen);
+print(is_subset)
+
+## issuperset argüman olarak gönderilen set içerisindeki bütün elemanlarý
+## soldaki set içeriisinde var ise true döner.
+is_superset = fruits_frozen.issuperset(fruits);
+print(is_superset)
+
+
+## symmetric difference
+## Her iki set içerisinde de ortak olan elemanlarýn çýkartýlýp sadece unique olanlarla yeni set döner.
+## symmetric_difference_update() metodu mutable olarak iþlem yapar.
+simetrik_tuple = fruits.symmetric_difference(fruits_frozen)
+print(simetrik_tuple)
+
+## UNION
+## Sete yeni seti ekler. Bütün elemanlarý ekler AMA DUPLÝCATE ÝZÝN VERMEZ.
+## Yeni set döner ORTAKLAR SADECE TEK SEFER GECER BÝRDEN FAZLA EKLENEBÝLÝR.
+new_set = fruits_frozen.union(fruits)
+print(new_set)
+
+## UPDATE() METHODU
+## birden fazla yeni eleman eklemen için kullanýlýr.
+d1 = {'a': 1, 'b': 2}
+d1.update(c=3, d=4) ## **kwargs kullnýlmýþtýr. kaç tane eleman geleceði belirli deðil ama isimlendirilmiþ.
+print(d1)
+
+s = {1, 2, 3}
+s.update([3, 4, 5])
+print(s)
+
+
+#---------------------------------------------------------------------------------
+## DICTIONARIES
+## Anahtar ve deðer ikililerinden oluþan yapýlardýr. Bütün anahtarlar unique olmasý gerekir.
+## Ýçerisindeki for ile gezildiði zaman sadece anahtarlara eriþir.
+## Bütün elemanlara eriþmek için iki deðiþken ve items() metodu kullanýlmasý gerekir.
+## Dictionary'ler integer deðerler ile indexlenmemiþlerdir. Bunlar için anahtarlar kullanýlýr.
+## Dicitonary'ler keyleri yerine tuple elemanlarý kullanýlabilir. Çünkü tuple içerisindeki bütün deðerler immutable
+## Yani deðerleri deðiþtirilemez ve yeni elemanlar eklenemez. Bu yüzden anahtar olarak kullanýlabilir.
+## del statement ile anahtar deðer ikilisi silinebilir.
+## Dicitonary anahtarý ile eriþirken get() metodu deðer bulamadýðý zaman error vermez none döner.
+
+tel = {'jack': 4098, 'sape': 4139}
+tel['guido'] = 4127                 ## Yeni anahtar deðer eklenebilir.
+
+diction = dict((('sape', 4139), ('guido', 4127), ('jack', 4098))) #liste ve liste içerisinde tuple deðerleri.
+print(diction)
+
+diction_1 = dict(anahtar="Deger" , anahtar2 = "Deger2" , anahtar3 = "Deger3" )
+print(diction_1)
+
+for x, y in diction_1.items():
+  print(x , y)
+
+## Ýkisine de ayný anda eriþir.
+## zip() metodunun kullanýlabilmesi için en az iki tane iterable lazým.
+questions = ['name', 'quest', 'favorite color']
+answers = ['lancelot', 'the holy grail', 'blue']
+test = ['lancelot', 'the holy grail', 'blue']
+
+for q, a, c in zip(questions, answers, test):
+    print('What is your {0}?  It is {1} {2}.'.format(q, a, c))
+  
+
+
+
+
+
+
+
+
+
+
+

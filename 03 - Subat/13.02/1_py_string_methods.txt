@@ -1,0 +1,299 @@
+# String methods ------------------------------------------------------
+# String metotlarýn hepsi yeni strnig döner. BÜTÜN HEPSÝ ÝÇÝN.
+## ÇÜNKÜ STRÝNGLER ÝMMUTABLE OLDUKLARI ÝÇÝN.
+
+# Casefold ve lower farki 
+# Casefold lower metoduna göre daha agresif çalýþýr.
+string = "WeightAGE oF THe DiScuSSiON"
+
+print("Original String:", string)
+print("String after using casefold():", string.casefold() + "\n")
+
+string = "ß"
+print("Using lower():", string.lower())
+print("Using casefold():", string.casefold())
+
+# Capitalize metodu ilk harfini büyütür.
+s = "multiple WORDS IN a String"
+res = s.capitalize()
+print(res)
+
+# Center() Metodu metnin saðýna ve soluna boþluk veya belirtilen karakteri
+# girer.
+s1 = "hello"
+s2 = s1.center(20)
+print(s2)
+print(s1.center(20,"*"))
+
+# count() metodu string içerisinde kaç kere geçtiðini bulur.
+# tuple ve list metotlarý ile ayný
+
+s = "GeeksforGeeks"
+print(s.count("e"))
+
+
+## encode() metodu stringi unicode formatlamasýný deðiþtirmek için kullanýlýr.
+## Dönüþtürmeyi yaparken bytelara çevirir.
+s = "Hello, WÖÖrld!"
+
+encoded_text = s.encode()
+print(encoded_text)
+
+## Endswith ve startswith meotlarý : boolean ifade dönerler.
+## Belirtilen stringlere göre bitip bitmediklerini kontrol etmek için
+## index aralýðý da belirlenebilir.
+
+s = "geeksforgeeks"
+res = s.endswith("geeks" , 15)
+print(res)
+
+## expandtabs() metodu string içerisindeki tablarýn aralýðýný belirler.
+## Ýçerisinde herhangi tab yok ise o zaman iþlem yapmayacaktýr.
+s = "Python\tis\tfun!"
+
+result = s.expandtabs(16)
+print(result)
+
+## Find() metodu belirtilen substring için bir index döner. Bu substring'in ilk indexidir.
+## bulunmaz ise o zaman -1 döner. Karþýlaþtýrma yaparken lowercase'lere dikkat eder. 
+## index() ve find() metotlarý ayný çalýþýrlar ama farklarý index() ifadeyi bulamadýðý zaman error verir. (ValueError )
+## find() eðer bulamaz ise o zaman -1 döner.
+## Yani find() aramaya çalýþýr.
+
+s = "abc   abc   abc"
+res = s.find("abc")
+print(res)
+
+# index() metodu. find ile ayný.
+
+try:
+  s = "Python is fun"
+  index = s.index("python")
+  print(index)
+except:
+  print("index() metodu ValueError fýrlattý.")
+  
+## rindex() metodu saðdan baþlayarak belirli string ifadeyi arar. Bulamaz ise hata verir.
+s = 'geeks for geeks'
+res= s.rindex('geeks')
+print(res)
+  
+## Format() biçimlendirme için kullanýlýr.
+## biçimlendirme yaparken {1} is a {gfg} science portal for {0} bu ifadede sorun yoktur.
+## isim belirtildiði sürece formatlayacaktýr.
+## Formatlama yapmak için dictionary kullanýlabilir.
+
+# Positional arguments (placed in order)
+print("{} love {}!!".format("GeeksforGeeks", "Geeks"))
+
+# Changing order using index
+print("{1} love {0}!!".format("GeeksforGeeks", "Geeks"))
+
+# Default order in placeholders
+print("Every {} should know the use of {} {} programming and {}".format("programmer", "Open", "Source", "Operating Systems"))
+
+# Reordering using index
+print("Every {3} should know the use of {2} {1} programming and {0}".format("programmer", "Open", "Source", "Operating Systems"))
+
+# keyword arguments
+print("{1} is a {gfg} science portal for {0}".format("computer", "geeks", gfg="GeeksforGeeks\n\n"))
+
+product, brand, price, issue, effect = "Smartphone", "Amazon", 12000, "bug", "troubling"
+
+print("{:>20} is a popular electronics brand.".format(brand))  
+print("They have a {} for {} rupees.".format(product, price))  
+print("I wondered why the program was {} me—turns out it was a {}.".format(effect, issue))  
+print("Truncated product name: {:.5}".format(product))
+print("The temperature today is {:.2f} degrees outside !".format(35.567))
+
+# Dictionary ile formatlama format_map()
+# **d ifadesi disctionary içerisindeki deðerleri açmak için kullanýlabilir.
+d = {"first_name": "Tony", "last_name": "Stark", "aka": "Iron Man"}
+print("My name is {first_name} {last_name}, also known as {aka}.".format(**d))
+
+# use of format_map() function
+def chk_msg(n):
+    a = {'name':"George", 'mesg':n}
+    print('{name} has {mesg} new messages'.format_map(a))
+chk_msg(10)
+
+## Formatting using Lists
+a = [100.7689454, 17.232999, 60.98867, 300.83748789]
+b = ['{:.2f}'.format(elem) for elem in a]
+print(b)
+  
+## isalnum() metodu : Ýçerisindeki bütün karakterler karaktelerden veya sayýlardan oluþmasý lazým.
+print("string".isalnum())
+
+## isalpha() metodu : Ýçerisindeki ifadelerin hepsi metinsel olmasý lazým.
+## ÖZEL ÝÞARETLER VE KARAKTERLER FALSE DÖNMESÝNE NEDEN OLUR.
+s = "Python!"
+print(s.isalpha())
+
+## isdecimal() metodu: bütün karakterler ondalýk sayý ise True döner.
+## ancak diðer dillerdeki sayýlarda da true döner. 
+## Eðer string içerisinde herhangi boþluk varsa o zaman False döner.
+## Sayýda negatif iþareti olursa FLASE döner.
+d = "12 34"
+print(d.isdecimal())  
+# This will print False because there’s a space between the numbers
+
+## isdigit() string içerisindeki bütün ifadelerin 0 - 9 arasýnda rakamlardan oluþuyorsa true döner.
+# Unicode for '1'
+a = "\u0031"  
+print(a.isdigit()) 
+
+# Devanagari digit for '1'
+b = "\u0967"  
+print(b.isdigit())
+
+## Stringin variable ismi için uygun oluduðunu kontrol eder.
+s = "variable_name"
+print(s.isidentifier())
+
+## join() metodu. iterable bir nesne içerisindekileri bu string'e concat edecektir.
+## eklerken aralýklar için seperator da belirlenebilir.
+## Dictionary içerisindekiler gezildiði zaman key'ler gelecek. join sadece keyleri okur.
+d = {"Geek": 1, "for": 2, "Geeks": 3}
+res = "_".join(d)
+print(res)
+
+## ljust rjust() metotlarý . belirlenen uzunluk kadar boþluk veya belirlenen stringi ekler.
+## l ise string solar r ise saða sabitlenir. justify iþlemi yapmýþ olur.
+# example string
+string = 'geeks'
+length = 8
+fillchar = '*'
+
+# print left justified string
+print(string.ljust(length, fillchar))
+
+## lstrip() stringin solundaki boþluklarý siler.
+s = '\nHello Python!\n'
+
+res = s.lstrip()
+print(res)
+
+## maketrans() translate() maketrans önce deðiþtirilecek olan stringleri sonra yeni stringleri ve en son silinecek olan
+## stringleri alýr. Translate metodu içeriinde bu string.maketrans() metodundan veriler gelir.
+
+# specify to translate chars
+str1 = "wy"
+
+# specify to replace with
+str2 = "gf"
+
+# delete chars
+str3 = "u"
+
+# target string 
+trg = "weeksyourweeks"
+
+# using maketrans() to 
+
+table = trg.maketrans(str1, str2, str3)
+
+# Printing original string 
+print ("The string before translating is : ", end ="")
+print (trg)
+
+# using translate() to make translations.
+print ("The string after translating is : ", end ="")
+print (trg.translate(table))
+
+# translations without
+# maketrans() 
+
+# specifying the mapping 
+# using ASCII 
+table = { 119 : 103, 121 : 102, 117 : None }
+
+# target string 
+trg = "weeksyourweeks"
+
+# Printing original string 
+print ("The string before translating is : ", end ="")
+print (trg)
+
+# using translate() to make translations.
+print ("The string after translating is : ", end ="")
+print (trg.translate(table))
+
+## String partition() metodu split iþlemini yapar.
+s = "key:value"
+res = s.partition(":")
+print(res)
+
+## replace() metodu
+## substring ile yeni stringi deðiþtirir. Count parametresi opsiyoneldir.
+s = "apple apple apple"
+res = s.replace("apple", "orange", 1)
+print(res)
+
+## rfind() metodu saðdan aramaya baþlar start end belirlenebilir.
+word = 'geeks for geeks'
+
+# Returns highest index of the substring
+res = word.rfind('geeks')
+print (res )
+
+res = word.rfind('for')
+print (res )
+
+word = 'CatBatSatMatGate'
+
+# Returns highest index of the substring
+res = word.rfind('ate')
+print(res)
+
+## rpartition() stringleri 3 ayrý parçaya böler bölmeyi yaparken seperator olarak 
+## son göründüðü yeri esas alýr.
+
+s = "2024-12-27"
+# Splitting the date string from the last occurrence of '-'
+res = s.rpartition("-")
+print(res)
+
+## rsplit() metodu:  saðdan baþlayarak split iþlemi yaparken
+## ikinci parametre maximum split deðerini belirtir.
+s = "tic-tac-toe"
+print(s.rsplit('-' ,1))
+
+## rstrip() metodu : Sað taraftan whitespace karakterlerin kaldýrýr.
+s = "Hello Python!   "
+res = s.rstrip()
+print(res)
+
+## splitlines() metodu : string içerisinde newline karakterleri olduðu yerlerden stringleri 
+## birbirlerinden ayýrýr.
+
+s = "Alpha\nBeta\nGamma"
+res = s.splitlines()
+print(res)
+
+## String zfill() method : string'i soldan itibaren 0'lar ile belirlenen uzunluk kadar ekleme iþlemi yapar.
+s = "42"
+
+padded_text = s.zfill(5)
+print(padded_text)
+
+
+## swapcase() method:
+## Karakterlerin büyüklüklerini ters çevirir.
+s = "I love Python"
+
+swapped_text = s.swapcase()
+print(swapped_text)
+
+## String title() method: Stringdeki bütün kelimelerin baþ harflerini uppercase yapar.
+## ve her python string metodunda olduðu gibi yeni string deðer döner.
+a = "hello geek"
+b = a.title()
+print(b)
+
+
+
+
+
+
+

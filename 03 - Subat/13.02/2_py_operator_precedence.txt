@@ -1,0 +1,18 @@
+## Operatörler ve iþlem sýrasý.
+
+# ** right to left 
+# +x, -x, ~x : Unary plus, unary minus, bitwise NOT -> Associativity: Right to left
+# *, @, /, //, % : Multiplication, matrix multiplication, division, floor division, remainder -> Associativity: Left to right
+# +, - : Addition and subtraction -> Associativity: Left to right
+# <<, >> : Bitwise shifts -> Associativity: Left to right
+# & : Bitwise AND -> Associativity: Left to right
+# ^ : Bitwise XOR -> Associativity: Left to right
+# | : Bitwise OR -> Associativity: Left to right
+# in, not in, is, is not, <, <=, >, >=, !=, == : Comparisons, membership, identity tests -> Associativity: Left to right
+# not x : Boolean NOT -> Associativity: Right to left
+# and : Boolean AND -> Associativity: Left to right
+# or : Booelan OR -> Associativity: Left to right
+# if-else : Conditional expression -> Associativity: Right to left
+# lambda : Lambda expression
+# assignment operator RIGHT TO left
+

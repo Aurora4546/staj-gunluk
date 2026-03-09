@@ -1,0 +1,400 @@
+## Python döngüler:
+## For döngüleri sadece iteration için kullanýlýr. Yani iterable olan veri tiplerinde kullanýlýr
+
+li = ["geeks", "for", "geeks"]
+for index in range(len(li)):
+    print(li[index])
+    
+for letter in 'geeksforgeeks':
+    if letter == 'e' or letter == 's':
+        continue
+    print('Current Letter :', letter)
+  
+for letter in 'geeksforgeeks':
+    if letter == 'e' or letter == 's':
+        break
+
+print('Current Letter :', letter)
+
+## pass statement
+# herhangi bir iþlem yapmayan statement'dýr. Boþ metotlarý ve if ifadeleri için kullanýlýr.
+# Boþ döngüler için de kullanýlabilir
+class EmptyClass:
+    pass  
+
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    
+    def greet(self):
+        pass  # Placeholder for greet method
+
+# Creating an instance of the class
+p = Person("Emily", 30)
+
+## python fonksiyonlar, fonksiyon paramtreleri
+def evenOdd(x):
+  if(x % 2 == 0):
+    return "Even"
+  else :
+    return "Odd"
+print(evenOdd(10))
+
+## Parametre tipleri
+# Default parametre alan fonksiyonlar
+# Default parametreler her zaman en sonda olmasý lazým. Hangi parametreye deðer saðlandýðý konusunda
+# compiler karar veremez.
+def default_param_func(x,y,z="default value"):
+  print(x, y, z)
+default_param_func(1,2)
+
+## Keyword parametreli fonksiyonlar
+# Parametrelere deðerler gönderirken parametrelerin isimleri ile gönderebiliriz.
+# Parametre sýralamasý artýk önemli olmaz. 
+
+def default_param_func(x,y,z="default value"):
+  print(x, y, z)
+default_param_func(x=1,y=2)
+
+## Arbitrary parametreler
+# ne kadar deðer gönderileceði belirli olmayan metotlarda kullanýlabilir.
+# örnek olarak print() metoduna kaç tane veri geleceði belirli deðil.
+# Bu parametreler artýk liste içeriisnde tutulacaktýr. Fonksiyon içerisinde buna uygun iþlemlerin yapýlmasý gerekir.
+def myFun(*args, **kwargs):
+    print("Non-Keyword Arguments (*args):")
+    for arg in args:
+        print(arg)
+
+    print("\nKeyword Arguments (**kwargs):")
+    for key, value in kwargs.items():
+        print(f"{key} == {value}")
+
+# Function call with both types of arguments
+myFun('Hey', 'Welcome', first='Geeks', mid='for', last='Geeks')
+
+## Global nonlocal 
+# nonlocal keyword INNER FUNCTION'lar için kullanýlýr. Ýnner içerisindeki tanýmlanan ve ismi dýþ function içerisindeki
+# tanýmlanan baþka bir deðiþken ile ayný olan deðiþkenlerin dýþ fonksiyon içerisindekileri temsil etmesi için kullanýlýr.
+# Global keyword ise inner function durumlarý olmadýðý zaman kullanýlýr.
+def outer():
+    x = "local"
+    
+    def inner():
+        nonlocal x
+        x = "nonlocal"
+        print("inner:", x)
+    
+    inner()
+    print("outer:", x)
+outer()
+
+global_degisken = 10;
+def funct():
+  global global_degisken
+  global_degisken = 20
+funct()
+print('Global degisken degeri' , global_degisken)
+
+## Anonymous fonksiyonlar
+# lambda ifadeleri ile oluþturulabilirler.
+# Lambda ifadelerinde fonsiyonlarýn isimleri yoktur. Lambda keywod ile oluþturulurlar.
+
+def cube(x): return x*x*x   # without lambda
+cube_l = lambda x : x*x*x  # with lambda
+
+print(cube(7))
+print(cube_l(7))
+
+def square_value(num):
+    """This function returns the square
+    value of the entered number"""
+    return num**2
+
+print(square_value(2))
+print(square_value(-4))
+
+## Pass by reference ve Pass by value
+## Fonksiyonlara deðerleri gönderirken referans veya deðer tipi olmalarý fark yaratýr.
+## Listeler referans tiplidir. Referans tipli deðiþkenler metotlara gönderildiði zaman
+## liste içerisindeki veriler deðiþecektir. Ancak integer gibi deðer tipleri metotlara gönderildiði zaman
+## deðerleri kopyalanýr. Metottan çýkýldýðý zaman global deðiþken üzerinde herhangi bir deðiþiklik olmayacaktýr.
+# Function modifies the first element of list
+
+def myFun(reference_type):
+    reference_type[0] = 20
+
+lst = [10, 11, 12, 13]
+myFun(lst)
+print(lst)
+
+def myFun2(value_type):
+    value_type = 20
+
+a = 10
+myFun2(a)
+print(a)  
+
+### Recursive functions
+## özyineleme. Kendini tekrardan çaðýran fonksiyonlardýr.
+def factorial(n):
+  if n == 0:
+    return 1
+  else :
+    return n * factorial(n - 1)
+print(factorial(6))
+
+## Fonksiyon içerisinden fonksiyon döndürme
+# Python dilinde bütün fonksiyonlar objelerdir. Bu yüzden deðiþkenlere atanabilirler 
+# veya herhangi bir baþka metoda argüman olarak gönderilebilirler.
+# Fonksiyon içerisinden fonksiyon döndürme faydalarý :
+# Preserve state (closures): Inner functions can remember values from the outer scope.
+
+def fun1(name):
+    def fun2():
+        return f"Hello, {name}!"
+    return fun2
+
+# Get the function returned by fun1() fonksiyon artý deðiþkende tutulduktan Fonksiyonlara
+# buna eriþmek için parantezler kullanýlabilir. 
+# Bu özellik için inner function olmasýna gerek yoktur.
+
+function_variable = fun1("Test")
+
+print(function_variable())
+
+def B():
+    print("Inside the method B.")
+
+def A():
+    print("Inside the method A.") 
+    return B  # function A returns function B
+
+return_fun = A()  # Atama yaparken de metodu çaðýrýr o yüzden çýktý görünür.
+return_fun()
+
+## Decorators
+## Fonksiyonlara yeni özellikleri eklemek veya güncellemek için kullanýlýr.
+## Decorator'larýn etki edebilmesi için annotation kullanýlmasý lazým.
+## kullandýðýmýz zaman kendisine gönderilen fonksiyonu da çaðýran yeni bir metot dönecektir.
+
+def DecoratorDemo(func):
+    def wrapper():
+        print("Before calling the function.")
+        func()
+        print("After calling the function.")
+    return wrapper
+
+@DecoratorDemo # Applying the decorator to a function
+def greet():
+    print("Hello, World!")
+greet()
+
+
+def DecoratorDemo(func):
+    def wrapper():
+        print("Before calling the function.")
+        func()
+        print("After calling the function.")
+    return wrapper
+
+def greet():
+    print("Hello, World!")
+greet = DecoratorDemo(greet)
+greet()
+
+
+def decorator_name(func):
+    def wrapper(*args, **kwargs):
+        print("Before execution")
+        result = func(*args, **kwargs)
+        print("After execution")
+        return result
+    return wrapper
+
+@decorator_name
+def add(a, b):
+    return a + b
+
+print(add(5, 3))
+
+
+## Method decorator.
+## nesnelerin metotlarýný deðiþtirmek için kullanýlýr.
+def method_decorator(func):
+    def wrapper(self, *args, **kwargs):
+        print("Before method execution")
+        res = func(self, *args, **kwargs)
+        print("After method execution")
+        return res
+    return wrapper
+
+class MyClass:
+    def say_hello(self):
+        print("Hello!")
+    say_hello = method_decorator(say_hello)
+obj = MyClass()
+obj.say_hello()
+
+## Class Decorators
+## Sýnýflarýn yapýsýný deðiþtirmek için kullanýlýr.
+
+def fun(cls):
+    cls.class_name = cls.__name__
+    return cls
+
+@fun
+class Person:
+    pass
+print(Person.class_name)
+
+## Built in Decorators
+## static method classmethod property gibi annotation tanýmlamalarýdýr.
+## Static ile class method arasýndaki temel fark classmethod sýnfýýn instance'larý içerisindeki üye deðiþkenlere
+## eriþebilir. Staticlerde ise olmaz. CLASSMETHOD'LAR ÜYE DEÐÝÞKENLERE ERÝÞTÝÐÝ ZAMAN O SINIFIN BÜTÜN ÝNSTANCE'LARI ÜZERÝNDE
+## ORTAK ÝÞLEMLER YAPAR.
+
+class MathOperations:
+    @staticmethod
+    def add(x, y):
+        return x + y
+
+# Using the static method
+res = MathOperations.add(5, 3)
+print(res)
+
+class Employee:
+    raise_amount = 1.05
+    def __init__(self, name, salary):
+        self.name = name
+        self.salary = salary
+        
+    @classmethod
+    def set_raise_amount(cls, amount):
+        cls.raise_amount = amount
+
+# Using the class method
+Employee.set_raise_amount(1.10) ## BÜTÜN ÝNSTANCE'LAR ETKÝLENÝR.
+print(Employee.raise_amount)
+
+## Property metotlarý normal field'mýþ gibi ERÝÞÝLMESÝNE izin verir.
+# ayný þekilde atamalarda da normal field'mýþ gibi olmasý için @radius.setter
+# annotation kullanýlabilir.
+class Circle:
+    def __init__(self, radius):
+        self._radius = radius
+
+    @property
+    def radius(self):
+        return self._radius
+
+    @radius.setter
+    def radius(self, value):
+        if value >= 0:
+            self._radius = value
+        else:
+            raise ValueError("Radius cannot be negative")
+
+    @property
+    def area(self):
+        return 3.14159 * (self._radius ** 2)
+
+# Using the property
+c = Circle(5)
+print(c.radius) 
+print(c.area)    
+c.radius = 10
+print(c.area)
+
+## Birden fazla decorator uygulamasý
+## Birden fazla decorator uygulayabilmek için annotation kullanýlmasý zorunlu olabilir.
+## Burada decorator'larýn eklenme sýralamasý önemlidir.
+def decorator_func(pre_function):
+  def wrapper_func():
+    print("before".center(25,"*"))
+    x = pre_function()
+    print("after".center(25,"*"))
+    return x
+  return wrapper_func
+  
+def decorator_func2(pre_function):
+  def wrapper_func():
+    print("before decorator_func2".upper())
+    x = pre_function()
+    print("after decorator_func2".upper())
+    return x
+  return wrapper_func
+  
+@decorator_func
+@decorator_func2
+def modified_func():
+  print("Normal function")
+  
+modified_func()
+
+## Python closures
+## Closures'dan kasýt fonksiyon içerisindeki diðer fonksiyondur.
+## closure olma durumlarý : Dýþ fonksiyonun içerideki fonksiyonu deðer olarak döndürmesi
+## Ýç fonksiyonun, dýþarýdaki fonksiyonun deðerini kullanmasý
+
+def outer_function(x):
+    # Outer function: takes 'x' and defines inner_function
+    def inner_function(y):
+        return x + y  # 'x' is remembered from outer_function
+    return inner_function  # Returns inner function (closure)
+
+# Create a closure with x = 10
+closure = outer_function(10)
+
+# Call the closure with different values of 'y'
+print(closure(5)) 
+print(closure(20))
+
+
+## Dýþ metodundaki deðeri counter deðiþken olarak kullanan bir iç fonksiyon.
+## Ýçerideki fonksiyon dýþ fonksiyondaki deðeri kulanýyor ve deðerini hatýrlýyor.
+# Bunu yapabilmek iiçn nonlocal keyword kullanýlmasý gerekiyor.
+def make_counter():
+    count = 0  # This variable will be remembered
+    def counter():
+        nonlocal count  # Modify outer variable
+        count += 1
+        return count
+    return counter
+
+counter1 = make_counter()
+print(counter1())  # 1
+print(counter1())
+
+## Closure örneði
+def pre(p):
+    # Outer function stores prefix
+    def add(t):
+        # Inner function uses stored prefix
+        return p + " " + t
+    return add  # Return closure
+
+# Create a closure that always prefixes with "Hello"
+h = pre("Hello")
+print(h("World"))
+print(h("Python"))
+
+## Closure örneði
+def make_multiplier(factor):
+    def multiply_by(x):
+        return x * factor # make_multiplier fonksiyonu içerisinde parametre olarak gelen deðeri hatýrlýyor.
+    return multiply_by
+
+double = make_multiplier(2)
+print(double(5)) 
+
+# Check closure variables
+print(double.__closure__[0].cell_contents)
+
+  
+
+
+
+
+
+
