@@ -1,0 +1,197 @@
+
+## __init__() constructor içerisinde referans tipli elemanlar tanýmlanmalýdýr.
+## Eðer bunu class var olarak tanýmlarsak o zaman ortak paylaþýlýr.
+## Ýnstance variable olmasý için self parametresini vermemiz zorunludur.
+## class methodlarýnda da cls parametresi verilmesi zorunludur.
+class Dog:
+
+    def __init__(self, name):
+        self.name = name
+        self.tricks = []    # creates a new empty list for each dog
+
+    def add_trick(self, trick):
+        self.tricks.append(trick)
+    
+    def test(self):
+        return "Deneme"
+    
+d = Dog('Fido')
+e = Dog('Buddy')
+d.add_trick('roll over')
+e.add_trick('play dead')
+
+print(d.tricks, e.tricks)
+print(f"test() method ---> {d.test()}")
+
+## --------------------------------------
+## Subclass constructor super().__init__() çaðýrdýðý zaman self vermesine gerek yoktur. Hata verir.
+class Mapping:
+    def __init__(self, iterable):
+        self.items_list = []
+        self.__update(iterable)
+
+    def update(self, iterable):
+        for item in iterable:
+            self.items_list.append(item)
+    
+    @property
+    def u_update(self):
+        return f"Üst sýnýftaki update metodu ---> {self.__update}"
+    @u_update.deleter
+    def u_update(self):
+      print("Deleting")
+      del self.__update
+
+    __update = update   # private copy of original update() method
+
+class MappingSubclass(Mapping):
+
+    def __init__(self,iterable,new_var):
+      super().__init__(iterable)
+      self.instance_var = new_var
+    
+    # üst sýnýfýn constructor'ýna yeni update() metodu gidecek.
+    def update(self, keys, values):
+        # provides new signature for update()
+        # but does not break __init__()
+        for item in zip(keys, values):
+            self.items_list.append(item)
+
+sub_instacne = MappingSubclass([1,], "EXAMPLE") 
+keys = ["a","b","c"]
+values = [1,2,3]
+sub_instacne.update(keys,values)
+
+print(sub_instacne.u_update)
+print(sub_instacne.instance_var)
+
+## Multiple inheritance olduðu zaman soldan saða doðru attribute'larý arayacak ---------------------------
+## Bulduðu ilki kullanacaktýr. Ayný metot her ikisinde de override edilmiþ ise o zaman
+## ilk bulduðunu kabul edecektir.
+class Class1:
+    def m(self):
+        print("In Class1") 
+      
+class Class2(Class1):
+    def m(self):
+        print("In Class2")
+
+class Class3(Class1):
+    def m(self):
+        print("In Class3")  
+       
+class Class4(Class2, Class3):
+    pass   
+    
+obj = Class4()
+obj.m()
+
+##------------------------------------------------------------------------------------------------------------
+## 
+class A:
+  def __init__(self, txt):
+    print(txt, 'I am in A Class')
+
+class B(A):
+  def __init__(self, txt):
+    print(txt, 'I am in B class')
+    super().__init__(txt)
+    
+class C(B):
+  def __init__(self, txt):
+    print(txt, 'I am in C class')
+    super().__init__(txt)
+
+class D(B):
+  def __init__(self, txt):
+    print(txt, 'I am in D class')
+    super().__init__(txt)
+
+class E(D, C):
+  def __init__(self):
+    print( 'I am in E class')
+    super().__init__('hello ')
+
+d = E()
+print('')
+h = C('hi')
+
+## ----------------- 
+class Person:
+  count_person = 0
+  
+  def __init__(self, name, age, height, weight):
+    self.name = name
+    self.__age = age
+    self.height = height
+    self.weight = weight
+    Person.count_person += 1
+  
+  def __str__(self):
+    return f"Name : {self.name}, Age : {self.__age}, Height : {self.height}, Weight : {self.weight}"
+  
+ 
+  @staticmethod
+  def create(name,age,height,weight):
+    print("STATIC METHOD")
+    return Person(name,age,height,weight)
+      
+  @classmethod
+  def remove_person(cls, person):
+    del person
+    cls.total_people -= 1
+    
+  @property
+  def age(self):
+    return self.__age
+    
+  @age.setter
+  def age(self,value):
+    self.__age = value
+    
+  @age.deleter
+  def age(self):
+    print("Deleting age")
+    del self.__age
+    
+  def speak(self):
+    print(f"Hello, im {self.name}")
+    
+  def eat(self):
+    self.weight += 0.1
+    
+class Employee(Person):
+
+  count_employee = 0
+  
+  def __init__(self, name, age, height, weight, salary):
+    super().__init__(name, age, height, weight)
+    self.__salary = salary
+    Employee.count_employee += 1
+    
+  # Override
+  def __str__(self):
+    return super().__str__() + f", Salary : {self.salary}"
+    
+  @property
+  def salary(self):
+    return self.__salary
+    
+  @salary.setter
+  def salary(self, value):
+    self.__salary = value
+    
+  ## instance method
+  def work(self):
+    print(f"{name} is working")
+    
+
+emp = Employee("john", 25, 1.70, 84, 15000)
+emp.speak()
+emp.eat()
+print(emp)
+print(f"Calisan sayisi ==> {Employee.count_employee}")
+
+
+
+

@@ -1,0 +1,108 @@
+## Integers, floats, strings, and tuples are hashable data types (and they are also immutable) 
+## while lists are an unhashable data type (and they are mutable). 
+## Python uses hash values to quickly access a dictionary's values.
+## Dictionary'lerde key'lerin hashlenebilir olmasý lazým
+## Dictionary oluþturuken anahtar deðer ikililerini tuple'lar olarak kullanabiliriz.
+## eleman sayýlarý 2 olan tuple'lardan oluþan bir liste dictionary olarak ifade edilebilir.
+xdict = dict( [ (1,2), (3,4), (5,6), (7,8) ] )
+
+x = dict(hashable = "value1" , test = "Value2", list_value = [1,2,3,4])
+
+original_dict = {'a': 1, 'b': [1, 2, 3]}
+shallow_copy = original_dict.copy()
+shallow_copy['b'][1] = 4
+shallow_copy['D'] = "new value to shallow copy"
+shallow_copy['b'].append("New value for both") 
+
+print(f"Original dict --> {original_dict}\nShallow Copy --> {shallow_copy}")
+
+# Dictionary with duplicate keys
+# Dictionary'lerde anahatarlarýn unique olmasý gerekir ama zorunlu deðildir.
+# eðer dupliacte anahtar varsa en son yani en saðdaki deðer esas alýnacaktýr.
+duplicated_keys = {"key1": "value1", "key1": "value2", "key1": "value3"}
+
+print(duplicated_keys["key1"]) ## output ----> value3 en son bulunan deðer.
+
+harry_potter_dict = {    
+    "Harry Potter": "Gryffindor",
+    "Ron Weasley": "Gryffindor",
+    "Hermione Granger": "Gryffindor"
+}
+
+add_characters_1 = {
+    "Albus Dumbledore": "Gryffindor",
+    "Luna Lovegood": "Ravenclaw"
+}
+
+add_characters_2 = [
+    ["Draco Malfoy", "Slytherin"], 
+    ["Cedric Diggory", "Hufflepuff"]
+]
+
+add_characters_3 = [
+    ("Rubeus Hagrid", "Gryffindor"), 
+    ("Minerva McGonagall", "Gryffindor")
+]
+
+# Merge dictionaries |= union operatörünü veya update metodunu kullanabiliriz.
+harry_potter_dict |= add_characters_1
+harry_potter_dict |= add_characters_2
+harry_potter_dict |= add_characters_3
+del harry_potter_dict["Minerva McGonagall"]
+
+
+for x,y in harry_potter_dict.items():
+  print(x,y)
+  
+# pop() ve popitem() metotlarý:
+# pop() anahtarý verilmiþ olan çifti siler ve geriye döndürür. Eðer yoksa default deðer belirlenebilir.
+# popitem() ise dictionary sonundaki deðeri siler  ve döner.
+## pop ve popitem metotolarýnýn döndüðü deðer tuple tipinde olacaktýr. anahtar ve deðer ikilileri tuple ile ifade edilebilir.
+harry_potter_dict["Voldemort"] = "Slytherin"
+silinen_tuple = harry_potter_dict.popitem()
+silinen_tuple_2 = harry_potter_dict.pop("OLMAYAN KEY", "Default deger" )
+print(silinen_tuple, silinen_tuple_2)
+
+## Dictionary'lerde bracetlerle eriþmeye çalýþtýðýmýz zaman anahtar yoksa error verir.
+## Bunu önlemek için get() metodu kullanlabilir. Eðer anahtar yoksa default deðer döner.
+print(harry_potter_dict.get("VOLDEMORT", "default deger"))
+
+## Eðer anahtarýn bulunmazsa ve yeni deðer eklemek istersek setdefault() kullanýlabilir.
+## anahtarýn dictionary içerisinde olup olmadýðýndan emin olamadýðýmýz zaman mantýklý
+harry_potter_dict.setdefault("BULUNAMADI" , "VALUE")
+print(harry_potter_dict["BULUNAMADI"])
+
+## items() keys() values() metotlarýnýn hepsi yeni deðer dönerler.
+## dict_items() nesnesi tuple'lardan oluþan bir listedir.
+print(f"keys() --> {harry_potter_dict.keys()}\nvalues() --> {harry_potter_dict.values()}\nitems() --> {harry_potter_dict.items()}")
+
+## Dictionary comprehension
+## listelerde ve tuple'larda olduðu gibi kýsa yoldan döngü ile Dictionary oluþturulabilir.
+## dictionary'ler listelere göre daha performanslý çalýþýrlar. 
+## comprehension : comprehension in Python means applying the same operation on each element of an iterable
+## comprehension kullandýðýmýz zaman yeni deðer döner.
+dict_comp = {x:v.strip().upper() for x,v in harry_potter_dict.items()}
+print(dict_comp)
+
+class Robot:
+  
+  def __init__(self, name):
+    self.__name = name
+  
+  def get_name(self):
+    return f"My name is {self.__name}"
+
+robot = Robot("Wall-e")
+
+print(robot._Robot__name)
+
+
+
+
+
+
+
+  
+  
+
+

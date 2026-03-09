@@ -1,0 +1,185 @@
+## List tuple dict set frozenset
+
+## sorted() metodu. Bir iterable ve reverse condition alýr.
+## herhangi iterable nesne varsa onlarý sýralayabilir. Setleri de sýralayabilir.
+## Genel kullaným fonksiyonu olduðu için yeni bir liste döner. Set için kullanýldýðý zaman da liste döner.
+basket = ['apple', 'orange', 'apple', 'pear', 'orange', 'banana']
+newlist = sorted(set(basket) , reverse=True)
+print(type(newlist))
+
+for f in sorted(set(basket)):
+    print(f)
+    
+## Tuple'lar deðiþtirilemez olduklarý için sadece count() ve index() metotlarý vardýr.
+## Tuple'lar listelere göre daha performanslýdýr. herhangi yeni eleman eklenemz veya çýkartýlamaz. 
+## Uzunluklarý sabittir. Ýndexleri vardýr ve sýralanabilirler.
+Tuple = (0, 1, (2, 3), (2, 3), 1, 
+         [3, 2], 'geeks', (0,))
+
+res = Tuple.count( (2, 3) )
+print('Count of (2, 3) in Tuple is:', res)
+
+res = Tuple.count( [3, 2] )
+print('Count of [3, 2] in Tuple is:', res)
+
+## index(element, start, end) method
+
+Tuple = (0, 1, 2, 3, 2, 3, 1, 3, 2)
+
+res = Tuple.index(3)
+print('First occurrence of 3 is', res)
+
+res = Tuple.index(3, 4)
+print('First occurrence of 3 after 4th index is:', res)
+  
+## Set metotlarý =========================================================================================
+## setler mutable nesneler olduðu için bazý metotlarý doðrudan nesnenin kendisini deðiþtirebilir.
+## copy metodu listelerdeki ve tuple'larda oludðu gibi referanslarý kopyalar. 
+## Eðer içlerinde referans tipli bir deðer varsa bunun referansýný kopyalar.
+
+# created using set copy is shallow
+first = {'g', 'e', 'e', 'k', 's'}
+second = first.copy()
+
+second.add('f')
+print(f"First set --> {first}\nSecone set --> {second}")
+
+## frozenset() parametre olarak iterable alýr ve yeni frozer set döner.
+## frozenset'lere eleman eklenemez. 
+## dictionary'ler de iterable olduklarý için frozen set olarak kullanýlabilir. SADECE ANAHTARLARI ALACAKTIR.
+## Dictionary üzerindde iteration yapýldýðý zamanlarda anahtarlarýn üzerinden döner.
+Student = {"name": "Ankit", "age": 21, "sex": "Male", 
+           "college": "MNNIT Allahabad", "address": "Allahabad"}
+
+key = frozenset(Student)
+
+print('The frozen set is:', key)
+
+## SET discard() set içinde belirlenen elemaný siler. Eðer bulamaz ise error vermez.
+## remove() metodu kullanýlýrsa ve eleman ublunamaz ise o zaman error verecektir.
+s = {"apple", "banana", "mango", "blueberry", "watermelon"}
+s.remove("mango")
+print(s)
+
+s.discard("banana")
+print(s)
+
+
+## SET - DIFFERENCE / A - B
+## Soldaki setin argüman olarak gönderilen setten farkýný bulmak için
+## Difference almak için çýkarma operatörünü kullanabiliriz.
+A = {10, 20, 30, 40, 80}
+B = {100, 30, 80, 40, 60}
+
+print(A-B)
+A = A.difference(B)
+print(A)
+
+A.difference_update(B) ## modify in place
+print(A)
+
+## SET - INTERSECTION kesiþimlerini alýr. A & B
+## difference metodnda olduðu gibi mutable hali olan intersection_update() metodu vardýr.
+set1 = {2, 4, 5, 6}
+set2 = {4, 6, 7, 8}
+set3 = {4, 6, 8}
+
+shorthand_intersection = set2 & set3
+print("shorthand intersection --> ",shorthand_intersection)
+
+new_set = set1.intersection(set2)
+
+set2.intersection_update(set3)
+
+print("set1 intersection set2 : ",
+      set1.intersection(set2))
+
+print("set1 intersection set2 intersection set3 :",
+      set1.intersection(set2, set3))
+      
+## SET SYMMETRÝC DÝFFERENCE SET1 ^ set2
+## HER ÝKÝ setin farklý olduðu elemanlardan yeni set döner.
+## symmetric_difference_update() metodu ile sonucu soldaki sete kaydedebiliriz.
+list1 = [1, 2, 3] 
+list2 = [2, 3, 4] 
+list3 = [3, 4, 5] 
+
+set1 = set(list1) 
+set2 = set(list2) 
+set3 = set(list3)
+
+result_set = set1 ^ set2
+print("Symmetric difference set : ", result_set) 
+
+set3.symmetric_difference_update(set2)
+print(set3)
+
+## SET isdisjoint(other) iki setin arasýnda herhangi kesiþim yoksa True döner.
+## Yani intersection'larý null ise disjoint olmuþ olur.
+set1 = {2, 4, 5, 6}
+set2 = {7, 8, 9, 10}
+set3 = {1, 2}
+print("set1 and set2 are disjoint?",
+      set1.isdisjoint(set2))
+print("set1 and set3 are disjoint?",
+      set1.isdisjoint(set3))
+
+## SET issubset() soldaki setin argüman olarak gönderilen setin alt seti mi 
+A = {1, 2, 3}
+B = {1, 2, 3, 4, 5}
+C = {1, 2, 4, 5}
+print(A.issubset(B))
+print(B.issubset(A))
+print(A.issubset(C))
+print(C.issubset(B))
+
+## SET issuperset() soldaki setin argüman olarak gönderilen setin bütün elemanlarýný içeriyor mu ?
+A = {1, 2, 3}
+B = {1, 2, 3, 4, 5}
+C = {1, 2, 4, 5}
+print("A.issuperset(B) : ", A.issuperset(B))
+print("B.issuperset(A) : ", B.issuperset(A))
+print("A.issuperset(C) : ", A.issuperset(C))
+print("C.issuperset(B) : ", C.issuperset(B))
+
+## SET pop() ve remove() metotlarý
+## setlerde sýralama olmadýðý için pop() metodu rastgele elemaný siler ve döner.
+## remove(), belirlenen elemaný siler. Eðer bulamaz ise ERROR verecektir.
+silinen = A.pop()
+print("A setinden silinen deger : " ,silinen)
+
+## SET union() metotlarý A | B
+## birden fazla seti birleþtirir ve yeni set döner.
+A = {2, 4, 5, 6}
+B = {4, 6, 7, 8}
+C = {7, 8, 9, 10}
+print("A U B U C:", A.union(B).union(C))
+print("A U B U C:", A.union(B, C))
+print(A | B)
+
+## SET - update() metodu setleri doðrudan deðiþtirmek için veya birden fazla elemaný
+## Ayný anda eklemek için kullanýlabilir.
+d1 = {'a': 1, 'b': 2}
+d1.update([('c', 3), ('d', 4)])
+print(d1)
+
+A = {2, 4, 5, 6}
+B = {4, 6, 7, 8}
+A.update(B)
+A.update({"test","abc"})
+A.update([1,2])
+print(A)
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
