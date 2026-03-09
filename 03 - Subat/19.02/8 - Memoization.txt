@@ -1,0 +1,25 @@
+
+lookup  = []
+def fact(val):
+  if val == 0:
+    return 1
+  elif val <= len(lookup) - 1:
+    return lookup[val]
+  else:
+    x = val * fact(val - 1)
+    lookup.append(x)
+    return x
+
+
+flookup = []
+def f(val):
+  if val == 0:
+    return 0 
+  elif val == 1:
+    return 1
+  elif val <= len(flookup) - 1:
+    return flookup[val]
+  else :
+    x = f(val - 1) + f(val - 2)
+    flookup.append(x)
+    return x

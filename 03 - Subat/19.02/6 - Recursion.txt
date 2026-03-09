@@ -1,0 +1,22 @@
+## recursion yaparken max call limitini aþmamak için halting condition olmasý þarttýr.
+## En son üstüne inþa edebileceði bir taným lazým.
+def fact(value):
+  if value == 0 :
+    return 1
+  else :
+    return value * fact(value - 1)
+  
+print(fact(5))
+
+## fib 0 1 1 2 3 5 8 13 
+
+def fibonacci(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
+
+print(fibonacci(10))
+  

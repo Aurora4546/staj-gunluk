@@ -1,0 +1,47 @@
+## Dunder methods
+## belirli iþlemlerde otomatik çaðýrýlan metotlar.
+## Oluþturduðumuz nesneleri hazýr tipler gibi kullanmaya yarar.
+## __str__ , __add__, __setatr__ , __getattribute__ ...
+## bu metotlarýn hepsi object base'inden geliyor. override edilebilir.
+
+class Book : 
+
+  def __init__(self, title):
+    self.title = title
+
+  def __str__(self):
+    return f"Name --> {self.title}"
+
+  def __repr__(self):
+    return f"Book('{self.title}')"
+
+  def __add__(self,other):
+    return f"Books --> {self.title} , {other.title}"
+    
+  ## Sýnýfýn içi ve dýþýndaki bütün eriþimler için.
+  def __getattribute__(self,name):
+    print(f"__getattribute__ --> {name}")
+    return super().__getattribute__(name)
+    
+  ## Olmayan attribute eriþilirken çaðýrýlýr.
+  def __getattr__(self,name):
+    print(f"__getarrt__ --> {name}")
+    return super().__getattr__(name)
+    
+for method in dir(object):
+  if method.startswith("__"):
+    print(f"Method --> {method}")
+    
+bk = Book("Kitap")
+print(bk.title)
+print(bk.__repr__())
+print(bk.__str__())
+print(Book("test") + Book("Test"))
+print(bk.yok)
+  
+  
+  
+
+
+
+

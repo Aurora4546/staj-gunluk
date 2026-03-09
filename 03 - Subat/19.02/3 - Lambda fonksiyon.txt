@@ -1,0 +1,66 @@
+
+## lambda fonksiyonlar.
+## tek bir ifade dönerler.
+## referanslarý olmadýklarý için eðer deðiþkene atanmazsa tekrar çaðýrýlamaz.
+## Deðerleri yazýldýðý yerde kullanýlýr.
+x = lambda : "test"
+print(x())
+
+a = 'GeeksforGeeks'
+upper = lambda x: x.upper()  
+print(upper(a))
+
+args = lambda *args : print(args)
+args(314,314,314)
+
+func = [lambda arg=x: arg * 10 for x in range(1, 5)]
+for i in func:
+    print(i())
+    
+## lambda fonksiyonlarýn kullanýmý parametre olarak fonksiyon bekleyen metotlarda gereklidir.
+## Metodu olduðu yerde tanýmlayabiliriz.
+## filter() map() reduce() fonksiyonlarý ilk parametre olarak bir metot bekler.
+## bu metodu iterable'daki bütün elemanlar için tek tek uygular.
+## Ýterable içindeki deðerleri tek tek fonksiyona parametre olarak gönderir.
+s = ['1', '2', '3', '4']
+res = map(int, s)
+print(res, list(res))
+
+# Custom function to be applied
+# in map
+def double(val):
+    return val * 2
+
+# Let us apply double on every member
+a = [1, 2, 3, 4,5,6,7,8]    
+res = list(map(double, a))
+print(res)
+
+res = list(map(lambda x: x ** 2, a))
+print(res)
+
+## Lambdanýn aldýðý parametre sayýsý kadar iterable verilebilir.
+a = [1, 2, 3]
+b = [4, 5, 6]
+res = map(lambda x, y: x + y, a, b)
+print(list(res))
+
+## filter() metodu : fonksiyon ve yanýnda iterable alýr.
+## içindeki bütün elemanlarý tek tek fonksiyona parametre olarak gönderir.
+## fonksiyon içerisindek true dönenleri döndürür.
+## fonksiyon gönderilmez ise o zaman liste içerisindeki falsy deðerleri siler.
+
+li = ["apple", "banana", "avocado", "cherry", "apricot"]
+res = filter(lambda string : string.startswith('a'), li)
+print(list(res))
+
+li = [1,2,3,4,5,6,7,8,9,10]
+res = filter(lambda value : value % 2 == 0, li)
+print(list(res))
+
+## FALSY DEÐERLER ------> None , BOÞ STRING, 0'A eþit olan deðerler, boþ olan listeler tuple'lar veya dicitonary'listeler
+## false olarak deðerlendirilir.
+L = ["apple", "", None, "banana", 0, "cherry"]
+A = filter(None, L)
+print(list(A))
+

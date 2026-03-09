@@ -1,0 +1,107 @@
+## kitap ve Kutuphane sınıfları olacak
+## kitap(ad,yazar,sayfa_sayisi, odunc_alindi_mi)
+## metotlar bilgileri_goster() , odunc_al(), teslim_et(), 
+
+## Kutuphane(kitap_listesi[])
+## metotlar kitap_ekle(kitap) , kitaplari_listele(), odunc_ver(kitap_adi), teslim_al(kitap_adi)
+
+## en az 3 kitap eklenmeli
+## kitaplari kitaplari_listele
+## kitap odunc
+## tekrar listele  
+## kitabi geri all
+## her metot ne yaptigini print et
+
+class Kitap:
+  def __init__(self,ad,yazar,sayfa_sayisi):
+    self.ad = ad
+    self.yazar = yazar
+    self.sayfa_sayisi = sayfa_sayisi
+    self.__odunc_alindi_mi = False
+    
+  @property
+  def odunc_alindi_mi(self):
+    return self.__odunc_alindi_mi
+  
+  def __str__(self):
+    return f"\n********* Kitap bilgileri *********\nKitap adi :\t{self.ad}\nYazar :\t{self.yazar}\nSayfa Sayisi :\t{self.sayfa_sayisi}\nOdunc alindi mi :\t{"== EVET ==" if self.__odunc_alindi_mi else "Hayir"}"
+    
+  def bilgileri_goster(self):
+    print(f"================= bilgileri_goster calisti ==============\n{self.__str__()}")
+    
+  def odunc_al(self):
+    print("\n=================== odunc_al calisti ===============")
+    self.__odunc_alindi_mi = True
+    
+  def teslim_et(self):
+    print("\n================= teslim_et calisti ==============")
+    self.__odunc_alindi_mi = False
+    
+    
+
+class Kutuphane :
+  
+  def __init__(self, kitap_listesi=[]):
+    self.kitap_listesi = kitap_listesi
+    
+  def kitap_ekle(self, *args):
+    print("\n================= kitap_ekle calisti ==============")
+    for kitap in args:
+      self.kitap_listesi.append(kitap)
+      
+  def kitaplari_listele(self):
+    print("\n================= kitaplari_listele calisti ==============")
+    for kitap in self.kitap_listesi:
+      print(kitap)
+
+  def odunc_ver(self, kitap):
+    print("\n================= odunc_ver calisti ==============")
+    
+    if type(kitap) == str:
+      for ktp in self.kitap_listesi:
+        if ktp.ad == kitap:
+          ktp.odunc_al()
+    elif type(kitap) == Kitap:
+      self.kitap_listesi[self.kitap_listesi.index(kitap)].odunc_al()
+    
+  def teslim_al(self, kitap):
+    print("\n================= teslim_al calisti ==============")  
+    
+    if type(kitap) == str:
+      for ktp in self.kitap_listesi:
+        if ktp.ad == kitap:
+          ktp.teslim_et()
+    elif type(kitap) == Kitap:
+      self.kitap_listesi[self.kitap_listesi.index(kitap)].teslim_et()
+    
+#=====================================================================================================    
+        
+
+kitap1 = Kitap("Kitap 1", "Yazar 1", 300)
+kitap2 = Kitap("Kitap 2", "Yazar 2", 250)
+kitap3 = Kitap("Kitap 3", "Yazar 3", 583)
+
+kutuphane = Kutuphane()
+
+kutuphane.kitap_ekle(kitap1, kitap2, kitap3)
+
+kutuphane.kitaplari_listele()
+
+kutuphane.odunc_ver(kitap1)
+
+kutuphane.kitaplari_listele()
+
+kutuphane.teslim_al("Kitap 1")
+
+kutuphane.kitaplari_listele()
+
+
+
+
+
+
+
+    
+  
+    
+    

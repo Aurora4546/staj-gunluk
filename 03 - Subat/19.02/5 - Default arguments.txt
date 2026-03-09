@@ -1,0 +1,40 @@
+## Python default argumanlar
+## Default parametreler metotlar içerisinde sadece 1 kere tanýmlanýrlar.
+## Bunu önlemek için metot içerisinde kendimiz oluþturmalýyýz.
+
+def to_append(number, to=[]):
+  to.append(number)
+  print(to)
+  
+to_append(12)
+to_append(2000)
+to_append("liste sadece 1 kere olusturulur.")
+  
+
+def to_append_new(number, to=None):
+  if to is None:
+    to = []
+    to.append(number)
+    print(to)
+  else:
+    to.append(number)
+    to.reverse()
+    print(to)
+    
+to_append_new( 12 )
+to_append_new( 432, [ "fd", "fds", "fd" ] )
+
+## 5 adet lambda fonksiyon donecektir.
+def create_multipliers():
+    return [lambda x : i * x for i in range(5)]
+
+## Late binding 
+## create_multipliers çaðýrýldýktan sonra bütün lamdalar oluþturulur ondan sonra
+## bu fonksiyonlar listesi içerisindeki tüm elemanlara 5 parametresi gönderiliyor.
+## bu yüzden hepsi ayný deðerde.
+for multiplier in create_multipliers():
+    print(multiplier(5))
+    
+def create_multipliers():
+    return [lambda x, i=i : i * x for i in range(5)]
+

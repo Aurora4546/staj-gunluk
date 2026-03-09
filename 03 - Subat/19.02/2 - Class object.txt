@@ -1,0 +1,55 @@
+## Composition kalýtýmdan farký sadece belirli metotlarý veya özellikleri almasý.
+## Bunun için alt sýnýf hangi sýnýftan özellik alacaksa onu attribute olarak 
+## Kullanmak zorunda.
+class Component:
+
+   # composite class constructor
+    def __init__(self):
+        print('Component class object created...')
+
+    # composite class instance method
+    def m1(self):
+        print('Component class m1() method executed...')
+
+
+class Composite:
+
+    # composite class constructor
+    def __init__(self):
+
+        # creating object of component class
+        self.obj1 = Component()
+        
+        print('Composite class object also created...')
+
+     # composite class instance method
+    def m2(self):
+      
+        print('Composite class m2() method executed...')
+
+        # calling m1() method of component class
+        self.obj1.m1()
+
+
+# creating object of composite class
+obj2 = Composite()
+
+# calling m2() method of composite class
+obj2.m2()
+
+## type() fonksiyonu ile sýnýflar oluþturulabilir.
+## Yeni sýnýf nesnesi döneceði için bunu deðiþken üzerinde tutmalýyýz.
+def __init__(self,name,age):
+  self.name = name
+  self.age = age
+
+def test(self):
+  print("a")
+def yeni_metot(self):
+  print("b")
+  
+Sinif = type("Sinif", (object,) , {"__init__" : __init__, "test" : test})
+Sinif.yeni_metot = yeni_metot
+x = Sinif("name", "age")
+x.yeni_metot()
+x.test()
