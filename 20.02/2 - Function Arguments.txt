@@ -1,0 +1,106 @@
+            
+## Default parametreler
+## bütün default deðerlerin parametre listesinde sonlarda olmasý lazým.
+## keyword parametre kullanýlabilirse o zaman hangi parametreye göndereceðimiz belirtebiliriz.
+def ask_ok(prompt, retries=4, reminder='Please try again!', reply="False"):
+    while True:
+        
+        if reply in {'y', 'ye', 'yes'}:
+            return True
+        if reply in {'n', 'no', 'nop', 'nope'}:
+            return False
+        retries -= 1
+        if retries < 0:
+            print("Invalid user response\n\n")
+            return
+        print(reminder)
+        
+
+ask_ok("Prompt" , reply="Test")
+
+## Defalut parametreler sadece 1 kere oluþturulurlar.
+## Ayný metodu birden fazla çaðýrdýðýmýz zaman ayný nesneyi kullanacak.
+## Ýçerikleri deðiþen nesnelerde (list, set . .) ayný nesne içerisine eklemeler yapacak.
+def default_test(para1, default_par = []):
+  default_par.append(para1)
+  print(default_par)
+
+
+## Default parametrenin ortak kullanýlmamasý için :  
+def default_none(para1, default_par = None):
+  if default_par is None:
+    default_par = []
+    default_par.append(para1)
+    print(default_par)
+  
+  
+default_test("Ilk cagirma")
+default_test("Ikinci cagirma")
+default_test("DEFAULT DEGIL" , [])
+
+default_none("1")
+default_none("2")
+default_none("3")
+
+## * ve ** listeleri veya dictionary'leri dictinary ve listeleri parametre olarak göndermek için kullanýlalbilir.
+## Ama gönderilen sequence'ýn açýlmasýný saðlar yani içerisindeki deðerleri kullanýr.
+## ** dictionary için, * listeler için
+def cheeseshop(kind, *arguments, **keywords):
+    print("\n\n-- Do you have any", kind, "?")
+    print("-- I'm sorry, we're all out of", kind)
+    
+    for arg in arguments:
+        print(arg)
+    print("-" * 40)
+    
+    for kw in keywords:
+        print(kw, ":", keywords[kw])
+        
+x = dict(ilk = "fdsfs", ikinci = "Deneme")
+
+cheeseshop("Limburger", "It's very runny, sir.",
+           *x,
+           shopkeeper="Michael Palin",
+           client="John Cleese",
+           sketch="Cheese Shop Sketch")
+
+
+
+
+
+## Positional - only ve Keyword - only parametreleri.
+## positional only parametreleri diðerlerinden ayýrmek için -----> / 
+## Parametreler positional oldukalarý zaman sýrasý önemlidir.
+## keyword only parametreleri diðerlerinden ayrýmak için --------> *
+
+def standard_arg(arg):
+    print(arg)
+
+def pos_only_arg(arg, /):
+    print(arg)
+
+def kwd_only_arg(*, arg):
+    print(arg)
+
+def combined_example(pos_only, /, standard, *, kwd_only):
+    print(pos_only, standard, kwd_only)
+    
+standard_arg(1)
+standard_arg(arg = 1)
+pos_only_arg(32)
+kwd_only_arg(arg = 32)
+
+combined_example(1 , standard = "2" , kwd_only = "Keyword only")
+combined_example(1, "----pos or kwd", kwd_only = "Keyword only")
+
+## * ve ** listelerdeki veya dictionary'lerdeki deðerleri açýp parametre olarak fonksiyona vermemizi saðlar.
+## zip metodu iterable'lar ile kullanýlýr.
+
+def list_dict(*args, **kwargs):
+  for x,y in zip(args,kwargs):
+    print(x,y)
+  
+list_arguments = [99,88,77,22]
+dictionary_arguments = dict(ilk="deger", ikinci="deger")
+
+list_dict(*list_arguments, **dictionary_arguments)
