@@ -1,0 +1,39 @@
+- Modul yapısı : 
+	* Object veya models : Odoo otomatik algılar. Configlerine göre.
+	* View : XML ve CSV içeriklerin olduğu dosyalar.
+	* Constroller : web istekleriyle ilgilenir.
+	* static : js, css, html veya statik resimler.
+- Modul sub folder : 
+	* controllers, data, models, views, report, security, static, wizard.
+- .py içerern bütün klasörlerde ve modulun ana klasöründe __init__.py olması lazım. .py dosylarını import etmek için 
+- modul altındaki init içerisinde controllers, models veya wizard gibi .py içeren klasörleri çağırmak için.
+- __manifest__.py : module/ içerisinde olması şart. modul hakkında bilgileri ve view/CSV/static gibi 
+dosyaları çağırmak için .
+- __manifest__.py içeriği : name, version, author, website, summary, description, depends, data, license,
+installable, application, auto-install
+	* https://www.odoo.com/documentation/12.0/developer/reference/module.html
+	* Manifest içeriği tamamen bir dicitonary.
+	* data : .xml ve csv dosyalarının hepsi
+	* depends : modülün bağımlı olduğu diğer modüller. Burada her modül base ile sonlancak.
+	* demo : demonstration için şablon
+- __init__.py içeriği : modulun altındaki diğer .py dosyalarını import etmek için kullanılır.
+	* import . from product 	gibi
+- models / model python dosyaları : 
+	* modeller = veritabanı tabloları bu tabloların sütunlarını field'lar ile oluşturulur.
+	* Odoo field tipleri : Character, Integer, Float, Text, Html, Selection Many2one, One2Many
+	* Field'ların ilişkileri de belirlenebilir.
+- Field'lar : sütunların veri tiplerini, erişimlerini  ve ilişkileri belirler. Veri tipi belirlendikten sonra
+sütun özellikleri belirlenebilir : string, help, readonly, required, index, default, states . . .
+	*Computed Fields : compute, inverse, search . . .
+			   Verileri doğrudan almak yerine hesaplanmış değerleri dönmek için 
+			   Hesaplanmış veriler için parametre olarak metot referansı verilir.
+			   Hesaplanmış alanlar veritabanında tutulması opsiyoneldir. store=True
+	*Related Fields : diğer field'lar ile bağlantılı olan field'lar tanımlaman için 
+- View / XML : form, tree/list, kanban, graph, search 
+	* Tanımladığımız field'ları burada erişebiliriz. 
+	* __manifest__ data kısmında oluşturduğumuz xml dosyasını belirtmemiz lazım.
+	
+	
+			   
+			   
+	

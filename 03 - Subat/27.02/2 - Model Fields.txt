@@ -1,0 +1,24 @@
+- Modellerin özelliklerinin veri tiplerini ve  yerlerini belirlemeye yarar.
+- Many2many, many2one, one2many, many2many field'lar belirlenebilir.
+- Field'ları xml ile kullanabiliriz.
+- Monetary field farklı birimlerde kaydetmek için.
+
+- Relational Fields : 
+	* Field'ları farklı modeller ile ilişkilendirmek için .
+	* Bağlantı kurmak için kullanılabilir.
+- Many2one field : 
+	* nationality = fields.Many2one('res.country', string='Nationality')
+	* Many tarafı hangi model ise odur. one tarafı ilk parametre.
+- One2many field : 
+	* order_lines = fields.One2many('sale.order.line', 'order_id', string='Order Lines')
+	* One tarafı -- order Many tarafı orderline. 
+- Many2Many field:
+	* Veritabanında yeni tablo oluşturur.
+	* tag_ids = fields.Many2many('product.tag', 'product_tag_rel',  'product_id', 'tag_id', string='Product Template Tags')
+	* Product many tag many. Ürünün birden fazla etiketi olabilir. Bir etiket birden fazla ürünü temsil edebilir.
+	
+	
+- https://www.odoo.com/documentation/19.0/developer/tutorials/server_framework_101/07_relations.html
+- https://www.odoo.com/tr_TR/slides/slide/relational-fields-4613
+
+
