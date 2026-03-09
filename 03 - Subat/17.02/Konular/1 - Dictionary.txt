@@ -1,0 +1,82 @@
+## Dictionary methods
+## clear copy fromkeys get items keys pop popitem setdefault values update
+## bazý metotlar modify in place diðerleri yeni dictionary dönebilir.
+
+## clear - modify in place
+## Dictionary içerisindeki bütün elemanlarý siler
+d = {1: "geeks", 2: "for"}
+d.clear()
+print(d)
+
+## copy - yeni dict döner.
+## shallow copy. Yani eðer dict içerisinde referans tipli deðerler varsa
+## Onlarýn sadece referanslarý kopyalanacaktýr. 
+dict1 = {10: 'a', 20: {"test":1, "deneme":2}, 30: 'c'}
+print("Given Dictionary:", dict1)
+
+dict2 = dict1.copy()
+print("New copy:", dict2)
+
+dict2[10] = 10
+dict2[20][2] = '45'  # dict item updated
+
+# copy() içerisindeki elemanlarýn deðer tipise deðer kopyalarýný
+# Refernas ise o zaman referanslarýnýn kopyalarýný alacaktýr.
+print("Updated copy:", dict2)
+print("Original copy:" , dict1)
+
+## fromkeys() static method
+## belirli bir liste içerisindeki deðerleri anahtar olarak kabul eder ve bunlara
+## Ortak deðer girmeyi saðlar girilecek olan ortak deðer liste olabilir.
+## Liste olursa tekrardan sadece referanslarý atanacaktýr. Yani her deðer referans olacak.
+keys = [1,2,3,4,5,6,7,8,9,10]
+values = ["shallow copy"] + ["test"]
+di1 = dict.fromkeys(keys,values)
+print(di1)
+
+# get() methodu avantajý key bulunamadýðý zaman varsayýlan deðer dönebilmesi
+print(di1.get(99999999999999999, "varsayilan deger"))
+
+# items() methodu sadece dictionary'ler için kullanýlabilir.
+# Bütün elemanlarýn olduðu view döner.
+# Dictionary içerisinde herhangi update olursa view kendisi de güncellenir.
+dict_view = di1.items()
+print(f"Before updating view ---> {dict_view}")
+di1["UPDATED"] = "UPDATED"
+print(f"After updating view VIEW UPDATED ---> {dict_view}")
+
+# Keys ve values() metotlarý da ayný þekilde view nesneleri dönecektir.
+# Döndürdükleri view nesneleri her zaman dinamiktir.
+keys_view = di1.keys()
+values_view = di1.values()
+print(f"Keys --> {keys_view}\nValues--> {values_view}")
+
+# pop() methodu belirlenen anahtara sahip ikiliyi siler ve döner.
+# Anahtar bulunamaz ise o zaman default deðer dönebilir.
+# listelerde en sondaki elemaný siler ve döndürür. Set'lerde tamamen rastgele eleman siler
+# ve dönürür Dönen veri VALUE'DUR
+popped = di1.pop("UPDATED", "Key not found")
+print(popped)
+
+# Eðer listelerdeki gibi çalýþan bir pop metodu istsersek popitem() kullanabiliriz.
+# Dictionary içerisinde en son eklenen elemaný silecek ve döndürecektir.
+# pop methodundan diðer farký sadece deðer dönmez. anahtarý ile beraber tuple dönecektir.
+d = {1: '001', 2: '010', 3: '011'}
+item = d.popitem()
+print(type(item) , item)
+
+# setdefault() eðer anahtar yok ise yeni ahatar deðer ikilisi ekler.
+# Yeni dict dönmez doðrudan etkiler.
+d.setdefault(9999999, "Yeni eklendi")
+print(d)
+
+# update() methodu dictionary üzerinde extend metodu gibi yeni dictionary deðerleri veya yeni dictionary'deðerleri
+# eklemek için kullanýlýr.
+d_temp = {"temp":"temp"}
+d.update({"New key": "new value"})
+d.update(d_temp)
+d.update({"temp":"overwrite"})
+print(d)
+
+
+

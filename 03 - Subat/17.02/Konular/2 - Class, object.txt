@@ -1,0 +1,240 @@
+## Python classes and objects
+## Python'da sýnýflar da birer obje olarak kullanýlabilir.
+## Yani metotlara argüman olarak gönderilebilirler veya deðiþkenlere atanabilirler
+## Sýnýflarýn içerisinde statement'lar iþlenebilir. Bunlar doðrudan ilk olarak iþlenirler.
+## Sýnýflara doðrudan yazýlan deðiþkenler hem sýnýf referansý hem de instance referanslarý ile eriþilebilir
+## CLASS MEMBER'LAR HEM ÝNSTANCE'LAR ERÝÞEBÝLÝR HEM DE SINIFIN KENDÝSÝ ERÝÞEBÝLÝR.
+## __init__() constructor içerisinde yazýlan ve oluþturulan bütün deðiþkenler sýnýfýn deðil o sýnfýn örneklerine ait olur.
+## Python'da property'ler ve setterlar vardýr bunlar metot gibi tanýmlanýr ama kullanýmý public field gibidir.
+## Propertylerde veya sýnýf metotlarýnda self ve cls kullanýlmasý zorunludur.
+
+# class metotlarý cls keyword ile sýnýfýn üyelerine eriþebilir.
+# __init__ metodu da self keyword ile instance üyelere eriþir.
+# Sýnýf variable'larýna instane üzerinden deðiþtirme yapýlabilir.
+class Node:
+  cls_msg = "CLASS VAR"
+  cls_mutable = [1,2,3,4,5]
+  
+  def __init__(self):
+    self._msg = "instance var" 
+
+  @property
+  def msg(self):
+    return self._msg
+    
+  @msg.setter
+  def msg(self,value):
+    self._msg = value
+    
+  @classmethod
+  def func(cls):
+    return cls.cls_msg
+
+## Bütün sýnýf variable'larý sadece sýnýf referanslarý ile DEÐÝÞTÝRÝLEBÝLÝR.
+## Eðer sýnýf üyelerinin deðerini deðiþtirmeye çalýþýrsak instance için yeni attribute oluþturmuþ oluruz.
+## Class içindeki deðeri deðiþtiremez.
+## BU DURUM MUTABLE NESNELER ÝÇÝN GEÇERLÝ DEÐÝLDÝR. YANÝ ÝNSTANCE ÝÇERÝSÝNDE YENÝ BÝR REFERANS EKLENÝR ve
+## BU REFERANS AYNI CLASS VARÝABLE'IN TEMSÝL ETTÝÐÝ NESNEYÝ TEMSÝL EDECEKTÝR.
+nde = Node()
+nde.cls_msg = "test;" ## Yeni instance variable oluþturuldu.
+print(nde.cls_msg)    ## instance variable kullanýr
+print(nde.func())     ## class variable kullanýr
+print(Node.cls_msg)   ## class variable
+print(Node.func())
+print(Node().func(),"\n")
+
+nde.cls_mutable[0] = "TEST"
+print(nde.cls_mutable)
+print(Node.cls_mutable)
+
+## -----------------------------------------------------------------------------------------------------
+## class static ve instance metotlar class method OVERRIDE VAR
+## Class method. Sýnýfý ilgilendiren metotlardýr. Ýnstance'lar da çaðýrabilir.
+class MyClass:
+    class_variable = 0
+
+    def __init__(self, value):
+        self.instance_variable = value
+
+    # decorator oludðu için instance üzerinden de çaðýrýlabilir.
+    # avantajý cls keyword almasý.
+    @classmethod
+    def class_method(cls, x):
+        cls.class_variable += x
+        return cls.class_variable
+
+obj1 = MyClass(5)
+obj2 = MyClass(10)
+
+print(MyClass.class_method(3))  # Output: 3
+print(MyClass.class_method(7))  # Output: 10
+
+print(obj1.class_method(432))   # 10 + 432 class var deðiþtirildi.
+
+
+## static metotlar OVERRIDE YOK
+## sýnýfa veya onun örneklerine herhangi bir þekilde baðlý olmayan metotlardýr.
+## Yani içerisinde self veya cls gibi keyword'leri alamazlar. Tamamen baðýmsýzlardýr.
+## Static metotlar instance'lar üzerinden çaðýrýlabilirler ama herhangi baðýmlýlýklarý yoktur.
+## Class variable veya instance variable'lara eriþemezler.
+
+class MathOperations:
+    class_var = "CLASS VAR"
+    @staticmethod
+    def add(x, y):
+        return x + y
+        
+    @staticmethod
+    def subtract(x, y):
+        return x - y
+
+print(MathOperations.add(5, 3))        
+print(MathOperations.subtract(10, 4))
+
+math = MathOperations()
+print(math.add(2,5))
+
+
+## Ýnstance metotlarý - OVERRIDE VAR
+## Sýnýflarýn örneklerine baðlý olan metotlardýr. yani bunlar ile iþlemler yaparlar.
+## Ýnstance variable'larýnýn tanýmlanma yerleri __init__() metodu içerisidir.
+## bu construcotr metot içerisinde instance variable'lar tanýmlanabilirler.
+## Ýnstance metotlarýn içerisinde class variable'larý deðiþtirilemez VE OKUNAMAZ YANÝ ERÝÞÝLEMEZ.
+
+class Person:
+    class_var = 10
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def introduce(self):
+        return f"Hi, I'm {self.name} and I'm {self.age} years old."
+        
+    def change_class_var(self):
+        print(class_var)
+        
+        
+    
+
+person1 = Person("Kishan", 20)
+
+print(person1.introduce())
+print(Person.introduce(person1))
+print()
+
+
+## Ýnheritance : python çoklu kalýtm destekler.
+## AltSýnýf(Kalýtým, kalýtým) þeklinde yapýlabilir.
+
+class A:
+    def method(self):
+        print("Method in class A")
+
+class B(A):
+    def method(self):
+        super().method()  
+        print("Method in class B")
+
+class C(A):
+    def method(self):
+        super().method()  
+        print("Method in class C")
+        
+## -------- super() constructor -----------------
+## Base sýnýfýn constructor'ýdýr
+class Class():
+    def __init__(self, x):
+        print(x)
+
+class SubClass(Class):
+    def __init__(self, x):
+        super().__init__(x)
+
+x = [1, 2, 3, 4, 5]
+a = SubClass(x)
+
+
+## Multi inheritance desteklediði için sýrasý nasýl olacak.
+## Soldan saða sýralý gidecektir.
+class Class1:
+    def m(self):
+        print("In Class1")
+
+class Class2(Class1):
+    def m(self):
+        print("In Class2")
+        super().m()
+
+class Class3(Class1):
+    def m(self):
+        print("In Class3")
+        super().m()
+
+class Class4(Class2, Class3):
+    def m(self):
+        print("In Class4")   
+        super().m()
+     
+print(Class4.mro())         
+print(Class4.__mro__)
+
+## -----------------
+## Bütün üst sýnýflarda da ayný metot varken en alt sýnýftan baþlar. Yani en güncel halini arar.
+## Ayný isimde iki tane metot olduðu zaman yenisi esas alýnacaktýr.
+## class1'de tanýmlanan deðiþkenler class4'te kullanýlabilir ve eriþilebilir.
+## Python kalýtýmlarýnda is a iliþkisi vardýr. Ýstenilirse deðiþtirilebilir.
+class Class1:
+    class_variable = "test"
+    class_var = 10
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    def m(self):
+        print("In Class1")
+
+class Class2(Class1):
+    another_class_var = 20
+    def __init__(self, new_name, new_age, class2_instance_var):
+        super().__init__(new_name,new_age)
+        self.class2_instance_var = "Class 2 instance variable"
+    
+    def m(self):
+        print("In Class2")
+
+class Class3(Class1):
+    
+    def m(self):
+        print("In Class3")
+    
+
+class Class4(Class2, Class3):
+    
+    
+    def m(self):
+        print("In Class4")
+    
+    def m(self):
+        print("YENÝ")
+        print(super().class_variable, super().class_var)
+        
+        
+
+obj = Class4("Name" , "age", "Testing")
+obj.m()
+Class2.m(obj)
+Class3.m(obj)
+Class1.m(obj)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
