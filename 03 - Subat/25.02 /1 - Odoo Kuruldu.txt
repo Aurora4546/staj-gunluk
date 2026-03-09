@@ -1,0 +1,11 @@
+- Odoo 12 pycharm pgadmin dbeaver kuruldu.
+- Python 3.7.4 ve venv setuptools ve pip wheel openssl1.1.1w
+- Dbeaver ve pgadmin 8.14 kur
+- Postgres için şifre belirle
+- Dbeaver postgres 1234 kullanıcı adı
+- admin database ismi ile kullan.
+- Pgadmin direk [localhost](http://localhost) gir. Database ismi admin ve sifre 1234
+- https://gemini.google.com/share/159610b1c283
+- Pycharm debug configuration scripr olarak odoo-bin parametre için -c /home…..odoo.conf
+- Odoo.conf ayarla
+- docs.huihoo cybrosys module cybrosys 13
