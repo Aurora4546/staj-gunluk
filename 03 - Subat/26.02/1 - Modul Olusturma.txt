@@ -1,0 +1,9 @@
+- /home/t12016074307/odoo12/odoo/odoo-bin scaffold ilk_modul /home/t12016074307/odoo12/odoo/custom_addons yeni modul icin
+
+- source activate ile venv aktiflestir ve oyle yap odoo-bin tam yolu vermen lazim.
+- Business object == modeller
+- Field - Modellerin hangi verileri tutabilecekleri ve nerelerde tutacaklarini belirler.
+	- Model siniflari içerisinde attibute'lar olarak tanımlanırlar.
+	
+- https://docs.huihoo.com/odoo/developer/12.0/howtos/backend.html
+- 
