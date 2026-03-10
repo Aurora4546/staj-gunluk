@@ -1,63 +1,112 @@
+### Two Solutions:
+**Solution 1: Reorder files (simplest)** Load files in this order:
+1. `authorization_request.xml`
+2. `card_replacement_request.xml`
+3. `secure_zone_request.xml`
+4. `views.xml` (all actions including `auth_per_employee_action_tusas_manager`)
+5. `request_menu_wizard.xml` (references actions from above files)
+6. Then a second file that contains ONLY the menu that references `hr_attendance_request_menu_wizard_action`
+
+**Solution 2: Split views.xml (recommended)**
+- Create `views_actions.xml` with all `<record model="ir.actions.act_window">` definitions
+- Create `views_menus.xml` with all `<menuitem>` definitions
+- Load order: actions → request_menu_wizard → menus
+
+Let me present the complete plan:
+Plan: Fix Circular Reference and Correct Data Loading Order
+Issues Found:
+Circular reference: views.xml and request_menu_wizard.xml reference each other
+Incorrect file paths: Manifest references files in subfolders (security/, data/, views/, wizards/) but files are in root
+Empty rules.xml: Security rules are in groups.xml instead of rules.xml
+Rules placement: rules.xml should load LAST, not in the middle
+Solution:
+Option A (Recommended): Split views.xml into actions and menus
+Create views_actions.xml - contains all action definitions from views.xml
+Create views_menus.xml - contains all menu definitions from views.xml
+Update manifest with correct order and paths
+Option B (Simpler): Just reorder existing files
+Keep views.xml as-is
+Update manifest to load files in dependency order
+Fix all file paths (remove folder prefixes)
+Correct Manifest Order:
 'data': [
-    'security/groups.xml',
-    'security/permanent.xml',
-    'security/ir.model.access.csv',
-
-    'data/card_types.xml',
-    'data/card_type_other.xml',
-    'data/zone_types.xml',
-    'data/terminal_types.xml',
-    'data/resource_move_type_data.xml',
-    # 'data/hr_employee.xml',
-    'data/automated_expire_cron.xml',
-    'data/sync_cron.xml',
-
-    'views/activities.xml',
-    'views/area.xml',
-    'views/building.xml',
-    'views/zone.xml',
-    'data/activities.xml',
-    'views/card.xml',
-    'views/terminal.xml',
-    'views/employee_history.xml',
-    'views/authorization.xml',
-    'views/authorization_request.xml',
-    'views/card_replacement_request.xml',
-    'views/secure_zone_request.xml',
-    'views/employee.xml',
-    'views/attendance_move.xml',
-    'views/zone_auth_views.xml',
-    'views/search_views.xml',
-
-    'views/integration_views/employee_movements.xml',
-    'views/integration_views/move_types.xml',
-    'views/integration_views/fdw_settings.xml',
-
-    'views/reports.xml',
-    'views/views.xml',
-    'views/user.xml',
-    'views/bulk_card_replacement.xml',
-
-    'wizards/card_replacement.xml',
-    'wizards/card_return_wizard.xml',
-    'wizards/bulk_card_replace_wizard.xml',
-    'wizards/card_assignment_wizard.xml',
-    'wizards/tier_validation_send_wizard.xml',
-    'wizards/auth_per_employee_assignment_wizard.xml',
-    'wizards/auth_per_department_assignment_wizard.xml',
-    'wizards/auth_per_building_assignment_wizard.xml',
-    'wizards/auth_copy_wizard.xml',
-    'wizards/employee_bulk_operations.xml',
-    'wizards/confirmation_wizard.xml',
-    'wizards/request_menu_wizard.xml',
-
-    'views/assets_backend.xml',
-    'views/templates_qweb.xml',
-    'views/templates.xml',
-
-    'activities/views/activities.xml',
-    'activities/data/activities.xml',
-    'activities/security/ir.model.access.csv',
-
-    'security/rules.xml',
-],
+    # Security
+    'groups.xml',
+    'permanent.xml',
+    'ir.model.access.csv',
+    
+    # Data
+    'card_types.xml',
+    'card_type_other.xml',
+    'zone_types.xml',
+    'terminal_types.xml',
+    'resource_move_type_data.xml',
+    'activities.xml',
+    'automated_expire_cron.xml',
+    'sync_cron.xml',
+    
+    # Views - Base models
+    'user.xml',
+    'employee.xml',
+    'building.xml',
+    'area.xml',
+    'zone.xml',
+    'terminal.xml',
+    'card.xml',
+    
+    # Views - Request models (define actions FIRST)
+    'authorization_request.xml',
+    'card_replacement_request.xml',
+    'secure_zone_request.xml',
+    
+    # Views - Other dependent models
+    'employee_history.xml',
+    'authorization.xml',
+    'attendance_move.xml',
+    'zone_auth_views.xml',
+    'bulk_card_replacement.xml',
+    
+    # Integration views
+    'move_types.xml',
+    'fdw_settings.xml',
+    'employee_movements.xml',
+    
+    # Reports and search
+    'search_views.xml',
+    'reports.xml',
+    
+    # Actions (or views_actions.xml if split)
+    'views.xml',  # or 'views_actions.xml'
+    
+    # Wizards - request_menu_wizard MUST come AFTER views.xml
+    'request_menu_wizard.xml',
+    
+    # Other wizards
+    'confirmation_wizard.xml',
+    'card_assignment_wizard.xml',
+    'card_return_wizard.xml',
+    'card_replacement.xml',
+    'bulk_card_replace_wizard.xml',
+    'tier_validation_send_wizard.xml',
+    'auth_per_employee_assignment_wizard.xml',
+    'auth_per_department_assignment_wizard.xml',
+    'auth_per_building_assignment_wizard.xml',
+    'auth_copy_wizard.xml',
+    'employee_bulk_operations.xml',
+    
+    # Menus (or views_menus.xml if split) - AFTER request_menu_wizard
+    # 'views_menus.xml',  # if split approach
+    
+    # Assets and templates
+    'assets_backend.xml',
+    'templates_qweb.xml',
+    'templates.xml',
+    
+    # Security rules LAST
+    'rules.xml',
+]
+Actions:
+Update manifest with corrected order
+Optionally split views.xml into two files (actions + menus)
+Move security rules from groups.xml to rules.xml
+Which approach would you prefer?
