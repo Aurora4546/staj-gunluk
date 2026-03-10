@@ -1,638 +1,101 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<odoo>
-    <!--    <data noupdate="0">-->
-    <data>
-
-
-        <record id="security_new_window" model="ir.actions.act_window">
-            <field name="name">Security</field>
-            <field name="res_model">hr.employee</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
-            <field name="context">{'tree_view_ref':'hr_employee_ext.hr_employee_security_tree'}</field>
-        </record>
-
-
-        <record id="clothes_sizes_action" model="ir.actions.act_window">
-            <field name="name">Clothes Sizes</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.par.clothes.size</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
-        </record>
-
-        <record id="clothes_action" model="ir.actions.act_window">
-            <field name="name">Clothes Types</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.par.clothes.type</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
-
-        </record>
-
-        <record id="inactive_relative_action" model="ir.actions.act_window">
-            <field name="name">Yakınlar Pasifleme Nedeni Tanımlama</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.par.relative.inactive.reason</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
-
-        </record>
-<!--
-        <menuitem
-                id="menu_id_inactive_relative"
-                name="Yakınlar Pasifleme Nedeni Tanımlama"
-                action="inactive_relative_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager"
-                sequence="50"/>
-
-        <menuitem
-                id="menu_human_resources_clothes_types"
-                name="Clothes Types Description"
-                action="clothes_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager"
-                sequence="1"/>
-
-        <menuitem
-                id="menu_human_resources_clothes_sizes"
-                name="Clothes Sizes Description"
-                action="clothes_sizes_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager"
-                sequence="2"/>
--->
-
-        <record id="open_view_academic_form" model="ir.actions.act_window">
-            <field name="name">Academic Experiences</field>
-            <field name="res_model">hr.employee.school</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-
-        <record id="open_view_academic_form" model="ir.actions.act_window">
-            <field name="name">Academic Experiences</field>
-            <field name="res_model">hr.employee.school</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-
-
-        <record id="school_definition_action" model="ir.actions.act_window">
-            <field name="name">School Definition</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.environment.school</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
-        </record>
-        <record id="education_degree_definition_action" model="ir.actions.act_window">
-            <field name="name">Education Degree Definition</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.par.school.degree</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
-        </record>
-
-        <record id="school_department_action" model="ir.actions.act_window">
-            <field name="name">School Department Definition</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.par.faculty.department</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
-        </record>
-
-        <record id="school_faculty_action" model="ir.actions.act_window">
-            <field name="name">School Faculty Definition</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.par.faculty</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
-        </record>
-
-        <record id="school_feature_action" model="ir.actions.act_window">
-            <field name="name">School Featuren</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.par.school.feature</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
-        </record>
-
-        <record id="school_legacy_education_class_action" model="ir.actions.act_window">
-            <field name="name">Legacy Education Class Definition</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.par.education.class</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
-        </record>
-
-        <record id="hr_employee_ext_res_city_action" model="ir.actions.act_window">
-            <field name="name">City</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">res.city</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
-        </record>
-
-        <record id="hr_employee_ext_res_county_action" model="ir.actions.act_window">
-            <field name="name">County</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">res.county</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
-        </record>
-
-        <record id="hr_employee_ext_res_partner_action" model="ir.actions.act_window">
-            <field name="name">Company</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">res.partner</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
-
-        </record>
-
-        <record id="hr_employee_ext_sgk_job_code_action" model="ir.actions.act_window">
-            <field name="name">SGK Job Code</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.par.sgk.job.code</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
-        </record>
-
-        <record id="hr_employee_ext_job_level_action" model="ir.actions.act_window">
-            <field name="name">Job Level</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.par.job.level</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
-        </record>
-
-        <record id="hr_employee_ext_job_group_action" model="ir.actions.act_window">
-            <field name="name">Job Group</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.par.job.group</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
-        </record>
-
-        <record id="hr_employee_ext_job_family_action" model="ir.actions.act_window">
-            <field name="name">Job Family</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.par.job.family</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
-        </record>
-
-        <record id="custom_create_action" model="ir.actions.act_window">
-            <field name="name">Create</field>
-            <field name="res_model">hr.employee</field>
-            <field name="view_id" ref="hr_employee_ext.view_employee_form_last"/>
-            <field name="view_mode">form</field>
-            <field name="context">{'default_request_type': 'creation'}</field>
-        </record>
-
-        <record id="custom_create_action_eighteen" model="ir.actions.act_window">
-            <field name="name">Create New</field>
-            <field name="res_model">hr.employee</field>
-            <field name="view_id" ref="hr_employee_ext.view_other_employee_form_last"/>
-            <field name="view_mode">form</field>
-            <field name="context">{'default_request_type': 'creation'}</field>
-        </record>
-        <record id="custom_create_action_twentytwo" model="ir.actions.act_window">
-            <field name="name">Create New Traniee</field>
-            <field name="res_model">hr.employee</field>
-            <field name="view_id" ref="hr_employee_ext.view_trainee_employee_form_last"/>
-            <field name="view_mode">form</field>
-            <field name="context">{'default_request_type': 'creation'}</field>
-        </record>
-
-        <record id="hr_employee_ext_job_action" model="ir.actions.act_window">
-            <field name="name">Job Definition</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.job</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
-        </record>
-
-        <record id="hr_par_required_briefing" model="ir.actions.act_window">
-            <field name="name">Required Briefing</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.par.required.briefing</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
-        </record>
-
-        <record id="open_view_sgk_company_form" model="ir.actions.act_window">
-            <field name="name">Sgk Company</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.par.sgk.company</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-
-        <record id="file_templates_action" model="ir.actions.server">
-            <field name="name">Security Document</field>
-            <field name="model_id" ref="model_hr_briefing_documents"/>
-            <field name="state">code</field>
-            <field name="code">
-                action = model.get_template_file_action()
-            </field>
-        </record>
-
-        <!--        <record id="sec_certificate_type_action" model="ir.actions.act_window">-->
-        <!--            <field name="name">Security  Certificate Type</field>-->
-        <!--            <field name="type">ir.actions.act_window</field>-->
-        <!--            <field name="res_model">hr.par.security.certificate.type</field>-->
-        <!--            <field name="view_type">form</field>-->
-        <!--            <field name="view_mode">tree,form</field>-->
-        <!--        </record>-->
-
-
-        <record id="hr_employee_ext_reports" model="ir.actions.act_window">
-            <field name="name">Raporlama Yönetimi</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.employee</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">kanban</field>
-        </record>
-
-
-        <record id="academic_title_action" model="ir.actions.act_window">
-            <field name="name">Academic Title</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.par.academic.title</field>
-            <field name="view_mode">tree,form</field>
-            <field name="view_type">form</field>
-
-        </record>
-
-        <record id="open_view_reason_leaving_form" model="ir.actions.act_window">
-            <field name="name">Reason for Leaving</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.par.reason.leaving</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-
-        <record id="open_view_reason_for_resignation_form" model="ir.actions.act_window">
-            <field name="name">Reason for Resignation</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.par.reason.for.resignation</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-
-        <record id="open_view_contracat_types_form" model="ir.actions.act_window">
-            <field name="name">Contract Types</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.par.contract.type</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-
-        <record id="open_view_sgk_group_form" model="ir.actions.act_window">
-            <field name="name">SGK Group</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.par.social.security.group</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-
-        <record id="open_view_legal_statu_form" model="ir.actions.act_window">
-            <field name="name">Legal Statu</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.par.legal.status</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-
-        <record id="open_view_way_of_employment_form" model="ir.actions.act_window">
-            <field name="name">Way of Employment</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">hr.par.wayof.employment</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-        <!--       Create Record Start     -->
-
-        <menuitem id="hr_ext_custom_create_root"
-                  parent="hr.menu_hr_root"
-                  name="Create Record"
-                  groups="hr_employee_ext.group_hr_manager,hr_employee_ext.group_hr_ik_manager,hr_employee_ext.group_hr_twentytwo"
-                  sequence="10"/>
-
-        <menuitem id="hr_ext_custom_create"
-                  parent="hr_ext_custom_create_root"
-                  action="custom_create_action"
-                  name="Create Employee"
-                  groups="hr_employee_ext.group_hr_manager,hr_employee_ext.group_hr_ik_manager"
-                  sequence="10"/>
-
-        <menuitem id="hr_ext_custom_create_twentytwo"
-                  parent="hr_ext_custom_create_root"
-                  action="custom_create_action_twentytwo"
-                  name="Create Trainee"
-                  groups="hr_employee_ext.group_hr_twentytwo"
-                  sequence="20"/>
-        <!--       Create Record End     -->
-
-        <!--       Records Start     -->
-
-        <menuitem
-                id="hr.menu_open_view_employee_list_my"
-                parent="hr.menu_hr_root"
-                name="Records"
-                sequence="20"/>
-        <menuitem
-                id="menu_employee_record"
-                action="hr.open_view_employee_list_my"
-                parent="hr.menu_open_view_employee_list_my"
-                name="Employee Records"
-                sequence="10"/>
-        <!--       Records End     -->
-
-
-        <!--       Description Start     -->
-
-        <menuitem
-                id="menu_human_description"
-                parent="hr.menu_hr_root"
-                name="Descriptions"
-                sequence="30"
-                groups="hr_employee_ext.group_hr_manager,hr_employee_ext.group_hr_three,hr_employee_ext.group_hr_four,hr_employee_ext.group_hr_five"/>
-
-        <menuitem
-                id="menu_id_inactive_relative"
-                name="Yakınlar Pasifleme Nedeni Tanımlama"
-                action="inactive_relative_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager"
-                sequence="50"/>
-
-        <menuitem
-                id="menu_human_resources_clothes_types"
-                name="Clothes Types Description"
-                action="clothes_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager"
-                sequence="1"/>
-
-        <menuitem
-                id="menu_human_resources_clothes_sizes"
-                name="Clothes Sizes Description"
-                action="clothes_sizes_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager"
-                sequence="2"/>
-
-        <menuitem
-                id="menu_hr_employee_ext_reason_leaving"
-                name="Reason for Leaving Description"
-                action="open_view_reason_leaving_form"
-                parent="menu_human_description"
-                sequence="56"/>
-
-        <menuitem
-                id="menu_hr_employee_ext_reason_for_resignation"
-                name="Reason for Resignation Description"
-                action="open_view_reason_for_resignation_form"
-                parent="menu_human_description"
-                sequence="60"/>
-
-        <menuitem
-                id="menu_hr_employee_ext_contract_types"
-                name="Contract Type Description"
-                action="open_view_contracat_types_form"
-                parent="menu_human_description"
-                sequence="65"/>
-
-        <menuitem
-                id="menu_hr_employee_ext_sgk_group"
-                name="SGK Group Description"
-                action="open_view_sgk_group_form"
-                parent="menu_human_description"
-                sequence="70"/>
-
-        <menuitem
-                id="menu_hr_employee_ext_legal_statu"
-                name="Legal Status Description"
-                action="open_view_legal_statu_form"
-                parent="menu_human_description"
-                sequence="75"/>
-
-        <menuitem
-                id="menu_hr_employee_ext_way_of_employment"
-                name="Way of Employment Description"
-                action="open_view_way_of_employment_form"
-                parent="menu_human_description"
-                sequence="80"/>
-
-        <menuitem
-                id="menu_hr_employee_security_req_file_templates"
-                name="Security Document Description"
-                parent="hr_employee_ext.menu_human_description"
-                sequence="55"
-                action="file_templates_action"/>
-        <menuitem
-                id="menu_hr_employee_ext_job_group"
-                name="Job Group Description"
-                action="hr_employee_ext_job_group_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager,hr_employee_ext.group_hr_four"
-                sequence="15"/>
-        <menuitem
-                id="menu_hr_employee_ext_job_family"
-                name="Job Family Description"
-                action="hr_employee_ext_job_family_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager,hr_employee_ext.group_hr_four"
-                sequence="13"/>
-
-        <menuitem
-                id="menu_hr_employee_ext_job_level"
-                name="Job Level Description"
-                action="hr_employee_ext_job_level_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager,hr_employee_ext.group_hr_four"
-                sequence="14"/>
-
-        <menuitem
-                id="menu_hr_employee_ext_job"
-                name="Job Definition Description"
-                action="hr_employee_ext_job_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager,hr_employee_ext.group_hr_four"
-                sequence="16"/>
-
-
-        <menuitem
-                id="menu_human_resources_legacy_education_class_def"
-                name="Legacy Education Class Definition Description"
-                action="school_legacy_education_class_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager,hr_employee_ext.group_hr_five"
-                sequence="9"/>
-        <menuitem
-                id="menu_human_resources_school_faculty_definition"
-                name="School Faculty Description"
-                action="school_faculty_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager,hr_employee_ext.group_hr_five"
-                sequence="5"/>
-        <menuitem
-                id="menu_human_resources_school_department_definition"
-                name="School Department Description"
-                action="school_department_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager,hr_employee_ext.group_hr_five"
-                sequence="6"/>
-        <menuitem
-                id="menu_human_resources_school_feature"
-                name="School Feature Description"
-                action="school_feature_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager,hr_employee_ext.group_hr_five"
-                sequence="10"/>
-        <menuitem
-                id="menu_human_resources_school_definition"
-                name="School Description"
-                action="school_definition_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager,hr_employee_ext.group_hr_five"
-                sequence="7"/>
-        <menuitem
-                id="menu_human_resources_education_degree_definition"
-                name="Education Degree Description"
-                action="education_degree_definition_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager,hr_employee_ext.group_hr_five"
-                sequence="8"/>
-
-        <menuitem
-                id="menu_hr_employee_ext_res_city"
-                name="City Description"
-                action="hr_employee_ext_res_city_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager"
-                sequence="12"/>
-
-        <menuitem
-                id="menu_hr_employee_ext_res_county"
-                name="County Description"
-                action="hr_employee_ext_res_county_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager"
-                sequence="11"/>
-
-        <menuitem
-                id="menu_hr_employee_ext_res_partner"
-                name="Company Description"
-                action="hr_employee_ext_res_partner_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager"
-                sequence="12"/>
-
-
-        <menuitem
-                id="menu_hr_employee_ext_sgk_job_code"
-                name="SGK Job Code Description"
-                action="hr_employee_ext_sgk_job_code_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager"
-                sequence="13"/>
-
-
-        <menuitem
-                id="menu_hr_par_required_briefing"
-                name="Required Briefing Description"
-                action="hr_par_required_briefing"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager"
-                sequence="17"/>
-
-        <menuitem
-                id="menu_hr_par_sgk_company"
-                name="SGK Company Description"
-                action="open_view_sgk_company_form"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager"
-                sequence="18"/>
-
-        <menuitem
-                id="menu_hr_recruitment_attchment_type"
-                name="Attachment Type Description"
-                action="hr_environment.hr_par_attachment_type_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager"
-                sequence="20"/>
-
-        <menuitem
-                id="menu_hr_par_academic_title"
-                name="Academic Title Description"
-                action="academic_title_action"
-                parent="menu_human_description"
-                groups="hr_employee_ext.group_hr_manager"
-                sequence="21"/>
-
-        <!--       Description End     -->
-
-        <!--       Report Start     -->
-        <menuitem id="hr_menu_reports"
-                  name="Reports"
-                  parent="hr.menu_hr_root"
-                  sequence="40"
-                  groups="hr_employee_ext.group_hr_normal_user"
-                  action="hr_employee_ext_reports"/>
-
-        <!--       Report End     -->
-
-        <!--       Management Start     -->
-        <menuitem id="hr_menu_management"
-                  name="Management"
-                  parent="hr.menu_hr_root"
-                  sequence="50"
-                  groups="hr_employee_ext.group_hr_manager,hr_contract.group_hr_contract_manager,hr_employee_ext.group_hr_ik_manager,hr_employee_ext.group_hr_fourteen"
-                  action="hr_employee_ext_reports"/>
-        <menuitem
-                id="hr.menu_human_resources_configuration"
-                name="Configuration"
-                parent="hr_employee_ext.hr_menu_management"
-                groups="hr.group_hr_manager"
-                sequence="0"/>
-
-        <menuitem
-                id="hr_contract.hr_menu_contract"
-                name="Contracts"
-                action="hr_contract.action_hr_contract"
-                parent="hr_employee_ext.hr_menu_management"
-                sequence="10"
-                groups="hr_contract.group_hr_contract_manager"/>
-
-        <menuitem id="ac" parent="hr_employee_ext.hr_menu_management" name="Open Security" sequence="20"
-                  groups="hr_employee_ext.group_hr_fourteen" action="security_new_window"
-        />
-        <!--       Management End     -->
-
-
-        <!--Menü güncelleme sırasında kapatıldı.-->
-        <!--        <menuitem id="hr_ext_custom_create_eighteen"-->
-        <!--                  parent="hr.menu_hr_root"-->
-        <!--                  action="custom_create_action_eighteen"-->
-        <!--                  name="Create New Employee"-->
-        <!--                  groups="hr_employee_ext.group_hr_eighteen"-->
-        <!--                  sequence="1000"/>-->
-
-
-        <!--         <menuitem-->
-        <!--            id="menu_hr_par_sec_certificate_type"-->
-        <!--            name="Security Certificate Type"-->
-        <!--            action="sec_certificate_type_action"-->
-        <!--            parent="menu_human_description"-->
-        <!--            groups="hr_employee_ext.group_hr_fourteen"-->
-        <!--            sequence="25"/>-->
-
-
-    </data>
-
-
-</odoo>
+odoo.tools.convert.ParseError: "External ID not found in the system: hr_contract.group_hr_contract_manager" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_employee_ext/views/menus.xml:595, near
+<menuitem id="hr_menu_management" name="Management" parent="hr.menu_hr_root" sequence="50" groups="hr_employee_ext.group_hr_manager,hr_contract.group_hr_contract_manager,hr_employee_ext.group_hr_ik_manager,hr_employee_ext.group_hr_fourteen" action="hr_employee_ext_reports"/>
+2026-03-10 10:21:10,156 11405 ERROR odoodb odoo.http: Exception during JSON request handling. 
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 88, in lookup
+    r = d[key]
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/func.py", line 69, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/lru.py", line 44, in __getitem__
+    a = self.d[obj].me
+KeyError: ('ir.model.data', <function IrModelData.xmlid_lookup at 0x755481ecf9e0>, 'hr_contract.group_hr_contract_manager')
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
+    self._tags[rec.tag](rec, de, mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 498, in _tag_menuitem
+    group_id = self.id_get(group)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 741, in id_get
+    res = self.model_id_get(id_str, raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 747, in model_id_get
+    return self.env['ir.model.data'].xmlid_to_res_model_res_id(id_str, raise_if_not_found=raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
+    return self.xmlid_lookup(xmlid)[1:3]
+  File "<decorator-gen-26>", line 2, in xmlid_lookup
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 93, in lookup
+    value = d[key] = self.method(*args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
+    raise ValueError('External ID not found in the system: %s' % xmlid)
+ValueError: External ID not found in the system: hr_contract.group_hr_contract_manager
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 663, in _handle_exception
+    return super(JsonRequest, self)._handle_exception(exception)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 321, in _handle_exception
+    raise pycompat.reraise(type(exception), exception, sys.exc_info()[2])
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 87, in reraise
+    raise value
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 705, in dispatch
+    result = self._call_function(**self.params)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 353, in _call_function
+    return checked_call(self.db, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/service/model.py", line 98, in wrapper
+    return f(dbname, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 346, in checked_call
+    result = self.endpoint(*a, **kw)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 948, in __call__
+    return self.method(*args, **kw)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 526, in response_wrap
+    response = f(*args, **kw)
+  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 963, in call_button
+    action = self._call_kw(model, method, args, {})
+  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 951, in _call_kw
+    return call_kw(request.env[model], method, args, kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 760, in call_kw
+    return _call_kw_multi(method, model, args, kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 747, in _call_kw_multi
+    result = method(recs, *args, **kwargs)
+  File "<decorator-gen-62>", line 2, in button_immediate_install
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_module.py", line 75, in check_and_log
+    return method(self, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_module.py", line 446, in button_immediate_install
+    return self._button_immediate_function(type(self).button_install)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_module.py", line 562, in _button_immediate_function
+    modules.registry.Registry.new(self._cr.dbname, update_module=True)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 87, in new
+    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 421, in load_modules
+    loaded_modules, update_module, models_to_check)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 313, in load_marked_modules
+    perform_checks=perform_checks, models_to_check=models_to_check
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 222, in load_module_graph
+    load_data(cr, idref, mode, kind='data', package=package, report=report)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 68, in load_data
+    tools.convert_file(cr, package.name, filename, idref, mode, noupdate, kind, report)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 802, in convert_file
+    convert_xml_import(cr, module, fp, idref, mode, noupdate, report)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 865, in convert_xml_import
+    obj.parse(doc.getroot(), mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 755, in parse
+    self.parse(rec, mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 764, in parse
+    exc_info[2]
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 86, in reraise
+    raise value.with_traceback(tb)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
+    self._tags[rec.tag](rec, de, mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 498, in _tag_menuitem
+    group_id = self.id_get(group)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 741, in id_get
+    res = self.model_id_get(id_str, raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 747, in model_id_get
+    return self.env['ir.model.data'].xmlid_to_res_model_res_id(id_str, raise_if_not_found=raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
+    return self.xmlid_lookup(xmlid)[1:3]
+  File "<decorator-gen-26>", line 2, in xmlid_lookup
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 93, in lookup
+    value = d[key] = self.method(*args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
+    raise ValueError('External ID not found in the system: %s' % xmlid)
+odoo.tools.convert.ParseError: "External ID not found in the system: hr_contract.group_hr_contract_manager" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_employee_ext/views/menus.xml:595, near
+<menuitem id="hr_menu_management" name="Management" parent="hr.menu_hr_root" sequence="50" groups="hr_employee_ext.group_hr_manager,hr_contract.group_hr_contract_manager,hr_employee_ext.group_hr_ik_manager,hr_employee_ext.group_hr_fourteen" action="hr_employee_ext_reports"/>
