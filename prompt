@@ -1,32 +1,76 @@
-odoo.tools.convert.ParseError: "External ID not found in the system: hr_contract.group_hr_contract_manager" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_employee_ext/views/menus.xml:595, near
-<menuitem id="hr_menu_management" name="Management" parent="hr.menu_hr_root" sequence="50" groups="hr_employee_ext.group_hr_manager,hr_contract.group_hr_contract_manager,hr_employee_ext.group_hr_ik_manager,hr_employee_ext.group_hr_fourteen" action="hr_employee_ext_reports"/>
-2026-03-10 10:21:10,156 11405 ERROR odoodb odoo.http: Exception during JSON request handling. 
-Traceback (most recent call last):
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 88, in lookup
-    r = d[key]
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/func.py", line 69, in wrapper
-    return func(self, *args, **kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/lru.py", line 44, in __getitem__
-    a = self.d[obj].me
-KeyError: ('ir.model.data', <function IrModelData.xmlid_lookup at 0x755481ecf9e0>, 'hr_contract.group_hr_contract_manager')
-During handling of the above exception, another exception occurred:
-Traceback (most recent call last):
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
-    self._tags[rec.tag](rec, de, mode=mode)
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 498, in _tag_menuitem
-    group_id = self.id_get(group)
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 741, in id_get
-    res = self.model_id_get(id_str, raise_if_not_found)
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 747, in model_id_get
-    return self.env['ir.model.data'].xmlid_to_res_model_res_id(id_str, raise_if_not_found=raise_if_not_found)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
-    return self.xmlid_lookup(xmlid)[1:3]
-  File "<decorator-gen-26>", line 2, in xmlid_lookup
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 93, in lookup
-    value = d[key] = self.method(*args, **kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
-    raise ValueError('External ID not found in the system: %s' % xmlid)
-ValueError: External ID not found in the system: hr_contract.group_hr_contract_manager
+<odoo>
+
+    <record id="approval_standard_model_name_action" model='ir.actions.act_window'>
+        <field name="name">Approval Model Name Action</field>
+        <field name="res_model">approval_standard.model.name</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+    </record>
+
+
+    <record id="approval_standard_model_name_tree" model='ir.ui.view'>
+        <field name="name">approval_standard.model.name.tree</field>
+        <field name="model">approval_standard.model.name</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="model_id" required="1"/>
+                <field name="name" required="1"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="approval_standard_model_name_form" model="ir.ui.view">
+        <field name="name">approval_standard.model.name.form</field>
+        <field name="model">approval_standard.model.name</field>
+        <field name="arch" type="xml">
+            <form string="Management">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object"
+                                class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button"/>
+                        </button>
+                    </div>
+
+                    <group>
+                        <field name="model_id" required="1"
+                               options="{'no_create': True,'no_open': True,'no_quick_create':True,'no_create_edit':True}"/>
+                        <field name="name" required="1"/>
+                        <field name="icon"/>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <menuitem id="approval_standard_model_name_main_menu_item" name="Module Naming" sequence="100"
+              groups="approval_dashboard.group_edit_icon_param_manager"
+              action="approval_standard_model_name_action"
+              parent="approvals_dashboard_main_menu"
+    />
+
+    <menuitem id="approval_standard_model_name_menu_item" name="Management" sequence="100"
+              groups="approval_dashboard.group_edit_icon_param_manager"
+              action="approval_standard_model_name_action"
+              parent="approval_standard_model_name_main_menu_item"
+    />
+
+    <menuitem id="menu_mail_activity_types"
+              name="Mail Activity Type"
+              groups="base.group_system"
+              action="mail.mail_activity_type_action"
+              parent="approval_standard_model_name_main_menu_item"
+    />
+
+</odoo>
+
+
+
+
+ValueError: External ID not found in the system: approval_dashboard.group_edit_icon_param_manager
 During handling of the above exception, another exception occurred:
 Traceback (most recent call last):
   File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 663, in _handle_exception
@@ -76,8 +120,6 @@ Traceback (most recent call last):
     convert_xml_import(cr, module, fp, idref, mode, noupdate, report)
   File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 865, in convert_xml_import
     obj.parse(doc.getroot(), mode=mode)
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 755, in parse
-    self.parse(rec, mode)
   File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 764, in parse
     exc_info[2]
   File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 86, in reraise
@@ -97,5 +139,6 @@ Traceback (most recent call last):
     value = d[key] = self.method(*args, **kwargs)
   File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
     raise ValueError('External ID not found in the system: %s' % xmlid)
-odoo.tools.convert.ParseError: "External ID not found in the system: hr_contract.group_hr_contract_manager" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_employee_ext/views/menus.xml:595, near
-<menuitem id="hr_menu_management" name="Management" parent="hr.menu_hr_root" sequence="50" groups="hr_employee_ext.group_hr_manager,hr_contract.group_hr_contract_manager,hr_employee_ext.group_hr_ik_manager,hr_employee_ext.group_hr_fourteen" action="hr_employee_ext_reports"/>
+odoo.tools.convert.ParseError: "External ID not found in the system: approval_dashboard.group_edit_icon_param_manager" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/approval_dashboard/views/approval_model_name.xml:53, near
+<menuitem id="approval_standard_model_name_main_menu_item" name="Module Naming" sequence="100" groups="approval_dashboard.group_edit_icon_param_manager" action="approval_standard_model_name_action" parent="approvals_dashboard_main_menu"/>
+2026-03-10 10:39:12,315 11405 INFO odoodb odoo.modules.loading: loading 1 modules... 
