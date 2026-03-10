@@ -1,6 +1,15 @@
-raise_if_not_found=False eklememe ragmen hatalar devam ediyor
+671.satiri duzenledikten sonra hatalari vermeye devam ediyor
 
-raceback (most recent call last):
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 88, in lookup
+    r = d[key]
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/func.py", line 69, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/lru.py", line 44, in __getitem__
+    a = self.d[obj].me
+KeyError: ('ir.model.data', <function IrModelData.xmlid_lookup at 0x7519910c3cb0>, 'hr_organisation.role_assistant_manager')
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
   File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 1129, in _validate_fields
     check(self)
   File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 351, in _check_xml
@@ -13,13 +22,24 @@ raceback (most recent call last):
     value = value(env)
   File "/home/t12016074307/odoo12/odoo/odoo/fields.py", line 2147, in _description_domain
     return self.domain(env[self.model_name]) if callable(self.domain) else self.domain
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan.py", line 93, in <lambda>
+  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan_flexible.py", line 14, in <lambda>
     domain=lambda self: self._get_employee_domain())
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan.py", line 619, in _get_employee_domain
+  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan_flexible.py", line 117, in _get_employee_domain
     return [('id', 'in', self._get_employee_ids_list())]
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan.py", line 671, in _get_employee_ids_list
-    return empList.ids
-AttributeError: 'list' object has no attribute 'ids'
+  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan_flexible.py", line 123, in _get_employee_ids_list
+    if self.env.ref('hr_organisation.role_assistant_manager') and self.env.user and self.env.user.employee_ids:
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 865, in ref
+    return self['ir.model.data'].xmlid_to_object(xml_id, raise_if_not_found=raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1454, in xmlid_to_object
+    t = self.xmlid_to_res_model_res_id(xmlid, raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
+    return self.xmlid_lookup(xmlid)[1:3]
+  File "<decorator-gen-26>", line 2, in xmlid_lookup
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 93, in lookup
+    value = d[key] = self.method(*args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
+    raise ValueError('External ID not found in the system: %s' % xmlid)
+ValueError: External ID not found in the system: hr_organisation.role_assistant_manager
 During handling of the above exception, another exception occurred:
 Traceback (most recent call last):
   File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
@@ -54,7 +74,7 @@ Traceback (most recent call last):
     self._validate_fields(vals)
   File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 1133, in _validate_fields
     raise ValidationError("%s\n\n%s" % (_("Error while validating constraint"), tools.ustr(e)))
-odoo.exceptions.ValidationError: ("Error while validating constraint\n\n'list' object has no attribute 'ids'", None)
+odoo.exceptions.ValidationError: ('Error while validating constraint\n\nExternal ID not found in the system: hr_organisation.role_assistant_manager', None)
 During handling of the above exception, another exception occurred:
 Traceback (most recent call last):
   File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 87, in new
@@ -108,27 +128,30 @@ Traceback (most recent call last):
   File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 1133, in _validate_fields
     raise ValidationError("%s\n\n%s" % (_("Error while validating constraint"), tools.ustr(e)))
 odoo.tools.convert.ParseError: "Error while validating constraint
-'list' object has no attribute 'ids'
-None" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/views/hr_shift_plan.xml:5, near
-<record id="hr_shift_plan_tree" model="ir.ui.view">
-        <field name="name">hr.shift_plan.tree</field>
-        <field name="model">hr.shift_plan</field>
+External ID not found in the system: hr_organisation.role_assistant_manager
+None" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/views/hr_shift_plan_flexible.xml:3, near
+<record model="ir.ui.view" id="shift_plan_flexible_tree">
+        <field name="name">hr.shift_plan.flexible.tree</field>
+        <field name="model">hr.shift_plan.flexible</field>
         <field name="arch" type="xml">
-            <tree string="shift_plan">
-                <field name="image_id" widget="image" class="oe_avatar" string=" "/>
-                <field name="employee_id" readonly="1"/>
-                <field name="personel_id" readonly="1" string="Sicil"/>
-                <field name="department_id" readonly="1"/>
-                <field name="date_from"/>
-                <field name="date_to"/>
-                <field name="calendar_id"/>
-                <field name="shift_type"/>
-                <field name="task_center_ids" widget="many2many_tags"/>
-                <field name="personel_id" invisible="1"/>
+            <tree string="Competencies">
+                <field name="term_id"/>
+                <field name="employee_ids" widget="many2many_tags"/>
+                <field name="bulk_plan_ids" widget="many2many_tags"/>
+                <field name="plan_ids" widget="many2many_tags"/>
             </tree>
         </field>
     </record>
-2026-03-10 11:50:24,268 17522 ERROR odoodb odoo.http: Exception during JSON request handling. 
+2026-03-10 12:02:26,371 18391 ERROR odoodb odoo.http: Exception during JSON request handling. 
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 88, in lookup
+    r = d[key]
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/func.py", line 69, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/lru.py", line 44, in __getitem__
+    a = self.d[obj].me
+KeyError: ('ir.model.data', <function IrModelData.xmlid_lookup at 0x7519910c3cb0>, 'hr_organisation.role_assistant_manager')
+During handling of the above exception, another exception occurred:
 Traceback (most recent call last):
   File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 1129, in _validate_fields
     check(self)
@@ -142,13 +165,24 @@ Traceback (most recent call last):
     value = value(env)
   File "/home/t12016074307/odoo12/odoo/odoo/fields.py", line 2147, in _description_domain
     return self.domain(env[self.model_name]) if callable(self.domain) else self.domain
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan.py", line 93, in <lambda>
+  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan_flexible.py", line 14, in <lambda>
     domain=lambda self: self._get_employee_domain())
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan.py", line 619, in _get_employee_domain
+  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan_flexible.py", line 117, in _get_employee_domain
     return [('id', 'in', self._get_employee_ids_list())]
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan.py", line 671, in _get_employee_ids_list
-    return empList.ids
-AttributeError: 'list' object has no attribute 'ids'
+  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan_flexible.py", line 123, in _get_employee_ids_list
+    if self.env.ref('hr_organisation.role_assistant_manager') and self.env.user and self.env.user.employee_ids:
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 865, in ref
+    return self['ir.model.data'].xmlid_to_object(xml_id, raise_if_not_found=raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1454, in xmlid_to_object
+    t = self.xmlid_to_res_model_res_id(xmlid, raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
+    return self.xmlid_lookup(xmlid)[1:3]
+  File "<decorator-gen-26>", line 2, in xmlid_lookup
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 93, in lookup
+    value = d[key] = self.method(*args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
+    raise ValueError('External ID not found in the system: %s' % xmlid)
+ValueError: External ID not found in the system: hr_organisation.role_assistant_manager
 During handling of the above exception, another exception occurred:
 Traceback (most recent call last):
   File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
@@ -183,7 +217,7 @@ Traceback (most recent call last):
     self._validate_fields(vals)
   File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 1133, in _validate_fields
     raise ValidationError("%s\n\n%s" % (_("Error while validating constraint"), tools.ustr(e)))
-odoo.exceptions.ValidationError: ("Error while validating constraint\n\n'list' object has no attribute 'ids'", None)
+odoo.exceptions.ValidationError: ('Error while validating constraint\n\nExternal ID not found in the system: hr_organisation.role_assistant_manager', None)
 During handling of the above exception, another exception occurred:
 Traceback (most recent call last):
   File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 663, in _handle_exception
@@ -270,23 +304,17 @@ Traceback (most recent call last):
   File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 1133, in _validate_fields
     raise ValidationError("%s\n\n%s" % (_("Error while validating constraint"), tools.ustr(e)))
 odoo.tools.convert.ParseError: "Error while validating constraint
-'list' object has no attribute 'ids'
-None" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/views/hr_shift_plan.xml:5, near
-<record id="hr_shift_plan_tree" model="ir.ui.view">
-        <field name="name">hr.shift_plan.tree</field>
-        <field name="model">hr.shift_plan</field>
+External ID not found in the system: hr_organisation.role_assistant_manager
+None" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/views/hr_shift_plan_flexible.xml:3, near
+<record model="ir.ui.view" id="shift_plan_flexible_tree">
+        <field name="name">hr.shift_plan.flexible.tree</field>
+        <field name="model">hr.shift_plan.flexible</field>
         <field name="arch" type="xml">
-            <tree string="shift_plan">
-                <field name="image_id" widget="image" class="oe_avatar" string=" "/>
-                <field name="employee_id" readonly="1"/>
-                <field name="personel_id" readonly="1" string="Sicil"/>
-                <field name="department_id" readonly="1"/>
-                <field name="date_from"/>
-                <field name="date_to"/>
-                <field name="calendar_id"/>
-                <field name="shift_type"/>
-                <field name="task_center_ids" widget="many2many_tags"/>
-                <field name="personel_id" invisible="1"/>
+            <tree string="Competencies">
+                <field name="term_id"/>
+                <field name="employee_ids" widget="many2many_tags"/>
+                <field name="bulk_plan_ids" widget="many2many_tags"/>
+                <field name="plan_ids" widget="many2many_tags"/>
             </tree>
         </field>
     </record>
