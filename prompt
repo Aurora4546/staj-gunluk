@@ -1,3 +1,37 @@
+odoo.tools.convert.ParseError: "External ID not found in the system: hr_employee_ext.menu_human_description" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_employee_ext/views/menus.xml:57, near
+<menuitem id="menu_human_resources_clothes_types" name="Clothes Types Description" action="clothes_action" parent="menu_human_description" groups="hr_employee_ext.group_hr_manager" sequence="1"/>
+2026-03-10 09:06:39,155 9252 ERROR odoodb odoo.http: Exception during JSON request handling. 
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 88, in lookup
+    r = d[key]
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/func.py", line 69, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/lru.py", line 44, in __getitem__
+    a = self.d[obj].me
+KeyError: ('ir.model.data', <function IrModelData.xmlid_lookup at 0x7496617ce9e0>, 'hr_employee_ext.menu_human_description')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
+    self._tags[rec.tag](rec, de, mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 455, in _tag_menuitem
+    menu_parent_id = self.id_get(rec.get('parent',''))
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 741, in id_get
+    res = self.model_id_get(id_str, raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 747, in model_id_get
+    return self.env['ir.model.data'].xmlid_to_res_model_res_id(id_str, raise_if_not_found=raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
+    return self.xmlid_lookup(xmlid)[1:3]
+  File "<decorator-gen-26>", line 2, in xmlid_lookup
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 93, in lookup
+    value = d[key] = self.method(*args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
+    raise ValueError('External ID not found in the system: %s' % xmlid)
+ValueError: External ID not found in the system: hr_employee_ext.menu_human_description
+
+During handling of the above exception, another exception occurred:
+
 Traceback (most recent call last):
   File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 663, in _handle_exception
     return super(JsonRequest, self)._handle_exception(exception)
@@ -17,93 +51,55 @@ Traceback (most recent call last):
     return self.method(*args, **kw)
   File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 526, in response_wrap
     response = f(*args, **kw)
-  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 959, in call_kw
-    return self._call_kw(model, method, args, kwargs)
+  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 963, in call_button
+    action = self._call_kw(model, method, args, {})
   File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 951, in _call_kw
     return call_kw(request.env[model], method, args, kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 832, in __getitem__
-    return self.registry[model_name]._browse((), self)
-  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 177, in __getitem__
-    return self.models[model_name]
-KeyError: 'ud.announcement.config'
-2026-03-10 05:22:36,282 8014 ERROR odoodb odoo.http: Exception during JSON request handling. 
-Traceback (most recent call last):
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 663, in _handle_exception
-    return super(JsonRequest, self)._handle_exception(exception)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 321, in _handle_exception
-    raise pycompat.reraise(type(exception), exception, sys.exc_info()[2])
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 87, in reraise
-    raise value
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 705, in dispatch
-    result = self._call_function(**self.params)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 353, in _call_function
-    return checked_call(self.db, *args, **kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/service/model.py", line 98, in wrapper
-    return f(dbname, *args, **kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 346, in checked_call
-    result = self.endpoint(*a, **kw)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 948, in __call__
-    return self.method(*args, **kw)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 526, in response_wrap
-    response = f(*args, **kw)
-  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 959, in call_kw
-    return self._call_kw(model, method, args, kwargs)
-  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 951, in _call_kw
-    return call_kw(request.env[model], method, args, kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 756, in call_kw
-    return _call_kw_model(method, model, args, kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 729, in _call_kw_model
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 760, in call_kw
+    return _call_kw_multi(method, model, args, kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 747, in _call_kw_multi
     result = method(recs, *args, **kwargs)
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/approval_dashboard/models/res_users.py", line 194, in review_user_count_dashboard_data
-    all_data = self.get_review_counts_by_state()
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/approval_dashboard/models/res_users.py", line 1053, in get_review_counts_by_state
-    solution_my_count = self.get_solutions_my_count()
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/approval_dashboard/models/res_users.py", line 962, in get_solutions_my_count
-    result += self.env['request.request'].search_count(
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 832, in __getitem__
-    return self.registry[model_name]._browse((), self)
-  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 177, in __getitem__
-    return self.models[model_name]
-KeyError: 'request.request'
-2026-03-10 05:22:36,289 8014 INFO odoodb werkzeug: 127.0.0.1 - - [10/Mar/2026 05:22:36] "POST /calendar/notify HTTP/1.1" 200 - 9 0.017 0.041
-2026-03-10 05:22:36,292 8014 INFO odoodb werkzeug: 127.0.0.1 - - [10/Mar/2026 05:22:36] "POST /web/dataset/call_kw/ud.announcement.config/search_read HTTP/1.1" 200 - 1 0.002 0.034
-2026-03-10 05:22:36,296 8014 INFO odoodb werkzeug: 127.0.0.1 - - [10/Mar/2026 05:22:36] "POST /web/dataset/call_kw/res.users/review_user_count_dashboard_data HTTP/1.1" 200 - 4 0.011 0.040
-2026-03-10 05:23:18,897 8014 INFO odoodb odoo.addons.base.models.ir_cron: Starting job `Clear Criminal Date`. 
-2026-03-10 05:23:18,927 8014 ERROR odoodb odoo.addons.base_tier_validation_ext.models.ir_cron: run cron: Clear Criminal Date 
-2026-03-10 05:23:18,941 8014 ERROR odoodb odoo.addons.base.models.ir_cron: Call from cron Clear Criminal Date for server action #657 failed in Job #76 
-Traceback (most recent call last):
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_cron.py", line 109, in _callback
-    self.env['ir.actions.server'].browse(server_action_id).run()
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_actions.py", line 541, in run
-    eval_context = self._get_eval_context(action)
-  File "/home/t12016074307/odoo12/odoo/addons/website/models/ir_actions.py", line 46, in _get_eval_context
-    eval_context = super(ServerAction, self)._get_eval_context(action)
-  File "/home/t12016074307/odoo12/odoo/addons/mail/models/ir_actions.py", line 150, in _get_eval_context
-    eval_context = super(ServerActions, self)._get_eval_context(action=action)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_actions.py", line 497, in _get_eval_context
-    model = self.env[model_name]
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 832, in __getitem__
-    return self.registry[model_name]._browse((), self)
-  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 177, in __getitem__
-    return self.models[model_name]
-KeyError: 'hr.employee.document.viewer'
-2026-03-10 05:23:18,947 8014 INFO odoodb odoo.addons.base.models.ir_cron: Job `Clear Criminal Date` done. 
-2026-03-10 05:23:18,949 8014 INFO odoodb odoo.addons.base.models.ir_cron: Starting job `Documents Criminal Rec. for Employee`. 
-2026-03-10 05:23:18,960 8014 ERROR odoodb odoo.addons.base_tier_validation_ext.models.ir_cron: run cron: Documents Criminal Rec. for Employee 
-2026-03-10 05:23:18,971 8014 ERROR odoodb odoo.addons.base.models.ir_cron: Call from cron Documents Criminal Rec. for Employee for server action #656 failed in Job #75 
-Traceback (most recent call last):
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_cron.py", line 109, in _callback
-    self.env['ir.actions.server'].browse(server_action_id).run()
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_actions.py", line 541, in run
-    eval_context = self._get_eval_context(action)
-  File "/home/t12016074307/odoo12/odoo/addons/website/models/ir_actions.py", line 46, in _get_eval_context
-    eval_context = super(ServerAction, self)._get_eval_context(action)
-  File "/home/t12016074307/odoo12/odoo/addons/mail/models/ir_actions.py", line 150, in _get_eval_context
-    eval_context = super(ServerActions, self)._get_eval_context(action=action)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_actions.py", line 497, in _get_eval_context
-    model = self.env[model_name]
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 832, in __getitem__
-    return self.registry[model_name]._browse((), self)
-  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 177, in __getitem__
-    return self.models[model_name]
-KeyError: 'hr.employee.document.viewer'
+  File "<decorator-gen-62>", line 2, in button_immediate_install
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_module.py", line 75, in check_and_log
+    return method(self, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_module.py", line 446, in button_immediate_install
+    return self._button_immediate_function(type(self).button_install)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_module.py", line 562, in _button_immediate_function
+    modules.registry.Registry.new(self._cr.dbname, update_module=True)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 87, in new
+    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 421, in load_modules
+    loaded_modules, update_module, models_to_check)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 313, in load_marked_modules
+    perform_checks=perform_checks, models_to_check=models_to_check
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 222, in load_module_graph
+    load_data(cr, idref, mode, kind='data', package=package, report=report)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 68, in load_data
+    tools.convert_file(cr, package.name, filename, idref, mode, noupdate, kind, report)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 802, in convert_file
+    convert_xml_import(cr, module, fp, idref, mode, noupdate, report)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 865, in convert_xml_import
+    obj.parse(doc.getroot(), mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 755, in parse
+    self.parse(rec, mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 764, in parse
+    exc_info[2]
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 86, in reraise
+    raise value.with_traceback(tb)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
+    self._tags[rec.tag](rec, de, mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 455, in _tag_menuitem
+    menu_parent_id = self.id_get(rec.get('parent',''))
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 741, in id_get
+    res = self.model_id_get(id_str, raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 747, in model_id_get
+    return self.env['ir.model.data'].xmlid_to_res_model_res_id(id_str, raise_if_not_found=raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
+    return self.xmlid_lookup(xmlid)[1:3]
+  File "<decorator-gen-26>", line 2, in xmlid_lookup
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 93, in lookup
+    value = d[key] = self.method(*args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
+    raise ValueError('External ID not found in the system: %s' % xmlid)
+odoo.tools.convert.ParseError: "External ID not found in the system: hr_employee_ext.menu_human_description" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_employee_ext/views/menus.xml:57, near
+<menuitem id="menu_human_resources_clothes_types" name="Clothes Types Description" action="clothes_action" parent="menu_human_description" groups="hr_employee_ext.group_hr_manager" sequence="1"/>
