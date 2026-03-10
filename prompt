@@ -1,162 +1,186 @@
-2026-03-10 10:43:53,137 12592 ERROR odoodb odoo.sql_db: bad query: 
-                                select count(system),system,
-                                    CASE                                            
-                                        WHEN '2026-03-10'::date::date - create_date::date = 0 Then 'today'
-                                        WHEN '2026-03-10'::date::date - create_date::date > 0 Then 'overdue'
-                                        WHEN '2026-03-10'::date::date - create_date::date < 0 Then 'planned'
-                                        END AS states from external_notification where employee_id = 1  and
-                                    notification_status = 'active' and active=true group by system,states
-                                
-ERROR: relation "external_notification" does not exist
-LINE 7: ...                               END AS states from external_n...
-                                                             ^
+<odoo>
+    <data noupdate="1">
+        <record id="ac_health_insurance_attachment_type_file_birth_certificate"
+                model="ac.health.insurance.attachment.type">
+            <field name="name">Birth Certificate</field>
+        </record>
+
+        <record id="ac_health_insurance_attachment_type_file_identity_card" model="ac.health.insurance.attachment.type">
+            <field name="name">Copy of Identity Card</field>
+        </record>
+
+        <record id="ac_health_insurance_attachment_type_file_marriage_certificate"
+                model="ac.health.insurance.attachment.type">
+            <field name="name">Marriage Certificate</field>
+        </record>
+    </data>
+</odoo>
+
+
+
+2026-03-10 10:58:03,904 13262 ERROR odoodb odoo.sql_db: bad query: 
+            INSERT INTO ir_model_data (module, name, model, res_id, noupdate, date_init, date_update)
+            VALUES ('ac_health_insurance', 'access_ac_health_insurance_premium_manager', 'ir.model.access', 3771, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_premium_general', 'ir.model.access', 3772, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_premium_secretary', 'ir.model.access', 3773, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_period_manager', 'ir.model.access', 3774, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_period_general', 'ir.model.access', 3775, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_period_secretary', 'ir.model.access', 3776, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_cover_definition_manager', 'ir.model.access', 3777, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_cover_definition_general', 'ir.model.access', 3778, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_cover_definition_secretary', 'ir.model.access', 3779, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_cover_period_definition_manager', 'ir.model.access', 3780, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_cover_period_definition_general', 'ir.model.access', 3781, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_cover_period_definition_secretary', 'ir.model.access', 3782, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_summary', 'ir.model.access', 3783, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_hr_employee_relative', 'ir.model.access', 3784, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_premium_report', 'ir.model.access', 3785, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_lock_history', 'ir.model.access', 3786, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_personal_department_permission_manager', 'ir.model.access', 3787, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_exceptions_manager', 'ir.model.access', 3788, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_exceptions_admin', 'ir.model.access', 3789, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_sms_list_manager', 'ir.model.access', 3790, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_sms_message_manager', 'ir.model.access', 3791, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_sms_manager', 'ir.model.access', 3792, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_sms_manager', 'ir.model.access', 3793, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_attachment_manager', 'ir.model.access', 3794, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_attachment_general', 'ir.model.access', 3795, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_attachment_secretary', 'ir.model.access', 3796, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_attachment_type_manager', 'ir.model.access', 3797, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_attachment_type_general', 'ir.model.access', 3798, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_attachment_type_secretary', 'ir.model.access', 3799, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_reminder_opr_history_manager', 'ir.model.access', 3800, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_premium_notification_manager', 'ir.model.access', 3801, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_premium_notification_general', 'ir.model.access', 3802, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_premium_notification_secretary', 'ir.model.access', 3803, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_summary_control_manager', 'ir.model.access', 3804, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_summary_control_admin', 'ir.model.access', 3805, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_kvkk_data_manager', 'ir.model.access', 3806, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_working_type_manager', 'ir.model.access', 3807, false, now() at time zone 'UTC', now() at time zone 'UTC'), ('ac_health_insurance', 'access_ac_health_insurance_working_type_general_user', 'ir.model.access', 3808, false, now() at time zone 'UTC', now() at time zone 'UTC')
+            ON CONFLICT (module, name)
+            DO UPDATE SET date_update=(now() at time zone 'UTC') 
+        
+ERROR: ON CONFLICT DO UPDATE command cannot affect row a second time
+HINT:  Ensure that no rows proposed for insertion within the same command have duplicate constrained values.
  
-2026-03-10 10:43:53,141 12592 ERROR odoodb odoo.http: Exception during JSON request handling. 
+2026-03-10 10:58:03,904 13262 ERROR odoodb odoo.addons.base.models.ir_model: Failed to insert ir_model_data
+('ac_health_insurance', 'access_ac_health_insurance_premium_manager', 'ir.model.access', 3771, False)
+('ac_health_insurance', 'access_ac_health_insurance_premium_general', 'ir.model.access', 3772, False)
+('ac_health_insurance', 'access_ac_health_insurance_premium_secretary', 'ir.model.access', 3773, False)
+('ac_health_insurance', 'access_ac_health_insurance_period_manager', 'ir.model.access', 3774, False)
+('ac_health_insurance', 'access_ac_health_insurance_period_general', 'ir.model.access', 3775, False)
+('ac_health_insurance', 'access_ac_health_insurance_period_secretary', 'ir.model.access', 3776, False)
+('ac_health_insurance', 'access_ac_health_insurance_cover_definition_manager', 'ir.model.access', 3777, False)
+('ac_health_insurance', 'access_ac_health_insurance_cover_definition_general', 'ir.model.access', 3778, False)
+('ac_health_insurance', 'access_ac_health_insurance_cover_definition_secretary', 'ir.model.access', 3779, False)
+('ac_health_insurance', 'access_ac_health_insurance_cover_period_definition_manager', 'ir.model.access', 3780, False)
+('ac_health_insurance', 'access_ac_health_insurance_cover_period_definition_general', 'ir.model.access', 3781, False)
+('ac_health_insurance', 'access_ac_health_insurance_cover_period_definition_secretary', 'ir.model.access', 3782, False)
+('ac_health_insurance', 'access_ac_health_insurance_summary', 'ir.model.access', 3783, False)
+('ac_health_insurance', 'access_hr_employee_relative', 'ir.model.access', 3784, False)
+('ac_health_insurance', 'access_ac_health_insurance_premium_report', 'ir.model.access', 3785, False)
+('ac_health_insurance', 'access_ac_health_insurance_lock_history', 'ir.model.access', 3786, False)
+('ac_health_insurance', 'access_ac_health_personal_department_permission_manager', 'ir.model.access', 3787, False)
+('ac_health_insurance', 'access_ac_health_insurance_exceptions_manager', 'ir.model.access', 3788, False)
+('ac_health_insurance', 'access_ac_health_insurance_exceptions_admin', 'ir.model.access', 3789, False)
+('ac_health_insurance', 'access_ac_health_insurance_sms_list_manager', 'ir.model.access', 3790, False)
+('ac_health_insurance', 'access_ac_health_insurance_sms_message_manager', 'ir.model.access', 3791, False)
+('ac_health_insurance', 'access_ac_health_insurance_sms_manager', 'ir.model.access', 3792, False)
+('ac_health_insurance', 'access_ac_health_insurance_sms_manager', 'ir.model.access', 3793, False)
+('ac_health_insurance', 'access_ac_health_insurance_attachment_manager', 'ir.model.access', 3794, False)
+('ac_health_insurance', 'access_ac_health_insurance_attachment_general', 'ir.model.access', 3795, False)
+('ac_health_insurance', 'access_ac_health_insurance_attachment_secretary', 'ir.model.access', 3796, False)
+('ac_health_insurance', 'access_ac_health_insurance_attachment_type_manager', 'ir.model.access', 3797, False)
+('ac_health_insurance', 'access_ac_health_insurance_attachment_type_general', 'ir.model.access', 3798, False)
+('ac_health_insurance', 'access_ac_health_insurance_attachment_type_secretary', 'ir.model.access', 3799, False)
+('ac_health_insurance', 'access_ac_health_insurance_reminder_opr_history_manager', 'ir.model.access', 3800, False)
+('ac_health_insurance', 'access_ac_health_insurance_premium_notification_manager', 'ir.model.access', 3801, False)
+('ac_health_insurance', 'access_ac_health_insurance_premium_notification_general', 'ir.model.access', 3802, False)
+('ac_health_insurance', 'access_ac_health_insurance_premium_notification_secretary', 'ir.model.access', 3803, False)
+('ac_health_insurance', 'access_ac_health_insurance_summary_control_manager', 'ir.model.access', 3804, False)
+('ac_health_insurance', 'access_ac_health_insurance_summary_control_admin', 'ir.model.access', 3805, False)
+('ac_health_insurance', 'access_ac_health_insurance_kvkk_data_manager', 'ir.model.access', 3806, False)
+('ac_health_insurance', 'access_ac_health_insurance_working_type_manager', 'ir.model.access', 3807, False)
+('ac_health_insurance', 'access_ac_health_insurance_working_type_general_user', 'ir.model.access', 3808, False) 
+2026-03-10 10:58:04,027 13262 INFO odoodb odoo.modules.loading: loading ac_health_insurance/views/cover_period.xml 
+2026-03-10 10:58:04,113 13262 INFO odoodb odoo.modules.loading: loading ac_health_insurance/data/ir_cron_data.xml 
+2026-03-10 10:58:04,205 13262 INFO odoodb odoo.modules.loading: loading ac_health_insurance/data/mail_templates.xml 
+2026-03-10 10:58:04,219 13262 INFO odoodb odoo.modules.loading: loading ac_health_insurance/data/request_sequence.xml 
+2026-03-10 10:58:04,238 13262 INFO odoodb odoo.modules.loading: loading ac_health_insurance/data/attachment_type.xml 
+2026-03-10 10:58:04,247 13262 ERROR odoodb odoo.sql_db: bad query: INSERT INTO "ac_health_insurance_attachment_type" ("id", "create_uid", "create_date", "write_uid", "write_date", "active", "mandatory", "name") VALUES (nextval('ac_health_insurance_attachment_type_id_seq'), 1, (now() at time zone 'UTC'), 1, (now() at time zone 'UTC'), true, false, 'Birth Certificate') RETURNING id
+ERROR: null value in column "new_record_reasons" of relation "ac_health_insurance_attachment_type" violates not-null constraint
+DETAIL:  Failing row contains (1, null, t, Birth Certificate, null, null, f, null, 1, 2026-03-10 10:57:51.699938, 1, 2026-03-10 10:57:51.699938).
+ 
+2026-03-10 10:58:04,256 13262 WARNING odoodb odoo.modules.loading: Transient module states were reset 
+2026-03-10 10:58:04,258 13262 ERROR odoodb odoo.modules.registry: Failed to load registry 
 Traceback (most recent call last):
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 663, in _handle_exception
-    return super(JsonRequest, self)._handle_exception(exception)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 321, in _handle_exception
-    raise pycompat.reraise(type(exception), exception, sys.exc_info()[2])
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 87, in reraise
-    raise value
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 705, in dispatch
-    result = self._call_function(**self.params)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 353, in _call_function
-    return checked_call(self.db, *args, **kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/service/model.py", line 98, in wrapper
-    return f(dbname, *args, **kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 346, in checked_call
-    result = self.endpoint(*a, **kw)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 948, in __call__
-    return self.method(*args, **kw)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 526, in response_wrap
-    response = f(*args, **kw)
-  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 959, in call_kw
-    return self._call_kw(model, method, args, kwargs)
-  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 951, in _call_kw
-    return call_kw(request.env[model], method, args, kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 760, in call_kw
-    return _call_kw_multi(method, model, args, kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 747, in _call_kw_multi
-    result = method(recs, *args, **kwargs)
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/approval_dashboard/models/res_users.py", line 899, in get_waiting_external_api
-    'employee_id': self.env.user.employee_ids[0].id
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
+    self._tags[rec.tag](rec, de, mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 663, in _tag_record
+    record = model.with_context(rec_context)._load_records([data], self.mode == 'update')
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3911, in _load_records
+    records = self._load_records_create([data['values'] for data in to_create])
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3825, in _load_records_create
+    return self.create(values)
+  File "<decorator-gen-114>", line 2, in create
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 463, in _model_create_multi
+    return create(self, arg)
+  File "/home/t12016074307/odoo12/odoo/addons/mail/models/mail_thread.py", line 271, in create
+    threads = super(MailThread, self).create(vals_list)
+  File "<decorator-gen-3>", line 2, in create
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 463, in _model_create_multi
+    return create(self, arg)
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3606, in create
+    records = self._create(data_list)
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3706, in _create
+    cr.execute(query, params)
   File "/home/t12016074307/odoo12/odoo/odoo/sql_db.py", line 148, in wrapper
     return f(self, *args, **kwargs)
   File "/home/t12016074307/odoo12/odoo/odoo/sql_db.py", line 225, in execute
     res = self._obj.execute(query, params)
-psycopg2.ProgrammingError: relation "external_notification" does not exist
-LINE 7: ...                               END AS states from external_n...
-                                                             ^
-2026-03-10 10:43:53,147 12592 INFO odoodb werkzeug: 127.0.0.1 - - [10/Mar/2026 10:43:53] "POST /web/dataset/call_kw/res.users/systray_get_done_activities HTTP/1.1" 200 - 3 0.024 0.075
-2026-03-10 10:43:53,152 12592 ERROR odoodb odoo.sql_db: bad query: select count(system),system from external_notification where employee_id = 1 and notification_status = 'done' and active=true group by system
-ERROR: relation "external_notification" does not exist
-LINE 1: select count(system),system from external_notification where...
-                                         ^
- 
-2026-03-10 10:43:53,158 12592 ERROR odoodb odoo.http: Exception during JSON request handling. 
+psycopg2.IntegrityError: null value in column "new_record_reasons" of relation "ac_health_insurance_attachment_type" violates not-null constraint
+DETAIL:  Failing row contains (1, null, t, Birth Certificate, null, null, f, null, 1, 2026-03-10 10:57:51.699938, 1, 2026-03-10 10:57:51.699938).
+During handling of the above exception, another exception occurred:
 Traceback (most recent call last):
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 663, in _handle_exception
-    return super(JsonRequest, self)._handle_exception(exception)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 321, in _handle_exception
-    raise pycompat.reraise(type(exception), exception, sys.exc_info()[2])
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 87, in reraise
-    raise value
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 705, in dispatch
-    result = self._call_function(**self.params)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 353, in _call_function
-    return checked_call(self.db, *args, **kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/service/model.py", line 98, in wrapper
-    return f(dbname, *args, **kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 346, in checked_call
-    result = self.endpoint(*a, **kw)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 948, in __call__
-    return self.method(*args, **kw)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 526, in response_wrap
-    response = f(*args, **kw)
-  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 959, in call_kw
-    return self._call_kw(model, method, args, kwargs)
-  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 951, in _call_kw
-    return call_kw(request.env[model], method, args, kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 760, in call_kw
-    return _call_kw_multi(method, model, args, kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 747, in _call_kw_multi
-    result = method(recs, *args, **kwargs)
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/approval_dashboard/models/res_users.py", line 944, in get_done_external_api
-    self.env.cr.execute(req_query_done_ext)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 87, in new
+    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 421, in load_modules
+    loaded_modules, update_module, models_to_check)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 313, in load_marked_modules
+    perform_checks=perform_checks, models_to_check=models_to_check
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 222, in load_module_graph
+    load_data(cr, idref, mode, kind='data', package=package, report=report)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 68, in load_data
+    tools.convert_file(cr, package.name, filename, idref, mode, noupdate, kind, report)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 802, in convert_file
+    convert_xml_import(cr, module, fp, idref, mode, noupdate, report)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 865, in convert_xml_import
+    obj.parse(doc.getroot(), mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 755, in parse
+    self.parse(rec, mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 764, in parse
+    exc_info[2]
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 86, in reraise
+    raise value.with_traceback(tb)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
+    self._tags[rec.tag](rec, de, mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 663, in _tag_record
+    record = model.with_context(rec_context)._load_records([data], self.mode == 'update')
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3911, in _load_records
+    records = self._load_records_create([data['values'] for data in to_create])
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3825, in _load_records_create
+    return self.create(values)
+  File "<decorator-gen-114>", line 2, in create
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 463, in _model_create_multi
+    return create(self, arg)
+  File "/home/t12016074307/odoo12/odoo/addons/mail/models/mail_thread.py", line 271, in create
+    threads = super(MailThread, self).create(vals_list)
+  File "<decorator-gen-3>", line 2, in create
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 463, in _model_create_multi
+    return create(self, arg)
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3606, in create
+    records = self._create(data_list)
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3706, in _create
+    cr.execute(query, params)
   File "/home/t12016074307/odoo12/odoo/odoo/sql_db.py", line 148, in wrapper
     return f(self, *args, **kwargs)
   File "/home/t12016074307/odoo12/odoo/odoo/sql_db.py", line 225, in execute
     res = self._obj.execute(query, params)
-psycopg2.ProgrammingError: relation "external_notification" does not exist
-LINE 1: select count(system),system from external_notification where...
-                                         ^
-2026-03-10 10:43:53,161 12592 INFO odoodb werkzeug: 127.0.0.1 - - [10/Mar/2026 10:43:53] "POST /web/dataset/call_kw/res.users/get_waiting_external_api HTTP/1.1" 200 - 4 0.020 0.071
-2026-03-10 10:43:53,164 12592 ERROR odoodb odoo.http: Exception during JSON request handling. 
+odoo.tools.convert.ParseError: "null value in column "new_record_reasons" of relation "ac_health_insurance_attachment_type" violates not-null constraint
+DETAIL:  Failing row contains (1, null, t, Birth Certificate, null, null, f, null, 1, 2026-03-10 10:57:51.699938, 1, 2026-03-10 10:57:51.699938).
+" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/ac_health_insurance/data/attachment_type.xml:4, near
+<record id="ac_health_insurance_attachment_type_file_birth_certificate" model="ac.health.insurance.attachment.type">
+            <field name="name">Birth Certificate</field>
+        </record>
+2026-03-10 10:58:04,261 13262 ERROR odoodb odoo.http: Exception during JSON request handling. 
 Traceback (most recent call last):
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 663, in _handle_exception
-    return super(JsonRequest, self)._handle_exception(exception)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 321, in _handle_exception
-    raise pycompat.reraise(type(exception), exception, sys.exc_info()[2])
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 87, in reraise
-    raise value
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 705, in dispatch
-    result = self._call_function(**self.params)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 353, in _call_function
-    return checked_call(self.db, *args, **kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/service/model.py", line 98, in wrapper
-    return f(dbname, *args, **kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 346, in checked_call
-    result = self.endpoint(*a, **kw)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 948, in __call__
-    return self.method(*args, **kw)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 526, in response_wrap
-    response = f(*args, **kw)
-  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 959, in call_kw
-    return self._call_kw(model, method, args, kwargs)
-  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 951, in _call_kw
-    return call_kw(request.env[model], method, args, kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 756, in call_kw
-    return _call_kw_model(method, model, args, kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 729, in _call_kw_model
-    result = method(recs, *args, **kwargs)
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/approval_dashboard/models/res_users.py", line 194, in review_user_count_dashboard_data
-    all_data = self.get_review_counts_by_state()
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/approval_dashboard/models/res_users.py", line 1053, in get_review_counts_by_state
-    solution_my_count = self.get_solutions_my_count()
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/approval_dashboard/models/res_users.py", line 962, in get_solutions_my_count
-    result += self.env['request.request'].search_count(
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 832, in __getitem__
-    return self.registry[model_name]._browse((), self)
-  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 177, in __getitem__
-    return self.models[model_name]
-KeyError: 'request.request'
-2026-03-10 10:43:53,166 12592 ERROR odoodb odoo.http: Exception during JSON request handling. 
-Traceback (most recent call last):
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 663, in _handle_exception
-    return super(JsonRequest, self)._handle_exception(exception)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 321, in _handle_exception
-    raise pycompat.reraise(type(exception), exception, sys.exc_info()[2])
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 87, in reraise
-    raise value
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 705, in dispatch
-    result = self._call_function(**self.params)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 353, in _call_function
-    return checked_call(self.db, *args, **kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/service/model.py", line 98, in wrapper
-    return f(dbname, *args, **kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 346, in checked_call
-    result = self.endpoint(*a, **kw)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 948, in __call__
-    return self.method(*args, **kw)
-  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 526, in response_wrap
-    response = f(*args, **kw)
-  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 959, in call_kw
-    return self._call_kw(model, method, args, kwargs)
-  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 951, in _call_kw
-    return call_kw(request.env[model], method, args, kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 832, in __getitem__
-    return self.registry[model_name]._browse((), self)
-  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 177, in __getitem__
-    return self.models[model_name]
-KeyError: 'ud.announcement.config'
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
+    self._tags[rec.tag](rec, de, mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 663, in _tag_record
+    record = model.with_context(rec_context)._load_records([data], self.mode == 'update')
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3911, in _load_records
+    records = self._load_records_create([data['values'] for data in to_create])
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3825, in _load_records_create
+    return self.create(values)
+  File "<decorator-gen-114>", line 2, in create
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 463, in _model_create_multi
+    return create(self, arg)
+  File "/home/t12016074307/odoo12/odoo/addons/mail/models/mail_thread.py", line 271, in create
+    threads = super(MailThread, self).create(vals_list)
+  File "<decorator-gen-3>", line 2, in create
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 463, in _model_create_multi
+    return create(self, arg)
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3606, in create
+    records = self._create(data_list)
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3706, in _create
+    cr.execute(query, params)
+  File "/home/t12016074307/odoo12/odoo/odoo/sql_db.py", line 148, in wrapper
+    return f(self, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/sql_db.py", line 225, in execute
+    res = self._obj.execute(query, params)
+psycopg2.IntegrityError: null value in column "new_record_reasons" of relation "ac_health_insurance_attachment_type" violates not-null constraint
+DETAIL:  Failing row contains (1, null, t, Birth Certificate, null, null, f, null, 1, 2026-03-10 10:57:51.699938, 1, 2026-03-10 10:57:51.699938).
