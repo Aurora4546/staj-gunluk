@@ -1,0 +1,46 @@
+- mail_ext : modul yuklu ama hr.delegation ve notification management modullerini kullaniyor ve hata veriyor. ntfc.reviewer ve hr.delegation. Depends icinde 'hr' modulu eklendi.
+
+- hr.environment : workforce modulu depends icinde eklenmemis. menus.xml icinde workforce kaldirildi.
+
+- hr.department.ext : ir.model.access.csv icerisinde 33. satir kaldirildi --> access_hr_department_delegation_auth,hr.department.delegation.auth,hr.model_hr_department,hr_delegation.group_delegation_manager,1,1,0,0
+hr delegation sonrası ekle. DUZELDI
+
+- base.tier.validation.ext : service_parameters.xml data icinde 35. satirda  <field name="reviewer_id">30890</field> kaldirildi. 32. satirdaki value silindi. yuklendikten sonra  psycopg2.ProgrammingError: relation "hr_delegation_tier_review_rel" does not exist
+LINE 1: ...ve=true and id not in (select tier_review_id from hr_delegat... hatasi verdi. hr delegation sonrasi duzelmesi lazim. DUZELDI
+
+- hr_employee_ext : external id not found hatası veriyor. 41 ve 65 satirlar arasinda menuleri en alta eklendi. Menu siralama hatasi. 
+hr_contract default odoo modulu dependency listesine eklenmemis. DUZELDI
+
+-approval_dashboard : data list sirasinda yanlislik. Yukledikten sonra request.request ve ud.announcement.config key error veriyor.
+
+- hr_delegation : ir.model.access 5.satir silindi. 
+access_hr_delegation3,Access Delegation Model 3,model_hr_delegation,hr_organisation.group_hr_department_responsibility_manager,1,1,1,0
+access_hr_delegation3,Access Delegation Model 3,model_hr_delegation,hr_organisation.group_hr_department_responsibility_manager,1,1,1,0
+
+hr_organisation sonrasi bak.
+
+- ac_health_insruance : data/attachment_type.xml icinde new_record_reason field'lari eklendi. DUZELDI.
+
+
+- hr_shift_plan : hr_shift_plan.py icindeki raise_if_not_found=False parametresi 634. satirdaki field'a eklendi. 671.satirda return duzenlendi. 
+ return empList if isinstance(empList, list) else empList.ids
+ hr_shift_plan_flexible.py icindeki 123 satirlarda da raise_if_not_found=False eklendi.
+ Menu.xml data listesinde yeri degisti.
+ Yuklendikten sonra hata vermeye basladi. ns.parameters modelini ariyor ama bulamiyor.
+hr_organisation yuklendiktne sonra bak
+
+- hr_workorder : datalist icinde menu sirasi duzeltildi.
+
+- hr_attendence_ext data list siralamasi hatasi. request_menu_wizard. views.xml
+
+
+
+
+
+
+                
+                
+
+
+
+
