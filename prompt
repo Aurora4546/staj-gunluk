@@ -1,0 +1,109 @@
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 663, in _handle_exception
+    return super(JsonRequest, self)._handle_exception(exception)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 321, in _handle_exception
+    raise pycompat.reraise(type(exception), exception, sys.exc_info()[2])
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 87, in reraise
+    raise value
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 705, in dispatch
+    result = self._call_function(**self.params)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 353, in _call_function
+    return checked_call(self.db, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/service/model.py", line 98, in wrapper
+    return f(dbname, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 346, in checked_call
+    result = self.endpoint(*a, **kw)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 948, in __call__
+    return self.method(*args, **kw)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 526, in response_wrap
+    response = f(*args, **kw)
+  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 959, in call_kw
+    return self._call_kw(model, method, args, kwargs)
+  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 951, in _call_kw
+    return call_kw(request.env[model], method, args, kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 832, in __getitem__
+    return self.registry[model_name]._browse((), self)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 177, in __getitem__
+    return self.models[model_name]
+KeyError: 'ud.announcement.config'
+2026-03-10 05:22:36,282 8014 ERROR odoodb odoo.http: Exception during JSON request handling. 
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 663, in _handle_exception
+    return super(JsonRequest, self)._handle_exception(exception)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 321, in _handle_exception
+    raise pycompat.reraise(type(exception), exception, sys.exc_info()[2])
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 87, in reraise
+    raise value
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 705, in dispatch
+    result = self._call_function(**self.params)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 353, in _call_function
+    return checked_call(self.db, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/service/model.py", line 98, in wrapper
+    return f(dbname, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 346, in checked_call
+    result = self.endpoint(*a, **kw)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 948, in __call__
+    return self.method(*args, **kw)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 526, in response_wrap
+    response = f(*args, **kw)
+  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 959, in call_kw
+    return self._call_kw(model, method, args, kwargs)
+  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 951, in _call_kw
+    return call_kw(request.env[model], method, args, kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 756, in call_kw
+    return _call_kw_model(method, model, args, kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 729, in _call_kw_model
+    result = method(recs, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/addons_tusas/approval_dashboard/models/res_users.py", line 194, in review_user_count_dashboard_data
+    all_data = self.get_review_counts_by_state()
+  File "/home/t12016074307/odoo12/odoo/addons_tusas/approval_dashboard/models/res_users.py", line 1053, in get_review_counts_by_state
+    solution_my_count = self.get_solutions_my_count()
+  File "/home/t12016074307/odoo12/odoo/addons_tusas/approval_dashboard/models/res_users.py", line 962, in get_solutions_my_count
+    result += self.env['request.request'].search_count(
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 832, in __getitem__
+    return self.registry[model_name]._browse((), self)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 177, in __getitem__
+    return self.models[model_name]
+KeyError: 'request.request'
+2026-03-10 05:22:36,289 8014 INFO odoodb werkzeug: 127.0.0.1 - - [10/Mar/2026 05:22:36] "POST /calendar/notify HTTP/1.1" 200 - 9 0.017 0.041
+2026-03-10 05:22:36,292 8014 INFO odoodb werkzeug: 127.0.0.1 - - [10/Mar/2026 05:22:36] "POST /web/dataset/call_kw/ud.announcement.config/search_read HTTP/1.1" 200 - 1 0.002 0.034
+2026-03-10 05:22:36,296 8014 INFO odoodb werkzeug: 127.0.0.1 - - [10/Mar/2026 05:22:36] "POST /web/dataset/call_kw/res.users/review_user_count_dashboard_data HTTP/1.1" 200 - 4 0.011 0.040
+2026-03-10 05:23:18,897 8014 INFO odoodb odoo.addons.base.models.ir_cron: Starting job `Clear Criminal Date`. 
+2026-03-10 05:23:18,927 8014 ERROR odoodb odoo.addons.base_tier_validation_ext.models.ir_cron: run cron: Clear Criminal Date 
+2026-03-10 05:23:18,941 8014 ERROR odoodb odoo.addons.base.models.ir_cron: Call from cron Clear Criminal Date for server action #657 failed in Job #76 
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_cron.py", line 109, in _callback
+    self.env['ir.actions.server'].browse(server_action_id).run()
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_actions.py", line 541, in run
+    eval_context = self._get_eval_context(action)
+  File "/home/t12016074307/odoo12/odoo/addons/website/models/ir_actions.py", line 46, in _get_eval_context
+    eval_context = super(ServerAction, self)._get_eval_context(action)
+  File "/home/t12016074307/odoo12/odoo/addons/mail/models/ir_actions.py", line 150, in _get_eval_context
+    eval_context = super(ServerActions, self)._get_eval_context(action=action)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_actions.py", line 497, in _get_eval_context
+    model = self.env[model_name]
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 832, in __getitem__
+    return self.registry[model_name]._browse((), self)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 177, in __getitem__
+    return self.models[model_name]
+KeyError: 'hr.employee.document.viewer'
+2026-03-10 05:23:18,947 8014 INFO odoodb odoo.addons.base.models.ir_cron: Job `Clear Criminal Date` done. 
+2026-03-10 05:23:18,949 8014 INFO odoodb odoo.addons.base.models.ir_cron: Starting job `Documents Criminal Rec. for Employee`. 
+2026-03-10 05:23:18,960 8014 ERROR odoodb odoo.addons.base_tier_validation_ext.models.ir_cron: run cron: Documents Criminal Rec. for Employee 
+2026-03-10 05:23:18,971 8014 ERROR odoodb odoo.addons.base.models.ir_cron: Call from cron Documents Criminal Rec. for Employee for server action #656 failed in Job #75 
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_cron.py", line 109, in _callback
+    self.env['ir.actions.server'].browse(server_action_id).run()
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_actions.py", line 541, in run
+    eval_context = self._get_eval_context(action)
+  File "/home/t12016074307/odoo12/odoo/addons/website/models/ir_actions.py", line 46, in _get_eval_context
+    eval_context = super(ServerAction, self)._get_eval_context(action)
+  File "/home/t12016074307/odoo12/odoo/addons/mail/models/ir_actions.py", line 150, in _get_eval_context
+    eval_context = super(ServerActions, self)._get_eval_context(action=action)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_actions.py", line 497, in _get_eval_context
+    model = self.env[model_name]
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 832, in __getitem__
+    return self.registry[model_name]._browse((), self)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 177, in __getitem__
+    return self.models[model_name]
+KeyError: 'hr.employee.document.viewer'
