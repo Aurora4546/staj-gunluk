@@ -1,55 +1,353 @@
-    'data': [
-        'security/groups.xml',
-        'security/permanent.xml',
-        'security/ir.model.access.csv',
-        'data/card_types.xml',
-        'data/card_type_other.xml',
-        'data/zone_types.xml',
-        'data/terminal_types.xml',
-        'data/resource_move_type_data.xml',
-        'data/automated_expire_cron.xml',
-        # 'data/hr_employee.xml',
-        'views/activities.xml',
-        'data/sync_cron.xml',
-        'views/area.xml',
-        'views/building.xml',
-        'views/zone.xml',
-        'data/activities.xml',
-        'views/card.xml',
-        'views/terminal.xml',
-        'views/employee_history.xml',
-        'views/authorization.xml',
-        'views/authorization_request.xml',
-        'views/card_replacement_request.xml',
-        'views/secure_zone_request.xml',
-        'views/employee.xml',
-        'views/attendance_move.xml',
-        'views/zone_auth_views.xml',
-        'views/search_views.xml',
-        'views/templates_qweb.xml',
-        'views/templates.xml',
-        'views/bulk_card_replacement.xml',
-        'wizards/card_replacement.xml',
-        'wizards/card_return_wizard.xml',
-        'wizards/bulk_card_replace_wizard.xml',
-        'wizards/card_assignment_wizard.xml',
-        'wizards/tier_validation_send_wizard.xml',
-        'wizards/auth_per_employee_assignment_wizard.xml',
-        'wizards/auth_per_department_assignment_wizard.xml',
-        'wizards/auth_per_building_assignment_wizard.xml',
-        'wizards/auth_copy_wizard.xml',
-        'wizards/employee_bulk_operations.xml',
-        'wizards/confirmation_wizard.xml',
-        'wizards/request_menu_wizard.xml',
-        'views/integration_views/employee_movements.xml',
-        'views/integration_views/move_types.xml',
-        'views/assets_backend.xml',
-        'views/integration_views/fdw_settings.xml',
-        'views/reports.xml',
-        'views/views.xml',
-        'views/user.xml',
-        'activities/views/activities.xml',
-        'activities/data/activities.xml',
-        'activities/security/ir.model.access.csv',
-        'security/rules.xml',
-    ],
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 88, in lookup
+    r = d[key]
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/func.py", line 69, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/lru.py", line 44, in __getitem__
+    a = self.d[obj].me
+KeyError: ('ir.model.data', <function IrModelData.xmlid_lookup at 0x7f0df20e0d40>, 'hr_attendance_ext.auth_per_employee_action_tusas_manager')
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
+    self._tags[rec.tag](rec, de, mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 652, in _tag_record
+    f_val = _eval_xml(self, field, self.env)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 138, in _eval_xml
+    +_process("".join(etree.tostring(n, encoding='unicode') for n in node))
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 127, in _process
+    self.idref[id] = self.id_get(id)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 741, in id_get
+    res = self.model_id_get(id_str, raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 747, in model_id_get
+    return self.env['ir.model.data'].xmlid_to_res_model_res_id(id_str, raise_if_not_found=raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
+    return self.xmlid_lookup(xmlid)[1:3]
+  File "<decorator-gen-26>", line 2, in xmlid_lookup
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 93, in lookup
+    value = d[key] = self.method(*args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
+    raise ValueError('External ID not found in the system: %s' % xmlid)
+ValueError: External ID not found in the system: hr_attendance_ext.auth_per_employee_action_tusas_manager
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 87, in new
+    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 421, in load_modules
+    loaded_modules, update_module, models_to_check)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 313, in load_marked_modules
+    perform_checks=perform_checks, models_to_check=models_to_check
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 222, in load_module_graph
+    load_data(cr, idref, mode, kind='data', package=package, report=report)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 68, in load_data
+    tools.convert_file(cr, package.name, filename, idref, mode, noupdate, kind, report)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 802, in convert_file
+    convert_xml_import(cr, module, fp, idref, mode, noupdate, report)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 865, in convert_xml_import
+    obj.parse(doc.getroot(), mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 755, in parse
+    self.parse(rec, mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 764, in parse
+    exc_info[2]
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 86, in reraise
+    raise value.with_traceback(tb)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
+    self._tags[rec.tag](rec, de, mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 652, in _tag_record
+    f_val = _eval_xml(self, field, self.env)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 138, in _eval_xml
+    +_process("".join(etree.tostring(n, encoding='unicode') for n in node))
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 127, in _process
+    self.idref[id] = self.id_get(id)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 741, in id_get
+    res = self.model_id_get(id_str, raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 747, in model_id_get
+    return self.env['ir.model.data'].xmlid_to_res_model_res_id(id_str, raise_if_not_found=raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
+    return self.xmlid_lookup(xmlid)[1:3]
+  File "<decorator-gen-26>", line 2, in xmlid_lookup
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 93, in lookup
+    value = d[key] = self.method(*args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
+    raise ValueError('External ID not found in the system: %s' % xmlid)
+odoo.tools.convert.ParseError: "External ID not found in the system: hr_attendance_ext.auth_per_employee_action_tusas_manager" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_attendance_ext/wizards/request_menu_wizard.xml:4, near
+<record model="ir.ui.view" id="request_menu_wizard_form_view">
+            <field name="name">request_menu.wizard form</field>
+            <field name="model">hr.attendance.request.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <style>
+                        .breadcrumb, .o_form_buttons_view, .breadcrumb-item, .o_form_buttons_edit{
+                        display:none !important;
+                        text-indent: -9999px;
+                        }
+                        .div_button_requests{
+                        text-align:center;
+                        float:left;
+                        background-color:#195372 !important;
+                        border-radius:7px;
+                        min-height:110px;
+                        width:125px;
+                        margin:10px;
+                        }
+                        .div_button_requests_container{
+                        padding-top: 10px;
+                        display:flex;
+                        justify-content:center;
+                        }
+                        .div_button_requests div{
+                        position:relative;
+                        }
+                        .div_button_requests h5{
+                        position:absolute;
+                        }
+                        .div_button_requests button{
+                        height:100%;
+                        width:90%;
+                        background-color:#195372 !important;
+                        border:0 !important;
+                        }
+                    </style>
+                    <sheet>
+                        <div class="div_button_requests_container">
+                            <div class="div_button_requests">
+                                <button name="%(zone_auth_request_action)d" type="action">
+                                    <img src="/resource_ext/static/src/img/wind.png" alt="transferred"/>
+                                </button>
+                                <div>
+                                    <h5>
+                                        Zone Auth Request
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="div_button_requests">
+                                <button name="%(card_replacement_request_request_action)d" type="action">
+                                    <img src="/hr_attendance_ext/static/description/icon.png" alt="change" height="64" width="64"/>
+                                </button>
+                                <div>
+                                    <h5>
+                                        Card Replacement Request
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="div_button_requests">
+                                <button name="%(secure_zone_request_request_action)d" type="action">
+                                    <img src="/hr_attendance_ext/static/src/img/zone_auth.png" alt="transferred" height="56" width="56"/>
+                                </button>
+                                <div>
+                                    <h5>
+                                        Secure Zone Request
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="div_button_requests">
+                                <button name="%(auth_per_employee_action_tusas_manager)d" type="action">
+                                    <img src="/hr_attendance_ext/static/src/img/red_blue_card.png" alt="transferred" height="56" width="56"/>
+                                </button>
+                                <div>
+                                    <h5>
+                                        <center>
+                                            Yetki Ver / Al
+                                        </center>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+2026-03-10 12:55:27,371 21345 ERROR odoodb odoo.http: Exception during JSON request handling. 
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 88, in lookup
+    r = d[key]
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/func.py", line 69, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/lru.py", line 44, in __getitem__
+    a = self.d[obj].me
+KeyError: ('ir.model.data', <function IrModelData.xmlid_lookup at 0x7f0df20e0d40>, 'hr_attendance_ext.auth_per_employee_action_tusas_manager')
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
+    self._tags[rec.tag](rec, de, mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 652, in _tag_record
+    f_val = _eval_xml(self, field, self.env)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 138, in _eval_xml
+    +_process("".join(etree.tostring(n, encoding='unicode') for n in node))
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 127, in _process
+    self.idref[id] = self.id_get(id)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 741, in id_get
+    res = self.model_id_get(id_str, raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 747, in model_id_get
+    return self.env['ir.model.data'].xmlid_to_res_model_res_id(id_str, raise_if_not_found=raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
+    return self.xmlid_lookup(xmlid)[1:3]
+  File "<decorator-gen-26>", line 2, in xmlid_lookup
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 93, in lookup
+    value = d[key] = self.method(*args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
+    raise ValueError('External ID not found in the system: %s' % xmlid)
+ValueError: External ID not found in the system: hr_attendance_ext.auth_per_employee_action_tusas_manager
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 663, in _handle_exception
+    return super(JsonRequest, self)._handle_exception(exception)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 321, in _handle_exception
+    raise pycompat.reraise(type(exception), exception, sys.exc_info()[2])
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 87, in reraise
+    raise value
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 705, in dispatch
+    result = self._call_function(**self.params)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 353, in _call_function
+    return checked_call(self.db, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/service/model.py", line 98, in wrapper
+    return f(dbname, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 346, in checked_call
+    result = self.endpoint(*a, **kw)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 948, in __call__
+    return self.method(*args, **kw)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 526, in response_wrap
+    response = f(*args, **kw)
+  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 963, in call_button
+    action = self._call_kw(model, method, args, {})
+  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 951, in _call_kw
+    return call_kw(request.env[model], method, args, kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 760, in call_kw
+    return _call_kw_multi(method, model, args, kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 747, in _call_kw_multi
+    result = method(recs, *args, **kwargs)
+  File "<decorator-gen-62>", line 2, in button_immediate_install
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_module.py", line 75, in check_and_log
+    return method(self, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_module.py", line 446, in button_immediate_install
+    return self._button_immediate_function(type(self).button_install)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_module.py", line 562, in _button_immediate_function
+    modules.registry.Registry.new(self._cr.dbname, update_module=True)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 87, in new
+    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 421, in load_modules
+    loaded_modules, update_module, models_to_check)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 313, in load_marked_modules
+    perform_checks=perform_checks, models_to_check=models_to_check
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 222, in load_module_graph
+    load_data(cr, idref, mode, kind='data', package=package, report=report)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 68, in load_data
+    tools.convert_file(cr, package.name, filename, idref, mode, noupdate, kind, report)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 802, in convert_file
+    convert_xml_import(cr, module, fp, idref, mode, noupdate, report)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 865, in convert_xml_import
+    obj.parse(doc.getroot(), mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 755, in parse
+    self.parse(rec, mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 764, in parse
+    exc_info[2]
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 86, in reraise
+    raise value.with_traceback(tb)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
+    self._tags[rec.tag](rec, de, mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 652, in _tag_record
+    f_val = _eval_xml(self, field, self.env)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 138, in _eval_xml
+    +_process("".join(etree.tostring(n, encoding='unicode') for n in node))
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 127, in _process
+    self.idref[id] = self.id_get(id)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 741, in id_get
+    res = self.model_id_get(id_str, raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 747, in model_id_get
+    return self.env['ir.model.data'].xmlid_to_res_model_res_id(id_str, raise_if_not_found=raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
+    return self.xmlid_lookup(xmlid)[1:3]
+  File "<decorator-gen-26>", line 2, in xmlid_lookup
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 93, in lookup
+    value = d[key] = self.method(*args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
+    raise ValueError('External ID not found in the system: %s' % xmlid)
+odoo.tools.convert.ParseError: "External ID not found in the system: hr_attendance_ext.auth_per_employee_action_tusas_manager" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_attendance_ext/wizards/request_menu_wizard.xml:4, near
+<record model="ir.ui.view" id="request_menu_wizard_form_view">
+            <field name="name">request_menu.wizard form</field>
+            <field name="model">hr.attendance.request.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <style>
+                        .breadcrumb, .o_form_buttons_view, .breadcrumb-item, .o_form_buttons_edit{
+                        display:none !important;
+                        text-indent: -9999px;
+                        }
+                        .div_button_requests{
+                        text-align:center;
+                        float:left;
+                        background-color:#195372 !important;
+                        border-radius:7px;
+                        min-height:110px;
+                        width:125px;
+                        margin:10px;
+                        }
+                        .div_button_requests_container{
+                        padding-top: 10px;
+                        display:flex;
+                        justify-content:center;
+                        }
+                        .div_button_requests div{
+                        position:relative;
+                        }
+                        .div_button_requests h5{
+                        position:absolute;
+                        }
+                        .div_button_requests button{
+                        height:100%;
+                        width:90%;
+                        background-color:#195372 !important;
+                        border:0 !important;
+                        }
+                    </style>
+                    <sheet>
+                        <div class="div_button_requests_container">
+                            <div class="div_button_requests">
+                                <button name="%(zone_auth_request_action)d" type="action">
+                                    <img src="/resource_ext/static/src/img/wind.png" alt="transferred"/>
+                                </button>
+                                <div>
+                                    <h5>
+                                        Zone Auth Request
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="div_button_requests">
+                                <button name="%(card_replacement_request_request_action)d" type="action">
+                                    <img src="/hr_attendance_ext/static/description/icon.png" alt="change" height="64" width="64"/>
+                                </button>
+                                <div>
+                                    <h5>
+                                        Card Replacement Request
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="div_button_requests">
+                                <button name="%(secure_zone_request_request_action)d" type="action">
+                                    <img src="/hr_attendance_ext/static/src/img/zone_auth.png" alt="transferred" height="56" width="56"/>
+                                </button>
+                                <div>
+                                    <h5>
+                                        Secure Zone Request
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="div_button_requests">
+                                <button name="%(auth_per_employee_action_tusas_manager)d" type="action">
+                                    <img src="/hr_attendance_ext/static/src/img/red_blue_card.png" alt="transferred" height="56" width="56"/>
+                                </button>
+                                <div>
+                                    <h5>
+                                        <center>
+                                            Yetki Ver / Al
+                                        </center>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+Guncelledigin data dosyasini ekledikten sonra bu hatalari almaya basladim.
