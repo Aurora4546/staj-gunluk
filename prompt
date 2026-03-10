@@ -1,9 +1,6 @@
-hr_shift plan modulunu indirmeye calisirken bu hatayi aliyorum. 
-View icinde hicbir organisation ref yok ama hata veriyor.
+raise_if_not_found=False eklememe ragmen hatalar devam ediyor
 
-KeyError: ('ir.model.data', <function IrModelData.xmlid_lookup at 0x75dba1660d40>, 'hr_organisation.role_assistant_manager')
-During handling of the above exception, another exception occurred:
-Traceback (most recent call last):
+raceback (most recent call last):
   File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 1129, in _validate_fields
     check(self)
   File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 351, in _check_xml
@@ -20,20 +17,9 @@ Traceback (most recent call last):
     domain=lambda self: self._get_employee_domain())
   File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan.py", line 619, in _get_employee_domain
     return [('id', 'in', self._get_employee_ids_list())]
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan.py", line 634, in _get_employee_ids_list
-    if self.env.ref('hr_organisation.role_assistant_manager') and self.env.user and self.env.user.employee_ids:
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 865, in ref
-    return self['ir.model.data'].xmlid_to_object(xml_id, raise_if_not_found=raise_if_not_found)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1454, in xmlid_to_object
-    t = self.xmlid_to_res_model_res_id(xmlid, raise_if_not_found)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
-    return self.xmlid_lookup(xmlid)[1:3]
-  File "<decorator-gen-26>", line 2, in xmlid_lookup
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 93, in lookup
-    value = d[key] = self.method(*args, **kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
-    raise ValueError('External ID not found in the system: %s' % xmlid)
-ValueError: External ID not found in the system: hr_organisation.role_assistant_manager
+  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan.py", line 671, in _get_employee_ids_list
+    return empList.ids
+AttributeError: 'list' object has no attribute 'ids'
 During handling of the above exception, another exception occurred:
 Traceback (most recent call last):
   File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
@@ -68,7 +54,136 @@ Traceback (most recent call last):
     self._validate_fields(vals)
   File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 1133, in _validate_fields
     raise ValidationError("%s\n\n%s" % (_("Error while validating constraint"), tools.ustr(e)))
-odoo.exceptions.ValidationError: ('Error while validating constraint\n\nExternal ID not found in the system: hr_organisation.role_assistant_manager', None)
+odoo.exceptions.ValidationError: ("Error while validating constraint\n\n'list' object has no attribute 'ids'", None)
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 87, in new
+    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 421, in load_modules
+    loaded_modules, update_module, models_to_check)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 313, in load_marked_modules
+    perform_checks=perform_checks, models_to_check=models_to_check
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 222, in load_module_graph
+    load_data(cr, idref, mode, kind='data', package=package, report=report)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 68, in load_data
+    tools.convert_file(cr, package.name, filename, idref, mode, noupdate, kind, report)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 802, in convert_file
+    convert_xml_import(cr, module, fp, idref, mode, noupdate, report)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 865, in convert_xml_import
+    obj.parse(doc.getroot(), mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 764, in parse
+    exc_info[2]
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 86, in reraise
+    raise value.with_traceback(tb)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
+    self._tags[rec.tag](rec, de, mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 663, in _tag_record
+    record = model.with_context(rec_context)._load_records([data], self.mode == 'update')
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3911, in _load_records
+    records = self._load_records_create([data['values'] for data in to_create])
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3825, in _load_records_create
+    return self.create(values)
+  File "<decorator-gen-33>", line 2, in create
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 463, in _model_create_multi
+    return create(self, arg)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 428, in create
+    return super(View, self).create(vals_list)
+  File "<decorator-gen-3>", line 2, in create
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 463, in _model_create_multi
+    return create(self, arg)
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3642, in create
+    fields[0].determine_inverse(batch_recs)
+  File "/home/t12016074307/odoo12/odoo/odoo/fields.py", line 1200, in determine_inverse
+    getattr(records, self.inverse)()
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 275, in _inverse_arch
+    view.write(data)
+  File "/home/t12016074307/odoo12/odoo/addons/website/models/ir_ui_view.py", line 41, in write
+    return super(View, self).write(vals)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 445, in write
+    res = super(View, self).write(self._compute_defaults(vals))
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3367, in write
+    self._write(store_vals)
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3503, in _write
+    self._validate_fields(vals)
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 1133, in _validate_fields
+    raise ValidationError("%s\n\n%s" % (_("Error while validating constraint"), tools.ustr(e)))
+odoo.tools.convert.ParseError: "Error while validating constraint
+'list' object has no attribute 'ids'
+None" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/views/hr_shift_plan.xml:5, near
+<record id="hr_shift_plan_tree" model="ir.ui.view">
+        <field name="name">hr.shift_plan.tree</field>
+        <field name="model">hr.shift_plan</field>
+        <field name="arch" type="xml">
+            <tree string="shift_plan">
+                <field name="image_id" widget="image" class="oe_avatar" string=" "/>
+                <field name="employee_id" readonly="1"/>
+                <field name="personel_id" readonly="1" string="Sicil"/>
+                <field name="department_id" readonly="1"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="calendar_id"/>
+                <field name="shift_type"/>
+                <field name="task_center_ids" widget="many2many_tags"/>
+                <field name="personel_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+2026-03-10 11:50:24,268 17522 ERROR odoodb odoo.http: Exception during JSON request handling. 
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 1129, in _validate_fields
+    check(self)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 351, in _check_xml
+    self.postprocess_and_fields(view.model, view_doc, view.id)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 1117, in postprocess_and_fields
+    fields = Model.fields_get(None)
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 2731, in fields_get
+    description = field.get_description(self.env)
+  File "/home/t12016074307/odoo12/odoo/odoo/fields.py", line 790, in get_description
+    value = value(env)
+  File "/home/t12016074307/odoo12/odoo/odoo/fields.py", line 2147, in _description_domain
+    return self.domain(env[self.model_name]) if callable(self.domain) else self.domain
+  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan.py", line 93, in <lambda>
+    domain=lambda self: self._get_employee_domain())
+  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan.py", line 619, in _get_employee_domain
+    return [('id', 'in', self._get_employee_ids_list())]
+  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan.py", line 671, in _get_employee_ids_list
+    return empList.ids
+AttributeError: 'list' object has no attribute 'ids'
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
+    self._tags[rec.tag](rec, de, mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 663, in _tag_record
+    record = model.with_context(rec_context)._load_records([data], self.mode == 'update')
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3911, in _load_records
+    records = self._load_records_create([data['values'] for data in to_create])
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3825, in _load_records_create
+    return self.create(values)
+  File "<decorator-gen-33>", line 2, in create
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 463, in _model_create_multi
+    return create(self, arg)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 428, in create
+    return super(View, self).create(vals_list)
+  File "<decorator-gen-3>", line 2, in create
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 463, in _model_create_multi
+    return create(self, arg)
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3642, in create
+    fields[0].determine_inverse(batch_recs)
+  File "/home/t12016074307/odoo12/odoo/odoo/fields.py", line 1200, in determine_inverse
+    getattr(records, self.inverse)()
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 275, in _inverse_arch
+    view.write(data)
+  File "/home/t12016074307/odoo12/odoo/addons/website/models/ir_ui_view.py", line 41, in write
+    return super(View, self).write(vals)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 445, in write
+    res = super(View, self).write(self._compute_defaults(vals))
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3367, in write
+    self._write(store_vals)
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3503, in _write
+    self._validate_fields(vals)
+  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 1133, in _validate_fields
+    raise ValidationError("%s\n\n%s" % (_("Error while validating constraint"), tools.ustr(e)))
+odoo.exceptions.ValidationError: ("Error while validating constraint\n\n'list' object has no attribute 'ids'", None)
 During handling of the above exception, another exception occurred:
 Traceback (most recent call last):
   File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 663, in _handle_exception
@@ -155,7 +270,7 @@ Traceback (most recent call last):
   File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 1133, in _validate_fields
     raise ValidationError("%s\n\n%s" % (_("Error while validating constraint"), tools.ustr(e)))
 odoo.tools.convert.ParseError: "Error while validating constraint
-External ID not found in the system: hr_organisation.role_assistant_manager
+'list' object has no attribute 'ids'
 None" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/views/hr_shift_plan.xml:5, near
 <record id="hr_shift_plan_tree" model="ir.ui.view">
         <field name="name">hr.shift_plan.tree</field>
@@ -175,204 +290,3 @@ None" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/vi
             </tree>
         </field>
     </record>
-
-
-
-
-<?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-
-    <!-- hr shift_plan plan -->
-    <record id="hr_shift_plan_tree" model="ir.ui.view">
-        <field name="name">hr.shift_plan.tree</field>
-        <field name="model">hr.shift_plan</field>
-        <field name="arch" type="xml">
-            <tree string="shift_plan">
-                <field name="image_id" widget="image" class="oe_avatar" string=" "/>
-                <field name="employee_id" readonly="1"/>
-                <field name="personel_id" readonly="1" string="Sicil"/>
-                <field name="department_id" readonly="1"/>
-                <field name="date_from"/>
-                <field name="date_to"/>
-                <field name="calendar_id"/>
-                <field name="shift_type"/>
-                <field name="task_center_ids" widget="many2many_tags"/>
-                <field name="personel_id" invisible="1"/>
-
-            </tree>
-        </field>
-    </record>
-
-    <record id="hr_shift_plan_form" model="ir.ui.view">
-        <field name="name">hr.shift_plan.form</field>
-        <field name="model">hr.shift_plan</field>
-        <field name="arch" type="xml">
-            <form string="shift_plan">
-                <header>
-                    <field name="cancel_button_valid_check" invisible="1"/>
-                    <field name="active" invisible="1"/>
-                    <button name="get_shift_plan_cancel" string="İptal Et" class="btn btn-succes" type="object" attrs="{'invisible': [('active','=', False)]}" confirm="Bu Vardiya Planı talebini iptal etmek istiyor musunuz?"/>
-                </header>
-                <sheet>
-                    <group string="Shift Plan">
-                        <field name="image_id" string="" widget="image"
-                               class="oe_avatar"/>
-                        <field name="employee_id"
-                               options='{"no_open": True, "no_create": True, "no_quick_create":True, "no_create_edit":True}'/>
-                        <field name="personel_id" readonly="1" string="Sicil"
-                               attrs="{'invisible': [('employee_id','=',False)]}"/>
-                        <field name="department_id" readonly="1" string="Bölüm"
-                               options='{"no_open": True, "no_create": True, "no_quick_create":True, "no_create_edit":True}'
-                               attrs="{'invisible': [('employee_id','=',False)]}"/>
-                        <label for="date_from" string="Shift Date"/>
-                        <div class="o_row">
-                            <field name="date_from" class="oe_inline"/>
-                            <span>
-                                -
-                            </span>
-                            <field name="date_to" class="oe_inline"/>
-                        </div>
-                        <field name="calendar_id_cmp" string="Çalışma Tipi"
-                               options='{"no_open": True, "no_create": True, "no_quick_create":True, "no_create_edit":True}'
-                               attrs="{'invisible': ['|', ('calendar_id_cmp','=',False),
-                                                    ('employee_id','=',False)]}"/>
-                        <field name="calendar_id"
-                               options='{"no_open": True, "no_create": True, "no_quick_create":True, "no_create_edit":True}'/>
-                        <field name="shift_type"/>
-                        <field name="task_center_ids" widget='many2many_tags'
-                               options='{"no_open": True, "no_create": True, "no_quick_create":True, "no_create_edit":True}'/>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <record id="view_hr_shift_plan_filter" model="ir.ui.view">
-        <field name="name">hr.shift_plan.filter</field>
-        <field name="model">hr.shift_plan</field>
-        <field name="arch" type="xml">
-            <search string="Search">
-                <field name="shift_type"/>
-                <field name="calendar_id"/>
-                <field name="employee_id"/>
-                <field name="department_id"/>
-                <field name="personel_id" string="Sicil"/>
-                <field name="date_from"/>
-                <field name="date_to"/>
-                <separator/>
-                <filter string="This Month" name="current_month" date="date_from" default_period="this_month"/>
-                <separator/>
-            </search>
-        </field>
-    </record>
-
-
-    <record model="ir.actions.act_window" id="action_hr_shift_plan_request_tree">
-        <field name="name">Shift Plan Tree</field>
-        <field name="res_model">hr.shift_plan</field>
-        <field name="view_mode">tree,form</field>
-        <field name="search_view_id" ref="view_hr_shift_plan_filter"/>
-        <field name="state">code</field>
-        <field name="condition">True</field>
-        <field name="code">action = model.shift_plan_view_with_domain()</field>
-        <field name="context">{'tree_view_ref':'hr_shift_plan.hr_shift_plan_tree' ,
-            'form_view_ref':'hr_shift_plan.hr_shift_plan_form',
-            'search_default_current_month': context_today().strftime('%m'), 'create': True ,
-            'edit': True ,
-            'delete': False ,
-            'duplicate': False}
-        </field>
-    </record>
-
-    <record id="action_hr_shift_plan_request" model="ir.actions.server">
-        <field name="name">Shift Plan</field>
-        <field name="type">ir.actions.server</field>
-        <field name="model_id" ref="hr_shift_plan.model_hr_shift_plan"/>
-        <field name="binding_model_id" ref="hr_shift_plan.model_hr_shift_plan"/>
-        <field name="state">code</field>
-        <field name="condition">True</field>
-        <field name="code">action = model.shift_plan_view_with_domain()</field>
-        <field name="context">{'tree_view_ref':'hr_shift_plan.hr_shift_plan_tree' ,
-            'form_view_ref':'hr_shift_plan.hr_shift_plan_form',
-            'search_default_current_month': context_today().strftime('%m'),}
-        </field>
-    </record>
-
-    <record id="action_hr_shift_plan_own_request" model='ir.actions.act_window'>
-        <field name="name">Shift Plan</field>
-        <field name="res_model">hr.shift_plan</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-        <field name="domain">['|',('create_uid','=',uid),('employee_id.user_id', '=', uid)]</field>
-        <field name="context">{}</field>
-    </record>
-
-    <record id="hr_shift_plan_activity_tree" model="ir.ui.view">
-        <field name="name">hr.shift_plan.activity.tree</field>
-        <field name="model">hr.shift_plan_activity</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="image_id" widget="image" class="oe_avatar" string=" "/>
-                <field name="rel_employee_id" readonly="1"/>
-                <field name="personel_id" readonly="1" string="Sicil"/>
-                <field name="department_id" readonly="1"/>
-                <field name="personel_id" invisible="1"/>
-
-
-            </tree>
-        </field>
-    </record>
-
-
-    <record id="hr_shift_plan_activity_form" model="ir.ui.view">
-        <field name="name">hr.shift_plan.activity.form</field>
-        <field name="model">hr.shift_plan_activity</field>
-        <field name="priority">100</field>
-        <field name="arch" type="xml">
-            <form string="shift_plan">
-                <header>
-                </header>
-                <sheet>
-                    <group string="Shift Plan">
-                        <field name="image_id" string="" widget="image"
-                               class="oe_avatar"/>
-                        <field name="rel_employee_id"
-                               options='{"no_open": True, "no_create": True, "no_quick_create":True, "no_create_edit":True}'/>
-                        <field name="personel_id" readonly="1" string="Sicil"
-                               attrs="{'invisible': [('rel_employee_id','=',False)]}"/>
-                        <field name="department_id" readonly="1" string="Bölüm"
-                               attrs="{'invisible': [('rel_employee_id','=',False)]}"/>
-                        <field name="activity_summary" string=" "/>
-
-                    </group>
-                    <field name="status" invisible="1"/>
-                    <group attrs="{'invisible':[('status','=','done')]}">
-                        <button name="action_read_information" string="I have read the information"
-                                class="oe_inline oe_button btn-success standard-approve"
-                                type="object"/>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <record model="ir.actions.act_window" id="action_hr_shift_plan_activity_tree">
-        <field name="name">Shift Plan Aktivity Tree</field>
-        <field name="res_model">hr.shift_plan_activity</field>
-        <field name="view_mode">tree,form</field>
-        <field name="context">{'tree_view_ref':'hr_shift_plan.hr_shift_plan_activity_tree' ,
-            'form_view_ref':'hr_shift_plan.hr_shift_plan_activity_form',
-            'edit': False ,
-            'create':False,
-            'delete': False ,
-            'duplicate': False}
-        </field>
-    </record>
-
-
-</odoo>
-
-
-
-
-
