@@ -1,0 +1,102 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="request_menu_wizard_form_view">
+            <field name="name">request_menu.wizard form</field>
+            <field name="model">hr.attendance.request.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <style>
+                        .breadcrumb, .o_form_buttons_view, .breadcrumb-item, .o_form_buttons_edit{
+                        display:none !important;
+                        text-indent: -9999px;
+                        }
+                        .div_button_requests{
+                        text-align:center;
+                        float:left;
+                        background-color:#195372 !important;
+                        border-radius:7px;
+                        min-height:110px;
+                        width:125px;
+                        margin:10px;
+                        }
+                        .div_button_requests_container{
+                        padding-top: 10px;
+                        display:flex;
+                        justify-content:center;
+                        }
+                        .div_button_requests div{
+                        position:relative;
+                        }
+                        .div_button_requests h5{
+                        position:absolute;
+                        }
+                        .div_button_requests button{
+                        height:100%;
+                        width:90%;
+                        background-color:#195372 !important;
+                        border:0 !important;
+                        }
+                    </style>
+                    <sheet>
+                        <div class="div_button_requests_container">
+                            <div class="div_button_requests">
+                                <button name="%(zone_auth_request_action)d" type="action">
+                                    <img src="/resource_ext/static/src/img/wind.png" alt="transferred"/>
+                                </button>
+                                <div>
+                                    <h5>
+                                        Zone Auth Request
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="div_button_requests">
+                                <button name="%(card_replacement_request_request_action)d" type="action">
+                                    <img src="/hr_attendance_ext/static/description/icon.png" alt="change"
+                                         height="64" width="64"/>
+                                </button>
+                                <div>
+                                    <h5>
+                                        Card Replacement Request
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="div_button_requests">
+                                <button name="%(secure_zone_request_request_action)d" type="action">
+                                    <img src="/hr_attendance_ext/static/src/img/zone_auth.png" alt="transferred"
+                                         height="56" width="56"/>
+                                </button>
+                                <div>
+                                    <h5>
+                                        Secure Zone Request
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="div_button_requests">
+                                <button name="%(auth_per_employee_action_tusas_manager)d" type="action">
+                                    <img src="/hr_attendance_ext/static/src/img/red_blue_card.png" alt="transferred"
+                                         height="56" width="56"/>
+                                </button>
+                                <div>
+                                    <h5>
+                                        <center>
+                                            Yetki Ver / Al
+                                        </center>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="hr_attendance_request_menu_wizard_action">
+            <field name="name">Requests</field>
+            <field name="res_model">hr.attendance.request.wizard</field>
+            <field name="view_mode">form</field>
+        </record>
+
+    </data>
+</odoo>

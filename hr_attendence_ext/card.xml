@@ -1,0 +1,514 @@
+<odoo>
+    <data>
+        <record id="hr_attendance_card_type_form_view" model="ir.ui.view">
+            <field name="name">Card Types</field>
+            <field name="model">hr.attendance.card.type</field>
+            <field name="arch" type="xml">
+                <form string="Card Type Form">
+                    <sheet>
+<!--                        <div class="oe_button_box" name="button_box">-->
+<!--                            <button name="toggle_active" type="object"-->
+<!--                                    groups="hr_attendance_ext.group_attendance_one"-->
+<!--                                    class="oe_stat_button" icon="fa-archive">-->
+<!--                                <field name="active" widget="boolean_button" string="Deactivate Card"-->
+<!--                                       options='{"terminology": "archive"}'/>-->
+<!--                            </button>-->
+<!--                        </div>-->
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="shared"/>
+                                <field name="idle_duration"/>
+                            </group>
+                            <group>
+                                <field name="color"/>
+                                <field name="temporary_color"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="hr_attendance_card_type_list_view" model="ir.ui.view">
+            <field name="name">Card Types</field>
+            <field name="model">hr.attendance.card.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="color"/>
+                    <field name="temporary_color"/>
+                </tree>
+            </field>
+        </record>
+        <record id="hr_attendance_card_form_view" model="ir.ui.view">
+            <field name="name">Cards</field>
+            <field name="model">hr.attendance.card</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <form string="Card Form">
+                    <header>
+                        <field name="card_state" widget="statusbar"/>
+                        <field name="id" invisible="1"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <!--                            <button name="toggle_active" type="object" groups="hr_attendance_ext.group_attendance_one"-->
+                            <!--                                    attrs="{'invisible':[('active','=',False)]}"-->
+                            <!--                                    confirm="Kartın tüm yetkileri alınacaktır. Onaylıyor musunuz?"-->
+                            <!--                                    class="oe_stat_button" icon="fa-archive">-->
+                            <!--                                <field name="active" widget="boolean_button"-->
+                            <!--                                       options='{"terminology": "archive"}'/>-->
+                            <!--                            </button>-->
+                            <!--                            <button name="toggle_active" type="object" groups="hr_attendance_ext.group_attendance_one"-->
+                            <!--                                    attrs="{'invisible':[('active','=',True)]}"-->
+                            <!--                                    class="oe_stat_button" icon="fa-archive"-->
+                            <!--                                    confirm="Kart kişi üzerinde ise yetkileri verilecektir. Onaylıyor musunuz?">-->
+                            <!--                                <field name="active" widget="boolean_button"-->
+                            <!--                                       options='{"terminology": "archive"}'/>-->
+                            <!--                            </button>-->
+<!--                            <button name="sync_area_auth" type="object" groups="hr_attendance_ext.group_attendance_one,-->
+<!--                                                                            hr_attendance_ext.group_attendance_three"-->
+<!--                                    class="oe_stat_button" icon="fa-braille">-->
+<!--                                Sync Auths-->
+<!--                            </button>-->
+                            <button name="test_notif_no_movement" type="object" groups="base.group_no_one"
+                                                                class="oe_stat_button" />
+
+
+
+
+                        </div>
+                        <group>
+                            <group>
+                                <field name="card_no" attrs="{'readonly':[('card_state','!=','available')]}"/>
+                                <field name="card_type"
+                                       domain="[('id', 'not in', [%(hr_attendance_ext.card_type_visitor)d])]"/>
+                                <!--<field name="validity_expire_time" readonly="1"/>-->
+                                <field name="end_of_contract_date"/>
+                                <field name="visitor_card_identity_number"/>
+                            </group>
+                            <group>
+                                <field name="employee_id" readonly="1"/>
+                                <field name="employee_personel_id" readonly="1"/>
+                                <field name="temporary" widget="boolean"/>
+                                <field name="preserve_common_auth" widget="boolean" groups="base.group_no_one"/>
+                            </group>
+                        </group>
+                        <group string="Area and Zones">
+                            <field name="area_id">
+                                <tree open="false">
+                                    <field name="name"/>
+                                    <field name="location_id"/>
+                                    <field name="area_type_id"/>
+                                    <field name="is_common_area"/>
+                                    <field name="building_id"/>
+                                </tree>
+
+                            </field>
+                            <field name="common_area_zones">
+                                <tree open="false">
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="zone_type_id"/>
+                                    <field name="area_id"/>
+                                    <field name="building_id" attrs="{'invisible':[('building_id','=',False)]}"/>
+                                    <field name="floor_id" attrs="{'invisible':[('building_id','=',False)]}"/>
+                                </tree>
+                            </field>
+
+                            <field name="zone_id">
+                                <tree open="false" >
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="zone_type_id"/>
+                                    <field name="area_id"/>
+                                    <field name="building_id" attrs="{'invisible':[('building_id','=',False)]}"/>
+                                    <field name="floor_id" attrs="{'invisible':[('building_id','=',False)]}"/>
+                                </tree>
+                            </field>
+                            <field name="permanent_zone_id" groups="hr_attendance_ext.group_attendance_permanent">
+                                <tree open="false">
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="zone_type_id"/>
+                                    <field name="area_id"/>
+                                    <field name="building_id" attrs="{'invisible':[('building_id','=',False)]}"/>
+                                    <field name="floor_id" attrs="{'invisible':[('building_id','=',False)]}"/>
+                                </tree>
+                            </field>
+
+                        </group>
+                        <separator string="Terminals and  Moves"/>
+                        <notebook>
+                            <page string="Terminals to Auth">
+                                <field name="terminal_ids">
+                                    <tree open="false">
+                                        <field name="device_id"/>
+                                        <field name="terminal_type_id"/>
+                                        <field name="terminal_no"/>
+                                        <field name="ip_no"/>
+                                        <field name="area_id"/>
+                                        <field name="building_id"/>
+                                        <field name="floor_id"/>
+                                        <field name="zone_id"/>
+                                        <field name="area_detail"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Company Entrance/Exit Moves" groups="hr_attendance_ext.group_attendance_one">
+                                <field name="common_area_moves">
+                                    <tree open="false">
+                                        <field name="move_time"/>
+                                        <field name="zone_id"/>
+                                        <field name="terminal_id"/>
+                                        <field name="move_type_id"/>
+                                        <field name="is_legitimate"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="All Moves" groups="hr_attendance_ext.group_attendance_one">
+                                <field name="all_moves">
+                                    <tree open="false" default_order="move_time desc">
+                                        <field name="move_time"/>
+                                        <field name="zone_id"/>
+                                        <field name="terminal_id"/>
+                                        <field name="move_type_id"/>
+                                        <field name="is_legitimate"/>
+                                    </tree>
+                                </field>
+<!--                                <button string="Get Moves" name="get_movements_action"-->
+<!--                                        icon="fa-retweet" type="object" class="btn-info"/>-->
+                            </page>
+
+                        </notebook>
+                        <div class="clearfix o_form_sheet"
+                             groups="hr_attendance_ext.group_attendance_four,hr_attendance_ext.group_attendance_one">
+                            <sheet>
+                                <div class="oe_chatter">
+                                    <field name="message_follower_ids" widget="mail_followers"/>
+                                    <field name="message_ids" widget="mail_thread"/>
+                                </div>
+                            </sheet>
+                        </div>
+                    </sheet>
+
+                </form>
+
+            </field>
+
+        </record>
+
+        <record id="hr_attendance_only_movements_form_view" model="ir.ui.view">
+            <field name="name">Cards</field>
+            <field name="model">hr.attendance.card</field>
+            <field name="priority">11</field>
+            <field name="arch" type="xml">
+                <form string="Card Form">
+                    <sheet>
+                        <separator string="Terminals and  Moves"/>
+                        <notebook>
+                            <page string="Company Entrance/Exit Moves" groups="hr_attendance_ext.group_attendance_nine">
+                                <field name="common_area_moves">
+                                    <tree open="false">
+                                        <field name="move_time"/>
+                                        <field name="zone_id"/>
+                                        <field name="terminal_id"/>
+                                        <field name="move_type_id"/>
+                                        <field name="is_legitimate"/>
+
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="All Moves" groups="hr_attendance_ext.group_attendance_nine">
+                                <field name="all_moves">
+                                    <tree open="false" default_order="move_time desc">
+                                        <field name="move_time"/>
+                                        <field name="zone_id"/>
+                                        <field name="terminal_id"/>
+                                        <field name="move_type_id"/>
+                                        <field name="is_legitimate"/>
+                                    </tree>
+                                </field>
+<!--                                <button string="Get Moves" name="get_movements_action"-->
+<!--                                        icon="fa-retweet" type="object" class="btn-info"/>-->
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="hr_attendance_visitor_card_form">
+            <field name="name">Attendance Visitor Card</field>
+            <field name="model">hr.attendance.card</field>
+            <field name="priority">11</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="card_no" style="width:25%" attrs="{'readonly':[('card_state','!=','available')]}"/>
+                                <field name="card_state" invisible="1"/>
+                                <field name="card_type" domain="[('id', '=', %(hr_attendance_ext.card_type_visitor)d)]"
+                                       style="width:25%" required="1"
+                                       options="{'no_create': True,'no_open': True,'no_create_edit': True,'no_quick_create': True}"/>
+                            </group>
+                            <group>
+                                <field name="visitor_card_identity_number" style="width:25%"
+                                       attrs="{'required':[('card_type', '=', %(hr_attendance_ext.card_type_visitor)d)]}"/>
+                            </group>
+                        </group>
+                        <br/>
+                        <h4 style="color:#7C7BAD;">Area and Zones</h4>
+                        <field name="visitor_zone_id"/>
+                        <separator string="Terminals and  Moves"/>
+                        <notebook>
+                            <page string="Terminals to Auth">
+                                <field name="terminal_ids">
+                                    <tree open="false">
+                                        <field name="device_id"/>
+                                        <field name="terminal_type_id"/>
+                                        <field name="terminal_no"/>
+                                        <field name="ip_no"/>
+                                        <field name="area_id"/>
+                                        <field name="building_id"/>
+                                        <field name="floor_id"/>
+                                        <field name="zone_id"/>
+                                        <field name="area_detail"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Hareketler">
+                                <field name="visitor_moves">
+                                    <tree open="false">
+                                        <field name="move_time"/>
+                                        <field name="zone_id"/>
+                                        <field name="terminal_id"/>
+                                        <field name="move_type_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="hr_attendance_card_kanban_view" model="ir.ui.view">
+            <field name="name">hr.attendance.card kanban</field>
+            <field name="model">hr.attendance.card</field>
+            <field name="arch" type="xml">
+                <kanban class="oe_background_grey o_kanban_dashboard o_hr_kanban">
+                    <field name="card_no"/>
+                    <field name="card_type"/>
+                    <field name="employee_id"/>
+                    <field name="card_color_url"/>
+                    <field name="active"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <!--                            <div t-attf-class="#{kanban_color(0) + ' oe_kanban_global_click'}"-->
+                            <div t-attf-class="#{kanban_color(0)}"
+                                 t-attf-style="height:180px;background-image:url('#{record.card_color_url.raw_value}');background-size:cover;">
+                                <div t-attf-class="o_kanban_card_header">
+                                    <div class="o_kanban_card_header_title">
+                                        <div class="o_primary" style="color:red;">
+                                            <field name="card_no"/>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_manage_button_section">
+                                        <div class="o_kanban_manage_toggle_button">
+                                            <img src="/hr_attendance_ext/static/src/img/logo-full.svg"
+                                                 alt="company-logo" style="width:100px;height:40px;"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container o_kanban_card_content">
+                                    <div class="row">
+                                        <div class="col-6 o_kanban_primary_left" style="font-size:16px;">
+                                            <field name="employee_first_name"/>
+                                            <br/>
+                                            <b>
+                                                <field name="employee_last_name"/>
+                                            </b>
+                                            <br/>
+                                            <field name="employee_personel_id"/>
+
+                                        </div>
+                                        <div class="col-6 o_kanban_primary_right;">
+                                        </div>
+                                    </div>
+                                    <div class="row" style="position:relative;bottom:2px;">
+                                        <div class="col-6 ">
+                                            <table style="border:none;">
+                                                <!--                                                    attrs="{'invisible':[('employee_id','=',False)]}"-->
+                                                <tr>
+                                                    <td>
+                                                        <button name="action_open_replace_card_wizard"
+                                                                class="btn btn-secondary" type="object">
+                                                            <i class="fa fa-random" style="color:green;"/>
+                                                            Replace
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button name="action_return_card" class="btn btn-secondary"
+                                                                type="object">
+                                                            <i class="fa fa-undo" style="color:red;"/>
+                                                            Return
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button name="open_card_settings" class="btn btn-secondary"
+                                                                type="object">
+                                                            <i class="fa fa-gear" style="color:gray;"/>
+                                                            Settings
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button name="action_activate_card" class="btn btn-secondary"
+                                                                attrs="{'invisible':[('active','=',True)]}"
+                                                                type="object">
+                                                            <i class="fa fa-undo" style="color:green;"/>
+                                                            Activate
+                                                        </button>
+                                                    </td>
+                                                    <!--                                                    <td>-->
+                                                    <!--                                                        <button class="btn btn-secondary oe_kanban_global_click">-->
+                                                    <!--                                                            <i class="fa fa-cog" style="color:grey;"/><span></span>-->
+                                                    <!--                                                        </button>-->
+                                                    <!--                                                    </td>-->
+                                                </tr>
+                                            </table>
+
+
+                                        </div>
+
+                                    </div>
+                                    <div class="row" style="position:absolute;right:2px;">
+                                        <div style="width:80px;height:100px;">
+                                            <field name="employee_image" widget="image" class="oe_avatar" readonly="1"
+                                                   modifiers="{'readonly':true}"/>
+                                        </div>
+                                        <div class="col-6 o_kanban_primary_right;z-index: -1;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container o_kanban_card_manage_pane dropdown-menu" role="menu">
+                                    <div class="row">
+                                        <div role="menuitem"
+                                             class="col-4 o_kanban_card_manage_section o_kanban_manage_to_do">
+                                            <div class="o_kanban_card_manage_title">
+                                                <a role="menuitem" type="edit">Settings</a>
+                                            </div>
+                                        </div>
+                                        <div role="menuitem"
+                                             class="col-4 o_kanban_card_manage_section o_kanban_manage_to_approve">
+                                            <div class="o_kanban_card_manage_title">
+                                                <a role="menuitem" type="edit">Replace</a>
+                                            </div>
+                                        </div>
+                                        <div role="menuitem"
+                                             class="col-4 o_kanban_card_manage_section o_kanban_manage_reports">
+                                            <div class="o_kanban_card_manage_title">
+                                                <a role="menuitem" type="edit">Return</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="hr_attendance_card_kanban_view_readonly_eight" model="ir.ui.view">
+            <field name="name">hr.attendance.card kanban</field>
+            <field name="model">hr.attendance.card</field>
+            <field name="arch" type="xml">
+                <kanban class="oe_background_grey o_kanban_dashboard o_hr_kanban" create="false">
+                    <field name="card_no"/>
+                    <field name="card_type"/>
+                    <field name="employee_id"/>
+                    <field name="card_color_url"/>
+                    <field name="active"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="#{kanban_color(0)}"
+                                 t-attf-style="height:180px;background-image:url('#{record.card_color_url.raw_value}');background-size:cover;">
+                                <div t-attf-class="o_kanban_card_header">
+                                    <div class="o_kanban_card_header_title">
+                                        <div class="o_primary" style="color:red;">
+                                            <field name="card_no"/>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_manage_button_section">
+                                        <div class="o_kanban_manage_toggle_button">
+                                            <img src="/hr_attendance_ext/static/src/img/logo-full.svg"
+                                                 alt="company-logo" style="width:100px;height:40px;"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container o_kanban_card_content">
+                                    <div class="row">
+                                        <div class="col-6 o_kanban_primary_left" style="font-size:16px;">
+                                            <field name="employee_first_name"/>
+                                            <br/>
+                                            <b>
+                                                <field name="employee_last_name"/>
+                                            </b>
+                                            <br/>
+                                            <field name="employee_personel_id"/>
+
+                                        </div>
+                                        <div class="col-6 o_kanban_primary_right;">
+                                        </div>
+                                    </div>
+                                    <button string="Get Moves" name="get_moves" type="object"
+                                            class="btn btn-outline-info"
+                                            groups="hr_attendance_ext.group_attendance_nine" style="width:45%">
+                                        Show All Moves
+                                    </button>
+                                    <div class="row" style="position:relative;bottom:2px;">
+                                        <div class="col-6 ">
+                                        </div>
+                                    </div>
+                                    <div class="row" style="position:absolute;right:2px;">
+                                        <div style="width:80px;height:100px;">
+                                            <field name="employee_image" widget="image" class="oe_avatar" readonly="1"
+                                                   modifiers="{'readonly':true}"/>
+                                        </div>
+                                        <div class="col-6 o_kanban_primary_right;z-index: -1;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record id="hr_attendance_card_list_view" model="ir.ui.view">
+            <field name="name">Card List</field>
+            <field name="model">hr.attendance.card</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="card_no" groups="hr_attendance_ext.group_attendance_one"/>
+                    <field name="employee_personel_id"/>
+                    <field name="employee_id"/>
+                    <field name="department_id"/>
+                    <field name="card_type"/>
+                    <field name="card_state"/>
+                    <field name="temporary"/>
+                    <field name="end_of_contract_date" />
+                    <field name="active" invisible="1"/>
+                    <field name="unlink_reason"
+                           attrs="{'invisible':[('active','=',True)]}" groups="hr_attendance_ext.group_attendance_one"/>
+                    <field name="unlink_date" attrs="{'invisible':[('active','=',True)]}" groups="hr_attendance_ext.group_attendance_one"/>
+                    <field name="unlink_uid" attrs="{'invisible':[('active','=',True)]}" groups="hr_attendance_ext.group_attendance_one"/>
+                    <field name="preserve_common_auth" groups="base.group_no_one"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,49 @@
+<odoo>
+
+    <record id="hr_attendance_bulk_card_rep_wizard" model="ir.ui.view">
+        <field name="name">Bulk Card Replacement</field>
+        <field name="model">bulk.card.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <h2 style="color:#0c5460">Seçilen Kişiler İçin Bu İşlemi Yapmak İstediğinize Emin misiniz?</h2><br/>
+                <group>
+                    <div>
+                        <field name="bulk_card_ids" readonly="1">
+                            <tree open="false">
+                                <field name="employee_id"/>
+                                <field name="personel_id"/>
+                                <field name="department_id"/>
+                                <field name="current_card_no"  options='{"fg_color": "red:employee_id != False"}'/>
+                                <field name="new_card_no" options='{"fg_color": "green:employee_id != False"}'/>
+                            </tree>
+                        </field>
+                    </div>
+                </group>
+                <div>
+                        <div class="o_notification_box mb0 alert alert-info" role="status">
+                            <i class="fa fa-info-circle fa-3x text-info float-left" style="padding-right: 15px;" role="img" aria-label="Info" title="Info"/>
+                            <h4 class="alert-heading" role="status">Bilgilendirme</h4>
+                            <hr/>
+                            <p class="mb-0">
+                                <span>Kişiye atanılan yeni kart numaraları sistem tarafından oluşturulacaktır lütfen kart numaralarından emin olunuz.</span><br/>
+                                <span>Seçilen kişilerin eski kartları pasif olacak olup, yeni kart kart numaraları geçerli olacaktır !</span>
+                                <br/>
+                                <br/>
+                                <strong style="float: right;">
+                                    TUSAŞ - Türk Havacılık ve Uzay Sanayii A.Ş.İnsan Kaynakları ve Yetenek Yönetimi
+                                    Başkanlığı.
+                                </strong>
+                            </p>
+                            <br/>
+                        </div>
+
+                    </div>
+                <footer>
+                    <button string="Replace" icon="fa-random" class="btn-info" type="object" name="active_cards_replace"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+</odoo>

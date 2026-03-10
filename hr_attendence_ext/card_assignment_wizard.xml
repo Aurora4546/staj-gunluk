@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 Ecosoft Co., Ltd. (http://ecosoft.co.th)
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="card_assignment_wizard" model="ir.ui.view">
+        <field name="name">Card Assignment Wizard</field>
+        <field name="model">card.assignment.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Comment">
+                <group>
+                    <field name="card_no" required="1"/>
+                    <field name="validity_expire_time" readonly="1" force_save="1"/>
+                </group>
+                <group>
+                    <field name="message" nolabel="1" readonly="1"/>
+                </group>
+                <footer>
+
+                    <field name="card_exists" invisible="1"/>
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="width:33%;text-align:center;">
+                                <button name="action_assign_existing_card" string="Create &amp; Assign" type="object"
+                                        attrs="{'invisible':['|',('card_exists','=',True),('card_no', '=', False)]}"
+                                        class="btn-primary icon-2x"
+                                        style="width:200px;height:40px;font-size:1.3em;"
+                                />
+                                <button name="action_create_new_card"
+                                        string="Assigned Existing Card" type="object"
+                                        attrs="{'invisible':['|',('card_exists','!=',True),('card_no', '=', False)]}"
+                                        class="btn-primary fa-2x"
+                                        style="width:200px;height:40px;font-size:1.3em;"/>
+                            </td>
+                            <td style="width:33%;text-align:center;">
+
+                            </td>
+                            <td style="width:33%;text-align:center;">
+                                <button special="cancel" string="Cancel" class="btn-secondary fa-2x"
+                                        style="width:200px;height:40px;font-size:1.3em;"/>
+                            </td>
+                        </tr>
+                    </table>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

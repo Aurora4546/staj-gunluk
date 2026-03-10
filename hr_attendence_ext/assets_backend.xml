@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="assets_backend_card_replacement" name="hot_widget_assets_card_replacement" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/hr_attendance_ext/static/src/js/card_replacement.js"/>
+            <script type="text/javascript" src="/hr_attendance_ext/static/src/js/all_approve.js"/>
+        </xpath>
+    </template>
+
+
+</odoo>

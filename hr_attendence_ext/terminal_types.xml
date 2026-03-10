@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="terminal_type_door_access" model="hr.attendance.terminal.type">
+            <field name="name">Kapı Geçiş</field>
+        </record>
+    </data>
+</odoo>

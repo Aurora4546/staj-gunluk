@@ -1,0 +1,110 @@
+<odoo>
+    <data>
+        <record id="hr_attendance_terminal_type_form_view" model="ir.ui.view">
+            <field name="name">Terminal Types</field>
+            <field name="model">hr.attendance.terminal.type</field>
+            <field name="arch" type="xml">
+                <form string="Terminal Type Form">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" groups="hr_attendance_ext.group_attendance_one"
+                                    class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button"
+                                       options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="hr_attendance_terminal_type_list_view" model="ir.ui.view">
+            <field name="name">Terminal Types</field>
+            <field name="model">hr.attendance.terminal.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="hr_attendance_terminal_form_view" model="ir.ui.view">
+            <field name="name">Terminals</field>
+            <field name="model">hr.attendance.terminal</field>
+            <field name="arch" type="xml">
+                <form string="Terminal Form">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" groups="hr_attendance_ext.group_attendance_one"
+                                    class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button"
+                                       options='{"terminology": "archive"}'/>
+                            </button>
+<!--                            <button name="send_auths" type="object" groups="hr_attendance_ext.group_attendance_one,-->
+<!--                                                                            hr_attendance_ext.group_attendance_three"-->
+<!--                                    class="oe_stat_button" icon="fa-braille">-->
+<!--                                Send Auths-->
+<!--                            </button>-->
+                        </div>
+                        <group>
+                            <group>
+                                <field name="device_id"/>
+                                <field name="terminal_type_id" options="{'no_create': True,'no_open': True,'no_create_edit': True,'no_quick_create': True}" />
+                                <field name="group_no" required="1"/>
+                                <field name="system_mode"/>
+                                <field name="dolasim_terminali_mi"/>
+                            </group>
+                            <group>
+                                <field name="terminal_no"/>
+                                <field name="ip_no"/>
+                                <field name="zone_id" options="{'no_create': True,'no_open': True,'no_create_edit': True,'no_quick_create': True}"/>
+                            </group>
+                            <br/>
+                            <h3 style="color:#7C7BAD;">Terminal Bölge Tanımı</h3>
+                            <field name="area_detail" />
+                        </group>
+                        <notebook>
+                            <page string="Buttons">
+                                <field name="buttons">
+                                    <tree editable="bottom">
+                                        <field name="button_no"/>
+                                        <field name="movement_id"
+                                               options="{'no_create': True, 'no_open': True,'no_create_edit':True,'no_quick_create': True,}"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Auths">
+                                <field name="terminal_auths">
+                                    <tree>
+                                        <field name="employee_id"/>
+                                        <field name="card_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="hr_attendance_terminal_list_view" model="ir.ui.view">
+            <field name="name">Terminal</field>
+            <field name="model">hr.attendance.terminal</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="device_id"/>
+                    <field name="terminal_type_id"/>
+                    <field name="terminal_no"/>
+                    <field name="ip_no"/>
+                    <field name="area_id"/>
+                    <field name="building_id"/>
+                    <field name="floor_id"/>
+                    <field name="zone_id"/>
+                    <field name="area_detail"/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</odoo>

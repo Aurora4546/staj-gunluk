@@ -1,0 +1,41 @@
+<odoo>
+
+    <record id="hr_attendance_ext_zone_auth_window" model='ir.actions.act_window'>
+        <field name="name">Zone Auth</field>
+        <field name="res_model">hr_attendance_zone_auth_report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{'search_default_group_zone_id': 1}</field>
+        <field name="domain">[('zone_owner_id','=',uid)]</field>
+    </record>
+
+
+    <record id="hr_attendance_ext_zone_auth_tree" model='ir.ui.view'>
+        <field name="name">Zone Auth Tree</field>
+        <field name="model">hr_attendance_zone_auth_report</field>
+        <field name="arch" type="xml">
+            <tree string="Zone Auth" create="false">
+                <field name="employee_id" />
+                <field name="employee_personel_id" />
+                <field name="department_code" />
+                <field name="department_name" />
+                <field name="zone_id" />
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="zone_auth_search_view">
+        <field name="name">Zone Auth</field>
+        <field name="model">hr_attendance_zone_auth_report</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter name="group_zone_id" string="Zone" context="{'group_by':'zone_id'}"/>
+            </search>
+        </field>
+    </record>
+
+
+
+
+</odoo>

@@ -1,0 +1,243 @@
+<odoo>
+    <record id="secure_zone_request_tree" model="ir.ui.view">
+        <field name="name">Secure Zone Request</field>
+        <field name="model">hr.attendance.secure.zone.request</field>
+        <!--            <field name="search_view_id" ref="role_request_filter"/>-->
+        <field name="arch" type="xml">
+            <tree delete="false" create="false">
+                <field name="record_num"/>
+                <field name="requester_image" widget="image" string=""/>
+                <field name="requester"/>
+                <field name="requester_personal_id"/>
+                <field name="requester_department"/>
+                <field name="building_id"/>
+                <field name="floor_poi_id"/>
+                <field name="project_id"/>
+                <field name="classification"/>
+                <field name="person_count"/>
+                <field name="reader"/>
+                <field name="responsible"/>
+                <field name="second_responsible"/>
+                <field name="rule_book_responsible"/>
+                <field name="state"/>
+                <field name="create_date"/>
+                <field name="detailed_reason"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="secure_zone_request_form" model="ir.ui.view">
+        <field name="name">Secure Zone Request Form</field>
+        <field name="model">hr.attendance.secure.zone.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <style>
+                    .o_form_button_save, .o_form_button_edit {
+                    display:none;
+                    }
+                    .breadcrumb, .breadcrumb-item{
+                    display:none !important;
+                    text-indent: -9999px;
+                    }
+                </style>
+                <header class="oe_read_only">
+                    <field name="state" string="State" readonly="1" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="requester"
+                                   options="{'no_create': True, 'no_open': True,'no_create_edit':True,'no_quick_create': True,}"/>
+                            <field name="building_id"
+                                   options="{'no_create': True, 'no_open': True,'no_create_edit':True,'no_quick_create': True,}"/>
+                            <field name="floor_poi_id"
+                                   domain="[('floor_id.building_id','=',building_id)]"
+                                   options="{'no_create': True, 'no_open': True,'no_create_edit':True,'no_quick_create': True,}"/>
+                            <field name="project_id"
+                                   options="{'no_create': True, 'no_open': True,'no_create_edit':True,'no_quick_create': True,}"/>
+                            <field name="classification"/>
+                            <field name="person_count"/>
+                            <field name="reader" widget="radio"/>
+                        </group>
+                        <group>
+                            <field name="responsible"
+                                   options="{'no_create': True, 'no_open': True,'no_create_edit':True,'no_quick_create': True,}"/>
+                            <field name="second_responsible"
+                                   options="{'no_create': True, 'no_open': True,'no_create_edit':True,'no_quick_create': True,}"/>
+                            <field name="rule_book_responsible"
+                                   options="{'no_create': True, 'no_open': True,'no_create_edit':True,'no_quick_create': True,}"/>
+                            <field name="detailed_reason"/>
+                        </group>
+                    </group>
+                    <group>
+                        <div class="o_notification_box mb0 alert alert-info" role="status">
+                            <i class="fa fa-info-circle fa-3x text-info float-left"
+                               style="padding-right: 15px;" role="img" aria-label="Info" title="Info"/>
+                            <h4 class="alert-heading" role="status">UYARI</h4>
+                            <hr/>
+                            <p class="mb-0">
+                                <span>
+                                    <a href="https://wiki.tai.com.tr/display/HKYM/KISITLI+ALAN+TALEP+ETME?focusedCommentId=50266976&amp;refresh=1650543408880#comment-50266976">
+                                        Kısıtlı Alan Prosedürü
+                                    </a>
+                                    <br/>
+                                    <field name="commit"/>Okudum, anladım.
+                                </span>
+                                <br/>
+                                <br/>
+                                Bu alan yetki talebinde bulunmak için değil, Kısıtlı Alan oluşturmak içindir.
+                                <br/>
+                                <br/>
+                                <strong style="float: right;">
+                                    TUSAŞ - Türk Havacılık ve Uzay Sanayii
+                                </strong>
+                            </p>
+                            <br/>
+                        </div>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="secure_zone_request_form_inherit" model="ir.ui.view">
+        <field name="name">Secure Zone Request Validation</field>
+        <field name="model">hr.attendance.secure.zone.request</field>
+        <field name="inherit_id" ref="secure_zone_request_form"/>
+        <field name="arch" type="xml">
+            <header position="inside">
+                <!--                <button name="request_validation"-->
+                <!--                        class="btn-info"-->
+                <!--                        string="Send Request"-->
+                <!--                        attrs="{'invisible': ['|','|','|',('need_validation', '!=', True),('rejected','=',True),('state','not in',['draft']),('is_creator','=',False)]}"-->
+                <!--                        type="object"-->
+                <!--                />-->
+                <button name="validate_tier"
+                        string="Validate"
+                        attrs="{'invisible': [('can_review', '=', False)]}"
+                        type="object"
+                        class="oe_inline oe_button standard-approve"
+                        icon="fa-thumbs-up"/>
+                <field name="can_open_model_admin" invisible="1"/>
+                <button name="open_model_admin_wizard"
+                        class="fa fa-random btn-outline-primary"
+                        attrs="{'invisible': [('can_open_model_admin','=',False)]}"
+                        string="Tier Admin"
+                        type="object"
+                />
+                <button name="open_revert_wizard"
+                        class="btn-outline-warning"
+                        string="Reddi Geri Al"
+                        confirm="Are you sure you want to revert the request?"
+                        attrs="{'invisible': [('can_be_revert','=',False)]}"
+                        type="object"
+                />
+                <field name="can_be_revert" invisible="1"/>
+                <button name="reject_tier"
+                        string="Reject"
+                        attrs="{'invisible': [('can_review', '=', False)]}"
+                        type="object"
+                        class="btn-icon standard-refuse"
+                        icon="fa-thumbs-down"/>
+                <button name="restart_validation"
+                        class="btn-warning"
+                        string="Cancel Request"
+                        confirm="Are you sure you want to cancel the request?"
+                        attrs="{'invisible': ['|','|',('review_ids', '=', []),('state','not in',['in_validation']),('is_creator','=',False)]}"
+                        type="object"
+                />
+            </header>
+            <header position="after">
+                <field name="need_validation" groups="base.group_no_one"/>
+                <field name="validated" groups="base.group_no_one"/>
+                <field name="rejected" groups="base.group_no_one"/>
+                <field name="is_creator" groups="base.group_no_one"/>
+                <field name="can_review" invisible="1"/>
+                <div class="alert alert-success"
+                     role="alert"
+                     attrs="{'invisible': ['|', '|', ('validated', '!=', True), ('state', 'not in', ['in_validation','rejected','approved']), ('review_ids', '=', [])]}"
+                     style="margin-bottom:0px;">
+                    <p>
+                        <i class="fa fa-thumbs-up"/>
+                        Operation has been <b>validated</b>!
+                    </p>
+                </div>
+                <div class="alert alert-danger"
+                     role="alert"
+                     attrs="{'invisible': ['|', '|', ('rejected', '!=', True), ('state', 'not in', ['in_validation','rejected','approved']), ('review_ids', '=', [])]}"
+                     style="margin-bottom:0px;">
+                    <p>
+                        <i class="fa fa-thumbs-down"/>
+                        Operation has been <b>rejected</b>.
+                    </p>
+                </div>
+            </header>
+            <sheet position="inside">
+                <field name="review_ids" widget="tier_validation"
+                       attrs="{'invisible':[('review_ids', '=', [])]}"/>
+                <field name="review_history" widget="tier_history"
+                       attrs="{'invisible':[('review_ids', '=', [])]}"/>
+            </sheet>
+        </field>
+    </record>
+
+    <record id="secure_zone_request_filter" model="ir.ui.view">
+        <field name="name">Secure Zone Request Search</field>
+        <field name="model">hr.attendance.secure.zone.request</field>
+        <field name="arch" type="xml">
+            <search string="Search Request">
+                <field name="record_num"/>
+                <field name="requester"/>
+                <field name="building_id"/>
+                <field name="floor_poi_id"/>
+                <field name="project_id"/>
+                <field name="classification"/>
+                <field name="person_count"/>
+                <field name="reader"/>
+                <field name="responsible"/>
+                <field name="second_responsible"/>
+                <field name="rule_book_responsible"/>
+                <field name="state"/>
+                <field name="create_date"/>
+                <field name="detailed_reason"/>
+                <filter name="needs_review" string="Needs my Review"
+                        domain="[('reviewer_ids','in',uid), ('state', 'not in', ['approved', 'rejected','draft'])]"
+                        help="My requests to review"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="no_edit_secure_zone_request_state_base" model="ir.rule">
+        <field name="name">No Edit in validation, approve or reject state</field>
+        <field name="model_id" ref="model_hr_attendance_secure_zone_request"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="domain_force">[('state', '!=', 'in_validation'),('state', '!=', 'approved'),('state', '!=',
+            'rejected'),('create_uid','=',user.id)]
+        </field>
+    </record>
+
+    <record id="secure_zone_request_request_action" model="ir.actions.act_window">
+        <field name="name">Secure Zone Request</field>
+        <field name="res_model">hr.attendance.secure.zone.request</field>
+        <field name="view_mode">form</field>
+        <field name="search_view_id" ref="secure_zone_request_filter"/>
+        <field name="context">{"search_default_needs_review":1,
+            'allow_bulk_save_send':True,
+            'allow_bulk_validations':True}
+        </field>
+        <field name="domain">['|','|',
+            ('create_uid','=',uid),
+            ('requester','=',uid),
+            ('reviewer_ids','=',uid)]
+        </field>
+    </record>
+
+</odoo>

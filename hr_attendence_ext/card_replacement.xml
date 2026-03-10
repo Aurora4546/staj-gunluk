@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 Ecosoft Co., Ltd. (http://ecosoft.co.th)
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="card_replacement_wizard" model="ir.ui.view">
+        <field name="name">Card Replacement Wizard</field>
+        <field name="model">card.replacement.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Comment">
+                <group>
+                    <field name="new_card_no" autofocus="autofocus" required="1"/>
+                    <field name="validity_expire_time" string="Sözleşme Bitiş Tarihi"/>
+                </group>
+                <group>
+                    <field name="replacement_reason"/>
+                </group>
+                <group>
+                    <group>
+                        <field name="card_id" readonly="1"/>
+                    </group>
+<!--                    <group>-->
+<!--                        <field name="card_type_id" readonly="1"/>-->
+<!--                    </group>-->
+                </group>
+                <group>
+                    <field name="employee_id" readonly="1"/>
+                </group>
+                <group>
+                    <field name="employee_image" widget="image" class="oe_avatar" readonly="1"
+                           modifiers="{'readonly':true}"/>
+                </group>
+                <footer>
+                    <button name="action_assign_card"
+                            string="Assign Card" type="object"
+                            class="oe_highlight"/>
+                    <button special="cancel" string="Cancel" class="oe_link"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

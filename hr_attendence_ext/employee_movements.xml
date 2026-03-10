@@ -1,0 +1,53 @@
+<odoo>
+    <data>
+
+        <record id="hr_attendance_movements_window" model='ir.actions.act_window'>
+            <field name="name">All Movements</field>
+            <field name="res_model">hr.attendance.security.move</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+
+        </record>
+
+        <record id="hr_attendance_movements_not_security_window" model='ir.actions.act_window'>
+            <field name="name">Door Enter/Exit Movements</field>
+            <field name="res_model">hr.attendance.move</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+
+        </record>
+
+        <record id="hr_attendance_movement_list_view" model="ir.ui.view">
+            <field name="name">Movement List - Raw Data</field>
+            <field name="model">hr.attendance.security.raw.moves</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <tree create="false" edit="false" delete="false">
+                    <field name="zone_id"/>
+                    <field name="terminal_id"/>
+                    <field name="tarih_utc"/>
+                    <field name="employee_id"/>
+                    <field name="card_id"/>
+                    <field name="hareket_m2o"/>
+                    <field name="gecerli"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="hr_attendance_movement_list_view_two" model="ir.ui.view">
+            <field name="name">Movement List</field>
+            <field name="model">att.kapi_gecis</field>
+            <field name="priority">11</field>
+            <field name="arch" type="xml">
+                <tree create="false" edit="false" delete="false">
+                    <field name="tarih_utc"/>
+                    <field name="zone_id"/>
+                    <field name="terminal_id"/>
+                    <field name="hareket_m2o"/>
+                    <field name="gecerli"/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</odoo>

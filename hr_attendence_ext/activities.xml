@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <record id="view_attendance_temp_card_activity" model="ir.ui.view">
+            <field name="name">hr.attendance.temp.card.activity.tree</field>
+            <field name="model">hr.attendance.temp.card.activity</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="state" invisible="1"/>
+                    <field name="image" readonly="1" widget="image" string="Resim"/>
+                    <field name="employee_id" readonly="1" string="Çalışan"/>
+                    <field name="personal_id" readonly="1" string="Sicil"/>
+                    <field name="department_id" readonly="1" string="Bölüm"/>
+                    <field name="temp_card_date" readonly="1" string="Tarih"/>
+                    <field name="summary_message" readonly="1" string="Geçici Kart Bilgilendirme"/>
+                    <button name="btn_action_approve_summary_message" class="btn btn-info"
+                            attrs="{'invisible':[('state','=','done')]}" string="Bilgilendirmeleri Okudum" type="object"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

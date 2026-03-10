@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 Ecosoft Co., Ltd. (http://ecosoft.co.th)
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="auth_per_building_assign_wizard" model="ir.ui.view">
+        <field name="name">auth.per.building.assignment.wizard form</field>
+        <field name="model">auth.per.building.assignment.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <style>
+                    .o_form_buttons_edit, .breadcrumb-item{
+                    display:none;
+                    }
+                </style>
+                <table style="width:100%;">
+                    <tr>
+                        <td style="width:33%;text-align:center;">
+                        </td>
+                        <td style="width:33%;text-align:center;">
+                            <h1 style="font-size:green;" attrs="{'invisible':[('operation','!=',False)]}">Please Select
+                                Operation
+                            </h1>
+                            <h1 style="font-size:green;" attrs="{'invisible':[('operation','!=','assign')]}">Give
+                                Permissions
+                            </h1>
+                            <h1 style="font-size:green;" attrs="{'invisible':[('operation','!=','unassign')]}">Take
+                                Permissions
+                            </h1>
+                            <field name="operation"/>
+                        </td>
+                        <td style="width:33%;text-align:center;">
+                        </td>
+                    </tr>
+                    <tr attrs="{'invisible':[('operation','=',False)]}">
+                        <td style="width:33%;text-align:center;">
+
+                        </td>
+                        <td style="width:33%;text-align:center;">
+                            <button name="action_set_operation_assign" string="Give Permission"
+                                    class="btn-success fa-2x" attrs="{'invisible':[('operation','!=','assign')]}"
+                                    style="width:200px;height:40px;font-size:1.3em;" type="object"/>
+
+                            <button name="action_set_operation_unassign" string="Take Permission"
+                                    class="btn-warning fa-2x" attrs="{'invisible':[('operation','!=','unassign')]}"
+                                    style="width:200px;height:40px;font-size:1.3em;" type="object"/>
+                        </td>
+                        <td style="width:33%;text-align:center;">
+
+                        </td>
+                    </tr>
+                </table>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="working_type"/>
+                        </group>
+                        <group>
+                            <field name="affected_count" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <field name="zone_id"/>
+                    </group>
+                    <group>
+                        <field name="building_ids" readonly="True"/>
+                    </group>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+
+        </field>
+    </record>
+
+</odoo>

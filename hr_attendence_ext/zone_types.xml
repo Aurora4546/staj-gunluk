@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="zone_type_control" model="hr.attendance.zone.type">
+            <field name="name">Kontrollü Bölge</field>
+            <field name="code">O</field>
+            <field name="security_check">True</field>
+        </record>
+        <record id="zone_type_sensitive" model="hr.attendance.zone.type">
+            <field name="name">Hassas Bölge</field>
+            <field name="code">S</field>
+            <field name="security_check">False</field>
+        </record>
+        <record id="zone_type_entrance" model="hr.attendance.zone.type">
+            <field name="name">Şirket Giriş veya Ortak Bölge</field>
+            <field name="code">G</field>
+            <field name="security_check">True</field>
+        </record>
+        <record id="zone_type_work" model="hr.attendance.zone.type">
+            <field name="name">Mesai Hareket</field>
+            <field name="code">B</field>
+            <field name="security_check">False</field>
+        </record>
+        <record id="zone_type_check" model="hr.attendance.zone.type">
+            <field name="name">Yetki Giriş</field>
+            <field name="code">Y</field>
+            <field name="security_check">True</field>
+        </record>
+
+    </data>
+</odoo>

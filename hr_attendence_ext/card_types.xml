@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="card_type_employee" model="hr.attendance.card.type">
+            <field name="name">TUSAŞ Çalışan</field>
+            <field name="color">blue-red</field>
+            <field name="temporary_color">red</field>
+        </record>
+        <record id="card_type_temporary_contractor" model="hr.attendance.card.type">
+            <field name="name">Tüm Müteahhit, Kısmi Süreli Çalışman/Danışman ve Firma Personeli</field>
+            <field name="color">yellow</field>
+            <field name="temporary_color">yellow</field>
+        </record>
+        <record id="card_type_full_contractor" model="hr.attendance.card.type">
+            <field name="name">Tam Zamanlı Çalışman Danışman</field>
+            <field name="color">red</field>
+            <field name="temporary_color">red</field>
+        </record>
+        <record id="card_type_project_contractor" model="hr.attendance.card.type">
+            <field name="name">Proje/İhtiyaç Makamı ve Diğer Kurum Personeli</field>
+            <field name="color">light-blue</field>
+            <field name="temporary_color">light-blue</field>
+        </record>
+        <record id="card_type_foreign_contractor" model="hr.attendance.card.type">
+            <field name="name">Yabancı Uyruklu Firma Personeli</field>
+            <field name="color">purple</field>
+            <field name="temporary_color">purple</field>
+        </record>
+        <record id="card_type_trainee" model="hr.attendance.card.type">
+            <field name="name">Stajyer</field>
+            <field name="color">orange</field>
+            <field name="temporary_color">orange</field>
+        </record>
+        <record id="card_type_visitor" model="hr.attendance.card.type">
+            <field name="name">Visitor</field>
+            <field name="color">blue-red</field>
+            <field name="temporary_color">blue-red</field>
+        </record>
+        <record id="card_type_other" model="hr.attendance.card.type">
+            <field name="name">Other</field>
+            <field name="color">white</field>
+            <field name="temporary_color">white</field>
+            <field name="active">False</field>
+        </record>
+    </data>
+</odoo>

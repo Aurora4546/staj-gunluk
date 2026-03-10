@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+        <record id="hr_attendance_card_assignment_log_list_view" model="ir.ui.view">
+            <field name="name">Card Assignment Logs</field>
+            <field name="model">hr.attendance.card.assignment.log</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="personal_id" string="Sicil"/>
+                    <field name="employee_id" string="Employee"/>
+                    <field name="card_no" string="Card No"/>
+                    <field name="reason" string="Reason"/>
+                    <field name="create_date" string="Assignment Date"/>
+                    <field name="create_uid" string="Assigned By"/>
+                    <field name="return_date" string="Return Date"/>
+                    <field name="write_uid" string="Returned By"
+                    attrs="{'invisible':[('return_date','=',False)]}"/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</odoo>

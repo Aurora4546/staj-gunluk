@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- just for migration -->
+<odoo>
+    <data noupdate="1">
+        <record id="card_type_other" model="hr.attendance.card.type">
+            <field name="name">Other</field>
+            <field name="color">white</field>
+            <field name="temporary_color">white</field>
+            <field name="active">False</field>
+        </record>
+    </data>
+</odoo>

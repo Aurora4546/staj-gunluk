@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="view_res_users_form_inherit" model="ir.ui.view">
+        <field name="name">res.users.form.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Card Authorizations" group_ids="hr_attendance_ext.group_attendance_one">
+                    <group string="Area and Zones">
+                        <field name="area_id">
+                            <tree open="false">
+                                <field name="name"/>
+                                <field name="location_id"/>
+                                <field name="area_type_id"/>
+                                <field name="is_common_area"/>
+                                <field name="building_id"/>
+                            </tree>
+
+                        </field>
+                        <field name="common_area_zones">
+                            <tree open="false">
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="zone_type_id"/>
+                                <field name="area_id"/>
+                                <field name="building_id" attrs="{'invisible':[('building_id','=',False)]}"/>
+                                <field name="floor_id" attrs="{'invisible':[('building_id','=',False)]}"/>
+                            </tree>
+                        </field>
+                        <field name="zone_id">
+                            <tree open="false">
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="zone_type_id"/>
+                                <field name="area_id"/>
+                                <field name="building_id" attrs="{'invisible':[('building_id','=',False)]}"/>
+                                <field name="floor_id" attrs="{'invisible':[('building_id','=',False)]}"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

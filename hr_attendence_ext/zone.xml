@@ -1,0 +1,132 @@
+<odoo>
+    <data>
+        <record id="hr_attendance_zone_type_form_view" model="ir.ui.view">
+            <field name="name">Zone Types</field>
+            <field name="model">hr.attendance.zone.type</field>
+            <field name="arch" type="xml">
+                <form string="Zone Type Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="security_check"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="hr_attendance_zone_type_list_view" model="ir.ui.view">
+            <field name="name">Zone Types</field>
+            <field name="model">hr.attendance.zone.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="security_check"/>
+                </tree>
+            </field>
+        </record>
+        <record id="hr_attendance_zone_tag_form_view" model="ir.ui.view">
+            <field name="name">Bölge Etiketis</field>
+            <field name="model">hr.attendance.zone.tag</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <notebook>
+                            <page string="Bölgeler">
+                                <field name="zone_ids"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="hr_attendance_zone_tag_list_view" model="ir.ui.view">
+            <field name="name">Bölge Etiketis</field>
+            <field name="model">hr.attendance.zone.tag</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="zone_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="hr_attendance_zone_form_view" model="ir.ui.view">
+            <field name="name">Zones</field>
+            <field name="model">hr.attendance.zone</field>
+            <field name="arch" type="xml">
+                <form string="Zone Form">
+                    <sheet>
+                        <field name="has_activity" invisible="1"/>
+                        <div style="float:right;margin-left:20px">
+                            <button name="activity_done" type="object"
+                                    class="btn btn-success" icon="fa-check" string="Doğrula"
+                                    style="font-size:1.6em;margin-right:5px;"
+                                    attrs="{'invisible':[('has_activity','!=',True)]}"/>
+                        </div>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" groups="hr_attendance_ext.group_attendance_one"
+                                    class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button"
+                                       options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="zone_type_id"/>
+                                <field name="zone_tag_ids" widget="many2many_tags"/>
+                            </group>
+                            <group>
+                                <field name="area_id"
+                                       options="{'no_create': True,'no_open': True,'no_create_edit': True,'no_quick_create': True}"/>
+                                <field name="building_id"
+                                       options="{'no_create': True, 'no_open': True,'no_create_edit':True,'no_quick_create': True,}"/>
+                                <field name="floor_id" attrs="{'invisible':[('building_id','=',False)]}"
+                                       context="{'building_id':building_id}"
+                                       domain="[('building_id','in',building_id)]"
+                                       options="{'no_create': True, 'no_open': True,'no_create_edit':True,'no_quick_create': True,}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Terminals">
+                                <field name="terminal_ids"/>
+                            </page>
+                            <page string="Zone Auth Owners">
+                                <field name="zone_auth_owner"/>
+                            </page>
+                            <page string="Auths">
+                                <field name="auth_ids"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="hr_attendance_zone_list_view" model="ir.ui.view">
+            <field name="name">Zone List</field>
+            <field name="model">hr.attendance.zone</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="zone_type_id"/>
+                    <field name="area_id"/>
+                    <field name="building_id" attrs="{'invisible':[('building_id','=',False)]}"/>
+                    <field name="floor_id" attrs="{'invisible':[('building_id','=',False)]}"/>
+                    <field name="has_activity" invisible="1"/>
+                    <button name="activity_done" type="object"
+                            class="btn btn-success" string="Doğrula"
+                            attrs="{'invisible':[('has_activity','!=',True)]}"
+                    />
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

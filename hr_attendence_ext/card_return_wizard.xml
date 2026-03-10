@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 Ecosoft Co., Ltd. (http://ecosoft.co.th)
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="card_return_wizard" model="ir.ui.view">
+        <field name="name">Card Return Wizard</field>
+        <field name="model">card.return.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Comment">
+                <group>
+
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="width:50%;">
+                                <group>
+                                    <field name="card_id" readonly="1"/>
+                                    <field name="employee_id" readonly="1"/>
+                                    <field name="card_type" readonly="1"/>
+                                    <field name="temporary" readonly="1"/>
+                                    <field name="shared" invisible="1"/>
+                                    <field name="employee_image" widget="image" class="oe_avatar" readonly="1"
+                                           modifiers="{'readonly':true}"/>
+                                </group>
+                            </td>
+                            <td style="text-align:center;">
+
+                                <field name="card_color" invisible="1"/>
+                                <field name="card_type_name" invisible="1"/>
+
+                                <img src="/hr_attendance_ext/static/src/img/red_blue_card.png" alt="blue_red"
+                                     attrs="{'invisible':[('card_color','!=','blue-red')]}"/>
+                                <img src="/hr_attendance_ext/static/src/img/red_card.png" alt="red"
+                                     attrs="{'invisible':[('card_color','!=','red')]}"/>
+                                <img src="/hr_attendance_ext/static/src/img/orange_card.png" alt="orange"
+                                     attrs="{'invisible':[('card_color','!=','orange')]}"/>
+                                <img src="/hr_attendance_ext/static/src/img/yellow_card.png" alt="yellow"
+                                     attrs="{'invisible':[('card_color','!=','yellow')]}"/>
+                                <img src="/hr_attendance_ext/static/src/img/purple_card.png" alt="purple"
+                                     attrs="{'invisible':[('card_color','!=','purple')]}"/>
+                                <img src="/hr_attendance_ext/static/src/img/light_blue_card.png" alt="light-blue"
+                                     attrs="{'invisible':[('card_color','!=','light-blue')]}"/>
+                            </td>
+
+                        </tr>
+                    </table>
+                </group>
+                <field name="card_status" invisible="1"/>
+                <group class="center" attrs="{'invisible':['|',('temporary','!=',True),('card_status', '=', False)]}">
+                    <div t-name="notification-box">
+                        <div class="o_notification_box mb0 alert alert-dismissible alert-danger" role="alertdialog">
+                            <span style="font-size:20px;color:red">Kişinin Asıl Kartını(varsa) Aktif Et</span>
+                            <hr/>
+                            <div>
+                                <table>
+                                    <tr>
+                                        <!--                                                <td> <field name ="confirm"  attrs="{'readonly': [('state', '=', 'approved')]}"/></td>-->
+                                        <td>
+                                            <field name="activate_old_card"/>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <strong>Bu seçimin seçili olması durumunda kişinin en son kullandığı
+                                                    kartın aktif hale getirilmesini sağlar.
+                                                    <ul>
+                                                        <li>Bu kart daha önce
+                                                            <field name="replacement_reason" readonly="1"/>
+                                                            sebebiyle kullanıcıya teslim edilmiştir.
+                                                        </li>
+                                                        <li>Kayıp/Çalıntı Durumlarında Eski Kart Aktif Edilmemelidir.
+                                                        </li>
+                                                    </ul>
+                                                </strong>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </group>
+                <footer>
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="width:33%;text-align:center;"
+                                attrs="{'invisible':[('temporary','=',False),('shared','=',False)]}">
+                                <button name="action_return_card" string="Return" type="object"
+                                        class="btn-primary icon-3x" icon="fa-undo"
+                                        style="width:200px;height:100px;font-size:2em;"
+                                />
+                            </td>
+                            <td style="width:33%;text-align:center;" attrs="{'invisible':[('temporary','=',True)]}">
+                                <button name="action_deactivate_card"
+                                        string="Deactivate" type="object"
+                                        class="btn-danger fa-2x" icon="fa-ban"
+                                        style="width:200px;height:100px;font-size:1.6em;"/>
+                            </td>
+                            <td style="width:33%;text-align:center;">
+                                <button special="cancel" string="Cancel" class="btn-secondary fa-2x"
+                                        style="width:200px;height:100px;font-size:1.6em;"/>
+                            </td>
+                        </tr>
+                    </table>
+
+
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

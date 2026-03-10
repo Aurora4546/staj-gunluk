@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="employee_tree" model="ir.ui.view">
+        <field name="name">auth.per.employee.tree.wizard tree</field>
+        <field name="model">hr.employee</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="personel_id"/>
+                <field name="name"/>
+                <field name="department_id"/>
+                <field name="work_email"/>
+                <field name="work_phone"/>
+                <field name="work_mobile_phone"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="auth_per_employee_assign_wizard" model="ir.ui.view">
+        <field name="name">auth.per.employee.assignment.wizard form</field>
+        <field name="model">auth.per.employee.assignment.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+
+            <form string="Zone Authorization">
+                <style>
+                    .o_form_buttons_edit, .breadcrumb-item{
+                    display:none;
+                    }
+                </style>
+                <field name="form_mode" invisible="1"/>
+                <field name="security_check" invisible="1"/>
+                <table style="width:100%;">
+                    <tr>
+                        <td style="width:33%;text-align:center;">
+                        </td>
+                        <td style="width:33%;text-align:center;">
+                            <h1 style="font-size:green;" attrs="{'invisible':[('operation','!=',False)]}">Please Select
+                                Operation
+                            </h1>
+                            <h1 style="font-size:green;" attrs="{'invisible':[('operation','!=','assign')]}">Give
+                                Permissions
+                            </h1>
+                            <h1 style="font-size:green;" attrs="{'invisible':[('operation','!=','unassign')]}">Take
+                                Permissions
+                            </h1>
+                            <field name="operation"/>
+                        </td>
+                        <td style="width:33%;text-align:center;">
+                        </td>
+                    </tr>
+                    <tr attrs="{'invisible':[('operation','=',False)]}">
+                        <td style="width:33%;text-align:center;">
+
+                        </td>
+                        <td style="width:33%;text-align:center;">
+                            <button name="action_set_operation_assign" string="Give Permission"
+                                    class="btn-success fa-2x" attrs="{'invisible':[('operation','!=','assign')]}"
+                                    style="width:200px;height:40px;font-size:1.3em;" type="object"/>
+
+                            <button name="action_set_operation_unassign" string="Take Permission"
+                                    class="btn-warning fa-2x" attrs="{'invisible':[('operation','!=','unassign')]}"
+                                    style="width:200px;height:40px;font-size:1.3em;" type="object"/>
+                        </td>
+                        <td style="width:33%;text-align:center;">
+
+                        </td>
+                    </tr>
+                </table>
+                <sheet>
+                    <group attrs="{'invisible':[('form_mode','=','security_manager')]}">
+
+                        <group style="width:65%;">
+                            <field name="zone_id"
+                                   options="{'no_create': True, 'no_open': True,'no_create_edit':True,'no_quick_create': True,}"/>
+                            <br/>
+                            <!--                            <div colspan="2" style="color:orange;">Kontrollü bölge yetkilendirilmelerinde otomatik-->
+                            <!--                                olarak Programlar ve Personel-->
+                            <!--                                Güvenlik Şefliği onayına gönderilecektir.-->
+                            <!--                            </div>-->
+                            <div class="o_notification_box mb0 alert alert-dismissible alert-info" role="alertdialog"
+                                 colspan="2"
+                                 attrs="{'invisible': ['|',('zone_id', '=', False),('security_check', '=', False)]}">
+                                <i class="fa fa-info-circle fa-3x text-info float-left"
+                                   style="padding-right: 15px;" role="img" aria-label="Info"
+                                   title="Info"/>
+                                <h4 class="alert-heading" role="status">Information</h4>
+                                <hr/>
+                                If a restricted area is selected, the form will be converted into authorization request
+                                and will be sent to Programs &amp; Personal Security Department.
+                            </div>
+                        </group>
+                        <group style="text-align:center;width:30%;" attrs="{'invisible': [('zone_id', '!=', False)]}">
+                            <h1 style="color:red;">Bölge ve Kişi Seçiniz</h1>
+                        </group>
+                        <group style="text-align:right;width:30%;"
+                               attrs="{'invisible': ['|',('zone_id', '=', False),('security_check', '=', False)]}">
+                            <img src="/hr_attendance_ext/static/src/img/kontrollubolge.png" alt="Kontrollü Bölge"
+                                 style="width:180px;height:129px;"/>
+                        </group>
+                        <group style="text-align:right;width:30%;"
+                               attrs="{'invisible': ['|',('zone_id', '=', False),('security_check', '=', True)]}">
+                            <img src="/hr_attendance_ext/static/src/img/hassasbolge.png" alt="Hassas Bölge"
+                                 style="width:180px;height:129px;"/>
+                        </group>
+
+                    </group>
+                    <group attrs="{'invisible':[('form_mode','=','tusas_manager')]}">
+                        <field name="area_ids"/>
+                    </group>
+                    <group attrs="{'invisible':[('form_mode','=','tusas_manager')]}">
+                        <field name="zone_ids"/>
+                    </group>
+                    <group>
+                        <field name="affected_count" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="employee_ids" attrs="{'readonly': [('operation', '=', False)]}">
+                            <tree>
+                                <field name="personel_id"/>
+                                <field name="name"/>
+                                <field name="department_id"/>
+                                <field name="work_email"/>
+                                <field name="work_phone"/>
+                                <field name="work_mobile_phone"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <group>
+                        <field name="protected_employee_ids" readonly="1">
+                            <tree>
+                                <field name="personel_id"/>
+                                <field name="name"/>
+                                <field name="department_id"/>
+                                <field name="work_email"/>
+                                <field name="work_phone"/>
+                                <field name="work_mobile_phone"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+
+        </field>
+    </record>
+
+</odoo>

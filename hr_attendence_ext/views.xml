@@ -1,0 +1,411 @@
+<odoo>
+    <data>
+
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="hr_attendance_ext.action_window_area">
+            <field name="name">Areas</field>
+            <field name="res_model">hr.attendance.area</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record model="ir.actions.act_window" id="hr_attendance_ext.action_window_zone">
+            <field name="name">Zones</field>
+            <field name="res_model">hr.attendance.zone</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="hr_attendance_ext.action_window_terminals">
+            <field name="name">Terminals</field>
+            <field name="res_model">hr.attendance.terminal</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="hr_attendance_ext.action_window_cards_group_eight">
+            <field name="name">Cards</field>
+            <field name="res_model">hr.attendance.card</field>
+            <field name="view_mode">kanban</field>
+            <field name="context">
+                {'kanban_view_ref':'hr_attendance_ext.hr_attendance_card_kanban_view_readonly_eight'}
+            </field>
+        </record>
+
+        <record id="hr_attendance_ext.action_window_cards" model="ir.actions.server">
+            <field name="name">Cards</field>
+            <field name="model_id" ref="model_hr_attendance_card"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = model.default_visitor_form()
+            </field>
+        </record>
+
+        <!--        <record model="ir.actions.act_window" id="hr_attendance_ext.action_window_visitor_cards">-->
+        <!--            <field name="name">Visitor Cards</field>-->
+        <!--            <field name="res_model">hr.attendance.card</field>-->
+        <!--            <field name="view_mode">kanban,tree,form</field>-->
+        <!--            <field name="domain">[('card_type', '=', 7 )]</field>-->
+        <!--            <field name="context">{'form_view_ref':'hr_attendance_ext.hr_attendance_visitor_card_form'}</field>-->
+        <!--        </record>-->
+
+        <record id="hr_attendance_ext.action_window_visitor_cards" model="ir.actions.server">
+            <field name="name">Visitor Cards</field>
+            <field name="model_id" ref="model_hr_attendance_card"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = model.default_visitor_form('only_visitor')
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="hr_attendance_ext.action_employees">
+            <field name="name">TAI ID Cards</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_id" ref="hr_attendance_ext.hr_attendance_employee_kanban_view"/>
+            <field name="view_mode">kanban</field>
+            <field name="search_view_id" ref="hr_attendance_employee_attendance_filter"/>
+        </record>
+        <!--        <record model="ir.actions.act_window" id="hr_attendance_ext.action_window_auth">-->
+        <!--            <field name="name">Card Authorizations</field>-->
+        <!--            <field name="res_model">hr.attendance.card.authorization</field>-->
+        <!--            <field name="view_mode">tree,form</field>-->
+        <!--        </record>-->
+        <!--        <record model="ir.actions.act_window" id="hr_attendance_ext.action_window_auth_request">-->
+        <!--      <field name="name">Card Authorization Request</field>-->
+        <!--      <field name="res_model">hr.attendance.card.authorization.request</field>-->
+        <!--      <field name="view_mode">tree,form</field>-->
+        <!--    </record>-->
+
+        <record model="ir.actions.act_window" id="hr_attendance_ext.action_window_area_type">
+            <field name="name">Area Types</field>
+            <field name="res_model">hr.attendance.area.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record model="ir.actions.act_window" id="hr_attendance_ext.action_window_zone_type">
+            <field name="name">Zone Types</field>
+            <field name="res_model">hr.attendance.zone.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record model="ir.actions.act_window" id="hr_attendance_ext.action_window_zone_tag">
+            <field name="name">Bölge Etiketi</field>
+            <field name="res_model">hr.attendance.zone.tag</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record model="ir.actions.act_window" id="hr_attendance_ext.action_window_terminal_type">
+            <field name="name">Terminal types</field>
+            <field name="res_model">hr.attendance.terminal.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record model="ir.actions.act_window" id="hr_attendance_ext.action_window_card_type">
+            <field name="name">Card Types</field>
+            <field name="res_model">hr.attendance.card.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record model="ir.actions.act_window" id="hr_attendance_ext.action_card_assignment_log">
+            <field name="name">Card Assignment Logs</field>
+            <field name="res_model">hr.attendance.card.assignment.log</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="hr_attendance_ext.action_card_assignment_log_last_3_month">
+            <field name="name">Son 3 Ayda 3'den Fazla Kart Unutanlar</field>
+            <field name="res_model">hr.attendance.card.assignment.log</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">
+                [("be_in_report_f","=",True)]
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="hr_attendance_ext.action_card_assignment_log_last_1_year">
+            <field name="name">Son 1 Yılda 2'den Fazla Kart Kaybedenler</field>
+            <field name="res_model">hr.attendance.card.assignment.log</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[("be_in_report_m","=",True)]
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="hr_attendance_ext.action_card_assignment_log">
+            <field name="name">Card Assignment Logs</field>
+            <field name="res_model">hr.attendance.card.assignment.log</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="auth_per_employee_action">
+            <field name="name">auth.per.employee.assignment.wizard action</field>
+            <field name="res_model">auth.per.employee.assignment.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="context">{'default_form_mode':'security_manager'}</field>
+        </record>
+        <record model="ir.actions.act_window" id="auth_copy_wizard_action">
+            <field name="name">auth.copy.wizard action</field>
+            <field name="res_model">auth.copy.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="context">{'default_form_mode':'security_manager'}</field>
+        </record>
+        <record model="ir.actions.act_window" id="auth_per_employee_action_tusas_manager">
+            <field name="name">auth.per.employee.assignment.wizard action</field>
+            <field name="res_model">auth.per.employee.assignment.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="context">{'default_form_mode':'tusas_manager'}</field>
+        </record>
+        <record model="ir.actions.act_window" id="auth_per_employee_unassign_tusas_manager">
+            <field name="name">auth.per.employee.assignment.wizard action</field>
+            <field name="res_model">auth.per.employee.assignment.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="context">{'default_form_mode':'tusas_manager','default_operation':'unassign'}</field>
+        </record>
+        <record model="ir.actions.act_window" id="auth_per_department_action">
+            <field name="name">auth.per.department.assignment.wizard action</field>
+            <field name="res_model">auth.per.department.assignment.wizard</field>
+            <field name="view_mode">form</field>
+        </record>
+        <record model="ir.actions.act_window" id="auth_per_building_action">
+            <field name="name">auth.per.building.assignment.wizard action</field>
+            <field name="res_model">auth.per.building.assignment.wizard</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="passive_card_report_action1">
+            <field name="name">Pasif Kart Kayıtları</field>
+            <field name="res_model">hr.attendance.card</field>
+            <field name="view_mode">tree</field>
+            <field name="context">{
+                'search_default_group_unlink_reason': 1,
+                }
+            </field>
+            <field name="domain">[('active','=',False)]</field>
+        </record>
+
+        <record id="role_request_list_action" model="ir.actions.act_window">
+            <field name="name">Authorization Request List</field>
+            <field name="res_model">hr.attendance.card.auth.request</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','!=','draft'),
+                '|',('zone_users.user_id', 'child_of', uid),
+                ('create_uid','=',uid)]
+            </field>
+        </record>
+
+        <record id="secure_zone_request_list_action" model="ir.actions.act_window">
+            <field name="name">Secure Zone Request List</field>
+            <field name="res_model">hr.attendance.secure.zone.request</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','!=','draft'),
+                '|',('requester.user_id', 'child_of', uid),
+                ('create_uid','=',uid)]
+            </field>
+        </record>
+
+        <record id="card_replacement_request_list_action" model="ir.actions.act_window">
+            <field name="name">Card Replacement Request List</field>
+            <field name="res_model">hr.attendance.card.replacement.request</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','!=','draft'),
+                '|',('employee_id.user_id', 'child_of', uid),
+                ('create_uid','=',uid)]
+            </field>
+        </record>
+
+        <!-- integration actions -->
+
+        <record model="ir.actions.act_window" id="hr_attendance_ext.action_move_types">
+            <field name="name">Move Types</field>
+            <field name="res_model">resource.move_type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="hr_attendance_ext.action_fdw_settings_manager">
+            <field name="name">Fdw Settings</field>
+            <field name="res_model">hr.attendance.fdw_settings</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="hr_attendance_ext.action_window_auth" model="ir.actions.server">
+            <field name="name">Card Authorizations</field>
+            <field name="model_id" ref="model_hr_attendance_card_authorization"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = model.open_card_authorization_act()
+            </field>
+        </record>
+
+
+        <!-- Top menu item -->
+
+        <menuitem name="Employee Tracking" id="hr_attendance_ext.menu_root"
+                  sequence="90" groups="hr_attendance_ext.group_attendance_two"
+                  web_icon="hr_attendance_ext,static/description/icon.png"/>
+
+        <!-- menu categories -->
+
+        <menuitem name="Kayıt Oluşturma"
+                  id="zone_auth_requests_menu1"
+                  sequence="4"
+                  parent="hr_attendance_ext.menu_root"
+                  action="hr_attendance_request_menu_wizard_action"/>
+
+        <menuitem name="Kayıtlar" id="hr_attendance_ext.menu_64564" parent="hr_attendance_ext.menu_root"
+                  sequence="5"/>
+
+        <menuitem name="Definitions" id="hr_attendance_ext.menu_1"
+                  parent="hr_attendance_ext.menu_root"
+                  groups="hr_attendance_ext.group_attendance_one,hr_attendance_ext.group_attendance_three,hr_attendance_ext.group_attendance_five"
+                  sequence="10"/>
+
+        <menuitem name="Raporlar" id="hr_attendance_ext.menu_movements1" parent="hr_attendance_ext.menu_root"
+                  sequence="15"/>
+
+        <menuitem name="Yönetim" id="hr_attendance_ext.menu_management" parent="hr_attendance_ext.menu_root"
+                  sequence="20"/>
+
+        <menuitem name="TAI ID Cards" id="hr_attendance_ext.menu_tai_id_cards"
+                  parent="hr_attendance_ext.menu_management"
+                  groups="hr_attendance_ext.group_attendance_one,hr_attendance_ext.group_attendance_five,hr_attendance_ext.group_attendance_thirteen"
+                  sequence="17" action="hr_attendance_ext.action_employees"/>
+
+
+        <menuitem name="Yetki Kayıtları" id="hr_attendance_ext.menu_auth_list_sdf_4"
+                  parent="hr_attendance_ext.menu_64564"
+                  action="hr_attendance_ext.action_window_auth" sequence="5"/>
+        <menuitem
+                id="hr_attendance_ext_my_role_requests12"
+                name="Yetki Talep Kayıtları"
+                parent="hr_attendance_ext.menu_64564"
+                sequence="21"
+                action="hr_attendance_ext.role_request_list_action"/>
+
+        <menuitem
+                id="hr_attendance_ext_my_role_requests2"
+                name="Kontrollü Bölge Talep Kayıtları"
+                parent="hr_attendance_ext.menu_64564"
+                sequence="21"
+                action="hr_attendance_ext.secure_zone_request_list_action"/>
+
+        <menuitem
+                id="hr_attendance_ext_my_role_requests3"
+                name="Kart Değişim Taleplerim"
+                parent="hr_attendance_ext.menu_64564"
+                sequence="21"
+                action="hr_attendance_ext.card_replacement_request_list_action"/>
+
+        <menuitem name="Card Assignment Log" id="hr_attendance_ext.menu_reports"
+                  parent="hr_attendance_ext.menu_management"
+                  groups="hr_attendance_ext.group_attendance_one,hr_attendance_ext.group_attendance_five"
+                  sequence="30"/>
+
+
+        <menuitem name="Bulk Operations" id="hr_attendance_ext.menu_bulks"
+                  parent="hr_attendance_ext.menu_management"
+                  groups="hr_attendance_ext.group_attendance_one,hr_attendance_ext.group_attendance_four"
+                  sequence="50"/>
+        <menuitem name="Settings" id="hr_attendance_ext.menu_2"
+                  parent="hr_attendance_ext.menu_management"
+                  groups="hr_attendance_ext.group_attendance_one,hr_attendance_ext.group_attendance_three"
+                  sequence="60"/>
+
+
+        <!-- actions -->
+
+        <menuitem name="Areas" id="hr_attendance_ext.menu_ares_list" parent="hr_attendance_ext.menu_1"
+                  groups="hr_attendance_ext.group_attendance_one,hr_attendance_ext.group_attendance_three"
+                  action="hr_attendance_ext.action_window_area" sequence="20"/>
+        <menuitem name="Zones" id="hr_attendance_ext.menu_zones_list" parent="hr_attendance_ext.menu_1"
+                  groups="hr_attendance_ext.group_attendance_one,hr_attendance_ext.group_attendance_three"
+                  action="hr_attendance_ext.action_window_zone" sequence="30"/>
+        <menuitem name="Terminals" id="hr_attendance_ext.menu_terminals_list" parent="hr_attendance_ext.menu_1"
+                  groups="hr_attendance_ext.group_attendance_one,hr_attendance_ext.group_attendance_three"
+                  action="hr_attendance_ext.action_window_terminals" sequence="40"/>
+
+        <menuitem name="Cards" id="hr_attendance_ext.menu_cards_list" parent="hr_attendance_ext.menu_1"
+                  groups="hr_attendance_ext.group_attendance_one,hr_attendance_ext.group_attendance_five"
+                  action="hr_attendance_ext.action_window_cards" sequence="50"/>
+
+        <menuitem name="Cards" id="hr_attendance_ext.menu_cards_list_group_eight"
+                  parent="hr_attendance_ext.menu_management"
+                  groups="hr_attendance_ext.group_attendance_eight,hr_attendance_ext.group_attendance_nine"
+                  action="hr_attendance_ext.action_window_cards_group_eight" sequence="51"/>
+
+        <menuitem name="Visitor Cards" id="hr_attendance_ext.menu_visitor_cards_list" parent="hr_attendance_ext.menu_1"
+                  groups="hr_attendance_ext.group_attendance_one,hr_attendance_ext.group_attendance_five"
+                  action="hr_attendance_ext.action_window_visitor_cards" sequence="55"/>
+
+
+        <menuitem name="Card Assignment Log" id="hr_attendance_ext.menu_card_assignment_log"
+                  parent="hr_attendance_ext.menu_reports"
+                  groups="hr_attendance_ext.group_attendance_one,hr_attendance_ext.group_attendance_five"
+                  action="hr_attendance_ext.action_card_assignment_log" sequence="10"/>
+
+        <menuitem name="Son 3 Ayda Geçici Kart Alanlar" id="hr_attendance_ext.menu_card_assignment_log_3"
+                  parent="hr_attendance_ext.menu_reports"
+                  groups="hr_attendance_ext.group_attendance_one,hr_attendance_ext.group_attendance_five"
+                  action="hr_attendance_ext.action_card_assignment_log_last_3_month" sequence="10"/>
+        <menuitem name="Son 1 Yılda Kart Kaybedenler" id="hr_attendance_ext.menu_card_assignment_log_1"
+                  parent="hr_attendance_ext.menu_reports"
+                  groups="hr_attendance_ext.group_attendance_one,hr_attendance_ext.group_attendance_five"
+                  action="hr_attendance_ext.action_card_assignment_log_last_1_year" sequence="10"/>
+
+        <menuitem name="Employee Zone Auths" id="hr_attendance_ext.menu_auth_employee_bulk_wizards"
+                  parent="hr_attendance_ext.menu_bulks"
+                  groups="hr_attendance_ext.group_attendance_one,hr_attendance_ext.group_attendance_four"
+                  action="hr_attendance_ext.auth_per_employee_action" sequence="10"/>
+        <menuitem name="Copy Zone Auths" id="hr_attendance_ext.menu_auth_copy_wizards"
+                  parent="hr_attendance_ext.menu_bulks"
+                  groups="hr_attendance_ext.group_attendance_one,hr_attendance_ext.group_attendance_four"
+                  action="hr_attendance_ext.auth_copy_wizard_action" sequence="30"/>
+
+        <menuitem name="Bulk Card Replacement" id="hr_attendance_ext.menu_bulk_card_replacement"
+                  parent="hr_attendance_ext.menu_bulks"
+                  groups="hr_attendance_ext.group_attendance_one"
+                  action="hr_attendance_ext.attendance_bulk_card_replacement_window" sequence="35"/>
+
+        <menuitem name="Department Zone Auths" id="hr_attendance_ext.menu_auth_department_bulk_wizards"
+                  parent="hr_attendance_ext.menu_bulks"
+                  groups="hr_attendance_ext.group_attendance_one,hr_attendance_ext.group_attendance_four"
+                  action="hr_attendance_ext.auth_per_department_action" sequence="10"/>
+        <menuitem name="Building Zone Auths" id="hr_attendance_ext.menu_auth_building_bulk_wizards"
+                  parent="hr_attendance_ext.menu_bulks"
+                  groups="hr_attendance_ext.group_attendance_one,hr_attendance_ext.group_attendance_four"
+                  action="hr_attendance_ext.auth_per_building_action" sequence="15"/>
+
+
+        <!-- Integration Section -->
+        <menuitem name="All Moves" id="hr_attendance_ext.menu_all_moves"
+                  parent="hr_attendance_ext.menu_movements1"
+                  groups="hr_attendance_ext.group_attendance_one"
+                  action="hr_attendance_ext.hr_attendance_movements_window" sequence="99"/>
+        <menuitem name="Door Enter/Exit Moves" id="hr_attendance_ext.menu_not_all_moves"
+                  parent="hr_attendance_ext.menu_movements1"
+                  groups="hr_attendance_ext.group_attendance_one"
+                  action="hr_attendance_ext.hr_attendance_movements_not_security_window" sequence="88"/>
+        <menuitem name="Pasif Kart Raporları" id="hr_attendance_ext.passive_card_report_menu"
+                  parent="hr_attendance_ext.menu_movements1"
+                  groups="hr_attendance_ext.group_attendance_one"
+                  action="hr_attendance_ext.passive_card_report_action1" sequence="77"/>
+
+        <menuitem name="Zone Types" id="hr_attendance_ext.menu_zone_type_list" parent="hr_attendance_ext.menu_2"
+                  groups="hr_attendance_ext.group_attendance_one,hr_attendance_ext.group_attendance_three"
+                  action="hr_attendance_ext.action_window_zone_type"/>
+        <menuitem name="Bölge Etiketleri" id="hr_attendance_ext.menu_zone_tag_list" parent="hr_attendance_ext.menu_2"
+                  groups="hr_attendance_ext.group_attendance_one,hr_attendance_ext.group_attendance_three"
+                  action="hr_attendance_ext.action_window_zone_tag"/>
+        <menuitem name="Terminal Types" id="hr_attendance_ext.menu_terminal_type_list" parent="hr_attendance_ext.menu_2"
+                  groups="hr_attendance_ext.group_attendance_one,hr_attendance_ext.group_attendance_three"
+                  action="hr_attendance_ext.action_window_terminal_type"/>
+        <menuitem name="Card Types" id="hr_attendance_ext.menu_card_type_list" parent="hr_attendance_ext.menu_2"
+                  groups="hr_attendance_ext.group_attendance_one,hr_attendance_ext.group_attendance_six"
+                  action="hr_attendance_ext.action_window_card_type"/>
+        <menuitem name="Move Types" id="hr_attendance_ext.menu_move_type_list" parent="hr_attendance_ext.menu_2"
+                  groups="base.group_system"
+                  action="hr_attendance_ext.action_move_types"/>
+        <menuitem name="FDW Settings" id="hr_attendance_ext.menu_fdw_settings" parent="hr_attendance_ext.menu_2"
+                  groups="base.group_system"
+                  action="hr_attendance_ext.action_fdw_settings_manager"/>
+
+        <menuitem name="Zone-Auth Report" id="hr_attendance_ext.menu_auth_z" parent="hr_attendance_ext.menu_64564"
+                  groups="hr_attendance_ext.group_attendance_seven"
+                  sequence="100"
+                  action="hr_attendance_ext_zone_auth_window"/>
+
+        <menuitem name="View Authorizations" id="hr_attendance_ext.menu_auth_list"
+                  parent="hr_attendance_ext.menu_movements1"
+                  groups="hr_attendance_ext.group_attendance_two"
+                  action="hr_attendance_ext.action_window_auth" sequence="50"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,111 @@
+<odoo>
+    <data>
+        <template id="mail_notification_light">
+            <table border="0" cellpadding="0" cellspacing="0"
+                   style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590"
+                               style="padding: 24px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%"
+                                               style="background-color: white; padding: 0; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle" align="center" style="width:33%;">
+                                                    <span style="font-size: 10px;">
+                                                        <h2>
+                                                            <span style="color:#0470c9;font-family:Verdana, Arial,sans-serif;">H&#219;MA - Bölge Talepleri Bilgilendirme</span>
+                                                        </h2>
+                                                    </span>
+
+                                                    <span style="font-size: 20px; font-weight: bold;">
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" style="text-align:center;">
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:4px 0px 4px 0px;"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="font-size:15px;">Sayın <span style="font-size:15px;" t-esc="parent_name"/>,
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="font-size:15px;"><span t-esc="mail_intro"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="font-size:15px;"><span t-esc="mail_intro_description"/>
+                                    </td>
+                                </tr>
+                                <tr t-if="security_certificate_required">
+                                    <td style="min-width:590px;">
+                                        Kontrollü Bölgeler, Savunma Sanayi Güvenliği mevzuatı gereği oluşturulmuş gizlilik dereceli faaliyetlerin yürütüldüğü alanlar olup;
+                                        <ol>
+                                                <li>Bu alanda ziyaretçi kabul etmeyiniz, çalışılan iş dışında başka bir işle uğraşmayınız, yüksek sesle konuşmayınız.</li>
+                                                <li>Acil durumlarda, acil çıkış kapılarını ve tahliye koridorlarını kullanınız, diğer personeli uyarınız ve güvenlik personeline bilgi veriniz. Çalıştığınız bölgede varsa girilmez işaretli yerlere girmeyiniz.</li>
+                                                <li>Çalışma esnasında kapıların kapalı olduğundan emin olunuz, beklenmedik bir durum olması halinde derhal Güvenlik Personeline / Kurumsal Güvenlik Birimine / Programlar ve Personel Güvenlik Birimine (tel: 666/2666) bilgi veriniz.</li>
+                                                <li>Bölgede bulunan form, doküman, yazılı bilgi ve/veya evrakları izinsiz olarak bölge dışına çıkarmayınız.</li>
+                                                <li>Özel ve üzeri gizlilik dereceli bilgi ve belgelerin fotokopi işlemlerini idari amirlerin onayını alarak kontrollü ve izlenebilir şekilde, Fotokopi Merkezinde yapınız.</li>
+                                                <li>Gizlilik derecesi (Hizmete özel ve üzeri) taşıyan bilgi ve belgeleri e-mail veya belgegeçer vasıtasıyla yollamayınız.</li>
+                                                <li>Kontrollü bölgelere elektronik teçhizat (Cep Telefonu, USB, Flash Bellek, Tablet ve Dizüstü Bilgisayar, Fotoğraf Makinesi), yanıcı, alev alıcı ve parlayıcı malzeme ile girmeyiniz.</li>
+                                                <li>Bu bölgede yapılacak “Gizlilik Dereceli” çalışmalarda, Bilmesi Gereken ve Girmesi Gereken Prensiplerine uygun olarak hareket ediniz. Giriş kartınızı başkasına vermeyiniz, masanızda bırakmayınız ve kullandırmayınız. Girişi kartınızı karşıdakinin göreceği şekilde boynunuzdan asınız. Giriş kartı olmayan personelin Kontrollü Bölge’ye girişine izin vermeyiniz ve ilgili güvelnik birimine bildiriniz.</li>
+                                                <li>Bu bölgede stajyer çalıştırmayınız. Gizlilik Dereceli evrak ve dokümanların kayıt ve işlemleri esnasında Kişi Güvenlik Belgesi olmayan personel bulundurmayınız.</li>
+                                                <li>Özel ve üzeri Gizlilik Dereceli evrak ve dokümanları bu bölgede muhafaza etmeyiniz. (geçici süreli işlemler hariç). Kontrollü Oda’da muhafaza ediniz.</li>
+                                                <li>Hizmete özel bilgi, belge ve dokümanları bu bölgede kontrollü şekilde çift kilitli dolaplarda muhafaza ediniz.</li>
+                                                <li>Şirket içine ve dışına gönderilecek Gizlilik Dereceli evrak ve dokümanların kayıt ve gizlilik derecesi verme işlemlerini kontrollü bölgede kontrollü şekilde yaparak kayıt altına alınız</li>
+                                                <li>Yazılım donanım/cihaz yapılandırma ve ilgili işlemleri sorumlusu ile beraber yapınız.</li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="height:20px;">
+                                        <a href="chromehtml://erp.tai.com.tr"
+                                           style="color:#0470c9;font-weight:600;text-decoration:none;">H&#219;MA Sistemine
+                                            Erişmek İçin Tıklayınız
+                                        </a>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px; padding: 0 8px 0 8px; font-size:11px;">
+                                        <hr width="100%"
+                                            style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 4px 0px;"/>
+<!--                                        <b>-->
+<!--                                            <span>TUSAŞ - Türk Havacılık ve Uzay Sanayii A.Ş.</span>-->
+<!--                                        </b>-->
+<!--                                        <br/>-->
+<!--                                        <div style="color: #999999;">-->
+<!--                                            <t t-if="company.website">|-->
+<!--                                                <a href="chromehtml://erp.tai.com.tr"-->
+<!--                                                   style="text-decoration:none; color: #999999;">-->
+<!--                                                    https://erp.tai.com.tr-->
+<!--                                                </a>-->
+<!--                                            </t>-->
+<!--                                        </div>-->
+                                        <h2>
+                                                            <!--                                                            <t t-esc="model_description or 'document'"/>-->
+                                                            <span style="color:white;font-family:Verdana, Arial,sans-serif;">H&#219;MA - Onaylarım Bilgilendirme</span>
+                                                        </h2>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br />
+                    </td>
+                </tr>
+
+            </table>
+        </template>
+    </data>
+</odoo>
+

@@ -1,0 +1,275 @@
+<odoo>
+    <data>
+        <record id="view_hr_attendance_card_search" model="ir.ui.view">
+            <field name="name">hr.attendance.card search</field>
+            <field name="model">hr.attendance.card</field>
+            <field name="arch" type="xml">
+                <search string="Search Request">
+                    <filter string="All" name="active" domain="['|',('active','=', True),('active','=', False)]"/>
+                    <filter string="Active" name="active" domain="[('active','=',True)]"/>
+                    <filter string="Archived" name="active" domain="[('active','=',False)]"/>
+                    <filter string="Temporary" name="temporary" domain="[('temporary','=',True)]"/>
+                    <field name="card_no" string="Tüm Alanlar"
+                           filter_domain="['|','|','|',('card_no','ilike',self),
+                           ('card_type','ilike',self),
+                           ('card_state','ilike',self),
+                           ('employee_id','ilike',self)]"/>
+                    <field name="card_no"/>
+                    <field name="card_type"/>
+                    <field name="card_state"/>
+                    <field name="employee_id"/>
+                    <field name="employee_personel_id"/>
+                    <field name="employee_first_name"/>
+                    <field name="employee_last_name"/>
+                    <field name="unlink_reason"/>
+                    <field name="unlink_uid"/>
+
+                    <!--                    <field name="visitor_id"/>-->
+                    <!--                    <filter name="needs_review" string="Needs my Review"-->
+                    <!--                            domain="[('reviewer_ids','in',uid), ('state', 'not in', ['approved', 'rejected','draft'])]"-->
+                    <!--                            help="My requests to review"/>-->
+                    <group expand="0" string="Grupla">
+                        <filter string="Pasive Alma Sebebi" name="group_unlink_reason" domain="[]"
+                                context="{'group_by':'unlink_reason'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="view_hr_attendance_card_authorization_search" model="ir.ui.view">
+            <field name="name">hr.attendance.card.authorization search</field>
+            <field name="model">hr.attendance.card.authorization</field>
+            <field name="arch" type="xml">
+                <search string="Search Request">
+                    <field name="card_id" string="Tüm Alanlar"
+                           filter_domain="['|',('card_id.card_no','ilike',self),('employee_id','ilike',self)]"/>
+                    <separator/>
+                    <filter string="Passive" name="active" domain="[('active','=',False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_hr_attendance_area_search" model="ir.ui.view">
+            <field name="name">hr.attendance.area search</field>
+            <field name="model">hr.attendance.area</field>
+            <field name="arch" type="xml">
+                <search string="Search Request">
+                    <filter string="All" name="active" domain="[('active','in',[True, False])]"/>
+                    <filter string="Archived" name="active" domain="[('active','=',False)]"/>
+                    <field name="name"/>
+                    <field name="location_id"/>
+                    <field name="area_type_id"/>
+                    <field name="is_common_area"/>
+                    <field name="building_id"/>
+                    <field name="floor_ids"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_hr_attendance_terminal_search" model="ir.ui.view">
+            <field name="name">hr.attendance.terminal search</field>
+            <field name="model">hr.attendance.terminal</field>
+            <field name="arch" type="xml">
+                <search string="Search Request">
+                    <field name="device_id"/>
+                    <field name="terminal_type_id"/>
+                    <field name="terminal_no"/>
+                    <field name="ip_no"/>
+                    <field name="area_detail"/>
+                    <field name="zone_id"/>
+                    <field name="area_id"/>
+                    <field name="floor_id"/>
+                    <field name="building_id"/>
+                    <!--                    <field name="visitor_id"/>-->
+                    <!--                    <filter name="needs_review" string="Needs my Review"-->
+                    <!--                            domain="[('reviewer_ids','in',uid), ('state', 'not in', ['approved', 'rejected','draft'])]"-->
+                    <!--                            help="My requests to review"/>-->
+                    <separator/>
+                    <filter string="Passive" name="active" domain="[('active','=',False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_hr_attendance_zone_search" model="ir.ui.view">
+            <field name="name">hr.attendance.zone search</field>
+            <field name="model">hr.attendance.zone</field>
+            <field name="arch" type="xml">
+                <search string="Search Request">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="zone_type_id"/>
+                    <field name="zone_tag_ids"/>
+                    <field name="area_id"/>
+                    <field name="floor_id"/>
+                    <field name="building_id"/>
+                    <field name="zone_auth_owner"/>
+                    <!--                    <field name="visitor_id"/>-->
+                    <!--                    <filter name="needs_review" string="Needs my Review"-->
+                    <!--                            domain="[('reviewer_ids','in',uid), ('state', 'not in', ['approved', 'rejected','draft'])]"-->
+                    <!--                            help="My requests to review"/>-->
+                    <separator/>
+                    <filter string="Passive" name="active" domain="[('active','=',False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_hr_attendance_auth_request_search" model="ir.ui.view">
+            <field name="name">hr.attendance.card.auth.request search</field>
+            <field name="model">hr.attendance.card.auth.request</field>
+            <field name="arch" type="xml">
+                <search string="Search Request">
+                    <field name="zone_id"/>
+                    <field name="zone_auth_owner"/>
+                    <field name="zone_users"/>
+                    <field name="reason"/>
+                    <field name="state"/>
+                    <!--                    <field name="visitor_id"/>-->
+                    <!--                    <filter name="needs_review" string="Needs my Review"-->
+                    <!--                            domain="[('reviewer_ids','in',uid), ('state', 'not in', ['approved', 'rejected','draft'])]"-->
+                    <!--                            help="My requests to review"/>-->
+                </search>
+            </field>
+        </record>
+
+        <record id="hr_attendance_employee_attendance_filter" model="ir.ui.view">
+            <field name="name">hr.employee card kanban</field>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                <search string="Search Employee">
+                    <field name="name" string="General Search"
+                           filter_domain="['|','|','|','|',
+                           ('card_ids.card_no','ilike',self),
+                           ('personel_id','=',self),
+                           ('name','ilike',self),
+                           ('first_name','ilike',self),
+                           ('last_name','ilike',self)]"/>
+                    <field name="working_type"/>
+                    <field name="card_ids"/>
+                    <field name="personel_id"/>
+                    <separator/>
+                    <filter string="All" name="active" domain="[('active','in',[True, False])]"/>
+                    <filter string="Passive" name="active" domain="[('active','=',False)]"/>
+                    <filter string="Temporary Card Owners" name="temp_card_owners"
+                            domain="[('card_ids.temporary','=',True)]"/>
+                    <filter string="Card Inactive 10 Days" name="card_inactive_soon"
+                            domain="[('card_ids.validity_expire_time','&lt;',datetime.datetime.now() + datetime.timedelta(days=10))]"/>
+                    <filter string="Card Inactive This Month" name="card_inactive_this_month"
+                            domain="[('card_ids.validity_expire_time','&lt;', (datetime.datetime.now().replace(day=28) + datetime.timedelta(days=4)).replace(day=1, hour=0, minute=0, second=0, microsecond=0))]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_hr_attendance_card_assignment_log_search" model="ir.ui.view">
+            <field name="name">hr.attendance.card.assignment.log search</field>
+            <field name="model">hr.attendance.card.assignment.log</field>
+            <field name="arch" type="xml">
+                <search string="Search Request">
+                    <field name="card_id"/>
+                    <field name="card_no" string="Kart Kimliği"
+                           filter_domain="[('card_id.visitor_card_identity_number','ilike',self)]"/>
+                    <field name="employee_id"/>
+                    <field name="personal_id" string="Çalışan Tipi"
+                           filter_domain="[('employee_id.working_type','ilike',self)]"/>
+                    <field name="reason"/>
+                    <field name="return_date"/>
+                    <separator/>
+                    <filter string="Not Returned" name="return_date" domain="[('card_id.assignment_log','=',False)]"/>
+
+                    <filter string="Tusaş Çalışan" name="tusas_calisan_card"
+                            domain="[('employee_id.working_type','=','taiEmployee')]"/>
+                    <filter string="Çalışman" name="caliman_card"
+                            domain="[('employee_id.working_type','=','theStudy')]"/>
+                    <filter string="Stajyer" name="stayjer_card" domain="[('employee_id.working_type','=','trainee')]"/>
+                    <filter string="Temsilci" name="temsilci_card"
+                            domain="[('employee_id.working_type','=','representative')]"/>
+                    <filter string="Firma Çalışanı" name="firma_calisani_card"
+                            domain="[('employee_id.working_type','=','companyEmployee')]"/>
+
+                </search>
+            </field>
+        </record>
+
+        <record id="view_hr_attendance_zone_type_search" model="ir.ui.view">
+            <field name="name">hr.attendance.zone.type search</field>
+            <field name="model">hr.attendance.zone.type</field>
+            <field name="arch" type="xml">
+                <search string="Search Request">
+                    <field name="name"/>
+                    <separator/>
+                    <filter string="Passive" name="active" domain="[('active','=',False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_hr_attendance_terminal_type_search" model="ir.ui.view">
+            <field name="name">hr.attendance.terminal.type search</field>
+            <field name="model">hr.attendance.terminal.type</field>
+            <field name="arch" type="xml">
+                <search string="Search Request">
+                    <field name="name"/>
+                    <separator/>
+                    <filter string="Passive" name="active" domain="[('active','=',False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_hr_attendance_card_type_search" model="ir.ui.view">
+            <field name="name">hr.attendance.card.type search</field>
+            <field name="model">hr.attendance.card.type</field>
+            <field name="arch" type="xml">
+                <search string="Search Request">
+                    <field name="name"/>
+                    <separator/>
+                    <filter string="Passive" name="active" domain="[('active','=',False)]"/>
+                </search>
+            </field>
+        </record>
+        <record id="view_hr_attendance_security_raw_search" model="ir.ui.view">
+            <field name="name">view_hr_attendance_security_raw_search search</field>
+            <field name="model">hr.attendance.security.raw.moves</field>
+            <field name="arch" type="xml">
+                <search string="Search Request">
+                    <field name="zone_id"/>
+                    <field name="terminal_id"/>
+                    <field name="tarih_utc"/>
+                    <field name="employee_id"/>
+                    <field name="card_id"/>
+                </search>
+            </field>
+        </record>
+        <record id="view_hr_attendance_security_move_search" model="ir.ui.view">
+            <field name="name">hr.attendance.security_move search</field>
+            <field name="model">hr.attendance.security.move</field>
+            <field name="arch" type="xml">
+                <search string="Search Request">
+
+                    <field name="employee_id"/>
+                    <field name="card_id"/>
+                    <field name="zone_id"/>
+                    <field name="department_id"/>
+                    <field name="terminal_id"/>
+                    <field name="move_type_id"/>
+                </search>
+
+            </field>
+        </record>
+        <record id="view_hr_attendance_move_search" model="ir.ui.view">
+            <field name="name">hr.attendance.move search</field>
+            <field name="model">hr.attendance.move</field>
+            <field name="arch" type="xml">
+                <search string="Search Request">
+
+                    <field name="employee_id"/>
+                    <field name="card_id"/>
+                    <field name="zone_id"/>
+                    <field name="department_id"/>
+                    <field name="terminal_id"/>
+                    <field name="move_type_id"/>
+                </search>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

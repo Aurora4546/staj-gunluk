@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="auth_copy_wizard" model="ir.ui.view">
+        <field name="name">auth.copy.wizard form</field>
+        <field name="model">auth.copy.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+
+            <form string="Zone Authorization">
+                <style>
+                    .o_form_buttons_edit, .breadcrumb-item{
+                    display:none;
+                    }
+                </style>
+                <field name="form_mode" invisible="1"/>
+                <table style="width:100%;">
+                    <tr>
+                        <td style="width:33%;text-align:center;">
+                        </td>
+                        <td style="width:33%;text-align:center;">
+
+                            <h1 style="font-size:green;" attrs="{'invisible':[('operation','!=','assign')]}">Copy Authorizations from One Zone to Another
+                            </h1>
+                            <field name="operation" invisible="1"/>
+                        </td>
+                        <td style="width:33%;text-align:center;">
+                        </td>
+                    </tr>
+                    <tr attrs="{'invisible':[('operation','=',False)]}">
+                        <td style="width:33%;text-align:center;">
+
+                        </td>
+                        <td style="width:33%;text-align:center;">
+                            <button name="action_set_operation_assign" string="Give Permission"
+                                    class="btn-success fa-2x" attrs="{'invisible':[('operation','!=','assign')]}"
+                                    style="width:200px;height:40px;font-size:1.3em;" type="object"/>
+                        </td>
+                        <td style="width:33%;text-align:center;">
+
+                        </td>
+                    </tr>
+                </table>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="zone_id"
+                                   options="{'no_create': True, 'no_open': True,'no_create_edit':True,'no_quick_create': True,}"/>
+                        </group>
+                        <group>
+                            <field name="new_zone_id"
+                                   options="{'no_create': True, 'no_open': True,'no_create_edit':True,'no_quick_create': True,}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="affected_count" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,77 @@
+<odoo>
+    <data noupdate="1">
+
+<!--        <record id="ir_cron_card_expire_employee_attendance_ext" model="ir.cron">-->
+<!--            <field name="name">Card Expire Cron</field>-->
+<!--            <field name="interval_number">30</field>-->
+<!--            <field name="interval_type">minutes</field>-->
+<!--            <field name="numbercall">-1</field>-->
+<!--            <field name="doall" eval="False"/>-->
+<!--            <field name="model_id" ref="model_hr_attendance_card"/>-->
+<!--            <field name="state">code</field>-->
+<!--            <field name="code">model.get_automated_card_expire_new(50)</field>-->
+<!--            <field name="active">False</field>-->
+<!--        </record>-->
+
+
+        <record id="ir_cron_synchron_employees" model="ir.cron">
+            <field name="name">Synchron Employees Cron</field>
+            <field name="interval_number">3</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model_id" ref="model_hr_attendance_bulk_card_replacement"/>
+            <field name="state">code</field>
+            <field name="code">model.synchron_employees()</field>
+            <field name="active">False</field>
+        </record>
+
+        <record id="ir_cron_card_validity_expire_cron" model="ir.cron">
+            <field name="name">Card Validity Expire Cron</field>
+            <field name="interval_number">3</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model_id" ref="model_hr_attendance_card"/>
+            <field name="state">code</field>
+            <field name="code">model.card_validity_expire_cron()</field>
+            <field name="active">False</field>
+        </record>
+
+        <record id="ir_cron_deactivate_no_moving_cards_cron" model="ir.cron">
+            <field name="name">Deactivate No Moving Cards</field>
+            <field name="interval_number">30</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model_id" ref="model_hr_attendance_card"/>
+            <field name="state">code</field>
+            <field name="code">model.deactivate_no_moving_cards(50,90)</field>
+            <field name="active">False</field>
+        </record>
+
+        <record id="ir_cron_send_mail_res_emp_deactivated_cards" model="ir.cron">
+            <field name="name">Send Mail Deactivated Cards Cron</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model_id" ref="model_hr_attendance_card"/>
+            <field name="state">code</field>
+            <field name="code">model.send_mail_res_deactivated_cards()</field>
+            <field name="active">False</field>
+        </record>
+
+        <record id="send_mail_res_deactivated_cards_reminder_temp" model="mail.template">
+            <field name="name">Responsible Employee Card Expire Reminder</field>
+            <field name="model_id" ref="hr_attendance_ext.model_hr_attendance_card"/>
+            <field name="subject">Tesis Güvenlik -  Son Üç Ay İçerisinde Giriş Çıkış Yapmayan TUSAŞ Dışı Personel Hk.</field>
+            <field name="email_to"></field>
+            <field name="email_from"></field>
+            <field name="body_html">
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

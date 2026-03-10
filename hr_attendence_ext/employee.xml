@@ -1,0 +1,166 @@
+<odoo>
+    <data>
+
+        <record id="hr_attendance_employee_kanban_view" model="ir.ui.view">
+            <field name="name">hr.employee.card kanban</field>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                <kanban class="oe_background_grey o_kanban_dashboard o_hr_kanban" create="false">
+                    <field name="card_color_url"/>
+                    <field name="card_font_color"/>
+                    <field name="card_ids" invisible="1"/>
+                    <field name="card_temporary" invisible="1"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <!--                            <div t-attf-class="#{kanban_color(0) + ' oe_kanban_global_click'}"-->
+                            <div t-attf-class="#{kanban_color(0)}"
+                                 t-attf-style="height:180px;background-image:url('#{record.card_color_url.raw_value}');background-size:cover;color:#{record.card_font_color.raw_value};">
+                                <div t-attf-class="o_kanban_card_header">
+                                    <div class="o_kanban_card_header_title">
+                                        <div class="o_primary" style="color:black;">
+                                            <field name="working_type"/>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_manage_button_section">
+                                        <div class="o_kanban_manage_toggle_button">
+                                            <img src="/hr_attendance_ext/static/src/img/logo-full.svg"
+                                                 alt="company-logo" style="width:100px;height:40px;"
+                                                 attrs="{'invisible':[('card_temporary','=',True)]}"/>
+                                            <img src="/hr_attendance_ext/static/src/img/logo-full-gecici.png"
+                                                 alt="company-logo" style="width:100px;height:40px;"
+                                                 attrs="{'invisible':[('card_temporary','=',False)]}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container o_kanban_card_content">
+
+                                    <div class="row">
+                                        <div class="container o_kanban_card_content"
+                                             style="font-size:16px;;max-width:100% !important;width:100% !important;">
+                                            <field name="first_name" t-attf-style="color:white;"/>
+                                            <br/>
+                                            <b>
+                                                <field name="last_name"/>
+                                            </b>
+                                            <br/>
+                                            <field name="personel_id"/>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="position:relative;bottom:2px;">
+                                        <div class="col-6 o_kanban_primary_left">
+                                        </div>
+                                        <div class="col-6 o_kanban_primary_right">
+                                        </div>
+                                    </div>
+                                    <div class="row" style="position:absolute;right:2px;">
+                                        <div style="width:80px;height:100px;">
+                                            <field name="image_medium" widget="image" class="oe_avatar" readonly="1"
+                                                   modifiers="{'readonly':true}"/>
+                                        </div>
+                                        <div class="col-6 o_kanban_primary_right">
+                                        </div>
+                                    </div>
+                                    <div class="kanban_bottom_buttons" style="font-size:14px;">
+                                        <div style="height: 1em;line-height: 1em;overflow:hidden">
+                                            <field name="resource_calendar_id"/>
+                                        </div>
+
+                                        <table style="border:none;">
+                                            <tr>
+                                                <td>
+                                                    <button name="action_open_replace_card_wizard"
+                                                            attrs="{'invisible':[('card_ids','&lt;',1)]}"
+                                                            class="btn btn-secondary" type="object">
+                                                        <i class="fa fa-random" style="color:green;"/>
+                                                        Replace
+                                                    </button>
+                                                    <button name="action_assign_card_wizard"
+                                                            attrs="{'invisible':[('card_ids','&gt;',0)]}"
+                                                            class="btn btn-secondary" type="object">
+                                                        <i class="fa fa-random" style="color:green;"/>
+                                                        Assign Card
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button name="action_return_card"
+                                                            attrs="{'invisible':[('card_ids','&lt;',1)]}"
+                                                            class="btn btn-secondary"
+                                                            type="object">
+                                                        <i class="fa fa-undo" style="color:red;"/>
+                                                        Return
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button name="action_open_card_form"
+                                                            attrs="{'invisible':[('card_ids','&lt;',1)]}"
+                                                            class="btn btn-secondary"
+                                                            type="object">
+                                                        <i class="fa fa-th" style="color:gray;"/>
+                                                        Details
+                                                    </button>
+                                                </td>
+                                                <!--                                                    <td>-->
+                                                <!--                                                        <button class="btn btn-secondary oe_kanban_global_click">-->
+                                                <!--                                                            <i class="fa fa-cog" style="color:grey;"/><span></span>-->
+                                                <!--                                                        </button>-->
+                                                <!--                                                    </td>-->
+                                            </tr>
+                                        </table>
+                                        <br/>
+                                    </div>
+                                </div>
+                                <div class="container o_kanban_card_manage_pane dropdown-menu" role="menu">
+                                    <div class="row">
+                                        <div role="menuitem"
+                                             class="col-4 o_kanban_card_manage_section o_kanban_manage_to_do">
+                                            <div class="o_kanban_card_manage_title">
+                                                <a role="menuitem" type="edit">Settings</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record id="hr_employee_search_veiew_inherit" model="ir.ui.view">
+            <field name="name">Employee Search</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr_employee_ext.view_employee_ext_filter"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//filter[@name='activities_upcoming_all']" position="after">
+                    <field name="job_id" string="Ünvan Sınıfı"
+                           filter_domain="[('job_id.staff_type.name','ilike',self)]"
+                           groups="hr_attendance_ext.group_attendance_one"/>
+                    <field name="job_id" string="Ünvan Grubu"
+                           filter_domain="[('job_id.legacy_job_group_id.name','ilike',self)]"
+                           groups="hr_attendance_ext.group_attendance_one"/>
+                    <filter name="filter_employee" string="Filter Employee"
+                            domain="[('filter_employee', '=', 'hr.employee%per_id')]"
+                            groups="hr_attendance_ext.group_attendance_one"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="view_employee_form_last_contact_attendance_inherit" model="ir.ui.view">
+            <field name="name">Employee Search</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr_employee_ext.view_employee_form_last_contact"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='work_phone']" position="before">
+                    <field name="attendance_zone_pt_id" widget="many2many_tags" string="Mesai Terminalleri"
+                           readonly="1"/>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

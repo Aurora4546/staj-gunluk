@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+        <record id="hr_attendance_security_move_tree_view" model="ir.ui.view">
+            <field name="name">Employee Security Movements</field>
+            <field name="model">hr.attendance.security.move</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="employee_id"/>
+                    <field name="department_id"/>
+                    <field name="zone_id"/>
+                    <field name="terminal_id"/>
+                    <field name="move_type_id"/>
+                    <field name="is_legitimate" invisible="1"/>
+                    <field name="move_time"/>
+                    <field name="create_uid"/>
+                    <field name="create_date"/>
+                    <field name="write_uid" groups="base.group_no_one"/>
+                    <field name="write_date" groups="base.group_no_one"/>
+                </tree>
+            </field>
+        </record>
+        <record id="hr_attendance_move_tree_view" model="ir.ui.view">
+            <field name="name">Employee Movements</field>
+            <field name="model">hr.attendance.move</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="employee_id"/>
+                    <field name="department_id"/>
+                    <field name="zone_id"/>
+                    <field name="terminal_id"/>
+                    <field name="move_type_id"/>
+                    <field name="is_legitimate" invisible="1"/>
+                    <field name="move_time"/>
+                    <field name="source" readonly="1"/>
+                    <field name="create_uid" groups="resource_ext.group_attendance_hr_one"/>
+                    <field name="create_date" groups="resource_ext.group_attendance_hr_one"/>
+                    <field name="write_uid" groups="base.group_no_one"/>
+                    <field name="write_date" groups="base.group_no_one"/>
+                    <button name="recalculate" type="object" string="Recalculate"
+                            groups="resource_ext.group_attendance_hr_one" class="btn btn-primary"/>
+                </tree>
+            </field>
+
+        </record>
+    </data>
+</odoo>
