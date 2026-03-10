@@ -1,1157 +1,216 @@
-Traceback (most recent call last):
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/safe_eval.py", line 358, in safe_eval
-    return unsafe_eval(c, globals_dict, locals_dict)
-  File "", line 1, in <module>
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan_task_center.py", line 57, in update_task_center_from_legacy
-    data_dict_list = self.update_task_center_from_legacy_new()
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan_task_center.py", line 33, in update_task_center_from_legacy_new
-    obj_pass = self.env['ns.parameters'].sudo().search([('key', '=', 'pass')], limit=1)
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 832, in __getitem__
-    return self.registry[model_name]._browse((), self)
-  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 177, in __getitem__
-    return self.models[model_name]
-KeyError: 'ns.parameters'
+raceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 88, in lookup
+    r = d[key]
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/func.py", line 69, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/lru.py", line 44, in __getitem__
+    a = self.d[obj].me
+KeyError: ('ir.model.data', <function IrModelData.xmlid_lookup at 0x7116d9ae3d40>, 'hr_attendance_ext.hr_attendance_request_menu_wizard_action')
 During handling of the above exception, another exception occurred:
 Traceback (most recent call last):
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_cron.py", line 109, in _callback
-    self.env['ir.actions.server'].browse(server_action_id).run()
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_actions.py", line 546, in run
-    res = func(action, eval_context=eval_context)
-  File "/home/t12016074307/odoo12/odoo/addons/website/models/ir_actions.py", line 57, in run_action_code_multi
-    res = super(ServerAction, self).run_action_code_multi(action, eval_context)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_actions.py", line 437, in run_action_code_multi
-    safe_eval(action.sudo().code.strip(), eval_context, mode="exec", nocopy=True)  # nocopy allows to return 'action'
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/safe_eval.py", line 381, in safe_eval
-    pycompat.reraise(ValueError, ValueError('%s: "%s" while evaluating\n%r' % (ustr(type(e)), ustr(e), expr)), exc_info[2])
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
+    self._tags[rec.tag](rec, de, mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 472, in _tag_menuitem
+    action_model, action_id = self.model_id_get(a_action)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 747, in model_id_get
+    return self.env['ir.model.data'].xmlid_to_res_model_res_id(id_str, raise_if_not_found=raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
+    return self.xmlid_lookup(xmlid)[1:3]
+  File "<decorator-gen-26>", line 2, in xmlid_lookup
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 93, in lookup
+    value = d[key] = self.method(*args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
+    raise ValueError('External ID not found in the system: %s' % xmlid)
+ValueError: External ID not found in the system: hr_attendance_ext.hr_attendance_request_menu_wizard_action
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 87, in new
+    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 421, in load_modules
+    loaded_modules, update_module, models_to_check)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 313, in load_marked_modules
+    perform_checks=perform_checks, models_to_check=models_to_check
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 222, in load_module_graph
+    load_data(cr, idref, mode, kind='data', package=package, report=report)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 68, in load_data
+    tools.convert_file(cr, package.name, filename, idref, mode, noupdate, kind, report)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 802, in convert_file
+    convert_xml_import(cr, module, fp, idref, mode, noupdate, report)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 865, in convert_xml_import
+    obj.parse(doc.getroot(), mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 755, in parse
+    self.parse(rec, mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 764, in parse
+    exc_info[2]
   File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 86, in reraise
     raise value.with_traceback(tb)
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/safe_eval.py", line 358, in safe_eval
-    return unsafe_eval(c, globals_dict, locals_dict)
-  File "", line 1, in <module>
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan_task_center.py", line 57, in update_task_center_from_legacy
-    data_dict_list = self.update_task_center_from_legacy_new()
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan_task_center.py", line 33, in update_task_center_from_legacy_new
-    obj_pass = self.env['ns.parameters'].sudo().search([('key', '=', 'pass')], limit=1)
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 832, in __getitem__
-    return self.registry[model_name]._browse((), self)
-  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 177, in __getitem__
-    return self.models[model_name]
-ValueError: <class 'KeyError'>: "ns.parameters" while evaluating
-'model.update_task_center_from_legacy()'
-
-hr_shift_plan.py
-
-import pytz
-from dateutil.relativedelta import relativedelta
-
-from odoo import fields, models, api
-from odoo.exceptions import ValidationError
-from odoo.tools.translate import _
-from datetime import datetime, timedelta
-from calendar import monthrange
-from odoo.exceptions import UserError
-from addons_tusas.resource_ext.models.utils import calculate_attendance_summary_process
-from collections import defaultdict
-from itertools import cycle, islice
-
-import ibm_db
-from collections import Counter
-
-import logging
-
-_logger = logging.getLogger(__name__)
-
-
-class HrShiftPlanActivity(models.Model):
-    _name = "hr.shift_plan_activity"
-    _description = "Vardiya Girişi Aktivite"
-    _inherit = ['base_environment.active', 'mail.thread', 'mail.activity.mixin', 'ntfc.request']
-
-    date_from = fields.Date('Shift Start Date')
-
-    date_to = fields.Date('Shift End Date')
-    employee_id = fields.Many2one('hr.employee', string='Employee')
-    rel_employee_id = fields.Many2one('hr.employee', string='Employee')
-    activity_summary = fields.Html(string='Activity Summary')
-    department_id = fields.Many2one(related='rel_employee_id.department_id', string='Department')
-    personel_id = fields.Char(related='rel_employee_id.personel_id', string='Personel Id')
-    image_id = fields.Binary(related='rel_employee_id.image_medium')
-    status = fields.Selection(selection=[
-        ('todo', 'To Do'),
-        ('in_progress', 'In Progress'),
-        ('done', 'Done'),
-        ('cancelled', 'Cancelled')], string="Completion Status", default='todo')
-    change_date = fields.Date('Change Date')
-    activity_ids = fields.One2many(
-        'mail.activity', 'res_id', 'Activities',
-        domain=lambda self: [('res_model', '=', self._name)])
-
-    def action_read_information(self):
-        self.write({'status': 'done'})
-
-        activity_todo = self.activity_ids.filtered(lambda l: l.status == 'todo')
-        self.notification_done(activity_ids=activity_todo.ids)
-        # if activity_todo:
-        #     activity_todo.write({'status': 'done'})
-        return {
-            'type': 'ir.actions.client',
-            'tag': 'reload',
-        }
-
-    @api.multi
-    def name_get(self):
-        result = []
-        for s in self:
-            result.append((s.id, (s.employee_id.name + '-' + str(s.date_from.strftime("%d.%m.%Y")) + '-' + str(
-                s.date_to.strftime("%d.%m.%Y")))))
-        return result
-
-
-class HrShiftPlan(models.Model):
-    _name = "hr.shift_plan"
-    _description = "Vardiya Girişi"
-    _inherit = ['base_environment.active', 'mail.thread', 'mail.activity.mixin', 'ntfc.request']
-    _order = "date_from desc"
-
-    _sql_constraints = [
-        ('employee_date_unique', 'EXCLUDE (employee_id WITH =, date_from WITH =) WHERE (active = true)',
-         'İlgili kişinin ilgili tarihte vardiyası zaten mevcut !')]
-
-    date_from = fields.Date('Shift Start Date', default=lambda self: fields.datetime.now().date(), required=True,
-                            index=True)
-    date_to = fields.Date('Shift End Date', default=lambda self: fields.datetime.now().date(), required=True,
-                          index=True)
-    calendar_id = fields.Many2one('resource.calendar', string='Shift Calendar',
-                                  domain=lambda self: self._get_calendar_domain(),
-                                  required=True)
-    shift_type = fields.Selection([('I', 'Irregular'),
-                                   ('R', 'Regular')],
-                                  string='Shift Type',
-                                  required=True,
-                                  default='R')
-    active = fields.Boolean('Active', default=True)
-    group_id = fields.Integer('Group Id')
-
-    employee_id = fields.Many2one('hr.employee', string='Employee', index=True,
-                                  domain=lambda self: self._get_employee_domain())
-    shift_plan_collective_id = fields.Many2one('hr.shift_plan_collective', string="Shift Plan Collective Id")
-    department_id = fields.Many2one(related='employee_id.department_id', string='Department')
-    personel_id = fields.Char(related='employee_id.personel_id', string='Personel Id')
-    image_id = fields.Binary(related='employee_id.image_medium')
-    task_center_ids = fields.Many2many('hr.shift_plan_task_center', string='Task Centers')
-    flexible_plan_id = fields.Many2one('hr.shift_plan.flexible', string='Flexible Plan')
-
-    calculation_type_cmp = fields.Char(compute='calc_calculation_type_dynamically')
-    calendar_id_cmp = fields.Many2one('resource.calendar', compute='calc_calculation_type_dynamically')
-    is_dept_production = fields.Boolean(string="Üretim Biriminde mi?")
-
-    up_number = fields.Integer(string="Update Number", default=0)
-
-    def call_check_ed_learning_cron(self):
-        self.search([('up_number', '=', 1)]).with_context({'no_up_db2': True}).write({'up_number': 0})
-
-    def update_work_center_all_records(self, date_from, show_info=True):
-        obj_ns_param = self.env['ns.parameters'].sudo().search(['|', ('key', '=', 'pass'), ('key', '=', 'user')],
-                                                               limit=2)
-        password = obj_ns_param.filtered(lambda l: l.key == 'pass').value
-        user = obj_ns_param.filtered(lambda l: l.key == 'user').value
-
-        conn = ibm_db.connect(
-            "DATABASE=LNXUDBP;HOSTNAME=Taivts1;PORT=50001;PROTOCOL=TCPIP;UID={};PWD={};".format(user, password), "", "")
-
-        huma_ids = self.search([('date_from', '=', date_from), ('task_center_ids', '!=', False)])
-
-        if show_info:
-            show_ids = huma_ids.ids[:3]
-            raise ValidationError("{} - {}".format(len(huma_ids), show_ids))
-
-        for i in huma_ids:
-            work_center = ''.join([str(elem) + ',' for elem in i.task_center_ids.mapped("task_center")])
-            if ',' in work_center and ',' == work_center[-1]:
-                work_center = work_center[:-1]
-
-            sql = """UPDATE pdks.t013vardiya set IS_MERKEZI='{}' WHERE HUMA_ID = {} """.format(work_center, i.id)
-            stmt = ibm_db.prepare(conn, sql)
-            ibm_db.execute(stmt)
-
-    def open_plans_w_manager_domain(self):
-        if self.user_has_groups('hr_shift_plan.group_manager_w_domain'):
-            employee_id = self.env.user.employee_ids[-1]
-            legacy_code = employee_id.department_id.legacy_code
-
-            return {
-                'name': _('Vardiya Kayıtları'),
-                'domain': [('employee_id.department_id.legacy_code', 'ilike', legacy_code[:3])],
-                'res_model': 'hr.shift_plan',
-                'type': 'ir.actions.act_window',
-                'view_mode': 'tree,form',
-                'view_type': 'form',
-                'context': {'tree_view_ref': 'hr_shift_plan.view_shift_plan_manager_custom_domain_tree',
-                            'form_view_ref': 'hr_shift_plan.view_shift_plan_manager_custom_domain_form'},
-                'target': 'current'
-            }
-
-    @api.depends('employee_id', 'date_from', 'date_to')
-    def calc_calculation_type_dynamically(self):
-        for i in self:
-            employee_id = i.employee_id
-            if employee_id and i.date_from and i.date_to:
-                mid_date = i.date_from + timedelta(days=(i.date_to - i.date_from).days / 2)
-                config_dict = employee_id.sudo().get_attendance_config_at_time(mid_date, True)
-                attendances = config_dict[employee_id.id][0].filtered(
-                    lambda x: x.dayofweek == str(mid_date.weekday()))
-                if attendances:
-                    i.calendar_id_cmp = attendances[0].calendar_id.id
-                else:
-                    i.calendar_id_cmp = False
-            else:
-                i.calendar_id_cmp = False
-
-    @api.constrains('employee_id', 'date_from', 'date_to')
-    def check_employee_shift_save(self):
-        for i in self:
-            calendar_id = i.calendar_id_cmp
-            permissible_shift_ids = self.env["ir.config_parameter"].sudo().get_param("permissible_shift_ids").replace(
-                " ", "").split(",")
-            int_permissible = [int(i) for i in permissible_shift_ids]
-            if calendar_id.calculation_type == 'weekly':
-                raise ValidationError(
-                    "({}) sicilli ilgili çalışan esnek olduğu için vardiya tanımlanamaz!".format(
-                        i.employee_id.personel_id))
-
-            if calendar_id.id not in int_permissible:
-                raise ValidationError(
-                    "({}) sicilli ilgili çalışan 'Vardiya' çalışma tipinde değildir. Vardiya planı yapılamaz. ({})".format(
-                        i.employee_id.personel_id,
-                        calendar_id))
-
-    def _get_calendar_domain(self):
-        pass
-
-    def recalculate_changed_shift(self, date_from, date_to):
-        date_min_rec = datetime.strptime(date_from, '%Y-%m-%d').date() if isinstance(date_from,
-                                                                                     str) else date_from
-        date_max_rec = datetime.strptime(date_to, '%Y-%m-%d').date() if isinstance(date_to,
-                                                                                   str) else date_to
-
-        date_range = [date_min_rec, date_max_rec]
-        calculate_attendance_summary_process(self.env, self.employee_id, date_range)
-
-    @api.constrains('calendar_id', 'date_from', 'date_to')
-    def check_shift_cover(self):
-        calendar_ids = self.env["ir.config_parameter"].sudo().get_param("hr_shift_plan.default_calendar_id","-1").split(',')
-        for i in self:
-            if str(i.calendar_id.id) in calendar_ids:
-                times_to_iterate = 1
-                new_calender_array = []
-
-                infinite_data = cycle(calendar_ids)
-
-                for element in islice(infinite_data, len(calendar_ids) * times_to_iterate):
-                    new_calender_array.append(element)
-
-                current_from_control = self.env['hr.shift_plan'].sudo().search(
-                    [('employee_id', '=', i.employee_id.id), (
-                        'date_to', '=', i.date_from - timedelta(days=1))])
-
-                current_to_control = self.env['hr.shift_plan'].sudo().search(
-                    [('employee_id', '=', i.employee_id.id), (
-                        'date_from', '=', i.date_to + timedelta(days=1))])
-
-                if calendar_ids.index(str(i.calendar_id.id)) + 1 == len(new_calender_array):
-                    calendar_to_control = False
-                else:
-                    calendar_to_control = new_calender_array[calendar_ids.index(str(i.calendar_id.id)) + 1]
-
-                if calendar_ids.index(str(i.calendar_id.id)) == 0:
-                    calendar_from_control = False
-                else:
-                    calendar_from_control = new_calender_array[calendar_ids.index(str(i.calendar_id.id)) - 1]
-
-                if current_from_control and current_from_control.calendar_id.id == int(calendar_from_control):
-                    raise UserError(
-                        'Birbirini takip eden günlerde oluşturulan vardiya planları V2-V3 sırasıyla yapılmamalıdır.{}'.format(
-                            str(i.employee_id.sudo().personel_id)))
-
-                if current_to_control and current_to_control.calendar_id.id == int(calendar_to_control):
-                    raise UserError(
-                        'Birbirini takip eden günlerde oluşturulan vardiya planları V2-V3 sırasıyla yapılmamalıdır.{}'.format(
-                            str(i.employee_id.sudo().personel_id)))
-
-    def check_category_id_for_shift(self, employee_id, date_from, date_to):
-        employee_id = self.env['hr.employee'].browse(employee_id)
-        history_info_dept = self.env['hr.employee.history'].sudo().search([('movement_type', '=', '3'),
-                                                                           ('validity_date', '>=', date_from),
-                                                                           ('validity_date', '<=', date_to),
-                                                                           ('employee_id', '=', employee_id.id),
-                                                                           (
-                                                                               'new_department_id.department_class_type_id.code',
-                                                                               '!=', False)])
-
-        history_info_job = self.env['hr.employee.history'].sudo().search([('movement_type', '=', '4'),
-                                                                          ('validity_date', '>=', date_from),
-                                                                          ('validity_date', '<=', date_to),
-                                                                          ('employee_id', '=', employee_id.id),
-                                                                          (
-                                                                              'new_job_id.category_id.id',
-                                                                              '=', 1)])
-
-        if history_info_dept or history_info_job or (
-                employee_id.department_id.sudo().department_class_type_id.code and employee_id.job_id.category_id.id == 1):
-            return True
-        return False
-
-    def insert_db2_the_shift_multi(self):
-        obj_ns_param = self.env['ns.parameters'].sudo().search(['|', ('key', '=', 'pass'), ('key', '=', 'user')],
-                                                               limit=2)
-        password = obj_ns_param.filtered(lambda l: l.key == 'pass').value
-        user = obj_ns_param.filtered(lambda l: l.key == 'user').value
-
-        values_sql = ""
-        for s in self:
-            employee_id = s.employee_id.sudo()
-            shift_code = s.calendar_id.legacy_shift_code
-            work_center = ''.join([str(elem) + ',' for elem in
-                                   s.task_center_ids.mapped("task_center")]) if s.task_center_ids else ""
-            if ',' in work_center and ',' == work_center[-1]:
-                work_center = work_center[:-1]
-
-            values_sql += "({},{},'{}','{}','{}',{},'{}',{},{},'{}',{}),".format(employee_id.legacy_general_personel_id,
-                                                                                 employee_id.personel_id, s.date_from,
-                                                                                 s.date_to,
-                                                                                 s.shift_type, shift_code, work_center,
-                                                                                 self.env.user.employee_ids.legacy_general_personel_id,
-                                                                                 '100', str(s.create_date)[:10],
-                                                                                 s.id) + "\n"
-
-        values_sql = values_sql[:-2]
-
-        conn = ibm_db.connect(
-            "DATABASE=LNXUDBP;HOSTNAME=Taivts1;PORT=50001;PROTOCOL=TCPIP;UID={};PWD={};".format(user, password), "", "")
-
-        sql = """INSERT INTO PDKS.t013vardiya 
-        (GENELSICIL,
-        SICIL,
-        BASLAMATARIH,
-        BITISTARIH,
-        VARDIYATIP,
-        VARDIYAKOD,
-        IS_MERKEZI,
-        KAYIT_EDEN,
-        KAYIT_YERI,
-        KAYIT_ZAMANI,
-        HUMA_ID)
-                VALUES 
-                {}
-         """.format(values_sql)
-
-        try:
-            stmt = ibm_db.prepare(conn, sql)
-            ibm_db.execute(stmt)
-        except:
-            raise ValidationError("{}---VALUES: {}".format(sql, values_sql))
-
-    def insert_db2_the_shift(self):
-        obj_ns_param = self.env['ns.parameters'].sudo().search(['|', ('key', '=', 'pass'), ('key', '=', 'user')],
-                                                               limit=2)
-        password = obj_ns_param.filtered(lambda l: l.key == 'pass').value
-        user = obj_ns_param.filtered(lambda l: l.key == 'user').value
-
-        employee_id = self.employee_id.sudo()
-        shift_code = self.calendar_id.legacy_shift_code
-        work_center = ''.join([str(elem) + ',' for elem in
-                               self.task_center_ids.mapped("task_center")]) if self.task_center_ids else ""
-        if ',' in work_center and ',' == work_center[-1]:
-            work_center = work_center[:-1]
-
-        conn = ibm_db.connect(
-            "DATABASE=LNXUDBP;HOSTNAME=Taivts1;PORT=50001;PROTOCOL=TCPIP;UID={};PWD={};".format(user, password), "", "")
-
-        sql = """INSERT INTO PDKS.t013vardiya 
-        (GENELSICIL,
-        SICIL,
-        BASLAMATARIH,
-        BITISTARIH,
-        VARDIYATIP,
-        VARDIYAKOD,
-        IS_MERKEZI,
-        KAYIT_EDEN,
-        KAYIT_YERI,
-        KAYIT_ZAMANI,
-        HUMA_ID)
-                VALUES 
-                ({},{},'{}','{}','{}',{},'{}',{},{},'{}',{});
-         """.format(employee_id.legacy_general_personel_id, employee_id.personel_id, self.date_from, self.date_to,
-                    self.shift_type, shift_code, work_center, self.env.user.employee_ids.legacy_general_personel_id,
-                    '100', str(self.create_date)[:10], self.id)
-
-        stmt = ibm_db.prepare(conn, sql)
-        ibm_db.execute(stmt)
-
-    def delete_double_shift(self):
-        obj_ns_param = self.env['ns.parameters'].sudo().search(['|', ('key', '=', 'pass'), ('key', '=', 'user')],
-                                                               limit=2)
-        password = obj_ns_param.filtered(lambda l: l.key == 'pass').value
-        user = obj_ns_param.filtered(lambda l: l.key == 'user').value
-        conn = ibm_db.connect(
-            "DATABASE=LNXUDBP;HOSTNAME=Taivts1;PORT=50001;PROTOCOL=TCPIP;UID={};PWD={};".format(user, password), "",
-            "")
-
-        sql_mng = """DELETE FROM pdks.t013vardiya where SICIL = {0} and 
-        ( ('{1}' <= BASLAMATARIH and BASLAMATARIH <= '{2}') or ('{1}' <= BITISTARIH and BITISTARIH <= '{2}') or 
-        (BASLAMATARIH <= '{1}' and '{1}' <= BITISTARIH)) """.format(
-            self.employee_id.personel_id,
-            self.date_from, self.date_to)
-
-        stmt = ibm_db.prepare(conn, sql_mng)
-        ibm_db.execute(stmt)
-
-    @api.model
-    def create(self, vals):
-
-        if ('employee_id' not in vals and 'flexible_plan_id' not in vals) or (
-                'employee_id' in vals and not vals['employee_id'] and 'flexible_plan_id' not in vals):
-            raise ValidationError('You have to select employee to make plans !')
-
-        is_dept_production = self.check_category_id_for_shift(vals.get('employee_id'), vals.get('date_from'),
-                                                              vals.get('date_to'))
-        vals.update({'is_dept_production': is_dept_production, 'up_number': 1})
-        new_record = super(HrShiftPlan, self).create(vals)
-        new_record.delete_double_shift()
-        if new_record.id > 40000 and not self.env.context.get('no_insert_db2', False):
-            new_record.insert_db2_the_shift()
-        return new_record
-
-    @api.constrains('employee_id')
-    def check_regular_shift_for_weekly(self):
-        for i in self:
-            if i.shift_type == 'R':
-                if i.employee_id.sudo().shift_working and (
-                        i.employee_id.sudo().shift_working_date < i.date_from < i.employee_id.sudo().shift_working_end_date):
-                    raise UserError(
-                        'Esnek vardiyalı çalışanlar için Regular vardiya planlaması yapılmamalıdır. {}'.format(
-                            str(i.employee_id.sudo().personel_id)))
-
-    def check_ed_learning(self, shift_obj):
-        resource_calendar_id = self.env['resource.calendar.attendance'].sudo().search(
-            [('calendar_id', '=', shift_obj.calendar_id.id), ('dayofweek', '=', '0')], limit=1)
-
-        start = resource_calendar_id.hour_from
-        end = resource_calendar_id.hour_to
-
-        demand_ids = self.env['ed_learning.demand'].sudo().search(
-            [('employee_id', '=', shift_obj.employee_id.id), ('planning_id', '!=', False),
-             ('ttc_course_id', '!=', False),
-             ('elearning_course_id', '=', False),
-             ('planning_id.stop_date', '>=', shift_obj.date_from),
-             ('planning_id.start_date', '<=', shift_obj.date_to),
-             ])
-
-        activity_obj = self.env['mail.activity']
-        ed_learning_model_id = self.env['ir.model'].search([('model', '=', 'ed_learning.activity')])
-        res_model_id = ed_learning_model_id.id
-        res_model_name = ed_learning_model_id.name
-        activity_type_id = self.env.ref("hr_shift_plan.activity_type_rejected_due_to_shift")
-        date_deadline = fields.Date.context_today(self) - timedelta(days=1)
-
-        for demand in demand_ids:
-            if not demand.planning_id.planning_shift_id.shift_block_ids.filtered(
-                    lambda l: l.block_start_time >= start and l.block_end_time <= end):
-                demand_pl_id_start = pytz.utc.localize(demand.planning_id.start).astimezone(
-                    pytz.timezone('Turkey')).strftime("%d-%m-%Y %H:%M:%S")
-                demand_pl_id_stop = pytz.utc.localize(demand.planning_id.stop).astimezone(
-                    pytz.timezone('Turkey')).strftime("%d-%m-%Y %H:%M:%S")
-                summary = (
-                    'Sayın {},<br/><br/>{} isimli {} sicil numaralı çalışanın vardiya günü değiştirilmiştir. Vardiya değişikliği yapılmadan önce çalışan aşağıdaki eğitim planlamasına dahil edilmişti.  '
-                    'Bu planlamaya katılmasını istemiyorsanız ''Planlama ve Talebi İptal Et'' butonuna basarak çalışanın planlamasını ve talebini iptal edebilirsiniz.<br/><br/> '
-                    '<b>Eğitim Kodu:</b> {} <br/> <b>Eğitim Adı:</b> {} <br/> <b>Eğitim Başlangıç Tarihi:</b> {} <br/> <b>Eğitim Bitiş Tarihi:</b>{} <br/><b> Eğitim Sınıfı: </b>{}').format(
-                    demand.employee_id.department_id.manager_id.name, demand.employee_id.name,
-                    demand.employee_id.personel_id, demand.planning_id.name, demand.planning_id.course_name,
-                    demand_pl_id_start, demand_pl_id_stop, demand.planning_id.classroom_id.name)
-                ed_learning_activity = {
-                    'title': 'Eğitim Yönetimi Vardiya Planlaması Kurs İptal Bilgilendirmesi',
-                    'summary': summary,
-                    'employee_id': demand.employee_id.department_id.manager_id.id,
-                    'rel_employee_id': demand.employee_id.id,
-                    'course_id': demand.course_id.id,
-                    'demand_id': demand.id,
-                    'status': 'todo',
-                    'active': True
-                }
-
-                demand_activity = self.env['ed_learning.activity'].sudo().create(ed_learning_activity)
-
-                demand_activity.notification_request(summary=summary,
-                                                     note='Eğitim Yönetimi Vardiya Planlaması Kurs İptal Bilgilendirmesi',
-                                                     date_deadline=date_deadline,
-                                                     assign_user_id=demand.employee_id.department_id.manager_id.user_id.id,
-                                                     status='todo',
-                                                     relevant_emp_id=demand.employee_id.id,
-                                                     activity_type_id=activity_type_id.id
-                                                     )
-
-                # activity_obj.sudo().create({'res_model_id': res_model_id,
-                #                             'summary': summary,
-                #                             'title': 'Eğitim Yönetimi Vardiya Planlaması Kurs İptal Bilgilendirmesi',
-                #                             'date_deadline': date_deadline,
-                #                             'res_name': res_model_name,
-                #                             'relevant_emp_id': demand.employee_id.id,
-                #                             'activity_type_id': activity_type_id.id,
-                #                             'user_id': demand.employee_id.department_id.manager_id.user_id.id,
-                #                             'res_id': demand_activity.id})
-
-    def update_db2_the_shift(self, is_delete):
-        if self.id > 40000:
-            obj_ns_param = self.env['ns.parameters'].sudo().search(['|', ('key', '=', 'pass'), ('key', '=', 'user')],
-                                                                   limit=2)
-            password = obj_ns_param.filtered(lambda l: l.key == 'pass').value
-            user = obj_ns_param.filtered(lambda l: l.key == 'user').value
-
-            employee_id = self.employee_id.sudo()
-            shift_code = self.calendar_id.legacy_shift_code
-            work_center = ''.join([str(elem) + ',' for elem in
-                                   self.task_center_ids.mapped("task_center")]) if self.task_center_ids else ""
-            if ',' in work_center and ',' == work_center[-1]:
-                work_center = work_center[:-1]
-
-            conn = ibm_db.connect(
-                "DATABASE=LNXUDBP;HOSTNAME=Taivts1;PORT=50001;PROTOCOL=TCPIP;UID={};PWD={};".format(user, password), "",
-                "")
-
-            if is_delete:
-                sql = """DELETE FROM pdks.t013vardiya where HUMA_ID = {} """.format(self.id)
-            else:
-                sql = """UPDATE pdks.t013vardiya set GENELSICIL={},SICIL={}, BASLAMATARIH='{}',BITISTARIH='{}',
-                VARDIYATIP='{}',VARDIYAKOD={},IS_MERKEZI='{}',KAYIT_EDEN={},KAYIT_YERI={},KAYIT_ZAMANI='{}'
-                WHERE HUMA_ID = {}
-                 """.format(employee_id.legacy_general_personel_id, employee_id.personel_id, self.date_from,
-                            self.date_to,
-                            self.shift_type, shift_code, work_center,
-                            self.env.user.employee_ids[-1].legacy_general_personel_id,
-                            '100', str(self.create_date)[:10], self.id)
-
-            stmt = ibm_db.prepare(conn, sql)
-            ibm_db.execute(stmt)
-
-    def write(self, vals):
-        calendar_1 = self.env["ir.config_parameter"].sudo().get_param("hr_shift_plan.calendar_1") or "-1"
-        calendar_2 = self.env["ir.config_parameter"].sudo().get_param("hr_shift_plan.calendar_2") or "-1"
-        calendar_3 = self.env["ir.config_parameter"].sudo().get_param("hr_shift_plan.calendar_3") or "-1"
-        for s in self:
-            new_shift = s.shift_type
-            new_calendar_id = str(s.calendar_id.id)
-            if 'shift_type' in vals:
-                new_shift = vals['shift_type']
-            if 'calendar_id' in vals:
-                new_calendar_id = str(vals['calendar_id'])
-
-            new_date_from = s.date_from
-            new_date_to = s.date_to
-
-            change_dates = False
-            if 'date_from' in vals:
-                new_date_from = datetime.strptime(vals['date_from'], '%Y-%m-%d').date()
-                change_dates = True
-            if 'date_to' in vals:
-                new_date_to = datetime.strptime(vals['date_to'], '%Y-%m-%d').date()
-                change_dates = True
-
-            search_matrix = self.env['hr.shift_plan_matrix_temp'].search(
-                [('employee_id', '=', s.employee_id.id)]).filtered(
-                lambda x: s.date_from <= x.plan_date.date() <= s.date_to)
-
-            new_search_matrix = self.env['hr.shift_plan_matrix_temp'].search(
-                [('employee_id', '=', s.employee_id.id)]).filtered(
-                lambda x: new_date_from <= x.plan_date.date() <= new_date_to)
-
-            if search_matrix:
-                search_matrix.write({'shift_type': False})
-
-            if new_calendar_id == calendar_1:
-                calendar = 1
-            elif new_calendar_id == calendar_2:
-                calendar = 2
-            elif new_calendar_id == calendar_3:
-                calendar = 3
-            else:
-                calendar = ''
-
-            new_shift_type = new_shift + str(calendar)
-
-            if new_search_matrix:
-                new_search_matrix.write({'shift_type': new_shift_type})
-
-            if 'active' in vals and not vals['active']:
-                rewrite_matrix = self.env['hr.shift_plan_matrix_temp'].search(
-                    [('employee_id', '=', s.employee_id.id)]).filtered(
-                    lambda x: s.date_from <= x.plan_date.date() <= s.date_to)
-                rewrite_matrix.write({'shift_type': False})
-            if 'active' in vals and vals['active'] and not s.active:
-                raise UserError(
-                    _('You cannot open the archive record.'))
-            if change_dates:
-                s.recalculate_changed_shift(new_date_from, new_date_to)
-        vals.update({'up_number': 0})
-        res = super(HrShiftPlan, self).write(vals)
-        for i in self:
-            active = vals.get('active', i.active)
-            if active:
-                i.check_ed_learning(i)
-                if not self.env.context.get('no_up_db2', False):
-                    i.update_db2_the_shift(is_delete=False)
-            else:
-                i.update_db2_the_shift(is_delete=True)
-        return res
-
-    @api.model
-    def create_matrix_list(self, plan):
-        matrix = []
-        if type(plan['date_from']) == str:
-            plan_date = datetime.strptime(plan['date_from'], '%Y-%m-%d')
-        else:
-            plan_date = datetime.strptime(plan['date_from'].strftime('%Y-%m-%d'), '%Y-%m-%d')
-
-        if type(plan['date_to']) == str:
-            plan_to = datetime.strptime(plan['date_to'], '%Y-%m-%d')
-        else:
-            plan_to = datetime.strptime(plan['date_to'].strftime('%Y-%m-%d'), '%Y-%m-%d')
-        year = plan_date.year
-        start = datetime(int(year), int(plan_date.month), 1)
-        end = datetime(int(year), int(plan_date.month), monthrange(year, plan_date.month)[1])
-        search_matrix = self.env['hr.shift_plan_matrix_temp'].search(
-            [('employee_id', '=', plan['employee_id'])]).filtered(
-            lambda x: start <= x.plan_date <= end).sorted(key=lambda r: r.plan_date, reverse=False)
-
-        calendar_1 = self.env["ir.config_parameter"].sudo().get_param("hr_shift_plan.calendar_1") or "-1"
-        calendar_2 = self.env["ir.config_parameter"].sudo().get_param("hr_shift_plan.calendar_2") or "-1"
-        calendar_3 = self.env["ir.config_parameter"].sudo().get_param("hr_shift_plan.calendar_3") or "-1"
-
-        if str(plan['calendar_id']) == str(calendar_1):
-            calendar = 1
-        if str(plan['calendar_id']) == str(calendar_2):
-            calendar = 2
-        if str(plan['calendar_id']) == str(calendar_3):
-            calendar = 3
-
-        if not search_matrix:
-            [matrix.append({
-                'employee_id': plan['employee_id'],
-                'plan_date': str(single_date),
-                'shift_type': plan['shift_type'] + str(calendar) if plan_date <= datetime.strptime(
-                    single_date.strftime('%Y-%m-%d'), '%Y-%m-%d') <= plan_to else None
-            }) for single_date in (start.date() + timedelta(n) for n in range(monthrange(year, plan_date.month)[1]))]
-        else:
-            change = search_matrix.filtered(
-                lambda x: plan_date <= x.plan_date <= plan_to)
-            change.write({'shift_type': plan['shift_type'] + str(calendar)})
-
-        if matrix:
-            self.env['hr.shift_plan_matrix_temp'].create(matrix)
-
-    @api.multi
-    def name_get(self):
-        result = []
-        for s in self:
-            result.append((s.id, (s.employee_id.name + '-' + str(s.date_from.strftime("%d.%m.%Y")) + '-' + str(
-                s.date_to.strftime("%d.%m.%Y")))))
-        return result
-
-
-    @api.model
-    def _get_employee_domain(self):
-        return [('id', 'in', self._get_employee_ids_list())]
-
-    @api.onchange('employee_id')
-    def _get_employee_list(self):
-        return {'domain': {'employee_ids': [('employee_id', 'in', self._get_employee_ids_list())]}}
-
-    def _get_employee_ids_list(self):
-        if self.env.user.has_group('hr_shift_plan.group_hr_shift_plan_ik'):
-            emp_list = self.env['hr.employee'].sudo().search([('active', '=', True)])
-            return emp_list.ids
-
-        empList = []
-        if self.env.user.has_group('hr_shift_plan.group_hr_shift_plan_user'):
-            empList = self.env['hr.employee'].sudo().search([('id', '=', self.env.user.employee_ids[:1].id)],
-                                                            order="department_id desc")
-        if self.env.ref('hr_organisation.role_assistant_manager', raise_if_not_found=False) and self.env.user and self.env.user.employee_ids:
-            employee_list = self.env['hr.employee'].sudo().search(
-                [('working_type', '=', 'taiEmployee'), '|',
-                 ('department_id', 'child_of', self.env.user.employee_ids[0].managed_departments.ids),
-                 ('id', '=', self.env.user.employee_ids[0].id)])
-
-            assistant_has_role = self.env.ref('hr_organisation.role_assistant_manager', raise_if_not_found=False).line_ids.filtered(
-                lambda l: l.user_id.id == self.env.uid and (not l.date_to or l.date_to >= datetime.now().date()))
-            if assistant_has_role:
-                empList = self.env['hr.employee'].search(
-                    ['|', ('search_assistant_manager_dept', '=', ''), ('id', 'in', employee_list.ids)])
-                return empList.ids
-        if self.env.user.has_group('hr_shift_plan.group_hr_shift_plan_manager'):
-            managerDeptList = self.env['hr.department'].sudo().search(
-                [('manager_id', '=', self.env.user.employee_ids[:1].id)]).ids
-            empList = self.env['hr.employee'].sudo().search([('department_id', 'child_of', managerDeptList)],
-                                                            order="department_id desc")
-        if self.env.user.has_group('hr_shift_plan.group_hr_shift_plan_presidential'):
-            if len(self.env.user.sequential_parent_departments.filtered(lambda x: x.department_level.code == 25)) > 0:
-                dept25_id = \
-                    self.env.user.sequential_parent_departments.filtered(lambda x: x.department_level.code == 25)[0].id
-                deptList = self.env['hr.department'].sudo().search([('id', 'child_of', dept25_id)])
-                empList = self.env['hr.employee'].sudo().search([('department_id', 'in', deptList.ids)],
-                                                                order="department_id desc")
-            if len(self.env.user.sequential_parent_departments.filtered(lambda x: x.department_level.code == 22)) > 0:
-                dept25_id = \
-                    self.env.user.sequential_parent_departments.filtered(lambda x: x.department_level.code == 22)[0].id
-                deptList = self.env['hr.department'].sudo().search([('id', 'child_of', dept25_id)])
-                empList = self.env['hr.employee'].sudo().search([('department_id', 'in', deptList.ids)],
-                                                                order="department_id desc")
-        if self.env.user.has_group('hr_shift_plan.group_hr_shift_plan_directorate'):
-            if len(self.env.user.sequential_parent_departments.filtered(lambda x: x.department_level.code == 40)) > 0:
-                dept40_id = \
-                    self.env.user.sequential_parent_departments.filtered(lambda x: x.department_level.code == 40)[0].id
-                deptList = self.env['hr.department'].sudo().search([('id', 'child_of', dept40_id)])
-                empList = self.env['hr.employee'].sudo().search([('department_id', 'in', deptList.ids)],
-                                                                order="department_id desc")
-        return empList if isinstance(empList, list) else empList.ids
-
-    def shift_plan_view_with_domain(self):
-        # print "make sure that this action is called from th server action "
-        domain = self._get_employee_list().get('domain').get('employee_ids')
-        tree_id = self.env.ref("hr_shift_plan.hr_shift_plan_tree")
-        form_id = self.env.ref("hr_shift_plan.hr_shift_plan_form")
-        return {
-            'type': 'ir.actions.act_window',
-            'name': _('Shift Plan'),
-            'view_type': 'form',
-            'view_mode': 'tree,form',
-            'res_model': 'hr.shift_plan',
-            'domain': domain,
-            # if you don't want to specify form for example
-            # (False, 'form') just pass False
-            'views': [(tree_id.id, 'tree'), (form_id.id, 'form')],
-            'target': 'current',
-        }
-
-    @api.multi
-    @api.constrains('date_from', 'date_to')
-    def check_shift(self):
-        for s in self:
-
-            if s.shift_type == 'I' and (s.date_to - s.date_from).days + 1 > 7:
-                raise ValidationError(
-                    _('Irregular vardiyalılar için vardiya girişlerini haftalık yapınız. Haftaiçi çalışmaları için en fazla 5 günlük plan oluşturunuz. Haftasonu da çalışma yapılacaksa en fazla 7 günlük plan oluşturunuz.'))
-
-            if s.shift_type == 'R' and (s.date_to - s.date_from).days + 1 < 6:
-                raise ValidationError(
-                    _('%s sicilli çalışan için %s-%s tarihlerinde girilen kayıt en az 6 günlük olmalıdır.') % (
-                        s.employee_id.personel_id, s.date_from.strftime("%d.%m.%Y"), s.date_to.strftime("%d.%m.%Y")))
-
-            if s.shift_type == 'R' and (s.date_to - s.date_from).days + 1 > 8:
-                raise ValidationError(_('Regular vardiya en fazla 8 günlük olabilir.'))
-
-            shiftPlanList = self.env['hr.shift_plan'].search(
-                [('employee_id', '=', s.employee_id.id), ('id', '!=', s.id), ('active', '=', True)])
-            for shiftPlan in shiftPlanList:
-                if s.shift_type == 'R' and s.shift_type == shiftPlan.shift_type and abs(
-                        (s.date_from - shiftPlan.date_from).days) + 1 < 8:
-                    raise ValidationError(
-                        _('%s sicilli çalışan için %s-%s tarihlerinde girilen kayıt vardiya tatilini kapsamaktadır.') % (
-                            s.employee_id.personel_id, s.date_to.strftime("%d.%m.%Y"),
-                            s.date_from.strftime("%d.%m.%Y")))
-
-            # HUMA-8544 Aynı Çalışan için girilen regular vardiya planlarını tarihe göre sıraladıktan sonra üst üste 2 den fazla V2 veya V3 olmamalı
-            if 'V1' not in s.calendar_id.name:
-                v_list = []
-                p_list = []
-                shiftPlanList = self.env['hr.shift_plan'].search(
-                    [('employee_id', '=', s.employee_id.id), ('shift_type', '=', 'R'), ('active', '=', True),
-                     ('date_to', '<=', s.date_from), ('date_from', '>', s.date_from - timedelta(days=20))],
-                    limit=2,
-                    order="date_from desc")
-                shiftPlanList2 = self.env['hr.shift_plan'].search(
-                    [('employee_id', '=', s.employee_id.id), ('shift_type', '=', 'R'), ('active', '=', True),
-                     ('date_from', '>', s.date_to), ('date_to', '<', s.date_to + timedelta(days=20))], limit=2,
-                    order="date_from desc")
-                if shiftPlanList:
-                    for v in shiftPlanList:
-                        if 'V2' in v.calendar_id.name or 'V3' in v.calendar_id.name:
-                            v_list.append(v)
-                            if len(v_list) == 2:
-                                raise ValidationError(
-                                    _('Regular vardiya planlaması yapılırken aynı çalışan için en fazla 2 defa üst üste V2 veya V3 planı oluşturulabilir.'))
-                if shiftPlanList2:
-                    for p in shiftPlanList2:
-                        if 'V2' in p.calendar_id.name or 'V3' in p.calendar_id.name:
-                            p_list.append(p)
-                            if len(p_list) == 2:
-                                raise ValidationError(
-                                    _('Regular vardiya planlaması yapılırken aynı çalışan için en fazla 2 defa üst üste V2 veya V3 planı oluşturulabilir.'))
-
-            #     else:
-            #         break
-            # for i in range(len(v_list)):
-            #     obj = v_list[i]
-            #     if 0 <= (i + 2) < len(v_list):
-            #         obj1 = v_list[i + 1]
-            #         obj2 = v_list[i + 2]
-            #
-            #         if ('V2' in obj.calendar_id.name or 'V3' in obj.calendar_id.name) and (
-            #                 'V2' in obj1.calendar_id.name or 'V3' in obj1.calendar_id.name) and (
-            #                 'V2' in obj2.calendar_id.name or 'V3' in obj2.calendar_id.name):
-            #             raise ValidationError(
-            #                 _('Regular vardiya planlaması yapılırken aynı çalışan için en fazla 2 defa üst üste V2 veya V3 planı oluşturulabilir.'))
-
-            domain = [
-                ('id', '!=', s.id),
-                ('date_from', '<=', s.date_to),
-                ('date_to', '>=', s.date_from),
-                ('employee_id', '=', s.employee_id.id),
-                ('active', '=', True)
-            ]
-            shiftPlanCount = self.env['hr.shift_plan'].search_count(domain)
-            if shiftPlanCount > 0:
-                raise ValidationError(
-                    _('%s sicilli çalışan için bu tarihlerle çakışan vardiya planı oluşturulmuş.') % s.employee_id.personel_id)
-
-    @api.multi
-    @api.constrains('date_from', 'date_to', 'active')
-    def check_date(self):
-        for obj in self:
-            if obj.date_from > obj.date_to:
-                raise ValidationError(_('Sorry, Shift End Date must be greater than Shift Start Date...'))
-            # if obj.date_from < fields.Date.today():
-            #     raise ValidationError(_('Sorry, Shift Start Date must be greater than or equal today...'))
-            # if obj.date_to < fields.Date.today():
-            #     raise ValidationError(_('Sorry, Shift End Date must be greater than or equal today...'))
-
-            if not self.env.user.has_group('hr_shift_plan.group_hr_shift_plan_ik'):
-                valid_start_date = fields.Date.today().replace(day=1)
-                if fields.Date.today().day in (1, 2, 3, 4, 5):
-                    valid_start_date = (fields.Date.today() + relativedelta(months=-1)).replace(day=1)
-                if obj.date_from < valid_start_date:
-                    raise ValidationError(_('You can not create/edit/delete for past months.'))
-
-    def _compute_flexible_shift(self, inputDate):
-        if self.employee_id.sudo().shift_working_date and self.employee_id.sudo().shift_working_end_date:
-            if self.employee_id.sudo().shift_working_date <= inputDate <= self.employee_id.sudo().shift_working_end_date:
-                return True
-        return False
-
-    def show_shift_info(self, input_date, employee_id):
-        shift_dict = self.get_shift_information(input_date, employee_id)
-
-        raise ValidationError("{}".format(shift_dict))
-
-    @api.multi
-    def get_shift_information(self, inputDate, employeeId):
-
-        origin_date = inputDate
-        returnDic = {}
-        resource_lunck_obj = self.env['resource.lunch.break'].sudo()
-        employee = self.env['hr.employee'].sudo().browse(employeeId)
-        cur_calendar_id = employee.sudo().get_attendance_config_at_time(origin_date, True)
-
-        is_version = employee.get_emp_version(origin_date)
-        if is_version:
-            calculation_type = is_version.calendar_id.calculation_type
-        else:
-            calculation_type = employee.resource_calendar_id.calculation_type
-
-        if calculation_type == 'weekly':
-            return {}
-
-        shiftPlan = self.search(
-            [('employee_id', '=', employeeId), ('date_from', '<=', inputDate), ('date_to', '>=', inputDate)], limit=1)
-        if shiftPlan:
-            returnDic['calendar_id'] = shiftPlan.calendar_id
-            returnDic['lunch_break_id'] = resource_lunck_obj.search([('calendar_id', '=', returnDic['calendar_id'].id)])
-            returnDic['shift_type'] = shiftPlan.shift_type
-            whichDay = (inputDate - shiftPlan.date_from).days + 1
-            returnDic['whichDay'] = whichDay
-            if shiftPlan.shift_type == 'R':
-                if whichDay == 7:
-                    returnDic['weekend'] = 1
-                if whichDay == 8:
-                    returnDic['weekend'] = 2
-            else:
-                if not shiftPlan._compute_flexible_shift(inputDate):
-                    weekDayNo = inputDate.weekday()
-                    if weekDayNo == 5:
-                        returnDic['weekend'] = 1
-                    if weekDayNo == 6:
-                        returnDic['weekend'] = 2
-        else:
-            delta = relativedelta(days=-1)
-            inputDate = inputDate + delta
-            shiftPlan = self.search(
-                [('employee_id', '=', employeeId), ('date_from', '<=', inputDate), ('date_to', '>=', inputDate)],
-                limit=1)
-            if shiftPlan and not self.search([('employee_id', '=', employeeId)], limit=1)._compute_flexible_shift(
-                    origin_date):
-                returnDic['calendar_id'] = shiftPlan.calendar_id
-                returnDic['lunch_break_id'] = resource_lunck_obj.search(
-                    [('calendar_id', '=', returnDic['calendar_id'].id)])
-                returnDic['shift_type'] = shiftPlan.shift_type
-                if shiftPlan.shift_type == 'R':
-                    if (shiftPlan.date_to - shiftPlan.date_from).days + 1 == 6:
-                        returnDic['weekend'] = 1
-                    else:
-                        returnDic['weekend'] = 2
-                    returnDic['calendar_id'] = cur_calendar_id[employee.id][2]
-                    returnDic['lunch_break_id'] = employee.sudo().lunch_break_id
-                else:
-                    return {}
-
-            elif self.search([('employee_id', '=', employeeId)], limit=1)._compute_flexible_shift(
-                    origin_date) and origin_date.weekday() in (5, 6):
-                returnDic['calendar_id'] = cur_calendar_id[employee.id][2] if employee.id in cur_calendar_id else -1
-                returnDic['lunch_break_id'] = employee.sudo().lunch_break_id
-                returnDic['shift_type'] = shiftPlan.shift_type
-                if origin_date.weekday() == 5:
-                    returnDic['weekend'] = 1
-                if origin_date.weekday() == 6:
-                    returnDic['weekend'] = 2
-            elif shiftPlan and self.search([('employee_id', '=', employeeId)], limit=1)._compute_flexible_shift(
-                    origin_date):
-                shiftPlan2 = self.search(
-                    [('employee_id', '=', employeeId), ('date_from', '<=', inputDate + relativedelta(days=+2)),
-                     ('date_to', '>=', inputDate + relativedelta(days=+2))],
-                    limit=1)
-                returnDic['calendar_id'] = cur_calendar_id[employee.id][2]
-                returnDic['lunch_break_id'] = employee.sudo().lunch_break_id
-                returnDic['shift_type'] = shiftPlan.shift_type
-                if shiftPlan2:
-                    returnDic['weekend'] = 2
-                else:
-                    returnDic['weekend'] = 1
-            else:
-                if not self.search([('employee_id', '=', employeeId)], limit=1)._compute_flexible_shift(origin_date):
-                    delta = relativedelta(days=-1)
-                    inputDate = inputDate + delta
-                    shiftPlan = self.search(
-                        [('employee_id', '=', employeeId), ('date_from', '<=', inputDate),
-                         ('date_to', '>=', inputDate)],
-                        limit=1)
-                    if shiftPlan:
-                        returnDic['calendar_id'] = shiftPlan.calendar_id
-                        returnDic['lunch_break_id'] = resource_lunck_obj.search(
-                            [('calendar_id', '=', returnDic['calendar_id'].id)])
-                        returnDic['shift_type'] = shiftPlan.shift_type
-                        if shiftPlan.shift_type == 'R':
-                            returnDic['weekend'] = 2
-                            if employee.id in cur_calendar_id:
-                                returnDic['calendar_id'] = cur_calendar_id[employee.id][2]
-                            returnDic['lunch_break_id'] = employee.sudo().lunch_break_id
-                        else:
-                            return {}
-                else:
-                    delta = relativedelta(days=+2)
-                    inputDate = inputDate + delta
-                    shiftPlan = self.search(
-                        [('employee_id', '=', employeeId), ('date_from', '<=', inputDate),
-                         ('date_to', '>=', inputDate)],
-                        limit=1)
-                    if shiftPlan:
-                        returnDic['calendar_id'] = cur_calendar_id[employee.id][2]
-                        returnDic['lunch_break_id'] = employee.sudo().lunch_break_id
-                        returnDic['shift_type'] = shiftPlan.shift_type
-                        returnDic['weekend'] = 2
-        return returnDic
-
-    def cron_person_based_shift_plans(self):
-        yesterday = datetime.today() - timedelta(days=1)
-        write_date_start = datetime.combine(yesterday, datetime.min.time())
-        write_date_stop = datetime.combine(yesterday, datetime.max.time())
-        # job_category üretim,
-        shift_plan_ids = self.search(
-            [('is_dept_production', '=', True),
-             ('write_date', '>=', write_date_start),
-             ('write_date', '<=', write_date_stop)])
-        employee_group = defaultdict(list)
-        for k in shift_plan_ids:
-            employee_group[k.employee_id].append(k)
-        for emp_id in employee_group.items():
-            date_to_list = []
-            date_from_list = []
-            calendar_list = []
-            for item in emp_id[1]:
-                date_to_list.append(item.date_to)
-                date_from_list.append(item.date_from)
-                calendar_list.append(item.calendar_id.name)
-            if emp_id[0].department_id.manager_id and emp_id[0].department_id.manager_id.user_id:
-                activity_obj = self.env['mail.activity']
-                res_model_id = self.env['ir.model'].search([('model', '=', 'hr.shift_plan_activity')]).id
-                res_model_name = self.env['ir.model'].search([('model', '=', 'hr.shift_plan_activity')]).name
-                activity_type_id = self.env.ref("hr_shift_plan.activity_type_person_based_shift_plans")
-                date_deadline = fields.Date.context_today(self) - timedelta(days=1)
-
-                calendar_lst = {val: calendar_list.count(val) for val in set(calendar_list)}
-                calendar_count = ""
-                for calendar, count in calendar_lst.items():  # dct.
-                    calendar_count += """<li>{} vardiyasında {} defa """.format(calendar, count)
-                calendar_count += "tanımlanmıştır"
-
-                summary = (
-                    '''Sayın İlgili,<br/>{} isimli {} sicil numaralı çalışanın {} / {} tarihleri arasında  <br/>{} <br/><br/>'''
-                    '''Ay boyunca V1(07:00-15:10) ve V2(15:00-23:10) vardiyalarında dönüşümlü olarak işe devam edildiği durumlarda 2'li vardiya tanımı yapılmış olur ve çalışanlar için vardiya primi % 20 olarak ödenecektir.<br/> '''
-                    '''Ay boyunca V1(07:00-15:10), V2(15:00-23:10) ve V3(23:00-07:10) vardiyalarında dönüşümlü olarak işe devam edildiği durumda 3'lü vardiya tanımı yapılmış olur ve çalışanlar için vardiya primi % 25 olarak ödenecektir.'''
-                ).format(
-                    emp_id[0].name, emp_id[0].personel_id, str(min(date_from_list)), str(max(date_to_list)),
-                    calendar_count)
-                shift_activity = self.env['hr.shift_plan_activity'].create({
-                    'employee_id': emp_id[0].department_id.manager_id.id,
-                    'rel_employee_id': emp_id[0].id,
-                    'date_from': min(date_from_list),
-                    'date_to': max(date_to_list),
-                    'activity_summary': summary,
-                    'status': 'todo',
-                    'change_date': yesterday,
-
-                })
-
-                shift_activity.notification_request(summary=summary,
-                                                    note='Vardiya Planlama Bilgilendirmesi',
-                                                    date_deadline=date_deadline,
-                                                    assign_user_id=emp_id[0].department_id.manager_id.user_id.id,
-                                                    status='todo',
-                                                    relevant_emp_id=emp_id[0].id,
-                                                    activity_type_id=activity_type_id.id
-                                                    )
-
-                # activity_obj.sudo().create({'res_model_id': res_model_id,
-                #                             'summary': summary,
-                #                             'title': 'Vardiya Planlama Bilgilendirmesi',
-                #                             'date_deadline': date_deadline,
-                #                             'res_name': res_model_name,
-                #                             'relevant_emp_id': emp_id[0].id,
-                #                             'activity_type_id': activity_type_id.id,
-                #                             'user_id': emp_id[0].department_id.manager_id.user_id.id,
-                #                             'res_id': shift_activity.id})
-
-    def get_shift_plan_cancel(self):
-        auth_check = self.user_has_groups('hr_shift_plan.group_hr_shift_plan_manager') or self.user_has_groups('hr_shift_plan.group_hr_shift_plan_directorate') or self.user_has_groups('hr_shift_plan.group_hr_shift_plan_presidential') or self.user_has_groups('hr_shift_plan.group_hr_shift_plan_ik') or self.user_has_groups('hr_shift_plan.group_hr_shift_plan_assistant')
-        if auth_check:
-            for record in self:
-                record.sudo().write({'active': False})
-
-        else:
-            raise ValidationError(
-                _("Vardiya Planı İptal işlemi yapılamamaktadır."))
-
-    cancel_button_valid_check = fields.Boolean(compute='_cancel_button_valid_check')
-
-    def _cancel_button_valid_check(self):
-        auth_check = self.user_has_groups('hr_shift_plan.group_hr_shift_plan_manager') or self.user_has_groups('hr_shift_plan.group_hr_shift_plan_directorate') or self.user_has_groups('hr_shift_plan.group_hr_shift_plan_presidential') or self.user_has_groups('hr_shift_plan.group_hr_shift_plan_ik') or self.user_has_groups('hr_shift_plan.group_hr_shift_plan_assistant')
-        for i in self:
-
-            if auth_check:
-                i.cancel_button_valid_check = True
-            else:
-                i.cancel_button_valid_check = False
-
-
-hr_shift_plan_task_center.py
-
-from odoo import fields, models, api,_
-from odoo.exceptions import UserError, ValidationError
-import logging
-import requests
-import os
-from odoo.osv import expression
-import ibm_db
-_logger = logging.getLogger(__name__)
-
-
-class HrShiftPlanTaskCenter(models.Model):
-    _name = "hr.shift_plan_task_center"
-    _description = "Vardiya Girişi İş Merkezi"
-
-    legacy_id = fields.Integer(string='Legacy Id')
-    task_center = fields.Char(string='Task Center')
-    description = fields.Char(string='Description')
-    active = fields.Boolean('Active', default=True)
-    dept_home = fields.Char(string='Dept Home')
-
-    @api.multi
-    def name_get(self):
-        result = []
-        for s in self:
-            result.append((s.id, (s.task_center + '-' + str(s.description))))
-        return result
-
-    @api.model_create_multi
-    def create(self, vals):
-        return super(HrShiftPlanTaskCenter, self).create(vals)
-
-    def update_task_center_from_legacy_new(self):
-        obj_pass = self.env['ns.parameters'].sudo().search([('key', '=', 'pass')], limit=1)
-        obj_user = self.env['ns.parameters'].sudo().search([('key', '=', 'user')], limit=1)
-        password = obj_pass.value
-        user = obj_user.value
-
-        conn = ibm_db.connect(
-            "DATABASE=LNXUDBP;HOSTNAME=Taivts1;PORT=50001;PROTOCOL=TCPIP;UID={};PWD={};".format(user, password), "", "")
-
-        sql = """SELECT ID, TRIM(IS_MERKEZI) AS IS_MERKEZI, TRIM(DESCRIPTION) AS DESCRIPTION, TRIM(DEPT_HOME) AS DEPT_HOME FROM ERP2.KAPASITE 
-                         WHERE IS_MERKEZI_TIP_ID ='2' AND DEPT_HOME NOT LIKE '999%' AND AKTIF_PASIF = 1 WITH UR"""
-        stmt = ibm_db.prepare(conn, sql)
-
-        ibm_db.execute(stmt)
-        capacity = []
-
-        row = ibm_db.fetch_both(stmt)
-        while row:
-            capacity.append({'task_center': row.get('IS_MERKEZI').strip(),
-                             'dept_home':row.get('DEPT_HOME', "").strip(),'description':row.get('DESCRIPTION', "").strip() })
-            row = ibm_db.fetch_both(stmt)
-
-        return capacity
-
-    def update_task_center_from_legacy(self):
-        data_dict_list = self.update_task_center_from_legacy_new()
-
-        created_list = []
-        for data in data_dict_list:
-            is_task_center_exist = self.search_count(
-                [('active', '=', True), ('task_center', '=', data.get('task_center'))])
-            if is_task_center_exist == 0:
-                created_list.append({
-                    'dept_home': data.get("dept_home"),
-                    'task_center': data.get("task_center"),
-                    'description': data.get("description")
-                })
-
-        self.create(created_list)
-
-    # @api.multi
-    # def update_task_center_from_legacy(self):
-    #     ws_url = self.env["ir.config_parameter"].sudo().get_param("webservice_address_base")
-    #     if not ws_url:
-    #         ws_url = ''
-    #     url = ws_url + '/shift/task_center'
-    #
-    #     headers = {"Authorization": os.getenv("DB2WSCALLAUTH")}
-    #     try:
-    #         response = requests.get(url, params={}, verify=False, timeout=5, headers=headers).json()
-    #         dataDictList = response['data']
-    #         for data in dataDictList:
-    #             is_task_center_exist = self.search_count([('active', '=', True), ('task_center', '=', data.get('IS_MERKEZI').strip())])
-    #             if is_task_center_exist == 0:
-    #                 self.create({
-    #                             'dept_home': data.get('DEPT_HOME', "").strip(),
-    #                             'task_center': data.get('IS_MERKEZI', "").strip(),
-    #                             'description': data.get('DESCRIPTION', "").strip()
-    #                 })
-    #     except requests.exceptions.Timeout as e:
-    #         _logger.error("Travel ---->>> _get_task_center ---ERROR---:%s", e)
-    #         raise ValidationError(_('Service timeout problem.'))
-    #     except Exception as e:
-    #         _logger.error("Travel ---->>> _get_task_center---ERROR---:%s", e)
-    #         # raise ValidationError(_('Service connection problem.exception:' + str(e)))
-
-
-
-
-
-
-
-
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
+    self._tags[rec.tag](rec, de, mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 472, in _tag_menuitem
+    action_model, action_id = self.model_id_get(a_action)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 747, in model_id_get
+    return self.env['ir.model.data'].xmlid_to_res_model_res_id(id_str, raise_if_not_found=raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
+    return self.xmlid_lookup(xmlid)[1:3]
+  File "<decorator-gen-26>", line 2, in xmlid_lookup
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 93, in lookup
+    value = d[key] = self.method(*args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
+    raise ValueError('External ID not found in the system: %s' % xmlid)
+odoo.tools.convert.ParseError: "External ID not found in the system: hr_attendance_ext.hr_attendance_request_menu_wizard_action" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_attendance_ext/views/views.xml:241, near
+<menuitem name="Kay&#x131;t Olu&#x15F;turma" id="zone_auth_requests_menu1" sequence="4" parent="hr_attendance_ext.menu_root" action="hr_attendance_request_menu_wizard_action"/>
+2026-03-10 12:49:27,800 20917 ERROR odoodb odoo.http: Exception during JSON request handling. 
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 88, in lookup
+    r = d[key]
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/func.py", line 69, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/lru.py", line 44, in __getitem__
+    a = self.d[obj].me
+KeyError: ('ir.model.data', <function IrModelData.xmlid_lookup at 0x7116d9ae3d40>, 'hr_attendance_ext.hr_attendance_request_menu_wizard_action')
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
+    self._tags[rec.tag](rec, de, mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 472, in _tag_menuitem
+    action_model, action_id = self.model_id_get(a_action)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 747, in model_id_get
+    return self.env['ir.model.data'].xmlid_to_res_model_res_id(id_str, raise_if_not_found=raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
+    return self.xmlid_lookup(xmlid)[1:3]
+  File "<decorator-gen-26>", line 2, in xmlid_lookup
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 93, in lookup
+    value = d[key] = self.method(*args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
+    raise ValueError('External ID not found in the system: %s' % xmlid)
+ValueError: External ID not found in the system: hr_attendance_ext.hr_attendance_request_menu_wizard_action
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 663, in _handle_exception
+    return super(JsonRequest, self)._handle_exception(exception)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 321, in _handle_exception
+    raise pycompat.reraise(type(exception), exception, sys.exc_info()[2])
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 87, in reraise
+    raise value
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 705, in dispatch
+    result = self._call_function(**self.params)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 353, in _call_function
+    return checked_call(self.db, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/service/model.py", line 98, in wrapper
+    return f(dbname, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 346, in checked_call
+    result = self.endpoint(*a, **kw)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 948, in __call__
+    return self.method(*args, **kw)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 526, in response_wrap
+    response = f(*args, **kw)
+  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 963, in call_button
+    action = self._call_kw(model, method, args, {})
+  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 951, in _call_kw
+    return call_kw(request.env[model], method, args, kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 760, in call_kw
+    return _call_kw_multi(method, model, args, kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 747, in _call_kw_multi
+    result = method(recs, *args, **kwargs)
+  File "<decorator-gen-62>", line 2, in button_immediate_install
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_module.py", line 75, in check_and_log
+    return method(self, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_module.py", line 446, in button_immediate_install
+    return self._button_immediate_function(type(self).button_install)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_module.py", line 562, in _button_immediate_function
+    modules.registry.Registry.new(self._cr.dbname, update_module=True)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 87, in new
+    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 421, in load_modules
+    loaded_modules, update_module, models_to_check)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 313, in load_marked_modules
+    perform_checks=perform_checks, models_to_check=models_to_check
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 222, in load_module_graph
+    load_data(cr, idref, mode, kind='data', package=package, report=report)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 68, in load_data
+    tools.convert_file(cr, package.name, filename, idref, mode, noupdate, kind, report)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 802, in convert_file
+    convert_xml_import(cr, module, fp, idref, mode, noupdate, report)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 865, in convert_xml_import
+    obj.parse(doc.getroot(), mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 755, in parse
+    self.parse(rec, mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 764, in parse
+    exc_info[2]
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 86, in reraise
+    raise value.with_traceback(tb)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
+    self._tags[rec.tag](rec, de, mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 472, in _tag_menuitem
+    action_model, action_id = self.model_id_get(a_action)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 747, in model_id_get
+    return self.env['ir.model.data'].xmlid_to_res_model_res_id(id_str, raise_if_not_found=raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
+    return self.xmlid_lookup(xmlid)[1:3]
+  File "<decorator-gen-26>", line 2, in xmlid_lookup
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 93, in lookup
+    value = d[key] = self.method(*args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
+    raise ValueError('External ID not found in the system: %s' % xmlid)
+odoo.tools.convert.ParseError: "External ID not found in the system: hr_attendance_ext.hr_attendance_request_menu_wizard_action" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_attendance_ext/views/views.xml:241, near
+<menuitem name="Kay&#x131;t Olu&#x15F;turma" id="zone_auth_requests_menu1" sequence="4" parent="hr_attendance_ext.menu_root" action="hr_attendance_request_menu_wizard_action"/>
+2026-03-10 12:49:27,809 20917 INFO odoodb odoo.modules.loading: loading 1 modules...
+
+
+'data' sirasi 
+
+    'data': [
+        'security/groups.xml',
+        'security/permanent.xml',
+        'security/ir.model.access.csv',
+        'data/card_types.xml',
+        'data/card_type_other.xml',
+        'data/zone_types.xml',
+        'data/terminal_types.xml',
+        'data/resource_move_type_data.xml',
+        'data/automated_expire_cron.xml',
+        # 'data/hr_employee.xml',
+        'views/activities.xml',
+        'data/sync_cron.xml',
+        'views/area.xml',
+        'views/building.xml',
+        'views/zone.xml',
+        'data/activities.xml',
+        'views/card.xml',
+        'views/terminal.xml',
+        'views/employee_history.xml',
+        'views/authorization.xml',
+        'views/authorization_request.xml',
+        'views/card_replacement_request.xml',
+        'views/secure_zone_request.xml',
+        'views/employee.xml',
+        'views/attendance_move.xml',
+        'views/zone_auth_views.xml',
+        'views/search_views.xml',
+        'views/templates_qweb.xml',
+        'views/templates.xml',
+        'views/bulk_card_replacement.xml',
+        'wizards/card_replacement.xml',
+        'wizards/card_return_wizard.xml',
+        'wizards/bulk_card_replace_wizard.xml',
+        'wizards/card_assignment_wizard.xml',
+        'wizards/tier_validation_send_wizard.xml',
+        'wizards/auth_per_employee_assignment_wizard.xml',
+        'wizards/auth_per_department_assignment_wizard.xml',
+        'wizards/auth_per_building_assignment_wizard.xml',
+        'wizards/auth_copy_wizard.xml',
+        'wizards/employee_bulk_operations.xml',
+        'wizards/confirmation_wizard.xml',
+        'views/integration_views/employee_movements.xml',
+        'views/integration_views/move_types.xml',
+        'views/assets_backend.xml',
+        'views/integration_views/fdw_settings.xml',
+        'views/reports.xml',
+        'views/views.xml',
+        'wizards/request_menu_wizard.xml',
+        'views/user.xml',
+        'activities/views/activities.xml',
+        'activities/data/activities.xml',
+        'activities/security/ir.model.access.csv',
+        'security/rules.xml',
+    ],
