@@ -1,5 +1,3 @@
-671.satiri duzenledikten sonra hatalari vermeye devam ediyor
-
 Traceback (most recent call last):
   File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 88, in lookup
     r = d[key]
@@ -7,31 +5,17 @@ Traceback (most recent call last):
     return func(self, *args, **kwargs)
   File "/home/t12016074307/odoo12/odoo/odoo/tools/lru.py", line 44, in __getitem__
     a = self.d[obj].me
-KeyError: ('ir.model.data', <function IrModelData.xmlid_lookup at 0x7519910c3cb0>, 'hr_organisation.role_assistant_manager')
+KeyError: ('ir.model.data', <function IrModelData.xmlid_lookup at 0x70498a102cb0>, 'hr_shift_plan.menu_4')
 During handling of the above exception, another exception occurred:
 Traceback (most recent call last):
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 1129, in _validate_fields
-    check(self)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 351, in _check_xml
-    self.postprocess_and_fields(view.model, view_doc, view.id)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 1117, in postprocess_and_fields
-    fields = Model.fields_get(None)
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 2731, in fields_get
-    description = field.get_description(self.env)
-  File "/home/t12016074307/odoo12/odoo/odoo/fields.py", line 790, in get_description
-    value = value(env)
-  File "/home/t12016074307/odoo12/odoo/odoo/fields.py", line 2147, in _description_domain
-    return self.domain(env[self.model_name]) if callable(self.domain) else self.domain
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan_flexible.py", line 14, in <lambda>
-    domain=lambda self: self._get_employee_domain())
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan_flexible.py", line 117, in _get_employee_domain
-    return [('id', 'in', self._get_employee_ids_list())]
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan_flexible.py", line 123, in _get_employee_ids_list
-    if self.env.ref('hr_organisation.role_assistant_manager') and self.env.user and self.env.user.employee_ids:
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 865, in ref
-    return self['ir.model.data'].xmlid_to_object(xml_id, raise_if_not_found=raise_if_not_found)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1454, in xmlid_to_object
-    t = self.xmlid_to_res_model_res_id(xmlid, raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
+    self._tags[rec.tag](rec, de, mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 455, in _tag_menuitem
+    menu_parent_id = self.id_get(rec.get('parent',''))
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 741, in id_get
+    res = self.model_id_get(id_str, raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 747, in model_id_get
+    return self.env['ir.model.data'].xmlid_to_res_model_res_id(id_str, raise_if_not_found=raise_if_not_found)
   File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
     return self.xmlid_lookup(xmlid)[1:3]
   File "<decorator-gen-26>", line 2, in xmlid_lookup
@@ -39,42 +23,7 @@ Traceback (most recent call last):
     value = d[key] = self.method(*args, **kwargs)
   File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
     raise ValueError('External ID not found in the system: %s' % xmlid)
-ValueError: External ID not found in the system: hr_organisation.role_assistant_manager
-During handling of the above exception, another exception occurred:
-Traceback (most recent call last):
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
-    self._tags[rec.tag](rec, de, mode=mode)
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 663, in _tag_record
-    record = model.with_context(rec_context)._load_records([data], self.mode == 'update')
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3911, in _load_records
-    records = self._load_records_create([data['values'] for data in to_create])
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3825, in _load_records_create
-    return self.create(values)
-  File "<decorator-gen-33>", line 2, in create
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 463, in _model_create_multi
-    return create(self, arg)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 428, in create
-    return super(View, self).create(vals_list)
-  File "<decorator-gen-3>", line 2, in create
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 463, in _model_create_multi
-    return create(self, arg)
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3642, in create
-    fields[0].determine_inverse(batch_recs)
-  File "/home/t12016074307/odoo12/odoo/odoo/fields.py", line 1200, in determine_inverse
-    getattr(records, self.inverse)()
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 275, in _inverse_arch
-    view.write(data)
-  File "/home/t12016074307/odoo12/odoo/addons/website/models/ir_ui_view.py", line 41, in write
-    return super(View, self).write(vals)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 445, in write
-    res = super(View, self).write(self._compute_defaults(vals))
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3367, in write
-    self._write(store_vals)
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3503, in _write
-    self._validate_fields(vals)
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 1133, in _validate_fields
-    raise ValidationError("%s\n\n%s" % (_("Error while validating constraint"), tools.ustr(e)))
-odoo.exceptions.ValidationError: ('Error while validating constraint\n\nExternal ID not found in the system: hr_organisation.role_assistant_manager', None)
+ValueError: External ID not found in the system: hr_shift_plan.menu_4
 During handling of the above exception, another exception occurred:
 Traceback (most recent call last):
   File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 87, in new
@@ -97,84 +46,12 @@ Traceback (most recent call last):
     raise value.with_traceback(tb)
   File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
     self._tags[rec.tag](rec, de, mode=mode)
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 663, in _tag_record
-    record = model.with_context(rec_context)._load_records([data], self.mode == 'update')
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3911, in _load_records
-    records = self._load_records_create([data['values'] for data in to_create])
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3825, in _load_records_create
-    return self.create(values)
-  File "<decorator-gen-33>", line 2, in create
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 463, in _model_create_multi
-    return create(self, arg)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 428, in create
-    return super(View, self).create(vals_list)
-  File "<decorator-gen-3>", line 2, in create
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 463, in _model_create_multi
-    return create(self, arg)
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3642, in create
-    fields[0].determine_inverse(batch_recs)
-  File "/home/t12016074307/odoo12/odoo/odoo/fields.py", line 1200, in determine_inverse
-    getattr(records, self.inverse)()
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 275, in _inverse_arch
-    view.write(data)
-  File "/home/t12016074307/odoo12/odoo/addons/website/models/ir_ui_view.py", line 41, in write
-    return super(View, self).write(vals)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 445, in write
-    res = super(View, self).write(self._compute_defaults(vals))
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3367, in write
-    self._write(store_vals)
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3503, in _write
-    self._validate_fields(vals)
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 1133, in _validate_fields
-    raise ValidationError("%s\n\n%s" % (_("Error while validating constraint"), tools.ustr(e)))
-odoo.tools.convert.ParseError: "Error while validating constraint
-External ID not found in the system: hr_organisation.role_assistant_manager
-None" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/views/hr_shift_plan_flexible.xml:3, near
-<record model="ir.ui.view" id="shift_plan_flexible_tree">
-        <field name="name">hr.shift_plan.flexible.tree</field>
-        <field name="model">hr.shift_plan.flexible</field>
-        <field name="arch" type="xml">
-            <tree string="Competencies">
-                <field name="term_id"/>
-                <field name="employee_ids" widget="many2many_tags"/>
-                <field name="bulk_plan_ids" widget="many2many_tags"/>
-                <field name="plan_ids" widget="many2many_tags"/>
-            </tree>
-        </field>
-    </record>
-2026-03-10 12:02:26,371 18391 ERROR odoodb odoo.http: Exception during JSON request handling. 
-Traceback (most recent call last):
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 88, in lookup
-    r = d[key]
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/func.py", line 69, in wrapper
-    return func(self, *args, **kwargs)
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/lru.py", line 44, in __getitem__
-    a = self.d[obj].me
-KeyError: ('ir.model.data', <function IrModelData.xmlid_lookup at 0x7519910c3cb0>, 'hr_organisation.role_assistant_manager')
-During handling of the above exception, another exception occurred:
-Traceback (most recent call last):
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 1129, in _validate_fields
-    check(self)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 351, in _check_xml
-    self.postprocess_and_fields(view.model, view_doc, view.id)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 1117, in postprocess_and_fields
-    fields = Model.fields_get(None)
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 2731, in fields_get
-    description = field.get_description(self.env)
-  File "/home/t12016074307/odoo12/odoo/odoo/fields.py", line 790, in get_description
-    value = value(env)
-  File "/home/t12016074307/odoo12/odoo/odoo/fields.py", line 2147, in _description_domain
-    return self.domain(env[self.model_name]) if callable(self.domain) else self.domain
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan_flexible.py", line 14, in <lambda>
-    domain=lambda self: self._get_employee_domain())
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan_flexible.py", line 117, in _get_employee_domain
-    return [('id', 'in', self._get_employee_ids_list())]
-  File "/home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/models/hr_shift_plan_flexible.py", line 123, in _get_employee_ids_list
-    if self.env.ref('hr_organisation.role_assistant_manager') and self.env.user and self.env.user.employee_ids:
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 865, in ref
-    return self['ir.model.data'].xmlid_to_object(xml_id, raise_if_not_found=raise_if_not_found)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1454, in xmlid_to_object
-    t = self.xmlid_to_res_model_res_id(xmlid, raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 455, in _tag_menuitem
+    menu_parent_id = self.id_get(rec.get('parent',''))
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 741, in id_get
+    res = self.model_id_get(id_str, raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 747, in model_id_get
+    return self.env['ir.model.data'].xmlid_to_res_model_res_id(id_str, raise_if_not_found=raise_if_not_found)
   File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
     return self.xmlid_lookup(xmlid)[1:3]
   File "<decorator-gen-26>", line 2, in xmlid_lookup
@@ -182,42 +59,35 @@ Traceback (most recent call last):
     value = d[key] = self.method(*args, **kwargs)
   File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
     raise ValueError('External ID not found in the system: %s' % xmlid)
-ValueError: External ID not found in the system: hr_organisation.role_assistant_manager
+odoo.tools.convert.ParseError: "External ID not found in the system: hr_shift_plan.menu_4" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/views/excel_im_definition_views.xml:47, near
+<menuitem name="Excel Yerle&#x15F;ke-Takvim Tan&#x131;mlama" id="shift_excel_im_def_menu_id" action="shift_plan_excel_im_definition_window" parent="hr_shift_plan.menu_4" groups="hr_shift_plan.group_hr_shift_plan_ik" sequence="1"/>
+2026-03-10 12:07:32,628 18749 ERROR odoodb odoo.http: Exception during JSON request handling. 
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 88, in lookup
+    r = d[key]
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/func.py", line 69, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/lru.py", line 44, in __getitem__
+    a = self.d[obj].me
+KeyError: ('ir.model.data', <function IrModelData.xmlid_lookup at 0x70498a102cb0>, 'hr_shift_plan.menu_4')
 During handling of the above exception, another exception occurred:
 Traceback (most recent call last):
   File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
     self._tags[rec.tag](rec, de, mode=mode)
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 663, in _tag_record
-    record = model.with_context(rec_context)._load_records([data], self.mode == 'update')
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3911, in _load_records
-    records = self._load_records_create([data['values'] for data in to_create])
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3825, in _load_records_create
-    return self.create(values)
-  File "<decorator-gen-33>", line 2, in create
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 463, in _model_create_multi
-    return create(self, arg)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 428, in create
-    return super(View, self).create(vals_list)
-  File "<decorator-gen-3>", line 2, in create
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 463, in _model_create_multi
-    return create(self, arg)
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3642, in create
-    fields[0].determine_inverse(batch_recs)
-  File "/home/t12016074307/odoo12/odoo/odoo/fields.py", line 1200, in determine_inverse
-    getattr(records, self.inverse)()
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 275, in _inverse_arch
-    view.write(data)
-  File "/home/t12016074307/odoo12/odoo/addons/website/models/ir_ui_view.py", line 41, in write
-    return super(View, self).write(vals)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 445, in write
-    res = super(View, self).write(self._compute_defaults(vals))
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3367, in write
-    self._write(store_vals)
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3503, in _write
-    self._validate_fields(vals)
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 1133, in _validate_fields
-    raise ValidationError("%s\n\n%s" % (_("Error while validating constraint"), tools.ustr(e)))
-odoo.exceptions.ValidationError: ('Error while validating constraint\n\nExternal ID not found in the system: hr_organisation.role_assistant_manager', None)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 455, in _tag_menuitem
+    menu_parent_id = self.id_get(rec.get('parent',''))
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 741, in id_get
+    res = self.model_id_get(id_str, raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 747, in model_id_get
+    return self.env['ir.model.data'].xmlid_to_res_model_res_id(id_str, raise_if_not_found=raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
+    return self.xmlid_lookup(xmlid)[1:3]
+  File "<decorator-gen-26>", line 2, in xmlid_lookup
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 93, in lookup
+    value = d[key] = self.method(*args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
+    raise ValueError('External ID not found in the system: %s' % xmlid)
+ValueError: External ID not found in the system: hr_shift_plan.menu_4
 During handling of the above exception, another exception occurred:
 Traceback (most recent call last):
   File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 663, in _handle_exception
@@ -273,48 +143,74 @@ Traceback (most recent call last):
     raise value.with_traceback(tb)
   File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
     self._tags[rec.tag](rec, de, mode=mode)
-  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 663, in _tag_record
-    record = model.with_context(rec_context)._load_records([data], self.mode == 'update')
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3911, in _load_records
-    records = self._load_records_create([data['values'] for data in to_create])
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3825, in _load_records_create
-    return self.create(values)
-  File "<decorator-gen-33>", line 2, in create
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 463, in _model_create_multi
-    return create(self, arg)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 428, in create
-    return super(View, self).create(vals_list)
-  File "<decorator-gen-3>", line 2, in create
-  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 463, in _model_create_multi
-    return create(self, arg)
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3642, in create
-    fields[0].determine_inverse(batch_recs)
-  File "/home/t12016074307/odoo12/odoo/odoo/fields.py", line 1200, in determine_inverse
-    getattr(records, self.inverse)()
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 275, in _inverse_arch
-    view.write(data)
-  File "/home/t12016074307/odoo12/odoo/addons/website/models/ir_ui_view.py", line 41, in write
-    return super(View, self).write(vals)
-  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_ui_view.py", line 445, in write
-    res = super(View, self).write(self._compute_defaults(vals))
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3367, in write
-    self._write(store_vals)
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 3503, in _write
-    self._validate_fields(vals)
-  File "/home/t12016074307/odoo12/odoo/odoo/models.py", line 1133, in _validate_fields
-    raise ValidationError("%s\n\n%s" % (_("Error while validating constraint"), tools.ustr(e)))
-odoo.tools.convert.ParseError: "Error while validating constraint
-External ID not found in the system: hr_organisation.role_assistant_manager
-None" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/views/hr_shift_plan_flexible.xml:3, near
-<record model="ir.ui.view" id="shift_plan_flexible_tree">
-        <field name="name">hr.shift_plan.flexible.tree</field>
-        <field name="model">hr.shift_plan.flexible</field>
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 455, in _tag_menuitem
+    menu_parent_id = self.id_get(rec.get('parent',''))
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 741, in id_get
+    res = self.model_id_get(id_str, raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 747, in model_id_get
+    return self.env['ir.model.data'].xmlid_to_res_model_res_id(id_str, raise_if_not_found=raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
+    return self.xmlid_lookup(xmlid)[1:3]
+  File "<decorator-gen-26>", line 2, in xmlid_lookup
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 93, in lookup
+    value = d[key] = self.method(*args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
+    raise ValueError('External ID not found in the system: %s' % xmlid)
+odoo.tools.convert.ParseError: "External ID not found in the system: hr_shift_plan.menu_4" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_shift_plan/views/excel_im_definition_views.xml:47, near
+<menuitem name="Excel Yerle&#x15F;ke-Takvim Tan&#x131;mlama" id="shift_excel_im_def_menu_id" action="shift_plan_excel_im_definition_window" parent="hr_shift_plan.menu_4" groups="hr_shift_plan.group_hr_shift_plan_ik" sequence="1"/>
+2026-03-10 12:07:32,639 18749 INFO odoodb odoo.modules.loading: loading 1 modules... 
+
+
+
+
+
+
+<odoo>
+
+    <record id="shift_plan_excel_im_definition_window" model='ir.actions.act_window'>
+        <field name="name">Excel Yerleşke-Takvim Tanımlama</field>
+        <field name="res_model">hr.shift.excel.im.definition</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="shift_plan_excel_im_definition_tree" model='ir.ui.view'>
+        <field name="name">Excel Yerleşke-Takvim Tanımlama</field>
+        <field name="model">hr.shift.excel.im.definition</field>
         <field name="arch" type="xml">
-            <tree string="Competencies">
-                <field name="term_id"/>
-                <field name="employee_ids" widget="many2many_tags"/>
-                <field name="bulk_plan_ids" widget="many2many_tags"/>
-                <field name="plan_ids" widget="many2many_tags"/>
+            <tree>
+                <field name="location_id"
+                       options='{"no_open": True, "no_create": True, "no_quick_create":True, "no_create_edit":True}'/>
+                <field name="calendar_ids" widget="many2many_tags"/>
             </tree>
         </field>
     </record>
+
+    <record model="ir.ui.view" id="shift_plan_excel_im_definition_form">
+        <field name="name">Excel Yerleşke-Takvim Tanımlama</field>
+        <field name="model">hr.shift.excel.im.definition</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="location_id"
+                               options='{"no_open": True, "no_create": True, "no_quick_create":True, "no_create_edit":True}'/>
+                        <field name="calendar_ids" widget="many2many_tags"/>
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <menuitem name="Excel Yerleşke-Takvim Tanımlama"
+              id="shift_excel_im_def_menu_id"
+              action="shift_plan_excel_im_definition_window"
+              parent="hr_shift_plan.menu_4"
+              groups="hr_shift_plan.group_hr_shift_plan_ik"
+              sequence="1"/>
+
+</odoo>
