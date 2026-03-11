@@ -50,7 +50,9 @@
             <field name="name">Performans Değerlendirme Raporu</field>
             <field name="res_model">hr_performance.evaluation_result</field>
             <field name="view_mode">form</field>
-            <field name="groups_id" eval="[(6, 0, [ref('hr_performance.group_hr_performance_one')])]"/>
+            <field name="domain">[]</field>
+            <field name="groups_id" eval="[(4, ref('hr_performance.group_hr_performance_one'))]"/>
+            <field name="context">{}</field>
             <field name="target">new</field>
         </record>
     </data>
