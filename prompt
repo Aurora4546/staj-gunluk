@@ -1,112 +1,335 @@
-### Two Solutions:
-**Solution 1: Reorder files (simplest)** Load files in this order:
-1. `authorization_request.xml`
-2. `card_replacement_request.xml`
-3. `secure_zone_request.xml`
-4. `views.xml` (all actions including `auth_per_employee_action_tusas_manager`)
-5. `request_menu_wizard.xml` (references actions from above files)
-6. Then a second file that contains ONLY the menu that references `hr_attendance_request_menu_wizard_action`
+ValueError: External ID not found in the system: resource_ext.model_hr_workorder_summary_month
 
-**Solution 2: Split views.xml (recommended)**
-- Create `views_actions.xml` with all `<record model="ir.actions.act_window">` definitions
-- Create `views_menus.xml` with all `<menuitem>` definitions
-- Load order: actions → request_menu_wizard → menus
+During handling of the above exception, another exception occurred:
 
-Let me present the complete plan:
-Plan: Fix Circular Reference and Correct Data Loading Order
-Issues Found:
-Circular reference: views.xml and request_menu_wizard.xml reference each other
-Incorrect file paths: Manifest references files in subfolders (security/, data/, views/, wizards/) but files are in root
-Empty rules.xml: Security rules are in groups.xml instead of rules.xml
-Rules placement: rules.xml should load LAST, not in the middle
-Solution:
-Option A (Recommended): Split views.xml into actions and menus
-Create views_actions.xml - contains all action definitions from views.xml
-Create views_menus.xml - contains all menu definitions from views.xml
-Update manifest with correct order and paths
-Option B (Simpler): Just reorder existing files
-Keep views.xml as-is
-Update manifest to load files in dependency order
-Fix all file paths (remove folder prefixes)
-Correct Manifest Order:
-'data': [
-    # Security
-    'groups.xml',
-    'permanent.xml',
-    'ir.model.access.csv',
-    
-    # Data
-    'card_types.xml',
-    'card_type_other.xml',
-    'zone_types.xml',
-    'terminal_types.xml',
-    'resource_move_type_data.xml',
-    'activities.xml',
-    'automated_expire_cron.xml',
-    'sync_cron.xml',
-    
-    # Views - Base models
-    'user.xml',
-    'employee.xml',
-    'building.xml',
-    'area.xml',
-    'zone.xml',
-    'terminal.xml',
-    'card.xml',
-    
-    # Views - Request models (define actions FIRST)
-    'authorization_request.xml',
-    'card_replacement_request.xml',
-    'secure_zone_request.xml',
-    
-    # Views - Other dependent models
-    'employee_history.xml',
-    'authorization.xml',
-    'attendance_move.xml',
-    'zone_auth_views.xml',
-    'bulk_card_replacement.xml',
-    
-    # Integration views
-    'move_types.xml',
-    'fdw_settings.xml',
-    'employee_movements.xml',
-    
-    # Reports and search
-    'search_views.xml',
-    'reports.xml',
-    
-    # Actions (or views_actions.xml if split)
-    'views.xml',  # or 'views_actions.xml'
-    
-    # Wizards - request_menu_wizard MUST come AFTER views.xml
-    'request_menu_wizard.xml',
-    
-    # Other wizards
-    'confirmation_wizard.xml',
-    'card_assignment_wizard.xml',
-    'card_return_wizard.xml',
-    'card_replacement.xml',
-    'bulk_card_replace_wizard.xml',
-    'tier_validation_send_wizard.xml',
-    'auth_per_employee_assignment_wizard.xml',
-    'auth_per_department_assignment_wizard.xml',
-    'auth_per_building_assignment_wizard.xml',
-    'auth_copy_wizard.xml',
-    'employee_bulk_operations.xml',
-    
-    # Menus (or views_menus.xml if split) - AFTER request_menu_wizard
-    # 'views_menus.xml',  # if split approach
-    
-    # Assets and templates
-    'assets_backend.xml',
-    'templates_qweb.xml',
-    'templates.xml',
-    
-    # Security rules LAST
-    'rules.xml',
-]
-Actions:
-Update manifest with corrected order
-Optionally split views.xml into two files (actions + menus)
-Move security rules from groups.xml to rules.xml
-Which approach would you prefer?
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 87, in new
+    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 421, in load_modules
+    loaded_modules, update_module, models_to_check)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 313, in load_marked_modules
+    perform_checks=perform_checks, models_to_check=models_to_check
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 222, in load_module_graph
+    load_data(cr, idref, mode, kind='data', package=package, report=report)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 68, in load_data
+    tools.convert_file(cr, package.name, filename, idref, mode, noupdate, kind, report)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 802, in convert_file
+    convert_xml_import(cr, module, fp, idref, mode, noupdate, report)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 865, in convert_xml_import
+    obj.parse(doc.getroot(), mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 755, in parse
+    self.parse(rec, mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 764, in parse
+    exc_info[2]
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 86, in reraise
+    raise value.with_traceback(tb)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
+    self._tags[rec.tag](rec, de, mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 650, in _tag_record
+    f_val = self.id_get(f_ref)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 741, in id_get
+    res = self.model_id_get(id_str, raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 747, in model_id_get
+    return self.env['ir.model.data'].xmlid_to_res_model_res_id(id_str, raise_if_not_found=raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
+    return self.xmlid_lookup(xmlid)[1:3]
+  File "<decorator-gen-26>", line 2, in xmlid_lookup
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 93, in lookup
+    value = d[key] = self.method(*args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
+    raise ValueError('External ID not found in the system: %s' % xmlid)
+odoo.tools.convert.ParseError: "External ID not found in the system: resource_ext.model_hr_workorder_summary_month" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/resource_ext/security/workorder_summary_rule.xml:4, near
+<record id="hr_workorder_summary_dept_manager_auth_rule" model="ir.rule">
+            <field name="name">İşçilik Bölüm Yöneticileri Kuralı</field>
+            <field name="model_id" ref="model_hr_workorder_summary_month"/>
+            <field name="domain_force">['|', ('employee_id.user_id','=',user.id), ('employee_id', 'child_of', user.employee_ids.ids)]
+            </field>
+            <field name="groups" eval="[(4,ref('hr_workorder.group_hr_workorder_department_manager'))]"/>
+        </record>
+2026-03-11 05:17:42,652 9864 ERROR odoodb odoo.http: Exception during JSON request handling. 
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 88, in lookup
+    r = d[key]
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/func.py", line 69, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/lru.py", line 44, in __getitem__
+    a = self.d[obj].me
+KeyError: ('ir.model.data', <function IrModelData.xmlid_lookup at 0x7b17653690e0>, 'resource_ext.model_hr_workorder_summary_month')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
+    self._tags[rec.tag](rec, de, mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 650, in _tag_record
+    f_val = self.id_get(f_ref)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 741, in id_get
+    res = self.model_id_get(id_str, raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 747, in model_id_get
+    return self.env['ir.model.data'].xmlid_to_res_model_res_id(id_str, raise_if_not_found=raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
+    return self.xmlid_lookup(xmlid)[1:3]
+  File "<decorator-gen-26>", line 2, in xmlid_lookup
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 93, in lookup
+    value = d[key] = self.method(*args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
+    raise ValueError('External ID not found in the system: %s' % xmlid)
+ValueError: External ID not found in the system: resource_ext.model_hr_workorder_summary_month
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 663, in _handle_exception
+    return super(JsonRequest, self)._handle_exception(exception)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 321, in _handle_exception
+    raise pycompat.reraise(type(exception), exception, sys.exc_info()[2])
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 87, in reraise
+    raise value
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 705, in dispatch
+    result = self._call_function(**self.params)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 353, in _call_function
+    return checked_call(self.db, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/service/model.py", line 98, in wrapper
+    return f(dbname, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 346, in checked_call
+    result = self.endpoint(*a, **kw)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 948, in __call__
+    return self.method(*args, **kw)
+  File "/home/t12016074307/odoo12/odoo/odoo/http.py", line 526, in response_wrap
+    response = f(*args, **kw)
+  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 963, in call_button
+    action = self._call_kw(model, method, args, {})
+  File "/home/t12016074307/odoo12/odoo/addons/web/controllers/main.py", line 951, in _call_kw
+    return call_kw(request.env[model], method, args, kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 760, in call_kw
+    return _call_kw_multi(method, model, args, kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/api.py", line 747, in _call_kw_multi
+    result = method(recs, *args, **kwargs)
+  File "<decorator-gen-62>", line 2, in button_immediate_install
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_module.py", line 75, in check_and_log
+    return method(self, *args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_module.py", line 446, in button_immediate_install
+    return self._button_immediate_function(type(self).button_install)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_module.py", line 562, in _button_immediate_function
+    modules.registry.Registry.new(self._cr.dbname, update_module=True)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/registry.py", line 87, in new
+    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 421, in load_modules
+    loaded_modules, update_module, models_to_check)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 313, in load_marked_modules
+    perform_checks=perform_checks, models_to_check=models_to_check
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 222, in load_module_graph
+    load_data(cr, idref, mode, kind='data', package=package, report=report)
+  File "/home/t12016074307/odoo12/odoo/odoo/modules/loading.py", line 68, in load_data
+    tools.convert_file(cr, package.name, filename, idref, mode, noupdate, kind, report)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 802, in convert_file
+    convert_xml_import(cr, module, fp, idref, mode, noupdate, report)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 865, in convert_xml_import
+    obj.parse(doc.getroot(), mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 755, in parse
+    self.parse(rec, mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 764, in parse
+    exc_info[2]
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/pycompat.py", line 86, in reraise
+    raise value.with_traceback(tb)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 758, in parse
+    self._tags[rec.tag](rec, de, mode=mode)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 650, in _tag_record
+    f_val = self.id_get(f_ref)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 741, in id_get
+    res = self.model_id_get(id_str, raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/convert.py", line 747, in model_id_get
+    return self.env['ir.model.data'].xmlid_to_res_model_res_id(id_str, raise_if_not_found=raise_if_not_found)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1438, in xmlid_to_res_model_res_id
+    return self.xmlid_lookup(xmlid)[1:3]
+  File "<decorator-gen-26>", line 2, in xmlid_lookup
+  File "/home/t12016074307/odoo12/odoo/odoo/tools/cache.py", line 93, in lookup
+    value = d[key] = self.method(*args, **kwargs)
+  File "/home/t12016074307/odoo12/odoo/odoo/addons/base/models/ir_model.py", line 1427, in xmlid_lookup
+    raise ValueError('External ID not found in the system: %s' % xmlid)
+odoo.tools.convert.ParseError: "External ID not found in the system: resource_ext.model_hr_workorder_summary_month" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/resource_ext/security/workorder_summary_rule.xml:4, near
+<record id="hr_workorder_summary_dept_manager_auth_rule" model="ir.rule">
+            <field name="name">İşçilik Bölüm Yöneticileri Kuralı</field>
+            <field name="model_id" ref="model_hr_workorder_summary_month"/>
+            <field name="domain_force">['|', ('employee_id.user_id','=',user.id), ('employee_id', 'child_of', user.employee_ids.ids)]
+            </field>
+            <field name="groups" eval="[(4,ref('hr_workorder.group_hr_workorder_department_manager'))]"/>
+        </record>
+
+
+
+workorder_summary_rule.xml
+
+<odoo>
+    <data noupdate="1">
+
+        <record id="hr_workorder_summary_dept_manager_auth_rule" model="ir.rule">
+            <field name="name">İşçilik Bölüm Yöneticileri Kuralı</field>
+            <field name="model_id" ref="model_hr_workorder_summary_month"/>
+            <field name="domain_force">['|', ('employee_id.user_id','=',user.id), ('employee_id', 'child_of', user.employee_ids.ids)]
+            </field>
+            <field name="groups" eval="[(4,ref('hr_workorder.group_hr_workorder_department_manager'))]"/>
+        </record>
+
+        <record id="hr_workorder_summary_all_auth_rule" model="ir.rule">
+            <field name="name">İşçilik Manager</field>
+            <field name="model_id" ref="model_hr_workorder_summary_month"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4,ref('hr_workorder.group_hr_workorder_manager'))]"/>
+        </record>
+
+    </data>
+</odoo>
+
+
+<odoo>
+
+<!--    <record id="workorder_summary_window" model='ir.actions.act_window'>-->
+<!--        <field name="name">Aylık İşçilik Özet Kayıtları</field>-->
+<!--        <field name="res_model">hr.workorder.summary.month</field>-->
+<!--        <field name="view_type">form</field>-->
+<!--        <field name="view_mode">tree</field>-->
+<!--        <field name="context">{"search_default_month":context_today().year}</field>-->
+<!--    </record>-->
+
+<!--    <record id="workorder_summary_search" model="ir.ui.view">-->
+<!--        <field name="name">Aylık İşçilik Özet Kayıtları Search</field>-->
+<!--        <field name="model">hr.workorder.summary.month</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <search string="Search">-->
+<!--                <field name="employee_id" string="Çalışan/Sicil"-->
+<!--                       filter_domain="['|', ('employee_id.name','ilike',self), ('employee_id.personel_id', 'ilike', self)]"/>-->
+<!--                <field name="month" string="Güncel Ay"-->
+<!--                       filter_domain="[('month', 'ilike', context_today().month), ('year', '=', context_today().year)]"/>-->
+<!--            </search>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="workorder_summary_tree" model='ir.ui.view'>-->
+<!--        <field name="name">Aylık İşçilik Özet Kayıtları</field>-->
+<!--        <field name="model">hr.workorder.summary.month</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree create="0" decoration-success="movement_code == 1" decoration-muted="movement_code == 9">-->
+<!--                <field name="personel_id"/>-->
+<!--                <field name="employee_id"/>-->
+<!--                <field name="year"/>-->
+<!--                <field name="month"/>-->
+<!--                <field name="movement_code"/>-->
+<!--                <field name="work_station"/>-->
+<!--                <field name="work_order_code"/>-->
+<!--                <field name="department_id"/>-->
+<!--                <field name="work_department"/>-->
+<!--                <field name="worked" widget="float_time" attrs="{'invisible': [('movement_code','=', 9)]}"/>-->
+<!--                <field name="overtime_25" widget="float_time" attrs="{'invisible': [('movement_code','=', 9)]}"/>-->
+<!--                <field name="overtime_50" widget="float_time" attrs="{'invisible': [('movement_code','=', 9)]}"/>-->
+<!--                <field name="overtime_100" widget="float_time" attrs="{'invisible': [('movement_code','=', 9)]}"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+<!--    <menuitem name="Yönetim/Bağlı Çalışan Aylık İşçilik Özet"-->
+<!--              id="hr_workorder_summary_month_menu"-->
+<!--              action="workorder_summary_window"-->
+<!--              parent="hr_workorder.work_order_report_menu"-->
+<!--              groups="hr_workorder.group_hr_workorder_manager,hr_workorder.group_hr_workorder_department_manager"-->
+<!--              sequence="13"/>-->
+
+</odoo>
+
+
+# -*- coding: utf-8 -*-
+{
+    'name': "resource_ext",
+
+    'summary': """
+        Short (1 phrase/line) summary of the module's purpose, used as
+        subtitle on modules listing or apps.openerp.com """,
+
+    'description': """
+        Long description of module's purpose
+    """,
+
+    # Categories can be used to filter modules in modules listing
+    # Check https://github.com/odoo/odoo/blob/13.0/odoo/addons/base/data/ir_module_category_data.xml
+    # for the full list
+    'category': 'Uncategorized',
+    "version": "1.0.475-test",
+
+    # any module necessary for this one to work correctly
+    'depends': ['base', 'hr_attendance_ext', 'hr_shift_plan', 'report_creator', 'hr_workorder',
+                'notification_management'],  # ,
+    'external_dependencies': {'python': ['pandas']},
+
+    # always loaded
+    'data': [
+        'security/groups.xml',
+        'security/readonly_groups.xml',
+        'security/external.xml',
+        'security/rules.xml',
+        'security/assistant_rules.xml',
+        'security/user_group.xml',
+        'security/workmanship_rule.xml',
+        'security/workorder_summary_rule.xml',
+        'security/activity_rule.xml',
+        'security/ir.model.access.csv',
+        'data/move_types.xml',
+        'data/ir_cron.xml',
+        'data/ir_cron2.xml',
+        'data/ir_cron3.xml',
+        'data/ir_cron4.xml',
+        'data/ir_cron5.xml',
+        'data/external_cron.xml',
+        'data/draft_calculate_cron.xml',
+        'data/ir_config_parameter.xml',
+        'data/email_templates.xml',
+        'views/activities.xml',
+        'data/activities.xml',
+        'data/work_order_cron.xml',
+        'data/workmanship_cron.xml',
+        'data/workmanship_soir_cron.xml',
+        'data/workmanship_month_cron.xml',
+        'data/parameters.xml',
+        'views/resource.xml',
+        'views/employee.xml',
+        'views/assets_backend.xml',
+        'views/attendance_summary.xml',
+        'views/attendance_move.xml',
+        'views/outer_emp_depts_views.xml',
+        'views/unusual_situations.xml',
+        'views/external_working_moves.xml',
+        'views/external_status.xml',
+        'views/find_difference.xml',
+        'views/wo_data.xml',
+        # 'views/workmanship_data.xml',
+        # 'views/workorder_summary.xml',
+        'wizards/attendance_summary_wizard.xml',
+        'wizards/change_employee_calendar_wizard.xml',
+        'wizards/change_employee_lunch_wizard.xml',
+        'wizards/attendance_move_re_calculation.xml',
+        'wizards/manager_approve_wizard.xml',
+        'wizards/show_move_views.xml',
+        'wizards/wo_diff_report.xml',
+        'wizards/wo_time_control.xml',
+        'wizards/start_date_wo_detail.xml',
+        'wizards/monthly_workorder_operation.xml',
+        'wizards/wo_personnel_q_report.xml',
+        'wizards/wo_indirect_personnel.xml',
+        'wizards/wo_personnel_moves.xml',
+        'wizards/wo_collective_reports.xml',
+        'wizards/daily_movement_editing.xml',
+        'wizards/wo_bulk_update.xml',
+        'wizards/attendance_move_execute_selected.xml',
+        'wizards/menu_wizard.xml',
+        'views/statistics.xml',
+        'views/menus.xml',
+        'wizards/test_summary_wizard.xml',
+        'views/legacy.xml'
+    ],
+    'qweb': ['static/src/xml/*.xml'],
+    # only loaded in demonstration mode
+    'demo': [
+        # 'demo/demo.xml',
+    ],
+}
+
