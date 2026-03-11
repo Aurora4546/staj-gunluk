@@ -1,251 +1,161 @@
-modulu indirirken bu hatayi aliyorum. ne yapmam lazim
+resource_ext/security/workorder_summary_role.xml dosyasini alip hr_workorder_source icindeki security alina yerlestirirsem modullerde herhangi bozulma olur mu ?
 
-<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+    <data noupdate="1">
+<!--
+        <record id="hr_workorder_summary_dept_manager_auth_rule" model="ir.rule">
+            <field name="name">İşçilik Bölüm Yöneticileri Kuralı</field>
+            <field name="model_id" ref="model_hr_workorder_summary_month"/>
+            <field name="domain_force">['|', ('employee_id.user_id','=',user.id), ('employee_id', 'child_of', user.employee_ids.ids)]
+            </field>
+            <field name="groups" eval="[(4,ref('hr_workorder.group_hr_workorder_department_manager'))]"/>
+        </record>
 
-    <record id="hr_overtime_manager_view_tree" model="ir.ui.view">
-    <field name="name">hr.overtime.view.tree</field>
-    <field name="model">hr.overtime</field>
-    <field name="priority">1</field>
-    <field name="arch" type="xml">
-        <tree default_order='overtime_date desc'>
-            <field name="is_current_user" invisible="1"/>
-            <field name="image_id" string=" " widget="image" options='{"size": [70, 70]}' class="oe_avatar" nolabel="1"/>
-            <field name="employee_id" string="Employee" class="align-middle"/>
-            <field name="department_legacy_code" string="Dept. Code" class="align-middle"/>
-            <field name="department_name" string="Dept. Name" class="align-middle"/>
-            <field name="overtime_date" string="Date" class="align-middle"/>
-            <field name="overtime_hour" string="Hour" class="align-middle" invisible="1"/>
-            <field name="overtime_minute" string="Minute" class="align-middle" invisible="1"/>
-            <field name="type" string="Type" class="align-middle"/>
-            <field name="project" string="Project" class="align-middle"/>
-            <field name="reason" string="Overtime Reason" class="align-middle"/>
-            <field name="fm_building_id" string="Building" class="align-middle"/>
-            <field name="bus_route" string="Route" class="align-middle"/>
-            <field name="description" class="align-middle"/>
-            <field name="state" class="align-middle"/>
-<!--            <field name="skype_button" widget="html" class="align-middle" attrs="{'invisible': [('is_current_user','=', True)]}"/>-->
-
-
-
-            <!--                <button string="Refuse" name="action_refuse" type="object"-->
-            <!--                        icon="fa-ban text-danger"-->
-            <!--                        states="confirm"-->
-            <!--                        groups="hr_overtime.group_hr_overtime_manager"-->
-            <!--                        attrs="{'invisible': [('state','!=', 'in_validation')]}"/>-->
-        </tree>
-    </field>
-    </record>
-
-    <record id="hr_overtime_manager_view_form" model="ir.ui.view">
-        <field name="name">hr.overtime.view.form</field>
-        <field name="model">hr.overtime</field>
-        <field name="priority">1</field>
-        <field name="arch" type="xml">
-            <form string="Overtime">
-                <header>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,validate"/>
-                    <field name="can_review" invisible="1"/>
-                    <button name="validate_tier" string="Approve" type="object"
-                            class="oe_inline oe_button standard-approve"
-                            icon="fa-thumbs-up"
-                            groups="hr_overtime.group_hr_overtime_manager"
-                            attrs="{'invisible': ['|',('state','!=', 'in_validation'),('can_review','=', False)]}"/>
-                    <button name="reject_tier" string="Refuse" type="object"
-                            class="btn-icon standard-refuse"
-                            icon="fa-thumbs-down"
-                            groups="hr_overtime.group_hr_overtime_manager"
-                            attrs="{'invisible': ['|',('state','!=', 'in_validation'),('can_review','=', False)]}"/>
-                    <field name="is_creator" invisible="1" />
-                    <button name="restart_validation"
-                        class="btn-warning"
-                        string="Cancel Request"
-                        confirm="Are you sure you want to cancel the request?"
-                        attrs="{'invisible': ['|','|',('review_ids', '=', []),('state','not in',['in_validation']),('is_creator','=',False)]}"
-                        type="object"
-                />
-                </header>
-                <sheet>
-                    <group>
-                        <group string="Employee Information">
-                            <field name="image_id" widget="image" class="oe_avatar" string=" "/>
-                            <field name="register_id" string="Register Id" readonly="True"
-                                   attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                            <field name="employee_id"
-                                   options='{"no_open": True, "no_create": True, "no_quick_create":True, "no_create_edit":True}'
-                                   attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                            <field name="department_name" attrs="{'readonly':True}"/>
-                            <field name="project"
-                                   options='{"no_open": True, "no_create": True, "no_quick_create":True, "no_create_edit":True}'
-                                   attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                            <field name="other_reason" readonly="True" invisible="True"/>
-                        </group>
-                        <group string="Overtime Information">
-                            <field name="overtime_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                            <field name="rel_calculation_type" />
-                            <field name="req_overtime_cal" invisible="1"/>
-                            <field name="is_reviewers" invisible="1"/>
-                            <field name="overtime_calendar_id"
-                                   options='{"no_open": True, "no_create": True, "no_quick_create":True, "no_create_edit":True}'
-                                   attrs="{'invisible': [('req_overtime_cal', '=', False)],'required': [('req_overtime_cal', '=', True)],
-                                   'readonly': ['|', ('state', 'in', ['approved','rejected', 'cancelled']), ('is_reviewers', '=', False)]}" />
-                            <div class="o_row o_row_readonly">
-                                <field name="overtime_hour" invisible="1" class="oe_inline"
-                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-<!--                                <span class="ml8">Hours</span>-->
-                                <field name="overtime_minute" invisible="1" class="oe_inline"
-                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-<!--                                <span class="ml8">Minutes</span>-->
-                            </div>
-                            <field name="type"
-                                   options='{"no_open": True, "no_create": True, "no_quick_create":True, "no_create_edit":True}'
-                                    readonly="1" force_save="1"/>
-                            <field name="reason"
-                                   options='{"no_open": True, "no_create": True, "no_quick_create":True, "no_create_edit":True}'
-                                   domain="[('department.name', '=', department_name)]"
-                                   attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                            <field name="reason_other_description"
-                                   options='{"no_open": True, "no_create": True, "no_quick_create":True, "no_create_edit":True}'
-                                   attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('other_reason', '!=', 1)], 'required': [('other_reason', '=', 1)]}" />
-                            <label for="fm_building_id" string="Food Request"/>
-                            <div class="o_row o_row_readonly">
-                                <field name="food_request" nolabel="1" class="oe_inline"
-                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                                <b class="ml8" attrs="{'invisible': [('food_request', '=', False)]}">Building</b>
-                                <field name="fm_building_id"
-                                       options='{"no_open": True, "no_create": True, "no_quick_create":True, "no_create_edit":True}'
-                                       attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('food_request', '=', False)], 'required': [('food_request', '=', True)]}"/>
-                            </div>
-                            <label for="bus_route" string="Bus Request"/>
-                            <div class="o_row o_row_readonly">
-                                <field name="bus_request" nolabel="1" class="oe_inline"
-                                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                                <b class="ml8" attrs="{'invisible': [('bus_request', '=', False)]}">Route</b>
-                                <field name="bus_route"
-                                       options='{"no_open": True, "no_create": True, "no_quick_create":True, "no_create_edit":True}'
-                                       attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('bus_request', '=', False)], 'required': [('bus_request', '=', True)]}"/>
-                            </div>
-                            <field name="description" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                        </group>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <record id="hr_overtime_manager_view_form_inherit" model="ir.ui.view">
-        <field name="name">Overtime Validation</field>
-        <field name="model">hr.overtime</field>
-        <field name="inherit_id" ref="hr_overtime_manager_view_form"/>
-        <field name="arch" type="xml">
-            <sheet position="inside">
-                <field name="review_ids" widget="tier_validation" attrs="{'invisible':[('review_ids', '=', [])]}"/>
-                <field name="review_history" widget="tier_history" class="oe_read_only" attrs="{'invisible':[('review_history', '=', [])]}"/>
-            </sheet>
-        </field>
-    </record>
-
-    <record id="view_hr_overtime_filter" model="ir.ui.view">
-        <field name="name">hr.overtime.filter</field>
-        <field name="model">hr.overtime</field>
-        <field name="priority">1</field>
-        <field name="arch" type="xml">
-            <search string="Search Overtime">
-                <field name="employee_id"/>
-                <field name="overtime_date"/>
-            </search>
-        </field>
-    </record>
-
-    <record id="action_hr_overtime_manager_approve" model="ir.actions.act_window">
-        <field name="name">Fazla Mesai / Yönetici Bekleyen Talep</field>
-        <field name="res_model">hr.overtime</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-        <field name="priority">1</field>
-        <field name="context">{
-            'create': False ,
-            'delete': False ,
-            'duplicate': False,
-            'allow_bulk_validations':True
-            }
-        </field>
-        <field name="domain">[('reviewer_ids','in',uid),('state','=','in_validation')]</field>
-        <field name="search_view_id" ref="view_hr_overtime_filter"/>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_empty_folder">
-                There are no overtime request pending approval
-            </p>
-        </field>
-    </record>
-
+        <record id="hr_workorder_summary_all_auth_rule" model="ir.rule">
+            <field name="name">İşçilik Manager</field>
+            <field name="model_id" ref="model_hr_workorder_summary_month"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4,ref('hr_workorder.group_hr_workorder_manager'))]"/>
+        </record>
+-->
+    </data>
 </odoo>
 
+resource_ext
+
+# -*- coding: utf-8 -*-
+{
+    'name': "resource_ext",
+
+    'summary': """
+        Short (1 phrase/line) summary of the module's purpose, used as
+        subtitle on modules listing or apps.openerp.com """,
+
+    'description': """
+        Long description of module's purpose
+    """,
+
+    # Categories can be used to filter modules in modules listing
+    # Check https://github.com/odoo/odoo/blob/13.0/odoo/addons/base/data/ir_module_category_data.xml
+    # for the full list
+    'category': 'Uncategorized',
+    "version": "1.0.475-test",
+
+    # any module necessary for this one to work correctly
+    'depends': ['base', 'hr_attendance_ext', 'hr_shift_plan', 'report_creator', 'hr_workorder',
+                'notification_management'],  # ,
+    'external_dependencies': {'python': ['pandas']},
+
+    # always loaded
+    'data': [
+        'security/groups.xml',
+        'security/readonly_groups.xml',
+        'security/external.xml',
+        'security/rules.xml',
+        'security/assistant_rules.xml',
+        'security/user_group.xml',
+        'security/workmanship_rule.xml',
+        'security/workorder_summary_rule.xml',
+        'security/activity_rule.xml',
+        'security/ir.model.access.csv',
+        'data/move_types.xml',
+        'data/ir_cron.xml',
+        'data/ir_cron2.xml',
+        'data/ir_cron3.xml',
+        'data/ir_cron4.xml',
+        'data/ir_cron5.xml',
+        'data/external_cron.xml',
+        'data/draft_calculate_cron.xml',
+        'data/ir_config_parameter.xml',
+        'data/email_templates.xml',
+        'views/activities.xml',
+        'data/activities.xml',
+        'data/work_order_cron.xml',
+        'data/workmanship_cron.xml',
+        'data/workmanship_soir_cron.xml',
+        'data/workmanship_month_cron.xml',
+        'data/parameters.xml',
+        'views/resource.xml',
+        'views/employee.xml',
+        'views/assets_backend.xml',
+        'views/attendance_summary.xml',
+        'views/attendance_move.xml',
+        'views/outer_emp_depts_views.xml',
+        'views/unusual_situations.xml',
+        'views/external_working_moves.xml',
+        'views/external_status.xml',
+        'views/find_difference.xml',
+        'views/wo_data.xml',
+        # 'views/workmanship_data.xml',
+        # 'views/workorder_summary.xml',
+        'wizards/attendance_summary_wizard.xml',
+        'wizards/change_employee_calendar_wizard.xml',
+        'wizards/change_employee_lunch_wizard.xml',
+        'wizards/attendance_move_re_calculation.xml',
+        'wizards/manager_approve_wizard.xml',
+        'wizards/show_move_views.xml',
+
+        'wizards/wo_time_control.xml',
+        'wizards/start_date_wo_detail.xml',
+        'wizards/monthly_workorder_operation.xml',
+        'wizards/wo_personnel_q_report.xml',
+        'wizards/wo_indirect_personnel.xml',
+        'wizards/wo_personnel_moves.xml',
+        'wizards/wo_collective_reports.xml',
+        'wizards/daily_movement_editing.xml',
+        'wizards/wo_bulk_update.xml',
+        'wizards/attendance_move_execute_selected.xml',
+        'wizards/menu_wizard.xml',
+        'views/statistics.xml',
+        'wizards/test_summary_wizard.xml',
+        'views/menus.xml',
+        'wizards/wo_diff_report.xml',
+
+        'views/legacy.xml'
+    ],
+    'qweb': ['static/src/xml/*.xml'],
+    # only loaded in demonstration mode
+    'demo': [
+        # 'demo/demo.xml',
+    ],
+}
 
 
-raise ValidationError("%s\n\n%s" % (_("Error while validating constraint"), tools.ustr(e)))
-odoo.tools.convert.ParseError: "Error while validating constraint
-Field 'review_ids' used in attributes must be present in view but is missing:
- - 'review_ids' in attrs="{'invisible': ['|','|',('review_ids', '=', []),('state','not in',['in_validation']),('is_creator','=',False)]}"
-Error context:
-View `hr.overtime.view.form`
-[view_id: 4424, xml_id: n/a, model: hr.overtime, parent_id: n/a]
-None" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_overtime/views/hr_overtime_manager_views.xml:38, near
-<record id="hr_overtime_manager_view_form" model="ir.ui.view">
-        <field name="name">hr.overtime.view.form</field>
-        <field name="model">hr.overtime</field>
-        <field name="priority">1</field>
-        <field name="arch" type="xml">
-            <form string="Overtime">
-                <header>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,validate"/>
-                    <field name="can_review" invisible="1"/>
-                    <button name="validate_tier" string="Approve" type="object" class="oe_inline oe_button standard-approve" icon="fa-thumbs-up" groups="hr_overtime.group_hr_overtime_manager" attrs="{'invisible': ['|',('state','!=', 'in_validation'),('can_review','=', False)]}"/>
-                    <button name="reject_tier" string="Refuse" type="object" class="btn-icon standard-refuse" icon="fa-thumbs-down" groups="hr_overtime.group_hr_overtime_manager" attrs="{'invisible': ['|',('state','!=', 'in_validation'),('can_review','=', False)]}"/>
-                    <field name="is_creator" invisible="1"/>
-                    <button name="restart_validation" class="btn-warning" string="Cancel Request" confirm="Are you sure you want to cancel the request?" attrs="{'invisible': ['|','|',('review_ids', '=', []),('state','not in',['in_validation']),('is_creator','=',False)]}" type="object"/>
-                </header>
-                <sheet>
-                    <group>
-                        <group string="Employee Information">
-                            <field name="image_id" widget="image" class="oe_avatar" string=" "/>
-                            <field name="register_id" string="Register Id" readonly="True" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                            <field name="employee_id" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True, &quot;no_quick_create&quot;:True, &quot;no_create_edit&quot;:True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                            <field name="department_name" attrs="{'readonly':True}"/>
-                            <field name="project" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True, &quot;no_quick_create&quot;:True, &quot;no_create_edit&quot;:True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                            <field name="other_reason" readonly="True" invisible="True"/>
-                        </group>
-                        <group string="Overtime Information">
-                            <field name="overtime_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                            <field name="rel_calculation_type"/>
-                            <field name="req_overtime_cal" invisible="1"/>
-                            <field name="is_reviewers" invisible="1"/>
-                            <field name="overtime_calendar_id" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True, &quot;no_quick_create&quot;:True, &quot;no_create_edit&quot;:True}" attrs="{'invisible': [('req_overtime_cal', '=', False)],'required': [('req_overtime_cal', '=', True)],                                    'readonly': ['|', ('state', 'in', ['approved','rejected', 'cancelled']), ('is_reviewers', '=', False)]}"/>
-                            <div class="o_row o_row_readonly">
-                                <field name="overtime_hour" invisible="1" class="oe_inline" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-<!--                                <span class="ml8">Hours</span>-->
-                                <field name="overtime_minute" invisible="1" class="oe_inline" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-<!--                                <span class="ml8">Minutes</span>-->
-                            </div>
-                            <field name="type" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True, &quot;no_quick_create&quot;:True, &quot;no_create_edit&quot;:True}" readonly="1" force_save="1"/>
-                            <field name="reason" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True, &quot;no_quick_create&quot;:True, &quot;no_create_edit&quot;:True}" domain="[('department.name', '=', department_name)]" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                            <field name="reason_other_description" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True, &quot;no_quick_create&quot;:True, &quot;no_create_edit&quot;:True}" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('other_reason', '!=', 1)], 'required': [('other_reason', '=', 1)]}"/>
-                            <label for="fm_building_id" string="Food Request"/>
-                            <div class="o_row o_row_readonly">
-                                <field name="food_request" nolabel="1" class="oe_inline" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                                <b class="ml8" attrs="{'invisible': [('food_request', '=', False)]}">Building</b>
-                                <field name="fm_building_id" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True, &quot;no_quick_create&quot;:True, &quot;no_create_edit&quot;:True}" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('food_request', '=', False)], 'required': [('food_request', '=', True)]}"/>
-                            </div>
-                            <label for="bus_route" string="Bus Request"/>
-                            <div class="o_row o_row_readonly">
-                                <field name="bus_request" nolabel="1" class="oe_inline" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                                <b class="ml8" attrs="{'invisible': [('bus_request', '=', False)]}">Route</b>
-                                <field name="bus_route" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True, &quot;no_quick_create&quot;:True, &quot;no_create_edit&quot;:True}" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('bus_request', '=', False)], 'required': [('bus_request', '=', True)]}"/>
-                            </div>
-                            <field name="description" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                        </group>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
+hr_workorder_source
+
+# -*- coding: utf-8 -*-
+{
+    'name': "TUSAS Work Order Score",
+    'summary': """
+        TUSAŞ Work Order Calculation Score""",
+    'description': """
+        TUSAŞ Work Order Calculation Score
+    """,
+    'author': "Ekip",
+    'website': "https://erp.tai.com.tr",
+    'category': 'Human Resources',
+    'version': '0.1',
+    'depends': ['base', 'hr', 'resource_ext', 'hr_workorder', 'hr_attendance_score'],
+    'data': [
+        'security/scatter_new_groups.xml',
+        'security/ir.model.access.csv',
+        'security/workmanship_month_rule.xml',
+        'views/workmanship_views.xml',
+        'views/summary_month_views.xml',
+        'views/dept_scatter_views.xml',
+        'views/daily_costing_view.xml',
+        'views/workmanship_month_views.xml',
+        'views/direct_sup_summary_views.xml',
+        'views/job_order_type_views.xml',
+        'views/e_file_operation_views.xml',
+        'views/workorder_common_def_views.xml',
+        'wizards/views/qar_wo_operation_views.xml',
+        'wizards/views/indirect_rate_wo_def.xml',
+        'wizards/views/g_file_display_views.xml',
+        'wizards/views/monthly_wo_operation_views.xml',
+        'wizards/views/dispensation_views.xml',
+    ],
+    'installable': True,
+    'application': True,
+
+}
