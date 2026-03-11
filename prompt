@@ -1,161 +1,79 @@
-resource_ext/security/workorder_summary_role.xml dosyasini alip hr_workorder_source icindeki security alina yerlestirirsem modullerde herhangi bozulma olur mu ?
+odoo.tools.convert.ParseError: "Error while validating constraint
+tuple index out of range
+None" while parsing /home/t12016074307/odoo12/odoo/addons_tusas/hr_performance/wizards/views/evaluation_result_wizard.xml:3, near
+<record id="evaluation_result_wizard_view" model="ir.ui.view">
+            <field name="name">Performans Değerlendirme Raporu</field>
+            <field name="model">hr_performance.evaluation_result</field>
+            <field name="groups_id" eval="[(6, 0, [ref('hr_performance.group_hr_performance_one')])]"/>
+            <field name="arch" type="xml">
+                <form string="Performans Değerlendirme Raporu">
+                    <sheet>
+                        <group>
+                            <field name="employee_image" widget="image" width="50px;" height="60px;" string=" " readonly="1" attrs="{'invisible':[('employee_id','=',False)],'readonly':[('readonly_flag','=',True)]}"/>
+                            <field name="employee_id" string="Çalışan" attrs="{'readonly':[('readonly_flag','=',True)]}" options="{'no_create': True,'no_open': True,'no_quick_create':True,'no_create_edit':True}"/>
+                            <field name="employee_personel_id" readonly="1" attrs="{'invisible':[('employee_id','=',False)]}"/>
+                            <field name="employee_department_id" readonly="1" attrs="{'invisible':[('employee_id','=',False)]}" options="{'no_create': True,'no_open': True,'no_quick_create':True,'no_create_edit':True}"/>
+                            <field name="year" domain="[('evaluation_results_report_open','=',True)]" options="{'no_create': True,'no_open': True,'no_quick_create':True,'no_create_edit':True}"/>
+                            <field name="readonly_flag" invisible="1"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_apply" string="Performans Değerlendirme Raporu" class="btn btn-outline-info" type="object"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
 
 <odoo>
-    <data noupdate="1">
-<!--
-        <record id="hr_workorder_summary_dept_manager_auth_rule" model="ir.rule">
-            <field name="name">İşçilik Bölüm Yöneticileri Kuralı</field>
-            <field name="model_id" ref="model_hr_workorder_summary_month"/>
-            <field name="domain_force">['|', ('employee_id.user_id','=',user.id), ('employee_id', 'child_of', user.employee_ids.ids)]
+    <data>
+        <record id="evaluation_result_wizard_view" model="ir.ui.view">
+            <field name="name">Performans Değerlendirme Raporu</field>
+            <field name="model">hr_performance.evaluation_result</field>
+            <field name="groups_id" eval="[(4,ref('hr_performance.group_hr_performance_one'))]"/>
+            <field name="arch" type="xml">
+                <form string="Performans Değerlendirme Raporu">
+                    <sheet>
+                        <group>
+                            <field name="employee_image" widget="image" width="50px;" height="60px;"
+                                   string=" "
+                                   readonly="1"
+                                   attrs="{'invisible':[('employee_id','=',False)],'readonly':[('readonly_flag','=',True)]}"/>
+                            <field name="employee_id" string="Çalışan" attrs="{'readonly':[('readonly_flag','=',True)]}"
+                                   options="{'no_create': True,'no_open': True,'no_quick_create':True,'no_create_edit':True}"/>
+                            <field name="employee_personel_id" readonly="1"
+                                   attrs="{'invisible':[('employee_id','=',False)]}"/>
+                            <field name="employee_department_id" readonly="1"
+                                   attrs="{'invisible':[('employee_id','=',False)]}"
+                                   options="{'no_create': True,'no_open': True,'no_quick_create':True,'no_create_edit':True}"/>
+                            <field name="year" domain="[('evaluation_results_report_open','=',True)]"
+                                   options="{'no_create': True,'no_open': True,'no_quick_create':True,'no_create_edit':True}"/>
+                            <field name="readonly_flag" invisible="1"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_apply"
+                                string="Performans Değerlendirme Raporu"
+                                class="btn btn-outline-info"
+                                type="object"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
             </field>
-            <field name="groups" eval="[(4,ref('hr_workorder.group_hr_workorder_department_manager'))]"/>
         </record>
 
-        <record id="hr_workorder_summary_all_auth_rule" model="ir.rule">
-            <field name="name">İşçilik Manager</field>
-            <field name="model_id" ref="model_hr_workorder_summary_month"/>
-            <field name="domain_force">[(1, '=', 1)]</field>
-            <field name="groups" eval="[(4,ref('hr_workorder.group_hr_workorder_manager'))]"/>
+        <record model="ir.actions.act_window" id="action_evaluation_result_wizard">
+            <field name="name">Performans Değerlendirme Raporu</field>
+            <field name="res_model">hr_performance.evaluation_result</field>
+            <field name="view_mode">form</field>
+            <field name="domain">[]</field>
+            <field name="groups_id" eval="[(4,ref('hr_performance.group_hr_performance_one'))]"/>
+            <field name="context">{
+                }
+            </field>
+            <field name="target">new</field>
         </record>
--->
     </data>
 </odoo>
-
-resource_ext
-
-# -*- coding: utf-8 -*-
-{
-    'name': "resource_ext",
-
-    'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com """,
-
-    'description': """
-        Long description of module's purpose
-    """,
-
-    # Categories can be used to filter modules in modules listing
-    # Check https://github.com/odoo/odoo/blob/13.0/odoo/addons/base/data/ir_module_category_data.xml
-    # for the full list
-    'category': 'Uncategorized',
-    "version": "1.0.475-test",
-
-    # any module necessary for this one to work correctly
-    'depends': ['base', 'hr_attendance_ext', 'hr_shift_plan', 'report_creator', 'hr_workorder',
-                'notification_management'],  # ,
-    'external_dependencies': {'python': ['pandas']},
-
-    # always loaded
-    'data': [
-        'security/groups.xml',
-        'security/readonly_groups.xml',
-        'security/external.xml',
-        'security/rules.xml',
-        'security/assistant_rules.xml',
-        'security/user_group.xml',
-        'security/workmanship_rule.xml',
-        'security/workorder_summary_rule.xml',
-        'security/activity_rule.xml',
-        'security/ir.model.access.csv',
-        'data/move_types.xml',
-        'data/ir_cron.xml',
-        'data/ir_cron2.xml',
-        'data/ir_cron3.xml',
-        'data/ir_cron4.xml',
-        'data/ir_cron5.xml',
-        'data/external_cron.xml',
-        'data/draft_calculate_cron.xml',
-        'data/ir_config_parameter.xml',
-        'data/email_templates.xml',
-        'views/activities.xml',
-        'data/activities.xml',
-        'data/work_order_cron.xml',
-        'data/workmanship_cron.xml',
-        'data/workmanship_soir_cron.xml',
-        'data/workmanship_month_cron.xml',
-        'data/parameters.xml',
-        'views/resource.xml',
-        'views/employee.xml',
-        'views/assets_backend.xml',
-        'views/attendance_summary.xml',
-        'views/attendance_move.xml',
-        'views/outer_emp_depts_views.xml',
-        'views/unusual_situations.xml',
-        'views/external_working_moves.xml',
-        'views/external_status.xml',
-        'views/find_difference.xml',
-        'views/wo_data.xml',
-        # 'views/workmanship_data.xml',
-        # 'views/workorder_summary.xml',
-        'wizards/attendance_summary_wizard.xml',
-        'wizards/change_employee_calendar_wizard.xml',
-        'wizards/change_employee_lunch_wizard.xml',
-        'wizards/attendance_move_re_calculation.xml',
-        'wizards/manager_approve_wizard.xml',
-        'wizards/show_move_views.xml',
-
-        'wizards/wo_time_control.xml',
-        'wizards/start_date_wo_detail.xml',
-        'wizards/monthly_workorder_operation.xml',
-        'wizards/wo_personnel_q_report.xml',
-        'wizards/wo_indirect_personnel.xml',
-        'wizards/wo_personnel_moves.xml',
-        'wizards/wo_collective_reports.xml',
-        'wizards/daily_movement_editing.xml',
-        'wizards/wo_bulk_update.xml',
-        'wizards/attendance_move_execute_selected.xml',
-        'wizards/menu_wizard.xml',
-        'views/statistics.xml',
-        'wizards/test_summary_wizard.xml',
-        'views/menus.xml',
-        'wizards/wo_diff_report.xml',
-
-        'views/legacy.xml'
-    ],
-    'qweb': ['static/src/xml/*.xml'],
-    # only loaded in demonstration mode
-    'demo': [
-        # 'demo/demo.xml',
-    ],
-}
-
-
-hr_workorder_source
-
-# -*- coding: utf-8 -*-
-{
-    'name': "TUSAS Work Order Score",
-    'summary': """
-        TUSAŞ Work Order Calculation Score""",
-    'description': """
-        TUSAŞ Work Order Calculation Score
-    """,
-    'author': "Ekip",
-    'website': "https://erp.tai.com.tr",
-    'category': 'Human Resources',
-    'version': '0.1',
-    'depends': ['base', 'hr', 'resource_ext', 'hr_workorder', 'hr_attendance_score'],
-    'data': [
-        'security/scatter_new_groups.xml',
-        'security/ir.model.access.csv',
-        'security/workmanship_month_rule.xml',
-        'views/workmanship_views.xml',
-        'views/summary_month_views.xml',
-        'views/dept_scatter_views.xml',
-        'views/daily_costing_view.xml',
-        'views/workmanship_month_views.xml',
-        'views/direct_sup_summary_views.xml',
-        'views/job_order_type_views.xml',
-        'views/e_file_operation_views.xml',
-        'views/workorder_common_def_views.xml',
-        'wizards/views/qar_wo_operation_views.xml',
-        'wizards/views/indirect_rate_wo_def.xml',
-        'wizards/views/g_file_display_views.xml',
-        'wizards/views/monthly_wo_operation_views.xml',
-        'wizards/views/dispensation_views.xml',
-    ],
-    'installable': True,
-    'application': True,
-
-}
